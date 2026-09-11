@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Reading - Athenaeum</title>
+  <link rel="stylesheet" href="css/reader.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+</head>
+<body data-theme="white">
+
+  <!-- Reader Sticky Toolbar -->
+  <header class="reader-toolbar">
+    <div class="toolbar-left">
+      <a href="index.html" class="tool-btn btn-back" title="Back to Library">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Library</span>
+      </a>
+
+      <button id="btn-toc-toggle" class="tool-btn" title="Table of Contents">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="toolbar-center">
+      <div class="book-title-display" id="reader-book-title">Loading book...</div>
+      <div class="book-author-display" id="reader-book-author"></div>
+    </div>
+
+    <div class="toolbar-right">
+      <!-- Font controls (for EPUB) -->
+      <div id="epub-controls" style="display: flex; gap: 4px;">
+        <button id="btn-font-smaller" class="tool-btn" title="Decrease font size">A-</button>
+        <button id="btn-font-larger" class="tool-btn" title="Increase font size">A+</button>
+      </div>
+
+      <!-- Theme selector -->
+      <button id="btn-theme-toggle" class="tool-btn" title="Switch Theme (White / Warm / Dark)">
+        🎨
+      </button>
+
+      <!-- Zoom controls (for PDF) -->
+      <div id="pdf-controls" style="display: none; gap: 4px;">
+        <button id="btn-pdf-zoom-out" class="tool-btn" title="Zoom out">-</button>
+        <button id="btn-pdf-zoom-in" class="tool-btn" title="Zoom in">+</button>
+      </div>
+
+      <!-- Fullscreen -->
+      <button id="btn-fullscreen" class="tool-btn" title="Toggle Fullscreen">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Reader Container -->
+  <div class="reader-container">
+
+    <!-- Table of Contents Sidebar -->
+    <aside class="reader-sidebar" id="reader-sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Table of Contents</span>
+        <button id="btn-sidebar-close" class="tool-btn" style="width: 28px; height: 28px;">&times;</button>
+      </div>
+      <div class="sidebar-content" id="toc-list">
+        <div style="padding: 16px; font-size: 13px; color: var(--text-muted);">No chapters found</div>
+      </div>
+    </aside>
+
+    <!-- Main Viewer Area -->
+    <main class="viewer-area" id="viewer-area">
+      <!-- Loading Overlay -->
+      <div class="loader-container" id="reader-loader">
+        <div class="loader-spinner"></div>
+        <p style="font-size: 13px; font-weight: 500;">Loading book into fast reader...</p>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button class="nav-arrow prev" id="btn-nav-prev" title="Previous page (Left Arrow)">&#10094;</button>
+      <button class="nav-arrow next" id="btn-nav-next" title="Next page (Right Arrow)">&#10095;</button>
+
+      <!-- EPUB Viewer -->
+      <div id="epub-viewer"></div>
+
+      <!-- PDF Viewer -->
+      <div id="pdf-viewer-container" style="display: none;">
+        <canvas id="pdf-canvas"></canvas>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Reader Footer / Progress Bar -->
+  <footer class="reader-footer">
+    <div id="reader-progress-text">Page 1</div>
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" id="progress-bar-fill"></div>
+    </div>
+    <div id="reader-percentage">0%</div>
+  </footer>
+
+  <!-- Vendor Libraries -->
+  <script src="js/vendor/jszip.min.js"></script>
+  <script src="js/vendor/epub.min.js"></script>
+  <script src="js/vendor/pdf.min.js"></script>
+
+  <!-- Reader Script -->
+  <script src="js/reader.js"></script>
+</body>
+</html>
