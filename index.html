@@ -6,9 +6,24 @@
   <title>The Cloud Library & Reader</title>
   <meta name="description" content="A pristine, high-speed online book gallery and reader for EPUB, PDF, and digital literature. Access your entire library anywhere.">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body>
+
+  <!-- Drag and Drop Overlay for Auto-Cataloging -->
+  <div class="drag-overlay" id="drag-overlay">
+    <div class="drag-overlay-box">
+      <div style="font-size: 48px; margin-bottom: 8px;">📚</div>
+      <h3 style="font-family: var(--font-serif); font-size: 22px; margin-bottom: 4px;">Drop Book to Auto-Catalog</h3>
+      <p style="font-size: 13.5px; color: var(--text-muted);">EPUB or PDF will be extracted, categorized, and added to your library!</p>
+    </div>
+  </div>
+
+  <!-- Toast Notice -->
+  <div class="toast-notice" id="toast-notice">
+    <span id="toast-icon">✨</span>
+    <span id="toast-msg">Library updated</span>
+  </div>
 
   <!-- Sticky Header -->
   <header class="header">
@@ -33,18 +48,19 @@
 
       <!-- Action Buttons -->
       <div class="header-actions">
-        <!-- Open local file from tablet button -->
-        <button id="btn-open-file" class="btn btn-outline" title="Open any EPUB or PDF from your tablet or device directly in the fast reader">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+        <!-- Add Book Button -->
+        <button id="btn-add-book" class="btn btn-add-book" title="Add an EPUB or PDF to automatically catalogue with cover">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Add Book</span>
+        </button>
+        <input type="file" id="add-book-input" accept=".epub,.pdf" style="display: none;">
+
+        <!-- Open File Direct -->
+        <button id="btn-open-file" class="btn btn-outline" title="Open any EPUB or PDF directly in reader">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
           <span>Open File</span>
         </button>
         <input type="file" id="local-file-input" accept=".epub,.pdf" style="display: none;">
-
-        <!-- Recommend a Book Button -->
-        <button id="btn-recommend-modal" class="btn btn-recommend">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-          <span>Recommend a Book</span>
-        </button>
       </div>
     </div>
   </header>
@@ -54,7 +70,7 @@
     <div class="container hero-content">
       <div>
         <h2 class="hero-title">Your Personal Cloud Library</h2>
-        <p class="hero-subtitle">Fast, distraction-free reading for EPUB & PDF formats. Access classic literature, philosophy, fantasy, and art on any device without tablet lag.</p>
+        <p class="hero-subtitle">High-speed reading with authentic paper types and 3D page turns. Access literature, philosophy, and fantasy anywhere without tablet lag.</p>
       </div>
       <div class="stats-bar">
         <div class="stat-item">
@@ -66,14 +82,14 @@
           <div class="stat-label">Authors</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" id="stat-total-categories">9</div>
+          <div class="stat-number" id="stat-total-categories">11</div>
           <div class="stat-label">Categories</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Categories Horizontal Bar -->
+  <!-- Category Bar -->
   <nav class="category-bar">
     <div class="container">
       <div class="category-scroll" id="category-pills">
@@ -93,158 +109,218 @@
     </div>
   </nav>
 
-  <!-- Filter & Sorting Toolbar -->
-  <section class="container">
-    <div class="sub-toolbar">
-      <div class="active-filter-indicator" id="filter-status">
-        Showing <strong id="visible-count">0</strong> books
+  <!-- Main 2-Column Layout (Gallery on Left, Permanent Recommendations on Right) -->
+  <div class="container layout-2col">
+
+    <!-- Left Gallery Column -->
+    <main class="gallery-column">
+      <!-- Sub toolbar (Filters & Sorting) -->
+      <div class="sub-toolbar">
+        <div class="active-filter-indicator" id="filter-status">
+          Showing <strong id="visible-count">0</strong> books
+        </div>
+
+        <div class="filter-controls">
+          <div class="select-wrapper">
+            <select id="format-filter" class="select-input">
+              <option value="all">All Formats</option>
+              <option value="EPUB">EPUB Only</option>
+              <option value="PDF">PDF Only</option>
+            </select>
+            <span class="select-arrow">&#9662;</span>
+          </div>
+
+          <div class="select-wrapper">
+            <select id="sort-filter" class="select-input">
+              <option value="author-asc">Author (A &rarr; Z)</option>
+              <option value="title-asc">Title (A &rarr; Z)</option>
+              <option value="size-desc">File Size (Largest)</option>
+              <option value="size-asc">File Size (Smallest)</option>
+            </select>
+            <span class="select-arrow">&#9662;</span>
+          </div>
+
+          <button id="btn-favorites" class="btn btn-outline" title="Show saved bookmarks">
+            <span>Favorites</span>
+            <span id="fav-count" style="font-size: 11px; opacity: 0.7;">0</span>
+          </button>
+        </div>
       </div>
 
-      <div class="filter-controls">
-        <!-- Format filter -->
-        <div class="select-wrapper">
-          <select id="format-filter" class="select-input">
-            <option value="all">All Formats</option>
-            <option value="EPUB">EPUB Only</option>
-            <option value="PDF">PDF Only</option>
-          </select>
-          <span class="select-arrow">&#9662;</span>
-        </div>
+      <!-- Books Grid -->
+      <div class="books-grid" id="books-grid">
+        <!-- Injected via JavaScript -->
+      </div>
 
-        <!-- Sort by -->
-        <div class="select-wrapper">
-          <select id="sort-filter" class="select-input">
-            <option value="author-asc">Author (A &rarr; Z)</option>
-            <option value="title-asc">Title (A &rarr; Z)</option>
-            <option value="size-desc">File Size (Largest)</option>
-            <option value="size-asc">File Size (Smallest)</option>
-          </select>
-          <span class="select-arrow">&#9662;</span>
-        </div>
+      <!-- Empty state -->
+      <div id="empty-state" class="empty-state" style="display: none; text-align: center; padding: 60px 20px;">
+        <div style="font-size: 48px; margin-bottom: 12px;">📖</div>
+        <h3 style="font-family: var(--font-serif); font-size: 20px; margin-bottom: 6px;">No books found</h3>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px;">Try adjusting filters or click "Add Book" above to import any EPUB/PDF!</p>
+        <button id="btn-reset-filters" class="btn btn-primary">Reset Filters</button>
+      </div>
+    </main>
 
-        <!-- Shelf Filter -->
-        <button id="btn-favorites" class="btn btn-outline" title="Show saved bookmarks">
-          <span>Favorites</span>
-          <span id="fav-count" style="font-size: 11px; opacity: 0.7;">0</span>
+    <!-- Permanent Right Sidebar: Recommendations & Wishlist -->
+    <aside class="recommendations-sidebar">
+      <div class="rec-sidebar-header">
+        <h3 class="rec-sidebar-title">
+          <span>💡 Recommendations</span>
+          <span class="cat-pill" id="rec-count" style="font-size: 10.5px; padding: 2px 7px;">0</span>
+        </h3>
+        <button id="btn-copy-recs" class="btn btn-outline" style="padding: 4px 8px; font-size: 11px;" title="Copy all recommendations to clipboard">
+          Copy List
         </button>
       </div>
-    </div>
-  </section>
 
-  <!-- Books Grid -->
-  <main class="container">
-    <div class="books-grid" id="books-grid">
-      <!-- Injected via JavaScript -->
-    </div>
-
-    <!-- Empty state message -->
-    <div id="empty-state" class="empty-state" style="display: none;">
-      <div class="empty-icon">📖</div>
-      <h3 style="font-family: var(--font-serif); font-size: 20px; margin-bottom: 6px;">No books matched your criteria</h3>
-      <p style="font-size: 14px; margin-bottom: 16px;">Try adjusting your search query, clearing filters, or recommend a book you would like to see added!</p>
-      <button id="btn-reset-filters" class="btn btn-primary">Reset Filters</button>
-    </div>
-  </main>
-
-  <!-- Recommendation Modal -->
-  <div class="modal-backdrop" id="rec-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 class="modal-title">Recommend a Book</h3>
-        <button class="modal-close" id="rec-modal-close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 18px;">
-          Have a great book in mind? Add it to the reading wishlist. Anyone can suggest book titles and authors so you always have references when searching for your next read.
-        </p>
-
-        <form id="rec-form">
-          <div class="form-group">
-            <label class="form-label" for="rec-title">Book Title *</label>
-            <input type="text" id="rec-title" class="form-input" placeholder="e.g. Norwegian Wood, Dune, Clean Code" required>
+      <div class="rec-sidebar-content">
+        <!-- Quick Recommendation Form -->
+        <form id="rec-form" class="quick-rec-form">
+          <div style="font-size: 12px; font-weight: 700; margin-bottom: 8px; color: var(--text-main);">
+            Recommend a Book
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="rec-author">Writer / Author Name *</label>
-            <input type="text" id="rec-author" class="form-input" placeholder="e.g. Haruki Murakami, Frank Herbert" required>
+          <div class="form-group-sm">
+            <label class="form-label-sm" for="rec-title">Book Name *</label>
+            <input type="text" id="rec-title" class="form-input-sm" placeholder="e.g. Norwegian Wood" required>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="rec-category">Category / Genre</label>
-            <select id="rec-category" class="form-select">
+          <div class="form-group-sm">
+            <label class="form-label-sm" for="rec-author">Writer / Author *</label>
+            <input type="text" id="rec-author" class="form-input-sm" placeholder="e.g. Haruki Murakami" required>
+          </div>
+
+          <div class="form-group-sm">
+            <label class="form-label-sm" for="rec-category">Category</label>
+            <select id="rec-category" class="form-select-sm">
               <option value="Fiction">Fiction</option>
               <option value="Classics & Literature">Classics & Literature</option>
               <option value="Fantasy & Sci-Fi">Fantasy & Sci-Fi</option>
               <option value="Philosophy & Psychology">Philosophy & Psychology</option>
               <option value="Art & Design">Art & Design</option>
               <option value="Science & Non-Fiction">Science & Non-Fiction</option>
-              <option value="Personal Growth & Business">Personal Growth & Business</option>
+              <option value="Personal Growth & Business">Personal Growth</option>
               <option value="Other">Other</option>
             </select>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="rec-notes">Why do you recommend this book? (Optional)</label>
-            <textarea id="rec-notes" class="form-textarea" rows="3" placeholder="Brief thought, quote, or reason why this book is worth reading..."></textarea>
+          <div class="form-group-sm">
+            <label class="form-label-sm" for="rec-notes">Notes (Optional)</label>
+            <input type="text" id="rec-notes" class="form-input-sm" placeholder="Why you recommend it...">
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="rec-name">Your Name (Optional)</label>
-            <input type="text" id="rec-name" class="form-input" placeholder="Anonymous or your name">
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
-            Submit Recommendation
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 8px; font-size: 12px;">
+            + Add to Wishlist
           </button>
         </form>
 
-        <!-- Community recommendations feed -->
-        <div class="rec-list">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <h4 style="font-family: var(--font-serif); font-size: 16px;">Wishlist & Recommendations (<span id="rec-count">0</span>)</h4>
-            <button id="btn-copy-recs" class="btn btn-outline" style="padding: 4px 10px; font-size: 11px;">Copy List</button>
-          </div>
-          <div id="rec-items-container">
-            <!-- Injected via JavaScript -->
-          </div>
+        <!-- Live Wishlist Feed -->
+        <div id="rec-items-container">
+          <!-- Injected via recommendations.js -->
         </div>
       </div>
-    </div>
+    </aside>
+
   </div>
 
   <!-- Book Info / Quick View Modal -->
   <div class="modal-backdrop" id="info-modal">
-    <div class="modal-card" style="max-width: 520px;">
+    <div class="modal-card" style="max-width: 500px;">
       <div class="modal-header">
         <h3 class="modal-title" id="info-modal-title">Book Details</h3>
         <button class="modal-close" id="info-modal-close">&times;</button>
       </div>
       <div class="modal-body" style="text-align: center;">
-        <img id="info-cover" src="" alt="Book Cover" style="max-width: 180px; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.12); margin-bottom: 16px;">
+        <img id="info-cover" src="" alt="Book Cover" style="max-width: 170px; border-radius: 8px; box-shadow: 0 8px 18px rgba(0,0,0,0.12); margin-bottom: 14px;">
         <h3 id="info-title" style="font-family: var(--font-serif); font-size: 18px; margin-bottom: 4px;"></h3>
-        <p id="info-author" style="color: var(--text-muted); font-size: 14px; margin-bottom: 14px;"></p>
+        <p id="info-author" style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 14px;"></p>
         
-        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-          <span id="info-category" class="cat-pill" style="font-size: 12px;"></span>
-          <span id="info-format" class="cat-pill" style="font-size: 12px;"></span>
-          <span id="info-size" class="cat-pill" style="font-size: 12px;"></span>
+        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;">
+          <span id="info-category" class="cat-pill" style="font-size: 11.5px;"></span>
+          <span id="info-format" class="cat-pill" style="font-size: 11.5px;"></span>
+          <span id="info-size" class="cat-pill" style="font-size: 11.5px;"></span>
         </div>
 
-        <div style="display: flex; gap: 10px; justify-content: center;">
+        <div style="display: flex; gap: 8px; justify-content: center;">
           <a id="info-read-link" href="#" class="btn btn-primary" style="flex: 1; justify-content: center;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            <span>Read Now</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span>Read</span>
           </a>
-          <a id="info-download-link" href="#" download class="btn btn-outline" style="flex: 1; justify-content: center;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            <span>Download</span>
-          </a>
+          <button id="info-edit-btn" class="btn btn-outline" style="flex: 1; justify-content: center;">
+            <span>✏️ Edit Book</span>
+          </button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Book Editor Modal (Edit Title, Author, Category & Cover) -->
+  <div class="modal-backdrop" id="edit-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Book Details</h3>
+        <button class="modal-close" id="edit-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="edit-book-form">
+          <input type="hidden" id="edit-book-id">
+
+          <div style="display: flex; gap: 18px; align-items: flex-start; margin-bottom: 18px;">
+            <div style="text-align: center;">
+              <img id="edit-cover-preview" src="" alt="Cover Preview" style="width: 100px; height: 145px; object-fit: cover; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 8px;">
+              <button type="button" id="btn-change-cover-file" class="btn btn-outline" style="font-size: 11px; padding: 4px 8px; width: 100%;">Upload Cover</button>
+              <input type="file" id="edit-cover-file" accept="image/*" style="display: none;">
+            </div>
+
+            <div style="flex: 1;">
+              <div class="form-group">
+                <label class="form-label" for="edit-title">Book Title</label>
+                <input type="text" id="edit-title" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="edit-author">Author / Writer</label>
+                <input type="text" id="edit-author" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="edit-category">Category</label>
+                <select id="edit-category" class="form-select">
+                  <option value="Classics & Literature">Classics & Literature</option>
+                  <option value="Fantasy & Adventure">Fantasy & Adventure</option>
+                  <option value="Fiction & Modern Novels">Fiction & Modern Novels</option>
+                  <option value="Philosophy & Psychology">Philosophy & Psychology</option>
+                  <option value="Sci-Fi & Dystopian">Sci-Fi & Dystopian</option>
+                  <option value="Art, Drawing & Animation">Art & Animation</option>
+                  <option value="Photography & Design">Photography & Design</option>
+                  <option value="Science & Non-Fiction">Science & Non-Fiction</option>
+                  <option value="Mythology & Folklore">Mythology & Folklore</option>
+                  <option value="Personal Growth & Finance">Personal Growth & Finance</option>
+                  <option value="Writing, Language & Reference">Writing & Style</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="edit-cover-url">Or Paste Cover Image URL</label>
+            <input type="url" id="edit-cover-url" class="form-input" placeholder="https://example.com/cover.jpg">
+          </div>
+
+          <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px;">
+            <button type="button" id="btn-reset-book-override" class="btn btn-outline" style="color: #ef4444; border-color: #fca5a5;">Reset to Original</button>
+            <button type="submit" class="btn btn-primary" style="padding: 9px 20px;">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
+  <script src="js/vendor/jszip.min.js"></script>
+  <script src="js/vendor/pdf.min.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/book-manager.js"></script>
   <script src="js/recommendations.js"></script>
   <script src="js/app.js"></script>
 </body>

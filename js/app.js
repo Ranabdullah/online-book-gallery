@@ -1,15 +1,17 @@
 ﻿/**
  * Athenaeum - Main Gallery Application
  * Features:
- * - Real-time fuzzy search
- * - Category navigation & badge filtering
- * - Format selection (EPUB / PDF)
- * - Sorting by Author, Title, File size
- * - Personal Reading List / Favorites persistence
- * - Local file opener for instant tablet reading
+ * - Real-time fuzzy search & Category navigation
+ * - Permanent right-sidebar integration
+ * - Auto-cataloging for user-added books (IndexedDB)
+ * - Editing book titles, authors, categories & covers
+ * - Drag-and-drop book import
+ * - Reading list / Favorites persistence
  */
 
+let baseBooks = [];
 let allBooks = [];
+let bookOverrides = {};
 let currentCategory = 'all';
 let currentFormat = 'all';
 let currentSort = 'author-asc';
@@ -48,19 +50,44 @@ function updateFavoritesBadge() {
 async function loadCatalog() {
   try {
     const resp = await fetch('data/books.json');
-    if (!resp.ok) throw new Error('Could not load books catalog');
-    allBooks = await resp.json();
-    initStats();
-    renderBooks();
+    if (resp.ok) {
+      baseBooks = await resp.json();
+    }
   } catch (err) {
-    console.error('Error loading books:', err);
-    document.getElementById('books-grid').innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
-        <p style="font-size: 16px;">Building books catalog or loading files...</p>
-        <p style="font-size: 13px; margin-top: 8px;">Please refresh in a moment.</p>
-      </div>
-    `;
+    console.warn('Could not fetch base books.json:', err);
   }
+
+  await refreshAllBooks();
+}
+
+async function refreshAllBooks() {
+  // 1. Get overrides
+  bookOverrides = await window.AthenaeumDB.getAllBookOverrides();
+
+  // 2. Get user added books
+  const userBooks = await window.AthenaeumDB.getAllUserBooks();
+
+  // 3. Combine: user books first, then catalog books
+  const combined = [...userBooks, ...baseBooks];
+
+  // 4. Apply overrides
+  allBooks = combined.map(b => {
+    const override = bookOverrides[b.id];
+    if (override) {
+      return {
+        ...b,
+        title: override.title || b.title,
+        author: override.author || b.author,
+        category: override.category || b.category,
+        cover: override.cover || b.cover,
+        hasCustomOverride: true
+      };
+    }
+    return b;
+  });
+
+  initStats();
+  renderBooks();
 }
 
 function initStats() {
@@ -85,22 +112,18 @@ function filterAndSortBooks() {
   const favs = getFavorites();
 
   return allBooks.filter(b => {
-    // Category filter
     if (currentCategory !== 'all' && b.category !== currentCategory) {
       return false;
     }
 
-    // Format filter
     if (currentFormat !== 'all' && b.format !== currentFormat) {
       return false;
     }
 
-    // Favorites only
     if (showFavoritesOnly && !favs.includes(b.id)) {
       return false;
     }
 
-    // Search query
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       const matchTitle = (b.title || '').toLowerCase().includes(q);
@@ -113,6 +136,10 @@ function filterAndSortBooks() {
 
     return true;
   }).sort((a, b) => {
+    // User added books always on top when viewing recent
+    if (a.isUserAdded && !b.isUserAdded) return -1;
+    if (!a.isUserAdded && b.isUserAdded) return 1;
+
     if (currentSort === 'author-asc') {
       return (a.author || '').localeCompare(b.author || '');
     }
@@ -152,14 +179,14 @@ function renderBooks() {
   grid.innerHTML = filtered.map(b => {
     const isFav = favs.includes(b.id);
     const readUrl = b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#';
-    const hasHosted = b.isHosted;
 
     return `
       <article class="book-card" data-id="${b.id}">
         <div class="cover-wrapper">
-          <img class="book-cover" src="${b.cover}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22 viewBox=%220 0 400 600%22><rect width=%22400%22 height=%22600%22 fill=%22%23f1f5f9%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-family=%22sans-serif%22 font-size=%2218%22>No Cover</text></svg>'">
+          <img class="book-cover" src="${b.cover}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22 viewBox=%220 0 400 600%22><rect width=%22400%22 height=%22600%22 fill=%22%23f1f5f9%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-family=%22sans-serif%22 font-size=%2216%22>No Cover</text></svg>'">
+          ${b.isUserAdded ? `<span class="user-added-badge">NEW</span>` : ''}
           <span class="format-badge ${b.format.toLowerCase()}">${b.format}</span>
-          <button class="bookmark-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${b.id}')" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
+          <button class="bookmark-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${b.id}')" title="${isFav ? 'Remove favorite' : 'Add favorite'}">
             ♥
           </button>
         </div>
@@ -170,18 +197,21 @@ function renderBooks() {
           <div class="book-author" title="${escapeHtml(b.author)}">${escapeHtml(b.author)}</div>
 
           <div class="card-actions">
-            ${hasHosted ? `
+            ${b.isHosted ? `
               <a href="${readUrl}" class="btn-read" title="Read online in high-speed reader">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                 <span>Read</span>
               </a>
             ` : `
-              <button class="btn-read" style="background: #475569;" onclick="openLocalPrompt('${b.id}')" title="Large file. Click to load from local storage or tablet">
+              <button class="btn-read" style="background: #475569;" onclick="openLocalPrompt('${b.id}')" title="Large file. Click to load from local storage">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                 <span>Load</span>
               </button>
             `}
-            <button class="btn-info" onclick="openBookModal('${b.id}')" title="Details & Options">
+            <button class="btn-card-edit" onclick="openEditModal('${b.id}')" title="Edit book name, author, category or cover">
+              ✏️
+            </button>
+            <button class="btn-card-edit" onclick="openBookModal('${b.id}')" title="Book details">
               &bull;&bull;&bull;
             </button>
           </div>
@@ -191,6 +221,181 @@ function renderBooks() {
   }).join('');
 }
 
+/**
+ * Edit Book Modal Logic
+ */
+let currentEditBookId = null;
+let currentEditCoverData = null;
+
+function openEditModal(bookId) {
+  const book = allBooks.find(b => b.id === bookId);
+  if (!book) return;
+
+  currentEditBookId = bookId;
+  currentEditCoverData = book.cover;
+
+  document.getElementById('edit-book-id').value = bookId;
+  document.getElementById('edit-title').value = book.title;
+  document.getElementById('edit-author').value = book.author;
+  document.getElementById('edit-category').value = book.category;
+  document.getElementById('edit-cover-preview').src = book.cover;
+  document.getElementById('edit-cover-url').value = '';
+
+  const modal = document.getElementById('edit-modal');
+  modal.classList.add('active');
+}
+
+function setupEditModal() {
+  const modal = document.getElementById('edit-modal');
+  const closeBtn = document.getElementById('edit-modal-close');
+  const form = document.getElementById('edit-book-form');
+  const coverFileBtn = document.getElementById('btn-change-cover-file');
+  const coverFileInput = document.getElementById('edit-cover-file');
+  const coverUrlInput = document.getElementById('edit-cover-url');
+  const coverPreview = document.getElementById('edit-cover-preview');
+  const resetBtn = document.getElementById('btn-reset-book-override');
+
+  if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  }
+
+  // Upload cover image
+  if (coverFileBtn && coverFileInput) {
+    coverFileBtn.addEventListener('click', () => coverFileInput.click());
+    coverFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        currentEditCoverData = evt.target.result;
+        coverPreview.src = currentEditCoverData;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Cover image URL
+  if (coverUrlInput) {
+    coverUrlInput.addEventListener('input', (e) => {
+      const url = e.target.value.trim();
+      if (url) {
+        currentEditCoverData = url;
+        coverPreview.src = url;
+      }
+    });
+  }
+
+  // Save changes
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!currentEditBookId) return;
+
+      const title = document.getElementById('edit-title').value.trim();
+      const author = document.getElementById('edit-author').value.trim();
+      const category = document.getElementById('edit-category').value;
+
+      await window.AthenaeumDB.saveBookOverride(currentEditBookId, {
+        title,
+        author,
+        category,
+        cover: currentEditCoverData
+      });
+
+      modal.classList.remove('active');
+      showToast(`Updated "${title}" successfully!`);
+      await refreshAllBooks();
+    });
+  }
+
+  // Reset to original
+  if (resetBtn) {
+    resetBtn.addEventListener('click', async () => {
+      if (!currentEditBookId) return;
+      await window.AthenaeumDB.deleteBookOverride(currentEditBookId);
+      modal.classList.remove('active');
+      showToast('Restored original book details');
+      await refreshAllBooks();
+    });
+  }
+}
+
+/**
+ * Add Book Auto-Cataloging Setup
+ */
+function setupAddBook() {
+  const btnAdd = document.getElementById('btn-add-book');
+  const input = document.getElementById('add-book-input');
+  const overlay = document.getElementById('drag-overlay');
+
+  if (btnAdd && input) {
+    btnAdd.addEventListener('click', () => input.click());
+
+    input.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      showToast('Auto-cataloging book and extracting cover...');
+      try {
+        const book = await window.BookManager.processAndAddBook(file);
+        showToast(`✨ Added "${book.title}" to your library!`);
+        await refreshAllBooks();
+      } catch (err) {
+        alert('Failed to catalogue book: ' + err.message);
+      }
+      input.value = '';
+    });
+  }
+
+  // Drag and Drop
+  window.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    if (overlay) overlay.classList.add('active');
+  });
+
+  if (overlay) {
+    overlay.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      overlay.classList.remove('active');
+    });
+
+    overlay.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      overlay.classList.remove('active');
+
+      const files = e.dataTransfer.files;
+      if (!files || files.length === 0) return;
+
+      const file = files[0];
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (!['epub', 'pdf'].includes(ext)) {
+        alert('Please drop an .epub or .pdf book file.');
+        return;
+      }
+
+      showToast('Auto-cataloging book and extracting cover...');
+      try {
+        const book = await window.BookManager.processAndAddBook(file);
+        showToast(`✨ Added "${book.title}" to your library!`);
+        await refreshAllBooks();
+      } catch (err) {
+        alert('Failed to catalogue book: ' + err.message);
+      }
+    });
+  }
+
+  // Listen for custom event
+  window.addEventListener('athenaeum:book-added', () => {
+    refreshAllBooks();
+  });
+}
+
+/**
+ * Quick View Info Modal
+ */
 function openBookModal(bookId) {
   const book = allBooks.find(b => b.id === bookId);
   if (!book) return;
@@ -204,20 +409,24 @@ function openBookModal(bookId) {
   document.getElementById('info-size').textContent = `Size: ${book.sizeMB} MB`;
 
   const readBtn = document.getElementById('info-read-link');
-  const downloadBtn = document.getElementById('info-download-link');
+  const editBtn = document.getElementById('info-edit-btn');
 
   if (book.isHosted) {
-    readBtn.href = `reader.html?book=${encodeURIComponent(book.file)}`;
+    readBtn.href = `reader.html?book=${encodeURIComponent(b.file)}`;
     readBtn.style.display = 'inline-flex';
-    downloadBtn.href = book.file;
-    downloadBtn.style.display = 'inline-flex';
   } else {
     readBtn.href = '#';
     readBtn.onclick = () => {
       modal.classList.remove('active');
       openLocalPrompt(book.id);
     };
-    downloadBtn.style.display = 'none';
+  }
+
+  if (editBtn) {
+    editBtn.onclick = () => {
+      modal.classList.remove('active');
+      openEditModal(book.id);
+    };
   }
 
   modal.classList.add('active');
@@ -231,6 +440,18 @@ function openLocalPrompt(bookId) {
   if (fileInput) fileInput.click();
 }
 
+function showToast(msg) {
+  const toast = document.getElementById('toast-notice');
+  const toastMsg = document.getElementById('toast-msg');
+  if (toast && toastMsg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3500);
+  }
+}
+
 function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -238,6 +459,8 @@ function escapeHtml(str) {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadCatalog();
+  setupAddBook();
+  setupEditModal();
 
   // Search input with debounce
   const searchInput = document.getElementById('search-input');
@@ -307,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Reset filters button
+  // Reset filters
   const resetBtn = document.getElementById('btn-reset-filters');
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
@@ -326,15 +549,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Open local file button for tablet
+  // Open local file direct
   const btnOpenFile = document.getElementById('btn-open-file');
   const fileInput = document.getElementById('local-file-input');
 
   if (btnOpenFile && fileInput) {
-    btnOpenFile.addEventListener('click', () => {
-      fileInput.click();
-    });
-
+    btnOpenFile.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (!file) return;
@@ -346,7 +566,6 @@ document.addEventListener('DOMContentLoaded', () => {
           sessionStorage.setItem('athenaeum_local_file_data', evt.target.result);
           window.location.href = 'reader.html?local=1';
         } catch (storageErr) {
-          // If file is too large for sessionStorage, use URL.createObjectURL or prompt
           const blobUrl = URL.createObjectURL(file);
           window.location.href = `reader.html?blob=${encodeURIComponent(blobUrl)}&title=${encodeURIComponent(file.name)}`;
         }

@@ -1,9 +1,9 @@
 ﻿# 📖 Athenaeum — Cloud Book Gallery & Fast Reader
 
-> A pristine, high-speed online book gallery and reader for EPUB, PDF, and digital literature. Access your entire library anywhere without tablet lag.
+> A pristine, high-speed online book gallery and reader for EPUB, PDF, and digital literature. Access your entire library anywhere with realistic 3D page turns, authentic paper finishes, auto-cataloging, and book customization.
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2563eb?style=for-the-badge&logo=github)](https://ranabdullah.github.io/online-book-gallery/)
-[![Books Catalog](https://img.shields.io/badge/Library-480%2B_Books-success?style=for-the-badge)](https://ranabdullah.github.io/online-book-gallery/)
+[![Books Catalog](https://img.shields.io/badge/Library-560%2B_Books-success?style=for-the-badge)](https://ranabdullah.github.io/online-book-gallery/)
 [![Formats](https://img.shields.io/badge/Formats-EPUB_%7C_PDF-orange?style=for-the-badge)](https://ranabdullah.github.io/online-book-gallery/)
 
 ---
@@ -11,30 +11,35 @@
 ## ✨ Features
 
 - **⚡ Blazing-Fast Readers**:
-  - **EPUB Engine** (`ePub.js`): Virtualized page rendering, responsive flow, custom font sizing (A- / A+), font family adjustments, chapter navigation (Table of Contents), and touch swipe gestures for tablets.
-  - **PDF Engine** (`PDF.js`): Canvas rendering, zoom controls, outline navigation, and jump-to-page.
-  - **Reading Position Memory**: Auto-saves your reading position in `localStorage` so you can pick up exactly where you left off.
-- **🎨 Clean White Aesthetic**:
-  - Modern, minimalist layout inspired by Apple Books and Linear.
-  - High contrast, crisp borders, and subtle elevation shadows.
-  - Reader color themes: **Clean White**, **Warm Paper (Sepia)**, and **Night Dark**.
-- **📚 Curated Categories**:
-  - *Classics & Literature* (Shakespeare, Tolstoy, Dostoevsky, Austen, Dickens, Hugo, Melville...)
-  - *Fantasy & Adventure* (J. K. Rowling, Andrzej Sapkowski / Witcher, Tolkien, George R. R. Martin...)
-  - *Fiction & Modern Novels* (Haruki Murakami, Kazuo Ishiguro, Stephen King, Albert Camus...)
-  - *Philosophy & Psychology* (Sigmund Freud, Nietzsche, Schopenhauer, Plato, Marcus Aurelius...)
-  - *Sci-Fi & Dystopian* (George Orwell, Philip K. Dick, Orson Scott Card, Ray Bradbury...)
-  - *Art, Drawing & Animation* (Preston Blair, Andrew Loomis, Dan Gheno, Character Drawing...)
-  - *Science & Non-Fiction* (DK Eyewitness Series, Smithsonian, Economics, Evolution...)
-  - *Mythology & Folklore* (Norse, Egyptian, Greek, Celtic, Bulfinch...)
-  - *Personal Growth & Finance* (James Clear, Robert Kiyosaki, Robin Sharma...)
-- **💡 Book Recommendation Board**:
-  - Anyone can recommend a book title and author to add to the reading list.
-  - Notes, category tags, and recommender attribution.
-  - 1-click **"Copy List"** to export recommendations anywhere.
-- **📱 Tablet & Mobile Friendly**:
-  - Fast touch swipe gestures to turn pages.
-  - **"Open File"** feature: select and read any EPUB or PDF directly from your tablet storage instantly.
+  - **Memory Preloading**: Pre-fetches books into memory buffers with real download percentage counters, eliminating relative URL errors and frozen loaders.
+  - **3D Page Turning Effect**: Physics-based 3D page flip animation with spine depth shadows, curl perspective, and smooth transitions on click or tablet swipe.
+  - **Authentic Paper Types & Finishes**:
+    - ⚪ **Crisp White** (Modern crisp printer paper)
+    - 📖 **Cream Novel Paper** (`#FAF6EE` gentle on the eyes)
+    - 📜 **Antique Sepia** (`#FBF0D9` warm aged paper)
+    - 🌾 **Fine Parchment** (`#F5EFE6` warm textured linen)
+    - 📰 **Newsprint Pulp** (`#EBE6DD` soft grayish newsprint)
+    - 🌙 **Charcoal Slate** (`#18181B` matte dark reading mode)
+  - **Typography Styling**: Playfair Display (Editorial), Merriweather (Book Serif), Inter (Sans), Georgia, font scaling (70% - 220%), and custom margins.
+  - **Reading Position Memory**: Auto-saves your exact reading spot so you can pick up where you left off on any device.
+- **💡 Permanent Recommendation Panel**:
+  - Docked permanently on the right side of the gallery.
+  - Quick form to suggest books and authors with notes.
+  - Live community wishlist feed.
+  - 1-click **"Copy List"** button for clipboard export.
+- **📥 In-Browser Auto-Cataloging ("+ Add Book")**:
+  - Add or drag-and-drop any `.epub` or `.pdf` directly into the web app.
+  - Automatically parses book title, author, and category.
+  - Extracts the embedded cover image or renders a canvas cover.
+  - Persists file and cover in browser `IndexedDB` for instant 1-click reading.
+- **✏️ Book Editor (Titles, Categories & Custom Covers)**:
+  - Edit button on every book card.
+  - Edit title, author, and category.
+  - Upload custom cover images (from tablet camera/photos or file) or paste cover image URLs.
+  - Changes are saved persistently in browser storage.
+- **🎨 Clean White Gallery**:
+  - Search across 560+ curated books, authors, and 11 categories.
+  - Personal Shelf / Favorites persistence.
 
 ---
 
@@ -42,38 +47,3 @@
 
 - **Public Gallery & Reader**: [https://ranabdullah.github.io/online-book-gallery/](https://ranabdullah.github.io/online-book-gallery/)
 - **GitHub Repository**: [https://github.com/Ranabdullah/online-book-gallery](https://github.com/Ranabdullah/online-book-gallery)
-
----
-
-## 🛠️ Project Structure
-
-```
-online-book-gallery/
-├── index.html              # Main gallery application
-├── reader.html             # High-speed EPUB & PDF reader
-├── css/
-│   ├── style.css           # Clean white design system
-│   └── reader.css          # Distraction-free reader styles & themes
-├── js/
-│   ├── app.js              # Gallery logic, search, category filter, favorites
-│   ├── reader.js           # Reader controller (ePub.js & PDF.js)
-│   ├── recommendations.js  # Recommendation submission & wishlist system
-│   └── vendor/             # Local offline vendor libraries (ePub.js, PDF.js, JSZip)
-├── data/
-│   └── books.json          # Complete book catalog metadata
-├── covers/                 # High-resolution optimized book covers
-├── books/                  # E-book files ready for instant online reading
-└── scripts/
-    ├── build_catalog.py    # Catalog processing & cover extraction pipeline
-    └── deploy.py           # GitHub Pages deployment automation
-```
-
----
-
-## 💻 Local Development
-
-To run locally:
-```bash
-python -m http.server 8080
-```
-Open `http://localhost:8080` in your tablet or desktop browser.

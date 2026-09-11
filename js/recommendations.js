@@ -1,12 +1,11 @@
 ﻿/**
  * Athenaeum - Recommendations Engine
  * Allows anyone to submit book and author recommendations for future reading.
- * Persists locally in localStorage with export / copy capabilities.
+ * Permanently rendered in the right sidebar with clipboard export.
  */
 
 const STORAGE_KEY_RECS = 'athenaeum_recommendations';
 
-// Default curated initial recommendations
 const INITIAL_RECOMMENDATIONS = [
   {
     id: 'rec_01',
@@ -22,7 +21,7 @@ const INITIAL_RECOMMENDATIONS = [
     title: 'Atomic Habits',
     author: 'James Clear',
     category: 'Personal Growth',
-    notes: 'Incredible framework for small continuous 1% improvements.',
+    notes: 'Incredible framework for continuous 1% daily improvements.',
     recommender: 'Reader',
     date: '2026-09-08'
   },
@@ -31,7 +30,7 @@ const INITIAL_RECOMMENDATIONS = [
     title: 'Meditations',
     author: 'Marcus Aurelius',
     category: 'Philosophy',
-    notes: 'Timeless stoic reflection on duty, resilience, and tranquility.',
+    notes: 'Timeless stoic reflections on duty, resilience, and inner tranquility.',
     recommender: 'Curator',
     date: '2026-09-05'
   }
@@ -66,7 +65,7 @@ function renderRecommendations() {
   if (countSpan) countSpan.textContent = recs.length;
 
   if (recs.length === 0) {
-    container.innerHTML = '<p style="font-size: 13px; color: var(--text-muted); text-align: center; padding: 16px;">No recommendations yet. Be the first to suggest one!</p>';
+    container.innerHTML = '<p style="font-size: 12.5px; color: var(--text-muted); text-align: center; padding: 16px;">No recommendations yet. Be the first to suggest one!</p>';
     return;
   }
 
@@ -74,10 +73,10 @@ function renderRecommendations() {
     <div class="rec-item">
       <div class="rec-header">
         <span class="rec-book-title">${escapeHtml(r.title)}</span>
-        <span class="cat-pill" style="font-size: 10px; padding: 2px 8px;">${escapeHtml(r.category || 'General')}</span>
+        <span class="cat-pill" style="font-size: 9.5px; padding: 2px 6px;">${escapeHtml(r.category || 'General')}</span>
       </div>
       <div class="rec-author">by <strong>${escapeHtml(r.author)}</strong></div>
-      ${r.notes ? `<p style="font-size: 12.5px; margin-top: 6px; color: #334155;">"${escapeHtml(r.notes)}"</p>` : ''}
+      ${r.notes ? `<p style="font-size: 12px; margin-top: 5px; color: #334155; line-height: 1.4;">"${escapeHtml(r.notes)}"</p>` : ''}
       <div class="rec-meta">Suggested by ${escapeHtml(r.recommender || 'Anonymous')} &bull; ${r.date || 'Recent'}</div>
     </div>
   `).join('');
@@ -103,32 +102,10 @@ function escapeHtml(str) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const recModal = document.getElementById('rec-modal');
-  const btnOpen = document.getElementById('btn-recommend-modal');
-  const btnClose = document.getElementById('rec-modal-close');
+  renderRecommendations();
+
   const recForm = document.getElementById('rec-form');
   const btnCopy = document.getElementById('btn-copy-recs');
-
-  if (btnOpen && recModal) {
-    btnOpen.addEventListener('click', () => {
-      recModal.classList.add('active');
-      renderRecommendations();
-    });
-  }
-
-  if (btnClose && recModal) {
-    btnClose.addEventListener('click', () => {
-      recModal.classList.remove('active');
-    });
-  }
-
-  if (recModal) {
-    recModal.addEventListener('click', (e) => {
-      if (e.target === recModal) {
-        recModal.classList.remove('active');
-      }
-    });
-  }
 
   if (recForm) {
     recForm.addEventListener('submit', (e) => {
@@ -137,10 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const author = document.getElementById('rec-author').value.trim();
       const category = document.getElementById('rec-category').value;
       const notes = document.getElementById('rec-notes').value.trim();
-      const name = document.getElementById('rec-name').value.trim() || 'Book Enthusiast';
 
       if (!title || !author) {
-        alert('Please provide both book title and author.');
+        alert('Please provide both book title and writer name.');
         return;
       }
 
@@ -150,13 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
         author,
         category,
         notes,
-        recommender: name,
+        recommender: 'Reader',
         date: new Date().toISOString().split('T')[0]
       };
 
       saveRecommendation(newRec);
       recForm.reset();
-      alert(`Thank you! "${title}" has been added to the recommendations wishlist.`);
     });
   }
 
