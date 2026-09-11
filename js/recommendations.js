@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Athenaeum - Recommendations Engine
  * Allows anyone to submit book and author recommendations for future reading.
  * Permanently rendered in the right sidebar with clipboard export.
@@ -63,6 +63,8 @@ function renderRecommendations() {
 
   const recs = getRecommendations();
   if (countSpan) countSpan.textContent = recs.length;
+  const mobileCountSpan = document.getElementById('mobile-rec-count');
+  if (mobileCountSpan) mobileCountSpan.textContent = recs.length;
 
   if (recs.length === 0) {
     container.innerHTML = '<p style="font-size: 12.5px; color: var(--text-muted); text-align: center; padding: 16px;">No recommendations yet. Be the first to suggest one!</p>';
@@ -106,6 +108,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const recForm = document.getElementById('rec-form');
   const btnCopy = document.getElementById('btn-copy-recs');
+  const btnMobileRecs = document.getElementById('btn-mobile-recs');
+  const btnCloseMobileRecs = document.getElementById('btn-close-recs-mobile');
+  const recDrawerBackdrop = document.getElementById('rec-drawer-backdrop');
+  const recSidebar = document.getElementById('recommendations-sidebar');
+
+  function toggleMobileRecs(open) {
+    if (!recSidebar) return;
+    const shouldOpen = typeof open === 'boolean' ? open : !recSidebar.classList.contains('mobile-open');
+    recSidebar.classList.toggle('mobile-open', shouldOpen);
+    if (recDrawerBackdrop) recDrawerBackdrop.classList.toggle('active', shouldOpen);
+  }
+
+  if (btnMobileRecs) {
+    btnMobileRecs.addEventListener('click', () => toggleMobileRecs(true));
+  }
+  if (btnCloseMobileRecs) {
+    btnCloseMobileRecs.addEventListener('click', () => toggleMobileRecs(false));
+  }
+  if (recDrawerBackdrop) {
+    recDrawerBackdrop.addEventListener('click', () => toggleMobileRecs(false));
+  }
 
   if (recForm) {
     recForm.addEventListener('submit', (e) => {
@@ -132,6 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       saveRecommendation(newRec);
       recForm.reset();
+      toggleMobileRecs(false);
+      if (window.showToast) {
+        window.showToast(`Added "${title}" to Wishlist!`);
+      }
     });
   }
 

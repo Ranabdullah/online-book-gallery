@@ -1,25 +1,28 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Reading - Athenaeum</title>
   <link rel="stylesheet" href="css/reader.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body data-paper="cream">
 
+  <!-- Mobile Drawer Backdrop -->
+  <div class="reader-backdrop" id="reader-backdrop"></div>
+
   <!-- Reader Sticky Toolbar -->
-  <header class="reader-toolbar">
+  <header class="reader-toolbar" id="reader-toolbar">
     <div class="toolbar-left">
       <a href="index.html" class="tool-btn btn-back" title="Back to Library">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <span>Library</span>
+        <span class="btn-text">Library</span>
       </a>
 
       <button id="btn-toc-toggle" class="tool-btn" title="Table of Contents">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        <span>Chapters</span>
+        <span class="btn-text">Chapters</span>
       </button>
     </div>
 
@@ -31,7 +34,8 @@
     <div class="toolbar-right">
       <!-- Paper Type & Style Button -->
       <button id="btn-paper-toggle" class="tool-btn" title="Change Paper Type & Typography">
-        <span>📜 Paper & Style</span>
+        <span class="btn-icon">📜</span>
+        <span class="btn-text">Paper & Style</span>
       </button>
 
       <!-- Zoom controls (for PDF) -->
@@ -49,6 +53,13 @@
 
   <!-- Paper & Typography Menu -->
   <div class="paper-menu" id="paper-menu">
+    <div class="mobile-sheet-header">
+      <div class="mobile-sheet-pill"></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 12px;">
+        <span style="font-weight: 700; font-size: 15px;">Reading Appearance</span>
+        <button id="btn-paper-close" class="tool-btn" style="width: 28px; height: 28px; font-size: 18px; border-radius: 50%;">&times;</button>
+      </div>
+    </div>
     <div class="menu-section-title">Authentic Paper Type</div>
     <div class="paper-options-grid">
       <button class="paper-option-btn" data-paper="white">
@@ -150,7 +161,7 @@
   </div>
 
   <!-- Reader Footer / Progress Bar -->
-  <footer class="reader-footer">
+  <footer class="reader-footer" id="reader-footer">
     <div id="reader-progress-text">Page 1</div>
     <div class="progress-bar-container">
       <div class="progress-bar-fill" id="progress-bar-fill"></div>

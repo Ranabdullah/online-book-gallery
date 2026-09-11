@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Athenaeum - Enhanced Unified Reader Engine
  * - Robust ArrayBuffer preloading & error diagnostics
  * - Realistic 3D page-turning animation
@@ -160,6 +160,10 @@ async function loadBufferAndInit(url, ext) {
 
 function initReaderWithBuffer(buffer, ext, identifier) {
   const isPdf = ext.includes('pdf');
+  const stage = document.getElementById('book-stage');
+  if (stage) {
+    attachTouchAndTapNavigation(stage);
+  }
 
   if (isPdf) {
     currentFormat = 'pdf';
@@ -185,11 +189,18 @@ function initEpubReaderWithBuffer(buffer, identifier) {
     const viewer = document.getElementById('epub-viewer');
     viewer.innerHTML = '';
 
+    const isMobile = window.innerWidth <= 768;
     currentRendition = currentBook.renderTo('epub-viewer', {
       width: '100%',
       height: '100%',
       flow: 'paginated',
-      spread: 'auto'
+      spread: isMobile ? 'none' : 'auto'
+    });
+
+    // Dynamic OCR clean-up filter & responsive mobile touch navigation inside iframe
+    currentRendition.hooks.content.register((contents) => {
+      cleanRenderedOcrArtifacts(contents.document.body);
+      attachTouchAndTapNavigation(contents.document);
     });
 
     // Apply paper style to EPUB internal styles
@@ -241,17 +252,6 @@ function initEpubReaderWithBuffer(buffer, identifier) {
       }
     });
 
-    // Tablet touch swipe
-    let touchStartX = 0;
-    currentRendition.on('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-    currentRendition.on('touchend', (e) => {
-      const diff = e.changedTouches[0].screenX - touchStartX;
-      if (diff > 50) turnPage('prev');
-      if (diff < -50) turnPage('next');
-    });
-
   } catch (err) {
     showError('Error initializing EPUB reader: ' + err.message);
   }
@@ -297,7 +297,15 @@ async function renderPdfPage(num) {
     const canvas = document.getElementById('pdf-canvas');
     const ctx = canvas.getContext('2d');
 
-    const viewport = page.getViewport({ scale: pdfScale });
+    const container = document.getElementById('pdf-viewer-container');
+    const availWidth = (container ? container.clientWidth : window.innerWidth) - 24;
+    const baseViewport = page.getViewport({ scale: 1.0 });
+    let effectiveScale = pdfScale;
+    if (window.innerWidth <= 768 && baseViewport.width > availWidth && availWidth > 200) {
+      effectiveScale = (availWidth / baseViewport.width) * pdfScale;
+    }
+
+    const viewport = page.getViewport({ scale: effectiveScale });
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
@@ -330,7 +338,6 @@ function triggerPageTurnAnimation(direction) {
 
   const animClass = direction === 'next' ? 'page-turning-next' : 'page-turning-prev';
   pageWrapper.classList.remove('page-turning-next', 'page-turning-prev');
-  // force reflow
   void pageWrapper.offsetWidth;
   pageWrapper.classList.add(animClass);
 
@@ -364,7 +371,6 @@ function applyPaperTheme(paperType) {
   localStorage.setItem('athenaeum_paper', paperType);
   document.body.setAttribute('data-paper', paperType);
 
-  // Update active button in menu
   document.querySelectorAll('.paper-option-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.paper === paperType);
   });
@@ -385,6 +391,9 @@ function applyCurrentStylesToRendition() {
   };
 
   const colors = paperColors[readerPrefs.paper] || paperColors.cream;
+  const isMobile = window.innerWidth <= 768;
+  const effectiveMargin = isMobile ? (readerPrefs.margin === '60px' ? '20px' : '10px') : readerPrefs.margin;
+  const effectiveLineHeight = isMobile ? '1.55 !important' : '1.65 !important';
 
   try {
     currentRendition.themes.default({
@@ -392,12 +401,12 @@ function applyCurrentStylesToRendition() {
         background: `${colors.bg} !important`,
         color: `${colors.text} !important`,
         'font-family': `${readerPrefs.fontFamily} !important`,
-        padding: `0 ${readerPrefs.margin} !important`,
-        'line-height': '1.65 !important'
+        padding: `0 ${effectiveMargin} !important`,
+        'line-height': effectiveLineHeight
       },
       p: {
         'font-family': `${readerPrefs.fontFamily} !important`,
-        'line-height': '1.65 !important'
+        'line-height': effectiveLineHeight
       }
     });
     currentRendition.themes.fontSize(`${readerPrefs.fontSize}%`);
@@ -407,14 +416,135 @@ function applyCurrentStylesToRendition() {
 }
 
 /**
+ * Dynamic OCR Text Cleanup Filter (Runtime Layer)
+ */
+function cleanRenderedOcrArtifacts(rootNode) {
+  if (!rootNode) return;
+  const walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, null, false);
+  let node;
+  const replacements = [
+    [/\bBrave\s+Ne\s*w\s+World\b/g, 'Brave New World'],
+    [/\bNe\s+w\b/g, 'New'],
+    [/\bne\s+w\b/g, 'new'],
+    [/\bChapte\s+r\b/g, 'Chapter'],
+    [/\bchapte\s+r\b/g, 'chapter'],
+    [/\bgre\s+y\b/g, 'grey'],
+    [/\bOve\s+r\b/g, 'Over'],
+    [/\bove\s+r\b/g, 'over'],
+    [/\bm\s+a\s+in\b/g, 'main'],
+    [/\be\s+ntra\s+nce\b/g, 'entrance'],
+    [/\be\s+nte\s+re\s+d\b/g, 'entered'],
+    [/\be\s+norm\s+ous\b/g, 'enormous'],
+    [/\ba\s+nd\b/g, 'and'],
+    [/\ba\s+ll\b/g, 'all'],
+    [/\ba\s+t\b/g, 'at'],
+    [/\ba\s+s\b/g, 'as'],
+    [/\ba\s+n\b/g, 'an'],
+    [/\bm\s+otto\b/g, 'motto'],
+    [/\bSta\s+te\b/g, 'State'],
+    [/\bsta\s+te\b/g, 'state'],
+    [/\bbe\s+yond\b/g, 'beyond'],
+    [/\bsa\s+id\b/g, 'said'],
+    [/\bgre\s*a\s*t\s+m\s*a\s*n\b/g, 'great man'],
+    [/\bgre\s*a\s*t\b/g, 'great'],
+    [/\bGre\s*a\s*t\b/g, 'Great'],
+    [/\bstude\s*nts\b/g, 'students'],
+    [/\bde\s*pa\s*rtm\s*e\s*nts\b/g, 'departments'],
+    [/\bm\s+out\s*h\b/g, 'mouth'],
+    [/\bhe\s+a\s+t\b/g, 'heat'],
+    [/\bhe\s+at\b/g, 'heat'],
+    [/\bitse\s+lf\b/g, 'itself'],
+    [/\b([A-Za-z]+)\s+'([stdm]|ll|re|ve)\b/g, "$1'$2"],
+    [/\b([A-Za-z]+'s)([A-Za-z]+)\b/g, '$1 $2'],
+    [/\s+([,.:;?!])/g, '$1'],
+    [/[ \t]{2,}/g, ' ']
+  ];
+
+  while ((node = walker.nextNode())) {
+    let val = node.nodeValue;
+    if (!val || val.trim().length === 0) continue;
+    let changed = false;
+    for (const [pat, rep] of replacements) {
+      if (pat.test(val)) {
+        val = val.replace(pat, rep);
+        changed = true;
+      }
+    }
+    if (changed) {
+      node.nodeValue = val;
+    }
+  }
+}
+
+/**
+ * Responsive Touch Swipe & Edge Tap Navigation
+ */
+function attachTouchAndTapNavigation(target) {
+  if (!target || target._hasTouchNav) return;
+  target._hasTouchNav = true;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  target.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }
+  }, { passive: true });
+
+  target.addEventListener('touchend', (e) => {
+    if (e.changedTouches && e.changedTouches.length === 1) {
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const dx = touchEndX - touchStartX;
+      const dy = touchEndY - touchStartY;
+      const dt = Date.now() - touchStartTime;
+
+      // 1. Horizontal Swipe (turn pages)
+      if (Math.abs(dx) > 40 && Math.abs(dy) < 80 && dt < 600) {
+        if (dx < -40) turnPage('next');
+        else if (dx > 40) turnPage('prev');
+        return;
+      }
+
+      // 2. Mobile screen tap zones
+      if (Math.abs(dx) < 15 && Math.abs(dy) < 15 && dt < 350) {
+        const width = target.clientWidth || window.innerWidth;
+        const tapX = touchEndX;
+
+        // Left 22% -> Prev
+        if (tapX < width * 0.22) {
+          turnPage('prev');
+        }
+        // Right 22% -> Next
+        else if (tapX > width * 0.78) {
+          turnPage('next');
+        }
+        // Center -> Toggle Immersive Fullscreen Mode on mobile
+        else if (window.innerWidth <= 768) {
+          toggleImmersiveMode();
+        }
+      }
+    }
+  }, { passive: true });
+}
+
+function toggleImmersiveMode() {
+  document.body.classList.toggle('immersive-mode');
+}
+
+/**
  * Navigation & Menu Controls Setup
  */
 function setupNavControls() {
   const btnPrev = document.getElementById('btn-nav-prev');
   const btnNext = document.getElementById('btn-nav-next');
 
-  btnPrev.addEventListener('click', () => turnPage('prev'));
-  btnNext.addEventListener('click', () => turnPage('next'));
+  if (btnPrev) btnPrev.addEventListener('click', () => turnPage('prev'));
+  if (btnNext) btnNext.addEventListener('click', () => turnPage('next'));
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') turnPage('prev');
@@ -448,15 +578,32 @@ function setupNavControls() {
 function setupMenuControls() {
   const btnPaper = document.getElementById('btn-paper-toggle');
   const paperMenu = document.getElementById('paper-menu');
+  const btnPaperClose = document.getElementById('btn-paper-close');
+  const backdrop = document.getElementById('reader-backdrop');
 
-  btnPaper.addEventListener('click', (e) => {
-    e.stopPropagation();
-    paperMenu.classList.toggle('active');
-  });
+  if (btnPaper) {
+    btnPaper.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePaperMenu();
+    });
+  }
+
+  if (btnPaperClose) {
+    btnPaperClose.addEventListener('click', () => togglePaperMenu(false));
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', () => {
+      toggleSidebar(false);
+      togglePaperMenu(false);
+    });
+  }
 
   document.addEventListener('click', (e) => {
-    if (!paperMenu.contains(e.target) && e.target !== btnPaper) {
-      paperMenu.classList.remove('active');
+    if (paperMenu && !paperMenu.contains(e.target) && e.target !== btnPaper) {
+      if (window.innerWidth > 768) {
+        paperMenu.classList.remove('active');
+      }
     }
   });
 
@@ -513,10 +660,25 @@ function setupMenuControls() {
 
 function toggleSidebar(forceState) {
   const sidebar = document.getElementById('reader-sidebar');
-  if (typeof forceState === 'boolean') {
-    sidebar.classList.toggle('open', forceState);
-  } else {
-    sidebar.classList.toggle('open');
+  const backdrop = document.getElementById('reader-backdrop');
+  const paperMenu = document.getElementById('paper-menu');
+  if (paperMenu) paperMenu.classList.remove('active');
+  const isOpen = typeof forceState === 'boolean' ? forceState : !sidebar.classList.contains('open');
+  sidebar.classList.toggle('open', isOpen);
+  if (backdrop) {
+    backdrop.classList.toggle('active', isOpen);
+  }
+}
+
+function togglePaperMenu(forceState) {
+  const paperMenu = document.getElementById('paper-menu');
+  const backdrop = document.getElementById('reader-backdrop');
+  const sidebar = document.getElementById('reader-sidebar');
+  if (sidebar) sidebar.classList.remove('open');
+  const isActive = typeof forceState === 'boolean' ? forceState : !paperMenu.classList.contains('active');
+  paperMenu.classList.toggle('active', isActive);
+  if (backdrop) {
+    backdrop.classList.toggle('active', isActive);
   }
 }
 

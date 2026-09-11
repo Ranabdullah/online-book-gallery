@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>The Cloud Library & Reader</title>
   <meta name="description" content="A pristine, high-speed online book gallery and reader for EPUB, PDF, and digital literature. Access your entire library anywhere.">
   <link rel="stylesheet" href="css/style.css">
@@ -162,15 +162,19 @@
     </main>
 
     <!-- Permanent Right Sidebar: Recommendations & Wishlist -->
-    <aside class="recommendations-sidebar">
+    <aside class="recommendations-sidebar" id="recommendations-sidebar">
+      <div class="mobile-sheet-pill rec-sheet-pill"></div>
       <div class="rec-sidebar-header">
         <h3 class="rec-sidebar-title">
           <span>💡 Recommendations</span>
           <span class="cat-pill" id="rec-count" style="font-size: 10.5px; padding: 2px 7px;">0</span>
         </h3>
-        <button id="btn-copy-recs" class="btn btn-outline" style="padding: 4px 8px; font-size: 11px;" title="Copy all recommendations to clipboard">
-          Copy List
-        </button>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button id="btn-copy-recs" class="btn btn-outline" style="padding: 4px 8px; font-size: 11px;" title="Copy all recommendations to clipboard">
+            Copy List
+          </button>
+          <button id="btn-close-recs-mobile" class="btn-close-mobile-sheet" title="Close Wishlist">&times;</button>
+        </div>
       </div>
 
       <div class="rec-sidebar-content">
@@ -315,6 +319,14 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating Mobile Wishlist / Recommendations Button -->
+  <button id="btn-mobile-recs" class="btn-floating-recs" title="View & Add Book Recommendations">
+    <span style="font-size: 16px;">💡</span>
+    <span>Wishlist</span>
+    <span class="floating-badge" id="mobile-rec-count">0</span>
+  </button>
+  <div class="mobile-drawer-backdrop" id="rec-drawer-backdrop"></div>
 
   <!-- Scripts -->
   <script src="js/vendor/jszip.min.js"></script>

@@ -1,4 +1,4 @@
-﻿/* High-Speed Reader Styling with 3D Page Flip & Authentic Paper Types */
+/* High-Speed Reader Styling with 3D Page Flip & Authentic Paper Types */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
 
 :root {
@@ -503,3 +503,199 @@ body {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* Reader Backdrop */
+.reader-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.reader-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Sheet Header in Paper Menu */
+.mobile-sheet-header {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-sheet-pill {
+  width: 36px;
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+
+/* Immersive Fullscreen Mode */
+.reader-toolbar, .reader-footer {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s, color 0.25s;
+}
+
+body.immersive-mode .reader-toolbar {
+  transform: translateY(-100%);
+}
+
+body.immersive-mode .reader-footer {
+  transform: translateY(100%);
+}
+
+/* Mobile Responsive Optimization (Phones & Tablets) */
+@media (max-width: 768px) {
+  .reader-toolbar {
+    height: 48px;
+    padding: 0 8px;
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
+  .toolbar-left .btn-text,
+  .toolbar-right .btn-text {
+    display: none;
+  }
+
+  .tool-btn {
+    padding: 0 8px;
+    height: 32px;
+    gap: 0;
+  }
+
+  .tool-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .book-title-display {
+    font-size: 12.5px;
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .book-author-display {
+    display: none;
+  }
+
+  .book-stage {
+    padding: 0;
+  }
+
+  .book-page-wrapper {
+    max-width: 100%;
+    height: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .spine-shadow-overlay {
+    width: 12px;
+    opacity: 0.35;
+  }
+
+  .nav-arrow {
+    display: none;
+  }
+
+  /* Table of Contents Drawer on Mobile */
+  .reader-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 85vw;
+    max-width: 310px;
+    z-index: 100;
+    transform: translateX(-100%);
+    box-shadow: 12px 0 35px rgba(0, 0, 0, 0.25);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reader-sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Paper & Typography Menu as Bottom Sheet on Mobile */
+  .paper-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 82vh;
+    overflow-y: auto;
+    padding: 16px 18px;
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0));
+    z-index: 100;
+    transform: translateY(100%);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.25);
+    display: block;
+    visibility: hidden;
+  }
+
+  .paper-menu.active {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .mobile-sheet-header {
+    display: flex;
+  }
+
+  .paper-options-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .paper-option-btn {
+    padding: 8px 4px;
+  }
+
+  .paper-swatch {
+    width: 22px;
+    height: 22px;
+  }
+
+  .paper-name {
+    font-size: 10px;
+  }
+
+  .style-control-row {
+    margin-bottom: 10px;
+  }
+
+  .reader-footer {
+    height: 32px;
+    padding: 0 10px;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    font-size: 10.5px;
+  }
+
+  .progress-bar-container {
+    margin: 0 8px;
+    max-width: 150px;
+  }
+
+  #pdf-viewer-container {
+    padding: 4px 0;
+  }
+
+  #pdf-canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
