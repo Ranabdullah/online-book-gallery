@@ -105,7 +105,10 @@ async function saveBookOverride(id, overrideData) {
   // 1. Save to LocalStorage immediately
   saveLocalBackupOverride(id, overrideData);
 
-  // 2. Save to IndexedDB
+  // 2. Automatically sync to backend server if active
+  syncOverrideToBackend(id, overrideData);
+
+  // 3. Save to IndexedDB
   try {
     const db = await openDB();
     return new Promise((resolve, reject) => {
@@ -159,6 +162,41 @@ async function deleteBookOverride(id) {
   } catch (err) {}
 }
 
+// Automated Backend Sync Engine
+async function syncOverrideToBackend(id, data) {
+  try {
+    const payload = { id, ...data };
+    const resp = await fetch('/api/save-override', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (resp.ok) {
+      const result = await resp.json();
+      console.log('Automated backend sync success:', result);
+      return result;
+    }
+  } catch (e) {
+    // If backend server is not running or on static host, ignore silently
+  }
+}
+
+async function syncAllOverridesToBackend() {
+  const overrides = await getAllBookOverrides();
+  try {
+    const resp = await fetch('/api/sync-all', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ overrides })
+    });
+    if (resp.ok) {
+      return await resp.json();
+    }
+  } catch (e) {
+    throw e;
+  }
+}
+
 // Export functions to window
 window.AthenaeumDB = {
   saveUserBook,
@@ -166,5 +204,8 @@ window.AthenaeumDB = {
   getUserBookById,
   saveBookOverride,
   getAllBookOverrides,
-  deleteBookOverride
+  deleteBookOverride,
+  syncOverrideToBackend,
+  syncAllOverridesToBackend
 };
+
