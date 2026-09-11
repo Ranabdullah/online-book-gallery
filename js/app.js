@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Athenaeum - Main Gallery Application
  * Features:
  * - Real-time fuzzy search & Category navigation
@@ -189,6 +189,9 @@ function renderBooks() {
           <button class="bookmark-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${b.id}')" title="${isFav ? 'Remove favorite' : 'Add favorite'}">
             ♥
           </button>
+          <button class="card-cover-change-btn" onclick="triggerQuickCoverChange('${b.id}', event)" title="Change book cover">
+            📷 Cover
+          </button>
         </div>
 
         <div class="card-details">
@@ -219,6 +222,119 @@ function renderBooks() {
       </article>
     `;
   }).join('');
+
+  attachCardDragAndDrop();
+}
+
+/**
+ * Bulletproof Cover Saving & Image Optimization System
+ */
+async function saveCoverForBook(bookId, source, showNotice = true) {
+  const book = allBooks.find(b => b.id === bookId);
+  if (!book) return;
+
+  try {
+    const optimized = await window.BookManager.optimizeCoverImage(source);
+    const existing = bookOverrides[bookId] || {};
+    const updatedOverride = {
+      ...existing,
+      title: existing.title || book.title,
+      author: existing.author || book.author,
+      category: existing.category || book.category,
+      cover: optimized
+    };
+
+    // 1. Dual-layer save: IndexedDB + LocalStorage backup
+    await window.AthenaeumDB.saveBookOverride(bookId, updatedOverride);
+    bookOverrides[bookId] = updatedOverride;
+
+    // 2. Update memory state
+    book.cover = optimized;
+    book.hasCustomOverride = true;
+
+    // 3. Update preview in modal if currently open
+    const infoCover = document.getElementById('info-cover');
+    if (infoCover) infoCover.src = optimized;
+    const editPreview = document.getElementById('edit-cover-preview');
+    if (editPreview) editPreview.src = optimized;
+
+    // 4. Update gallery cards
+    renderBooks();
+
+    if (showNotice) {
+      showToast(`Cover saved successfully for "${book.title}"!`);
+    }
+    return optimized;
+  } catch (err) {
+    console.error('Failed to save cover:', err);
+    showToast('Could not save cover: ' + err.message);
+    throw err;
+  }
+}
+
+function triggerQuickCoverChange(bookId, event) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  let quickInput = document.getElementById('quick-cover-input');
+  if (!quickInput) {
+    quickInput = document.createElement('input');
+    quickInput.type = 'file';
+    quickInput.id = 'quick-cover-input';
+    quickInput.accept = 'image/*';
+    quickInput.style.display = 'none';
+    document.body.appendChild(quickInput);
+  }
+
+  quickInput.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      await saveCoverForBook(bookId, file, true);
+    }
+    quickInput.value = '';
+  };
+
+  quickInput.click();
+}
+
+function attachCardDragAndDrop() {
+  const cards = document.querySelectorAll('.book-card');
+  cards.forEach(card => {
+    card.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      card.classList.add('drag-target');
+    });
+
+    card.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      card.classList.remove('drag-target');
+    });
+
+    card.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      card.classList.remove('drag-target');
+
+      const bookId = card.dataset.id;
+      if (!bookId) return;
+
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        const file = e.dataTransfer.files[0];
+        if (file.type.startsWith('image/')) {
+          await saveCoverForBook(bookId, file, true);
+        }
+      } else {
+        const text = e.dataTransfer.getData('text/plain');
+        if (text && (text.startsWith('http://') || text.startsWith('https://') || text.startsWith('data:image/'))) {
+          await saveCoverForBook(bookId, text, true);
+        }
+      }
+    });
+  });
 }
 
 /**
@@ -262,29 +378,48 @@ function setupEditModal() {
     });
   }
 
-  // Upload cover image
+  // Upload cover image with instant optimization & preview
   if (coverFileBtn && coverFileInput) {
     coverFileBtn.addEventListener('click', () => coverFileInput.click());
-    coverFileInput.addEventListener('change', (e) => {
+    coverFileInput.addEventListener('change', async (e) => {
       const file = e.target.files[0];
       if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = (evt) => {
-        currentEditCoverData = evt.target.result;
-        coverPreview.src = currentEditCoverData;
-      };
-      reader.readAsDataURL(file);
+      try {
+        coverPreview.style.opacity = '0.5';
+        const optimized = await window.BookManager.optimizeCoverImage(file);
+        currentEditCoverData = optimized;
+        coverPreview.src = optimized;
+        coverPreview.style.opacity = '1';
+        // Auto-save immediately to DB/LocalStorage so it is never lost!
+        if (currentEditBookId) {
+          await saveCoverForBook(currentEditBookId, optimized, false);
+          showToast('Cover saved instantly!');
+        }
+      } catch (err) {
+        console.error('Error optimizing cover:', err);
+        coverPreview.style.opacity = '1';
+      }
     });
   }
 
   // Cover image URL
   if (coverUrlInput) {
-    coverUrlInput.addEventListener('input', (e) => {
+    coverUrlInput.addEventListener('change', async (e) => {
       const url = e.target.value.trim();
       if (url) {
-        currentEditCoverData = url;
-        coverPreview.src = url;
+        try {
+          const optimized = await window.BookManager.optimizeCoverImage(url);
+          currentEditCoverData = optimized;
+          coverPreview.src = optimized;
+          if (currentEditBookId) {
+            await saveCoverForBook(currentEditBookId, optimized, false);
+            showToast('Cover saved instantly!');
+          }
+        } catch (err) {
+          currentEditCoverData = url;
+          coverPreview.src = url;
+        }
       }
     });
   }
@@ -410,9 +545,23 @@ function openBookModal(bookId) {
 
   const readBtn = document.getElementById('info-read-link');
   const editBtn = document.getElementById('info-edit-btn');
+  const changeCoverBtn = document.getElementById('btn-info-change-cover');
+  const changeCoverInput = document.getElementById('info-cover-file');
+
+  if (changeCoverBtn && changeCoverInput) {
+    changeCoverBtn.onclick = () => changeCoverInput.click();
+    changeCoverInput.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        await saveCoverForBook(book.id, file, true);
+        document.getElementById('info-cover').src = book.cover;
+      }
+      changeCoverInput.value = '';
+    };
+  }
 
   if (book.isHosted) {
-    readBtn.href = `reader.html?book=${encodeURIComponent(b.file)}`;
+    readBtn.href = `reader.html?book=${encodeURIComponent(book.file)}`;
     readBtn.style.display = 'inline-flex';
   } else {
     readBtn.href = '#';
@@ -584,3 +733,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// Export key functions globally for inline HTML event handlers
+window.openBookModal = openBookModal;
+window.openEditModal = openEditModal;
+window.toggleFavorite = toggleFavorite;
+window.openLocalPrompt = openLocalPrompt;
+window.saveCoverForBook = saveCoverForBook;
+window.triggerQuickCoverChange = triggerQuickCoverChange;
+

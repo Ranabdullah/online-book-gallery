@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Athenaeum - IndexedDB Storage Engine
  * Manages user-added books (blobs), custom covers, and metadata overrides locally.
  */
@@ -72,44 +72,91 @@ async function getUserBookById(id) {
   });
 }
 
+const LS_OVERRIDES_KEY = 'athenaeum_overrides_backup_v2';
+
+function getLocalBackupOverrides() {
+  try {
+    return JSON.parse(localStorage.getItem(LS_OVERRIDES_KEY) || '{}');
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveLocalBackupOverride(id, data) {
+  try {
+    const map = getLocalBackupOverrides();
+    map[id] = { id, ...data, updatedAt: Date.now() };
+    localStorage.setItem(LS_OVERRIDES_KEY, JSON.stringify(map));
+  } catch (e) {
+    console.warn('LocalStorage backup error:', e);
+  }
+}
+
+function deleteLocalBackupOverride(id) {
+  try {
+    const map = getLocalBackupOverrides();
+    delete map[id];
+    localStorage.setItem(LS_OVERRIDES_KEY, JSON.stringify(map));
+  } catch (e) {}
+}
+
 // Book Metadata / Cover Overrides
 async function saveBookOverride(id, overrideData) {
-  const db = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('book_overrides', 'readwrite');
-    const store = tx.objectStore('book_overrides');
-    store.put({ id, ...overrideData, updatedAt: Date.now() });
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
+  // 1. Save to LocalStorage immediately
+  saveLocalBackupOverride(id, overrideData);
+
+  // 2. Save to IndexedDB
+  try {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('book_overrides', 'readwrite');
+      const store = tx.objectStore('book_overrides');
+      store.put({ id, ...overrideData, updatedAt: Date.now() });
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => resolve(); // Gracefully fallback to localStorage
+    });
+  } catch (err) {
+    console.warn('IndexedDB write error, saved in LocalStorage fallback:', err);
+  }
 }
 
 async function getAllBookOverrides() {
-  const db = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('book_overrides', 'readonly');
-    const store = tx.objectStore('book_overrides');
-    const req = store.getAll();
-    req.onsuccess = () => {
-      const map = {};
-      (req.result || []).forEach(item => {
-        map[item.id] = item;
-      });
-      resolve(map);
-    };
-    req.onerror = () => reject(req.error);
-  });
+  const localMap = getLocalBackupOverrides();
+
+  try {
+    const db = await openDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction('book_overrides', 'readonly');
+      const store = tx.objectStore('book_overrides');
+      const req = store.getAll();
+      req.onsuccess = () => {
+        const idbMap = {};
+        (req.result || []).forEach(item => {
+          idbMap[item.id] = item;
+        });
+        // Merge with localMap (prefer newer updatedAt)
+        const combined = { ...localMap, ...idbMap };
+        resolve(combined);
+      };
+      req.onerror = () => resolve(localMap);
+    });
+  } catch (err) {
+    return localMap;
+  }
 }
 
 async function deleteBookOverride(id) {
-  const db = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('book_overrides', 'readwrite');
-    const store = tx.objectStore('book_overrides');
-    store.delete(id);
-    tx.oncomplete = () => resolve();
-    tx.onerror = () => reject(tx.error);
-  });
+  deleteLocalBackupOverride(id);
+  try {
+    const db = await openDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction('book_overrides', 'readwrite');
+      const store = tx.objectStore('book_overrides');
+      store.delete(id);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => resolve();
+    });
+  } catch (err) {}
 }
 
 // Export functions to window

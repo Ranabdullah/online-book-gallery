@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Athenaeum - Book Auto-Cataloging & Management Engine
  * - Parses EPUB & PDF metadata directly in the browser
  * - Extracts covers or generates high-res canvas covers
@@ -265,7 +265,73 @@ function generateCanvasCover(title, author, category) {
   return canvas.toDataURL('image/jpeg', 0.9);
 }
 
+/**
+ * Auto-optimizes any uploaded cover image to standard dimensions (400x600)
+ * and exports as lightweight, crisp JPEG (~60 KB) to ensure instant saving.
+ */
+async function optimizeCoverImage(source, maxWidth = 400, maxHeight = 600) {
+  return new Promise((resolve, reject) => {
+    let src = '';
+    let isObjectUrl = false;
+    if (typeof source === 'string') {
+      src = source;
+    } else if (source instanceof File || source instanceof Blob) {
+      src = URL.createObjectURL(source);
+      isObjectUrl = true;
+    } else {
+      return reject(new Error('Invalid image source'));
+    }
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = maxWidth;
+        canvas.height = maxHeight;
+        const ctx = canvas.getContext('2d');
+
+        const imgAspect = img.width / img.height;
+        const targetAspect = maxWidth / maxHeight;
+        let renderWidth, renderHeight, offsetX, offsetY;
+
+        if (imgAspect > targetAspect) {
+          renderHeight = maxHeight;
+          renderWidth = maxHeight * imgAspect;
+          offsetX = -(renderWidth - maxWidth) / 2;
+          offsetY = 0;
+        } else {
+          renderWidth = maxWidth;
+          renderHeight = maxWidth / imgAspect;
+          offsetX = 0;
+          offsetY = -(renderHeight - maxHeight) / 2;
+        }
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, maxWidth, maxHeight);
+        ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
+
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.88);
+        if (isObjectUrl) URL.revokeObjectURL(src);
+        resolve(dataUrl);
+      } catch (err) {
+        if (isObjectUrl) URL.revokeObjectURL(src);
+        resolve(typeof source === 'string' ? source : null);
+      }
+    };
+
+    img.onerror = () => {
+      if (isObjectUrl) URL.revokeObjectURL(src);
+      if (typeof source === 'string') resolve(source);
+      else reject(new Error('Failed to load image'));
+    };
+
+    img.src = src;
+  });
+}
+
 window.BookManager = {
   processAndAddBook,
-  generateCanvasCover
+  generateCanvasCover,
+  optimizeCoverImage
 };

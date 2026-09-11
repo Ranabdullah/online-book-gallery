@@ -116,6 +116,14 @@
         <option value="60px">Spacious</option>
       </select>
     </div>
+
+    <div class="style-control-row">
+      <span class="style-control-label">Page Turn Sound</span>
+      <label class="toggle-sound-label" style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
+        <input type="checkbox" id="sound-toggle" checked style="accent-color: #0f172a; width: 16px; height: 16px; cursor: pointer;">
+        <span style="font-size: 12px; font-weight: 500;">🔊 Enabled</span>
+      </label>
+    </div>
   </div>
 
   <!-- Reader Main Layout -->
@@ -148,6 +156,26 @@
       <!-- Book Page 3D Wrapper -->
       <div class="book-page-wrapper" id="book-page-wrapper">
         <div class="spine-shadow-overlay"></div>
+        <div class="book-edge-stack left"></div>
+        <div class="book-edge-stack right"></div>
+
+        <!-- Authentic 3D Page Curl Engine Overlay -->
+        <div class="page-curl-overlay" id="page-curl-overlay" aria-hidden="true">
+          <div class="curl-cast-shadow" id="curl-cast-shadow"></div>
+          <div class="curl-leaf" id="curl-leaf">
+            <div class="curl-leaf-front" id="curl-leaf-front"></div>
+            <div class="curl-leaf-back" id="curl-leaf-back">
+              <div class="curl-fold-ridge"></div>
+              <div class="curl-paper-sheen"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Corner Dog-ear & Drag Hint -->
+        <div class="corner-curl-hint" id="corner-curl-hint" title="Peel page corner">
+          <div class="corner-dogear"></div>
+        </div>
+
         <!-- EPUB Viewer -->
         <div id="epub-viewer"></div>
 
