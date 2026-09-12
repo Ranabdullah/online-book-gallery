@@ -137,9 +137,7 @@
   async function fetchCloudPayload() {
     const key = getSyncKey();
     try {
-      const resp = await fetch(CLOUD_RELAY_BASE + encodeURIComponent(key), {
-        headers: { 'Cache-Control': 'no-cache' }
-      });
+      const resp = await fetch(CLOUD_RELAY_BASE + encodeURIComponent(key) + '?_t=' + Date.now());
       if (resp.ok) {
         const text = await resp.text();
         if (text) {
@@ -157,7 +155,7 @@
     try {
       const resp = await fetch(CLOUD_RELAY_BASE + encodeURIComponent(key), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload)
       });
       return resp.ok;

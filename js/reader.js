@@ -23,8 +23,7 @@ let readerPrefs = {
   paper: localStorage.getItem('athenaeum_paper') || 'cream',
   fontFamily: localStorage.getItem('athenaeum_font') || 'Merriweather, Georgia, serif',
   fontSize: parseInt(localStorage.getItem('athenaeum_font_size') || '100', 10),
-  margin: localStorage.getItem('athenaeum_margin') || '40px',
-  soundEnabled: localStorage.getItem('athenaeum_sound') !== 'false'
+  margin: localStorage.getItem('athenaeum_margin') || '40px'
 };
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   applyPaperTheme(readerPrefs.paper);
   setupMenuControls();
   setupNavControls();
-  setupCornerCurlGesture();
 
   if (isLocal) {
     loadLocalSessionBook();
@@ -266,7 +264,6 @@ function initEpubReaderWithBuffer(buffer, identifier) {
 
         tocList.querySelectorAll('.toc-item').forEach(el => {
           el.addEventListener('click', () => {
-            triggerPageTurnAnimation('next');
             currentRendition.display(el.dataset.href);
             toggleSidebar(false);
           });
@@ -366,7 +363,6 @@ async function renderPdfPage(num) {
 
 window.jumpToPdfPage = function(num) {
   if (num >= 1 && num <= pdfDoc.numPages) {
-    triggerPageTurnAnimation(num > pdfCurrentPage ? 'next' : 'prev');
     pdfCurrentPage = num;
     renderPdfPage(pdfCurrentPage);
     toggleSidebar(false);
@@ -407,7 +403,6 @@ async function checkAndPromptCrossDeviceResume(bookId, format) {
         btnResume.onclick = () => {
           banner.style.display = 'none';
           if (format === 'epub' && remote.cfi && currentRendition) {
-            triggerPageTurnAnimation('next');
             currentRendition.display(remote.cfi);
           } else if (format === 'pdf' && remote.page && window.jumpToPdfPage) {
             window.jumpToPdfPage(remote.page);
@@ -421,101 +416,19 @@ async function checkAndPromptCrossDeviceResume(bookId, format) {
 }
 
 /**
- * Synthesized Organic Paper Turn Whisper (Web Audio API)
+ * Fast, Clean Page Turning Engine (No Sound, No Glitchy Animations)
  */
-function playPaperTurnSound() {
-  if (!readerPrefs.soundEnabled) return;
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
-    if (!window._athenaeumAudioCtx) {
-      window._athenaeumAudioCtx = new AudioContext();
-    }
-    const ctx = window._athenaeumAudioCtx;
-    if (ctx.state === 'suspended') {
-      ctx.resume();
-    }
-
-    // Synthesize 180ms organic bandpassed noise for crisp paper glide
-    const duration = 0.18;
-    const bufferSize = Math.floor(ctx.sampleRate * duration);
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-
-    // Filtered noise with slight texture variations
-    let lastOut = 0.0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      lastOut = (lastOut * 0.4) + (white * 0.6);
-      data[i] = lastOut;
-    }
-
-    const noiseSource = ctx.createBufferSource();
-    noiseSource.buffer = buffer;
-
-    // Bandpass filter to match tactile book paper frequency (800Hz - 2400Hz sweep)
-    const bandpass = ctx.createBiquadFilter();
-    bandpass.type = 'bandpass';
-    bandpass.frequency.setValueAtTime(1400, ctx.currentTime);
-    bandpass.frequency.exponentialRampToValueAtTime(700, ctx.currentTime + duration);
-    bandpass.Q.setValueAtTime(1.8, ctx.currentTime);
-
-    // Natural attack & decay envelope
-    const gainNode = ctx.createGain();
-    gainNode.gain.setValueAtTime(0.001, ctx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.09, ctx.currentTime + 0.025);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
-
-    noiseSource.connect(bandpass);
-    bandpass.connect(gainNode);
-    gainNode.connect(ctx.destination);
-
-    noiseSource.start();
-  } catch (err) {
-    // Audio contexts may require initial user gesture
-  }
-}
-
-/**
- * Authentic 3D Page Curl & Turning Engine
- */
-let isPageTurnActive = false;
-
-function executeRealisticPageCurl(direction) {
-  if (isPageTurnActive) return;
-  isPageTurnActive = true;
-
-  const overlay = document.getElementById('page-curl-overlay');
-  const curlClass = direction === 'next' ? 'curling-forward' : 'curling-backward';
-
-  // Play realistic paper rustle sound
-  playPaperTurnSound();
-
-  if (overlay) {
-    overlay.classList.remove('curling-forward', 'curling-backward', 'active');
-    void overlay.offsetWidth; // Trigger reflow
-    overlay.classList.add('active', curlClass);
-
-    // Advance underlying content at midpoint of curl fold
-    setTimeout(() => {
-      advanceReaderPage(direction);
-    }, 190);
-
-    // Reset overlay after 3D curl clears
-    setTimeout(() => {
-      overlay.classList.remove('active', curlClass);
-      isPageTurnActive = false;
-    }, 540);
-  } else {
-    advanceReaderPage(direction);
-    isPageTurnActive = false;
-  }
+function turnPage(direction) {
+  advanceReaderPage(direction);
 }
 
 function advanceReaderPage(direction) {
   if (currentFormat === 'epub' && currentRendition) {
-    if (direction === 'next') currentRendition.next();
-    else currentRendition.prev();
+    if (direction === 'next') {
+      currentRendition.next();
+    } else {
+      currentRendition.prev();
+    }
   } else if (currentFormat === 'pdf' && pdfDoc) {
     if (direction === 'next' && pdfCurrentPage < pdfDoc.numPages) {
       pdfCurrentPage++;
@@ -525,92 +438,6 @@ function advanceReaderPage(direction) {
       renderPdfPage(pdfCurrentPage);
     }
   }
-}
-
-function turnPage(direction) {
-  executeRealisticPageCurl(direction);
-}
-
-/**
- * Interactive Corner Peel & Tactile Drag Gesture
- */
-function setupCornerCurlGesture() {
-  const hint = document.getElementById('corner-curl-hint');
-  if (!hint) return;
-
-  let isDragging = false;
-  let startX = 0, startY = 0;
-  let totalDragDist = 0;
-
-  const handleStart = (clientX, clientY) => {
-    isDragging = true;
-    startX = clientX;
-    startY = clientY;
-    totalDragDist = 0;
-  };
-
-  const handleMove = (clientX, clientY) => {
-    if (!isDragging) return;
-    const dx = startX - clientX;
-    const dy = startY - clientY;
-    const pull = Math.max(0, (dx + dy) / 2);
-    totalDragDist = pull;
-
-    const overlay = document.getElementById('page-curl-overlay');
-    const leaf = document.getElementById('curl-leaf');
-    const shadow = document.getElementById('curl-cast-shadow');
-
-    if (overlay && leaf && pull > 12) {
-      overlay.classList.add('active');
-      const progress = Math.min(pull / 260, 0.42);
-      const rotY = progress * 70;
-      const transX = progress * 30;
-      const transY = progress * 18;
-      leaf.style.transform = `rotate3d(-0.85, 1, 0.15, ${rotY}deg) translate3d(-${transX}%, -${transY}%, 38px)`;
-      if (shadow) {
-        shadow.style.opacity = `${progress * 2.2}`;
-        shadow.style.background = `radial-gradient(ellipse at 80% 82%, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.1) 45%, transparent 70%)`;
-      }
-    }
-  };
-
-  const handleEnd = () => {
-    if (!isDragging) return;
-    isDragging = false;
-
-    const overlay = document.getElementById('page-curl-overlay');
-    const leaf = document.getElementById('curl-leaf');
-    const shadow = document.getElementById('curl-cast-shadow');
-
-    if (leaf) leaf.style.transform = '';
-    if (shadow) {
-      shadow.style.opacity = '';
-      shadow.style.background = '';
-    }
-
-    if (totalDragDist > 65) {
-      if (overlay) overlay.classList.remove('active');
-      turnPage('next');
-    } else {
-      if (overlay) overlay.classList.remove('active');
-    }
-    totalDragDist = 0;
-  };
-
-  hint.addEventListener('pointerdown', (e) => {
-    handleStart(e.clientX, e.clientY);
-  });
-
-  document.addEventListener('pointermove', (e) => {
-    if (isDragging) handleMove(e.clientX, e.clientY);
-  });
-
-  document.addEventListener('pointerup', handleEnd);
-  document.addEventListener('pointercancel', handleEnd);
-
-  hint.addEventListener('click', (e) => {
-    if (totalDragDist < 10) turnPage('next');
-  });
 }
 
 /**
@@ -907,16 +734,7 @@ function setupMenuControls() {
     });
   }
 
-  // Page Turn Sound Toggle
-  const soundToggle = document.getElementById('sound-toggle');
-  if (soundToggle) {
-    soundToggle.checked = readerPrefs.soundEnabled;
-    soundToggle.addEventListener('change', (e) => {
-      readerPrefs.soundEnabled = e.target.checked;
-      localStorage.setItem('athenaeum_sound', readerPrefs.soundEnabled ? 'true' : 'false');
-      if (readerPrefs.soundEnabled) playPaperTurnSound();
-    });
-  }
+
 }
 
 function toggleSidebar(forceState) {
