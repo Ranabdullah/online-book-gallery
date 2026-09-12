@@ -72,6 +72,50 @@ async function getUserBookById(id) {
   });
 }
 
+async function deleteUserBook(id) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('user_books', 'readwrite');
+    const store = tx.objectStore('user_books');
+    store.delete(id);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+// Hidden / Deleted Books Registry
+const LS_HIDDEN_BOOKS_KEY = 'athenaeum_hidden_books_v1';
+
+function getHiddenBooks() {
+  try {
+    const stored = localStorage.getItem(LS_HIDDEN_BOOKS_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function hideBook(id) {
+  try {
+    const list = getHiddenBooks();
+    if (!list.includes(id)) {
+      list.push(id);
+      localStorage.setItem(LS_HIDDEN_BOOKS_KEY, JSON.stringify(list));
+    }
+  } catch (e) {}
+}
+
+function unhideBook(id) {
+  try {
+    const list = getHiddenBooks().filter(x => x !== id);
+    localStorage.setItem(LS_HIDDEN_BOOKS_KEY, JSON.stringify(list));
+  } catch (e) {}
+}
+
+function isBookHidden(id) {
+  return getHiddenBooks().includes(id);
+}
+
 const LS_OVERRIDES_KEY = 'athenaeum_overrides_backup_v2';
 
 function getLocalBackupOverrides() {
@@ -202,6 +246,11 @@ window.AthenaeumDB = {
   saveUserBook,
   getAllUserBooks,
   getUserBookById,
+  deleteUserBook,
+  hideBook,
+  unhideBook,
+  getHiddenBooks,
+  isBookHidden,
   saveBookOverride,
   getAllBookOverrides,
   deleteBookOverride,

@@ -32,6 +32,7 @@ const bookUrl = urlParams.get('book');
 const isLocal = urlParams.get('local');
 const blobUrl = urlParams.get('blob');
 const bookTitleParam = urlParams.get('title');
+let currentBookIdentifier = bookUrl || blobUrl || bookTitleParam || 'book_default';
 
 document.addEventListener('DOMContentLoaded', async () => {
   applyPaperTheme(readerPrefs.paper);
@@ -76,6 +77,7 @@ async function loadFromCatalogOrDB(url) {
       const books = await resp.json();
       const match = books.find(b => b.file === url);
       if (match) {
+        currentBookIdentifier = match.id || match.file;
         document.getElementById('reader-book-title').textContent = match.title;
         document.getElementById('reader-book-author').textContent = match.author ? `by ${match.author}` : '';
         document.title = `${match.title} - Athenaeum Reader`;
@@ -161,6 +163,7 @@ async function loadBufferAndInit(url, ext) {
 }
 
 function initReaderWithBuffer(buffer, ext, identifier) {
+  currentBookIdentifier = identifier || currentBookIdentifier;
   const isPdf = ext.includes('pdf');
   const stage = document.getElementById('book-stage');
   if (stage) {
@@ -172,13 +175,13 @@ function initReaderWithBuffer(buffer, ext, identifier) {
     document.getElementById('pdf-controls').style.display = 'flex';
     document.getElementById('epub-viewer').style.display = 'none';
     document.getElementById('pdf-viewer-container').style.display = 'flex';
-    initPdfReaderWithBuffer(buffer);
+    initPdfReaderWithBuffer(buffer, currentBookIdentifier);
   } else {
     currentFormat = 'epub';
     document.getElementById('pdf-controls').style.display = 'none';
     document.getElementById('epub-viewer').style.display = 'block';
     document.getElementById('pdf-viewer-container').style.display = 'none';
-    initEpubReaderWithBuffer(buffer, identifier);
+    initEpubReaderWithBuffer(buffer, currentBookIdentifier);
   }
 }
 
@@ -215,9 +218,13 @@ function initEpubReaderWithBuffer(buffer, identifier) {
     displayPromise.then(() => {
       hideLoader();
       applyCurrentStylesToRendition();
+      checkAndPromptCrossDeviceResume(identifier, 'epub');
     }).catch((displayErr) => {
       console.warn('Initial display error, falling back to default:', displayErr);
-      currentRendition.display().then(hideLoader).catch(e => showError('EPUB render error: ' + e.message));
+      currentRendition.display().then(() => {
+        hideLoader();
+        checkAndPromptCrossDeviceResume(identifier, 'epub');
+      }).catch(e => showError('EPUB render error: ' + e.message));
     });
 
     // Tracking position & progress
@@ -225,13 +232,26 @@ function initEpubReaderWithBuffer(buffer, identifier) {
       hideLoader();
       if (location && location.start) {
         localStorage.setItem(`athenaeum_pos_${identifier}`, location.start.cfi);
+        const pct = location.start.percentage ? Math.round(location.start.percentage * 100) : 0;
         if (location.start.percentage) {
-          const pct = Math.round(location.start.percentage * 100);
           document.getElementById('reader-percentage').textContent = `${pct}%`;
           document.getElementById('progress-bar-fill').style.width = `${pct}%`;
         }
-        if (location.start.displayed && location.start.displayed.page) {
-          document.getElementById('reader-progress-text').textContent = `Page ${location.start.displayed.page}`;
+        const pageNum = (location.start.displayed && location.start.displayed.page) ? location.start.displayed.page : null;
+        if (pageNum) {
+          document.getElementById('reader-progress-text').textContent = `Page ${pageNum}`;
+        }
+        // Save to Cross-Device Sync Engine
+        if (window.AthenaeumSync) {
+          const titleEl = document.getElementById('reader-book-title');
+          window.AthenaeumSync.saveReadingProgress({
+            bookId: identifier,
+            bookTitle: titleEl ? titleEl.textContent : 'Book',
+            cfi: location.start.cfi,
+            page: pageNum || 1,
+            percentage: pct,
+            format: 'epub'
+          });
         }
       }
     });
@@ -262,13 +282,21 @@ function initEpubReaderWithBuffer(buffer, identifier) {
 /**
  * PDF Engine
  */
-async function initPdfReaderWithBuffer(buffer) {
+async function initPdfReaderWithBuffer(buffer, identifier) {
   try {
+    currentBookIdentifier = identifier || currentBookIdentifier;
     const loadingTask = pdfjsLib.getDocument({ data: buffer });
     pdfDoc = await loadingTask.promise;
     hideLoader();
 
+    // Restore saved page
+    const savedPage = parseInt(localStorage.getItem(`athenaeum_pos_${currentBookIdentifier}`) || '1', 10);
+    if (savedPage && savedPage >= 1 && savedPage <= pdfDoc.numPages) {
+      pdfCurrentPage = savedPage;
+    }
+
     renderPdfPage(pdfCurrentPage);
+    checkAndPromptCrossDeviceResume(currentBookIdentifier, 'pdf');
 
     // Outline
     try {
@@ -317,6 +345,20 @@ async function renderPdfPage(num) {
     const pct = Math.round((num / pdfDoc.numPages) * 100);
     document.getElementById('reader-percentage').textContent = `${pct}%`;
     document.getElementById('progress-bar-fill').style.width = `${pct}%`;
+
+    localStorage.setItem(`athenaeum_pos_${currentBookIdentifier}`, num);
+
+    // Save to Cross-Device Sync Engine
+    if (window.AthenaeumSync && currentBookIdentifier) {
+      const titleEl = document.getElementById('reader-book-title');
+      window.AthenaeumSync.saveReadingProgress({
+        bookId: currentBookIdentifier,
+        bookTitle: titleEl ? titleEl.textContent : 'Book',
+        page: num,
+        percentage: pct,
+        format: 'pdf'
+      });
+    }
   } catch (e) {
     console.error('PDF render error:', e);
   }
@@ -330,6 +372,53 @@ window.jumpToPdfPage = function(num) {
     toggleSidebar(false);
   }
 };
+
+/**
+ * Cross-Device Reading Resume Engine
+ */
+async function checkAndPromptCrossDeviceResume(bookId, format) {
+  if (!window.AthenaeumSync || !bookId) return;
+  try {
+    const remote = await window.AthenaeumSync.getLatestCrossDeviceProgress(bookId);
+    if (remote && remote.isRemoteNewer) {
+      const banner = document.getElementById('sync-resume-banner');
+      const deviceLabel = document.getElementById('resume-device-label');
+      const deviceIcon = document.getElementById('resume-device-icon');
+      const posDesc = document.getElementById('resume-position-desc');
+      const btnResume = document.getElementById('btn-resume-now');
+      const btnDismiss = document.getElementById('btn-resume-dismiss');
+
+      if (!banner) return;
+      if (deviceLabel) deviceLabel.textContent = remote.deviceLabel || 'Other Device';
+      if (deviceIcon) deviceIcon.textContent = (remote.deviceType === 'phone' ? '📱' : (remote.deviceType === 'tablet' ? '📱' : '💻'));
+      if (posDesc) {
+        posDesc.textContent = remote.page ? `Page ${remote.page} (${remote.percentage || 0}%)` : `${remote.percentage || 0}%`;
+      }
+
+      banner.style.display = 'block';
+
+      if (btnDismiss) {
+        btnDismiss.onclick = () => {
+          banner.style.display = 'none';
+        };
+      }
+
+      if (btnResume) {
+        btnResume.onclick = () => {
+          banner.style.display = 'none';
+          if (format === 'epub' && remote.cfi && currentRendition) {
+            triggerPageTurnAnimation('next');
+            currentRendition.display(remote.cfi);
+          } else if (format === 'pdf' && remote.page && window.jumpToPdfPage) {
+            window.jumpToPdfPage(remote.page);
+          }
+        };
+      }
+    }
+  } catch (e) {
+    console.warn('Cross-device resume check note:', e);
+  }
+}
 
 /**
  * Synthesized Organic Paper Turn Whisper (Web Audio API)

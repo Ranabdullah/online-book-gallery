@@ -188,6 +188,16 @@
 
   </div>
 
+  <!-- Cross-Device Reading Resume Banner -->
+  <div class="sync-resume-banner" id="sync-resume-banner" style="display: none;">
+    <div class="resume-banner-content">
+      <span class="resume-device-icon" id="resume-device-icon">📱</span>
+      <span class="resume-text">Synced from <strong id="resume-device-label">Phone</strong>: <span id="resume-position-desc">Page 42 (35%)</span></span>
+      <button type="button" class="btn-resume-action" id="btn-resume-now">Resume</button>
+      <button type="button" class="btn-resume-dismiss" id="btn-resume-dismiss" title="Dismiss">&times;</button>
+    </div>
+  </div>
+
   <!-- Reader Footer / Progress Bar -->
   <footer class="reader-footer" id="reader-footer">
     <div id="reader-progress-text">Page 1</div>
@@ -202,6 +212,7 @@
   <script src="js/vendor/epub.min.js"></script>
   <script src="js/vendor/pdf.min.js"></script>
   <script src="js/db.js"></script>
+  <script src="js/sync.js"></script>
 
   <!-- Reader Script -->
   <script src="js/reader.js"></script>

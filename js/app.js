@@ -67,8 +67,14 @@ async function refreshAllBooks() {
   // 2. Get user added books
   const userBooks = await window.AthenaeumDB.getAllUserBooks();
 
-  // 3. Combine: user books first, then catalog books
-  const combined = [...userBooks, ...baseBooks];
+  // 3. Combine: user books first, then catalog books, filtering out deleted/hidden books
+  const hiddenIds = new Set(window.AthenaeumDB ? window.AthenaeumDB.getHiddenBooks() : []);
+  const combined = [...userBooks, ...baseBooks].filter(b => {
+    if (hiddenIds.has(b.id)) return false;
+    const ov = bookOverrides[b.id];
+    if (ov && ov.deleted === true) return false;
+    return true;
+  });
 
   // 4. Apply overrides
   allBooks = combined.map(b => {
@@ -88,6 +94,7 @@ async function refreshAllBooks() {
 
   initStats();
   renderBooks();
+  updateDuplicateBadge();
 }
 
 function initStats() {
@@ -247,6 +254,11 @@ async function saveCoverForBook(bookId, source, showNotice = true) {
     // 1. Dual-layer save: IndexedDB + LocalStorage backup
     await window.AthenaeumDB.saveBookOverride(bookId, updatedOverride);
     bookOverrides[bookId] = updatedOverride;
+
+    // Broadcast to backend & cloud sync automatically
+    if (window.AthenaeumSync) {
+      window.AthenaeumSync.broadcastBookOverride(bookId, updatedOverride);
+    }
 
     // 2. Update memory state
     book.cover = optimized;
@@ -434,16 +446,33 @@ function setupEditModal() {
       const author = document.getElementById('edit-author').value.trim();
       const category = document.getElementById('edit-category').value;
 
-      await window.AthenaeumDB.saveBookOverride(currentEditBookId, {
+      const overrideData = {
         title,
         author,
         category,
         cover: currentEditCoverData
-      });
+      };
+
+      await window.AthenaeumDB.saveBookOverride(currentEditBookId, overrideData);
+
+      // Auto-broadcast to backend and cross-device sync
+      if (window.AthenaeumSync) {
+        window.AthenaeumSync.broadcastBookOverride(currentEditBookId, overrideData);
+      }
 
       modal.classList.remove('active');
       showToast(`Updated "${title}" successfully!`);
       await refreshAllBooks();
+    });
+  }
+
+  // Delete book from library
+  const deleteBtn = document.getElementById('btn-delete-book');
+  if (deleteBtn) {
+    deleteBtn.addEventListener('click', () => {
+      if (currentEditBookId) {
+        deleteBook(currentEditBookId);
+      }
     });
   }
 
@@ -578,6 +607,13 @@ function openBookModal(bookId) {
     };
   }
 
+  const infoDeleteBtn = document.getElementById('info-delete-btn');
+  if (infoDeleteBtn) {
+    infoDeleteBtn.onclick = () => {
+      deleteBook(book.id);
+    };
+  }
+
   modal.classList.add('active');
 }
 
@@ -610,6 +646,8 @@ document.addEventListener('DOMContentLoaded', () => {
   loadCatalog();
   setupAddBook();
   setupEditModal();
+  setupSyncModal();
+  setupDuplicateManager();
 
   // Search input with debounce
   const searchInput = document.getElementById('search-input');
@@ -741,4 +779,403 @@ window.toggleFavorite = toggleFavorite;
 window.openLocalPrompt = openLocalPrompt;
 window.saveCoverForBook = saveCoverForBook;
 window.triggerQuickCoverChange = triggerQuickCoverChange;
+
+/**
+ * Book Deletion & Duplicate Management System
+ */
+async function deleteBook(bookId) {
+  const book = allBooks.find(b => b.id === bookId);
+  const title = book ? book.title : 'this book';
+
+  const confirmed = confirm(`Are you sure you want to delete "${title}" from your library?`);
+  if (!confirmed) return;
+
+  try {
+    if (book && book.isUserBook) {
+      await window.AthenaeumDB.deleteUserBook(bookId);
+    } else {
+      window.AthenaeumDB.hideBook(bookId);
+    }
+
+    // Save override with deleted flag and sync
+    await window.AthenaeumDB.saveBookOverride(bookId, { deleted: true });
+
+    if (window.AthenaeumSync) {
+      window.AthenaeumSync.broadcastBookOverride(bookId, { deleted: true });
+      window.AthenaeumSync.performFullSync().catch(() => {});
+    }
+
+    // Close any open modals
+    const editModal = document.getElementById('edit-modal');
+    if (editModal) editModal.classList.remove('active');
+    const infoModal = document.getElementById('info-modal');
+    if (infoModal) infoModal.classList.remove('active');
+
+    showToast(`Removed "${title}" from library`);
+    await refreshAllBooks();
+    updateDuplicateBadge();
+  } catch (err) {
+    alert('Error deleting book: ' + err.message);
+  }
+}
+
+function normalizeTitleForDupe(t) {
+  if (!t) return '';
+  let clean = t.toLowerCase();
+  clean = clean.replace(/\(pdfdrive\)/g, '');
+  clean = clean.replace(/\(.*?\)/g, '');
+  clean = clean.replace(/\[.*?\]/g, '');
+  clean = clean.replace(/[_]/g, ' ');
+  clean = clean.replace(/[-]/g, ' ');
+  clean = clean.replace(/[^a-z0-9\s]/g, '');
+  return clean.trim().replace(/\s+/g, ' ');
+}
+
+function detectLibraryDuplicates() {
+  const groups = {};
+  for (const b of allBooks) {
+    const key = normalizeTitleForDupe(b.title);
+    if (!key || key.length < 3) continue;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(b);
+  }
+
+  const duplicateGroups = [];
+  for (const [key, items] of Object.entries(groups)) {
+    if (items.length > 1) {
+      duplicateGroups.push({
+        key,
+        title: items[0].title,
+        items
+      });
+    }
+  }
+  return duplicateGroups;
+}
+
+function updateDuplicateBadge() {
+  const dupes = detectLibraryDuplicates();
+  const badge = document.getElementById('dupe-count-badge');
+  if (badge) {
+    if (dupes.length > 0) {
+      badge.textContent = dupes.length;
+      badge.style.display = 'inline-block';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
+}
+
+function setupDuplicateManager() {
+  const btnManage = document.getElementById('btn-manage-dupes');
+  const modal = document.getElementById('duplicates-modal');
+  const closeBtn = document.getElementById('duplicates-modal-close');
+  const rescanBtn = document.getElementById('btn-rescan-dupes');
+  const container = document.getElementById('duplicates-list-container');
+  const statusSummary = document.getElementById('dupe-status-summary');
+  const statusDetail = document.getElementById('dupe-status-detail');
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  }
+
+  function renderDuplicates() {
+    const dupes = detectLibraryDuplicates();
+    if (dupes.length === 0) {
+      if (statusSummary) statusSummary.textContent = '✨ Library is 100% Clean';
+      if (statusDetail) statusDetail.textContent = 'No duplicate titles or conflicting files detected.';
+      if (container) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+            <div style="font-size: 40px; margin-bottom: 8px;">🎉</div>
+            <h4 style="font-family: var(--font-serif); font-size: 16px; margin-bottom: 4px; color: var(--text-main);">No Duplicates Found</h4>
+            <p style="font-size: 13px;">Every book in your library is unique. When duplicates appear from imports or syncs, you can manage them here.</p>
+          </div>
+        `;
+      }
+      return;
+    }
+
+    let totalCopies = 0;
+    dupes.forEach(g => totalCopies += g.items.length);
+    if (statusSummary) statusSummary.textContent = `Found ${dupes.length} Duplicate Group${dupes.length > 1 ? 's' : ''} (${totalCopies} total books)`;
+    if (statusDetail) statusDetail.textContent = 'Review and delete redundant copies below.';
+
+    if (container) {
+      container.innerHTML = dupes.map((group, gIdx) => `
+        <div class="dupe-group-card" id="dupe-group-${gIdx}">
+          <div class="dupe-group-title">
+            <span>📚</span>
+            <span>Matched: <em>"${escapeHtml(group.title)}"</em></span>
+            <span class="cat-pill" style="font-size: 10px; margin-left: auto;">${group.items.length} copies</span>
+          </div>
+          <div class="dupe-items-grid">
+            ${group.items.map(item => `
+              <div class="dupe-item-row" id="dupe-row-${item.id}">
+                <img src="${item.cover}" alt="Cover" class="dupe-item-thumb">
+                <div class="dupe-item-details">
+                  <div class="dupe-item-title">${escapeHtml(item.title)}</div>
+                  <div class="dupe-item-meta">
+                    <span>👤 ${escapeHtml(item.author || 'Unknown')}</span>
+                    <span>📁 ${item.format} (${item.sizeMB} MB)</span>
+                    <span>🏷️ ${escapeHtml(item.category)}</span>
+                    ${item.isHosted ? '<span style="color: #059669; font-weight: 600;">● Online Reader Ready</span>' : '<span style="color: #64748b;">○ Local Catalog</span>'}
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline dupe-action-del" onclick="deleteDuplicateItem('${item.id}', this)">
+                  🗑️ Delete Copy
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  if (btnManage) {
+    btnManage.addEventListener('click', () => {
+      renderDuplicates();
+      if (modal) modal.classList.add('active');
+    });
+  }
+
+  if (rescanBtn) {
+    rescanBtn.addEventListener('click', () => {
+      renderDuplicates();
+      showToast('Duplicate scan completed');
+    });
+  }
+}
+
+async function deleteDuplicateItem(bookId, btn) {
+  const row = btn ? btn.closest('.dupe-item-row') : document.getElementById(`dupe-row-${bookId}`);
+  const group = row ? row.closest('.dupe-group-card') : null;
+
+  await deleteBook(bookId);
+
+  if (row) row.remove();
+  if (group) {
+    const remainingRows = group.querySelectorAll('.dupe-item-row');
+    if (remainingRows.length <= 1) {
+      group.remove();
+    }
+  }
+  updateDuplicateBadge();
+}
+
+/**
+ * Cross-Device Synchronization & Profile Manager Setup
+ */
+function setupSyncModal() {
+  const btnToggle = document.getElementById('btn-sync-toggle');
+  const modal = document.getElementById('sync-modal');
+  const closeBtn = document.getElementById('sync-modal-close');
+  const btnSyncNow = document.getElementById('btn-sync-now');
+  const deviceNameEl = document.getElementById('sync-device-name');
+  const roomKeyInput = document.getElementById('sync-room-key');
+  const btnSaveKey = document.getElementById('btn-save-sync-key');
+  const btnCopyKey = document.getElementById('btn-copy-sync-key');
+  const ghTokenInput = document.getElementById('gh-pat-token');
+  const btnSaveGh = document.getElementById('btn-save-gh-token');
+  const profileRadios = document.querySelectorAll('input[name="profile_choice"]');
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  }
+
+  function updateSyncUI() {
+    if (!window.AthenaeumSync) return;
+    const device = window.AthenaeumSync.detectDevice();
+    if (deviceNameEl) {
+      deviceNameEl.textContent = `${device.label}`;
+    }
+
+    const currentProfile = window.AthenaeumSync.getActiveProfile();
+    profileRadios.forEach(radio => {
+      radio.checked = (radio.value === currentProfile.id);
+      const card = radio.closest('.profile-card');
+      if (card) card.classList.toggle('active', radio.checked);
+    });
+
+    if (roomKeyInput) {
+      roomKeyInput.value = window.AthenaeumSync.getSyncKey();
+    }
+
+    if (ghTokenInput) {
+      ghTokenInput.value = window.AthenaeumSync.getGitHubToken();
+    }
+
+    renderReadingLogsList();
+  }
+
+  if (btnToggle) {
+    btnToggle.addEventListener('click', () => {
+      updateSyncUI();
+      if (modal) modal.classList.add('active');
+    });
+  }
+
+  // Profile radio changes
+  profileRadios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      if (!window.AthenaeumSync) return;
+      const isShared = (e.target.value === 'shared');
+      const profile = {
+        id: e.target.value,
+        name: isShared ? 'Shared (Phone & PC)' : 'Independent PC Log',
+        isShared
+      };
+      window.AthenaeumSync.setActiveProfile(profile);
+      profileRadios.forEach(r => {
+        const c = r.closest('.profile-card');
+        if (c) c.classList.toggle('active', r.checked);
+      });
+      showToast(`Switched profile: ${profile.name}`);
+      if (isShared) {
+        window.AthenaeumSync.performFullSync().catch(() => {});
+      }
+    });
+  });
+
+  // Save sync key
+  if (btnSaveKey && roomKeyInput) {
+    btnSaveKey.addEventListener('click', () => {
+      if (!window.AthenaeumSync) return;
+      const key = window.AthenaeumSync.setSyncKey(roomKeyInput.value);
+      showToast(`Pairing key updated: ${key}`);
+      window.AthenaeumSync.performFullSync().then(() => {
+        renderReadingLogsList();
+      });
+    });
+  }
+
+  // Copy sync key
+  if (btnCopyKey && roomKeyInput) {
+    btnCopyKey.addEventListener('click', () => {
+      const val = roomKeyInput.value || (window.AthenaeumSync ? window.AthenaeumSync.getSyncKey() : '');
+      navigator.clipboard.writeText(val).then(() => {
+        showToast('Copied pairing key to clipboard!');
+      }).catch(() => {
+        roomKeyInput.select();
+        document.execCommand('copy');
+        showToast('Copied pairing key!');
+      });
+    });
+  }
+
+  // Save GitHub token
+  if (btnSaveGh && ghTokenInput) {
+    btnSaveGh.addEventListener('click', () => {
+      if (!window.AthenaeumSync) return;
+      const val = window.AthenaeumSync.setGitHubToken(ghTokenInput.value);
+      showToast(val ? 'GitHub PAT saved! Auto-commit active.' : 'GitHub PAT cleared.');
+    });
+  }
+
+  // Manual Sync Now button
+  if (btnSyncNow) {
+    btnSyncNow.addEventListener('click', async () => {
+      if (!window.AthenaeumSync) return;
+      btnSyncNow.disabled = true;
+      btnSyncNow.innerHTML = '<span>⏳ Syncing...</span>';
+      const res = await window.AthenaeumSync.performFullSync();
+      btnSyncNow.disabled = false;
+      btnSyncNow.innerHTML = '<span>⚡ Sync Now</span>';
+      if (res.success) {
+        showToast('Library & Reading Progress Synced!');
+        await refreshAllBooks();
+        renderReadingLogsList();
+      } else {
+        showToast('Sync completed (local active)');
+      }
+    });
+  }
+
+  // Sync listener for header dot & live updates
+  if (window.AthenaeumSync) {
+    window.AthenaeumSync.addSyncListener((event, data) => {
+      const dot = document.getElementById('sync-dot');
+      const badge = document.getElementById('sync-status-badge');
+      const lastMsg = document.getElementById('sync-last-msg');
+
+      if (event === 'sync_status') {
+        if (dot) {
+          dot.className = 'sync-dot ' + (data.status === 'syncing' ? 'syncing' : (data.status === 'synced' ? '' : 'offline'));
+        }
+        if (badge) {
+          badge.className = 'status-pill ' + (data.status === 'syncing' ? 'status-syncing' : 'status-synced');
+          badge.textContent = data.status === 'syncing' ? '● Syncing...' : '● Synced';
+        }
+        if (lastMsg && data.text) {
+          lastMsg.textContent = data.text;
+        }
+      } else if (event === 'logs_updated' || event === 'progress_saved') {
+        renderReadingLogsList();
+      }
+    });
+  }
+}
+
+function renderReadingLogsList() {
+  const container = document.getElementById('reading-logs-list');
+  const countText = document.getElementById('logs-count-text');
+  if (!container || !window.AthenaeumSync) return;
+
+  const logs = window.AthenaeumSync.getReadingLogs();
+  if (countText) countText.textContent = `${logs.length} logged session${logs.length !== 1 ? 's' : ''}`;
+
+  if (logs.length === 0) {
+    container.innerHTML = `<div style="padding: 18px; text-align: center; color: var(--text-muted); font-size: 12.5px;">No reading activity recorded yet. Open any book to track progress across devices!</div>`;
+    return;
+  }
+
+  container.innerHTML = logs.map(log => {
+    const book = allBooks.find(b => b.id === log.bookId || b.file === log.bookId);
+    const readUrl = log.bookId && log.bookId.includes('/') ? `reader.html?book=${encodeURIComponent(log.bookId)}` : (book && book.file ? `reader.html?book=${encodeURIComponent(book.file)}` : '#');
+    const title = log.bookTitle || (book ? book.title : 'Book');
+    const pos = log.page ? `Page ${log.page}` : `${log.percentage || 0}%`;
+
+    return `
+      <div class="reading-log-item">
+        <div style="flex: 1; min-width: 0; padding-right: 10px;">
+          <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+            <span class="log-device-badge">${escapeHtml(log.deviceLabel || 'Device')}</span>
+            <strong style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px;">${escapeHtml(title)}</strong>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-muted);">
+            Progress: <strong>${pos}</strong> (${log.percentage || 0}%) • ${formatTimeAgo(log.updatedAt || log.timestamp)}
+          </div>
+        </div>
+        ${readUrl !== '#' ? `
+          <a href="${readUrl}" class="btn btn-outline" style="font-size: 11.5px; padding: 4px 10px; white-space: nowrap;">
+            Resume
+          </a>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function formatTimeAgo(ts) {
+  if (!ts) return 'Just now';
+  const diff = Math.floor((Date.now() - ts) / 1000);
+  if (diff < 60) return 'Just now';
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  return `${Math.floor(diff / 86400)}d ago`;
+}
+
+// Export functions to window
+window.deleteBook = deleteBook;
+window.deleteDuplicateItem = deleteDuplicateItem;
+window.setupDuplicateManager = setupDuplicateManager;
+window.detectLibraryDuplicates = detectLibraryDuplicates;
+
 

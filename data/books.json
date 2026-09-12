@@ -97,7 +97,7 @@
   },
   {
     "id": "book_0009",
-    "title": "After the Quake_ Stories",
+    "title": "After the Quake Stories",
     "author": "Haruki Murakami",
     "category": "Fiction & Modern Novels",
     "format": "EPUB",
@@ -289,7 +289,7 @@
   },
   {
     "id": "book_0025",
-    "title": "English_Skills_with_Readings_7th_Edition",
+    "title": "English Skills with Readings (7th Edition)",
     "author": "Various",
     "category": "Writing, Language & Reference",
     "format": "PDF",
@@ -362,8 +362,8 @@
   {
     "id": "book_0031",
     "title": "Guitar scales easy music lessons",
-    "author": "Various",
-    "category": "Classics & Literature",
+    "author": "Music & Arts",
+    "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 1.56,
     "cover": "covers/book_0031.jpg",
@@ -493,8 +493,8 @@
   },
   {
     "id": "book_0042",
-    "title": "Operations Management_ Sustainability and Supply Chain Management (12th Edition 2016) Jay Heizer",
-    "author": "Various",
+    "title": "Operations Management: Sustainability and Supply Chain Management (12th Edition)",
+    "author": "Jay Heizer & Barry Render",
     "category": "Personal Growth & Finance",
     "format": "PDF",
     "sizeMB": 34.6,
@@ -577,7 +577,7 @@
   },
   {
     "id": "book_0049",
-    "title": "Stephen_King_On_Writing",
+    "title": "Stephen King On Writing",
     "author": "Various",
     "category": "Writing, Language & Reference",
     "format": "PDF",
@@ -673,9 +673,9 @@
   },
   {
     "id": "book_0057",
-    "title": "The Power of Visual Storytelling- How to Use Visuals, Videos, and Social Media to Market Your Brand ( PDFDrive )",
-    "author": "Various",
-    "category": "Classics & Literature",
+    "title": "The Power of Visual Storytelling: How to Use Visuals, Videos, and Social Media to Market Your Brand",
+    "author": "Ekaterina Walter & Jessica Gioglio",
+    "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 7.43,
     "cover": "covers/book_0057.jpg",
@@ -733,7 +733,7 @@
   },
   {
     "id": "book_0062",
-    "title": "total04_digital_version",
+    "title": "total04 digital version",
     "author": "Various",
     "category": "Classics & Literature",
     "format": "PDF",
@@ -781,9 +781,9 @@
   },
   {
     "id": "book_0066",
-    "title": "Wonderbook _ the illustrated guide to creating imaginative fiction ( PDFDrive )",
-    "author": "Various",
-    "category": "Classics & Literature",
+    "title": "Wonderbook: The Illustrated Guide to Creating Imaginative Fiction",
+    "author": "Jeff VanderMeer",
+    "category": "Writing, Language & Reference",
     "format": "PDF",
     "sizeMB": 511.64,
     "cover": "covers/book_0066.jpg",
@@ -793,7 +793,7 @@
   },
   {
     "id": "book_0067",
-    "title": "[Jean_Aitchison]-The Articulate Mammal",
+    "title": "[Jean Aitchison]-The Articulate Mammal",
     "author": "Various",
     "category": "Writing, Language & Reference",
     "format": "PDF",
@@ -805,7 +805,7 @@
   },
   {
     "id": "book_0068",
-    "title": "2DArtist_Issue_130_Oct16_highres",
+    "title": "2DArtist Issue 130 Oct16 highres",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -817,7 +817,7 @@
   },
   {
     "id": "book_0069",
-    "title": "2DArtist_Issue_131_Nov16_highres",
+    "title": "2DArtist Issue 131 Nov16 highres",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -829,7 +829,7 @@
   },
   {
     "id": "book_0070",
-    "title": "2DArtist_Issue_132_Dec16_highres",
+    "title": "2DArtist Issue 132 Dec16 highres",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -865,7 +865,7 @@
   },
   {
     "id": "book_0073",
-    "title": "AnimationMentor_HowToBecomeAnAnimator",
+    "title": "AnimationMentor HowToBecomeAnAnimator",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -877,7 +877,7 @@
   },
   {
     "id": "book_0074",
-    "title": "AnimationMentor_IndustryReport",
+    "title": "AnimationMentor IndustryReport",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -889,8 +889,8 @@
   },
   {
     "id": "book_0075",
-    "title": "Basic Perspective Drawing- A Visual Approach ( PDFDrive )",
-    "author": "Art & Animation",
+    "title": "Basic Perspective Drawing: A Visual Approach",
+    "author": "John Montague",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 154.29,
@@ -902,7 +902,7 @@
   {
     "id": "book_0076",
     "title": "Cartoon Animation",
-    "author": "Preston Blair ( PDFDrive )",
+    "author": "Preston Blair",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 41.37,
@@ -913,7 +913,7 @@
   },
   {
     "id": "book_0077",
-    "title": "cdq_sample_issue_2019",
+    "title": "cdq sample issue 2019",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -925,8 +925,8 @@
   },
   {
     "id": "book_0078",
-    "title": "Color and Light- A Guide for the Realist Painter ( PDFDrive )",
-    "author": "Art & Animation",
+    "title": "Color and Light: A Guide for the Realist Painter",
+    "author": "James Gurney",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 484.42,
@@ -997,8 +997,8 @@
   },
   {
     "id": "book_0084",
-    "title": "dokumen.tips_jack-hamm-drawing-the-head-and-figurepdf",
-    "author": "Art & Animation",
+    "title": "Drawing the Head and Figure",
+    "author": "Jack Hamm",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 163.75,
@@ -1032,21 +1032,9 @@
     "originalName": "Drawing cartoons comics for dummies.pdf"
   },
   {
-    "id": "book_0087",
-    "title": "Drawing Comics the Marvel Way ( PDFDrive )",
-    "author": "Art & Animation",
-    "category": "Art, Drawing & Animation",
-    "format": "PDF",
-    "sizeMB": 34.2,
-    "cover": "covers/book_0087.jpg",
-    "isHosted": false,
-    "file": "",
-    "originalName": "Drawing Comics the Marvel Way ( PDFDrive ).pdf"
-  },
-  {
     "id": "book_0088",
-    "title": "Drawing comics the marvel way",
-    "author": "Art & Animation",
+    "title": "Drawing Comics the Marvel Way",
+    "author": "Stan Lee & John Buscema",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 34.2,
@@ -1057,7 +1045,7 @@
   },
   {
     "id": "book_0089",
-    "title": "Drawing the Human Head (Practical Art Books) ( PDFDrive )",
+    "title": "Drawing the Human Head (Practical Art Books)",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -1069,7 +1057,7 @@
   },
   {
     "id": "book_0090",
-    "title": "epdf.pub_the-animators-survival-kit",
+    "title": "epdf.pub the-animators-survival-kit",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -1105,7 +1093,7 @@
   },
   {
     "id": "book_0093",
-    "title": "free_chapter_bgts2",
+    "title": "free chapter bgts2",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -1126,18 +1114,6 @@
     "isHosted": true,
     "file": "books/book_0094.pdf",
     "originalName": "graphic design basics.pdf"
-  },
-  {
-    "id": "book_0095",
-    "title": "Guitar scales easy music lessons",
-    "author": "Art & Animation",
-    "category": "Art, Drawing & Animation",
-    "format": "PDF",
-    "sizeMB": 1.56,
-    "cover": "covers/book_0095.jpg",
-    "isHosted": true,
-    "file": "books/book_0095.pdf",
-    "originalName": "Guitar scales easy music lessons.pdf"
   },
   {
     "id": "book_0096",
@@ -1165,7 +1141,7 @@
   },
   {
     "id": "book_0098",
-    "title": "kupdf.net_anatomy-for-sculptorspdf",
+    "title": "kupdf.net anatomy-for-sculptorspdf",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -1177,7 +1153,7 @@
   },
   {
     "id": "book_0099",
-    "title": "Modern Cartooning_ Essential Techniques for Drawing Today’s Popular Cartoons ( PDFDrive )",
+    "title": "Modern Cartooning Essential Techniques for Drawing Today’s Popular Cartoons",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "EPUB",
@@ -1202,7 +1178,7 @@
   {
     "id": "book_0101",
     "title": "Perspective Made Easy",
-    "author": "Art & Animation",
+    "author": "Ernest R. Norling",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 17.03,
@@ -1222,18 +1198,6 @@
     "isHosted": false,
     "file": "",
     "originalName": "Perspective Sketching Freehand and Digital Drawing Techniques for Artists & Designers.pdf"
-  },
-  {
-    "id": "book_0103",
-    "title": "Perspective_Made_Easy",
-    "author": "Art & Animation",
-    "category": "Art, Drawing & Animation",
-    "format": "PDF",
-    "sizeMB": 17.03,
-    "cover": "covers/book_0103.jpg",
-    "isHosted": false,
-    "file": "",
-    "originalName": "Perspective_Made_Easy.pdf"
   },
   {
     "id": "book_0104",
@@ -1285,8 +1249,8 @@
   },
   {
     "id": "book_0108",
-    "title": "Jeff Mellem",
-    "author": "Sketching People Life Drawing Basics",
+    "title": "Sketching People: Life Drawing Basics",
+    "author": "Jeff Mellem",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 38.04,
@@ -1321,8 +1285,8 @@
   },
   {
     "id": "book_0111",
-    "title": "The Anatomy of Style_ Figure Drawing Techniques ( PDFDrive )",
-    "author": "Art & Animation",
+    "title": "The Anatomy of Style: Figure Drawing Techniques",
+    "author": "Patrick J. Jones",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 123.39,
@@ -1330,18 +1294,6 @@
     "isHosted": false,
     "file": "",
     "originalName": "The Anatomy of Style_ Figure Drawing Techniques ( PDFDrive ).pdf"
-  },
-  {
-    "id": "book_0112",
-    "title": "The Animators Survival Kit",
-    "author": "Art & Animation",
-    "category": "Art, Drawing & Animation",
-    "format": "PDF",
-    "sizeMB": 35.0,
-    "cover": "covers/book_0112.jpg",
-    "isHosted": false,
-    "file": "",
-    "originalName": "The Animators Survival Kit.pdf"
   },
   {
     "id": "book_0113",
@@ -1393,8 +1345,8 @@
   },
   {
     "id": "book_0117",
-    "title": "The illusion of life_ Disney animation ( PDFDrive )",
-    "author": "Art & Animation",
+    "title": "The Illusion of Life: Disney Animation",
+    "author": "Frank Thomas & Ollie Johnston",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 290.64,
@@ -1405,7 +1357,7 @@
   },
   {
     "id": "book_0118",
-    "title": "The New Drawing on the Right Side of the Brain ( PDFDrive )",
+    "title": "The New Drawing on the Right Side of the Brain",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -1417,8 +1369,8 @@
   },
   {
     "id": "book_0119",
-    "title": "The nine old men_ lessons, techniques, and inspiration from Disney's great animators ( PDFDrive )",
-    "author": "Art & Animation",
+    "title": "The Nine Old Men: Lessons, Techniques, and Inspiration from Disney's Great Animators",
+    "author": "Andreas Deja",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 32.98,
@@ -1428,20 +1380,8 @@
     "originalName": "The nine old men_ lessons, techniques, and inspiration from Disney's great animators ( PDFDrive ).pdf"
   },
   {
-    "id": "book_0120",
-    "title": "The Power of Visual Storytelling- How to Use Visuals, Videos, and Social Media to Market Your Brand ( PDFDrive )",
-    "author": "Art & Animation",
-    "category": "Art, Drawing & Animation",
-    "format": "PDF",
-    "sizeMB": 7.43,
-    "cover": "covers/book_0120.jpg",
-    "isHosted": true,
-    "file": "books/book_0120.pdf",
-    "originalName": "The Power of Visual Storytelling- How to Use Visuals, Videos, and Social Media to Market Your Brand ( PDFDrive ).pdf"
-  },
-  {
     "id": "book_0121",
-    "title": "TipsAndTricks_Volume1",
+    "title": "TipsAndTricks Volume1",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -1453,7 +1393,7 @@
   },
   {
     "id": "book_0122",
-    "title": "TipsAndTricks_Volume2",
+    "title": "TipsAndTricks Volume2",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -1465,7 +1405,7 @@
   },
   {
     "id": "book_0123",
-    "title": "total_magazine_issue02",
+    "title": "total magazine issue02",
     "author": "Art & Animation",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
@@ -1477,8 +1417,8 @@
   },
   {
     "id": "book_0124",
-    "title": "Tradigital Animate CC_ 12 principles of animation in Adobe Animate ( PDFDrive )",
-    "author": "Art & Animation",
+    "title": "Tradigital Animate CC: 12 Principles of Animation in Adobe Animate",
+    "author": "Stephen Cavalier",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 19.27,
@@ -1489,8 +1429,8 @@
   },
   {
     "id": "book_0125",
-    "title": "Tradigital Blender_ A CG Animator's Guide to Applying the Classic Principles of Animation ( PDFDrive )",
-    "author": "Art & Animation",
+    "title": "Tradigital Blender: A CG Animator's Guide to Applying the Classic Principles of Animation",
+    "author": "Roland Hess",
     "category": "Art, Drawing & Animation",
     "format": "PDF",
     "sizeMB": 38.82,
@@ -1717,7 +1657,7 @@
   },
   {
     "id": "book_0144",
-    "title": "TheSwordOfDestiny",
+    "title": "The Sword of Destiny",
     "author": "Andrzej Sapkowski",
     "category": "Fantasy & Adventure",
     "format": "EPUB",

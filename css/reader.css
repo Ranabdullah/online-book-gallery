@@ -943,3 +943,93 @@ body.immersive-mode .reader-footer {
   }
 }
 
+/* ==========================================================================
+   Cross-Device Progress Resume Banner
+   ========================================================================== */
+
+.sync-resume-banner {
+  position: fixed;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  animation: slide-down-banner 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slide-down-banner {
+  from { opacity: 0; transform: translate(-50%, -16px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.resume-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0f172a;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+}
+
+.resume-device-icon {
+  font-size: 16px;
+}
+
+.resume-text {
+  color: #e2e8f0;
+}
+
+.resume-text strong {
+  color: #38bdf8;
+}
+
+.btn-resume-action {
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-resume-action:hover {
+  background: #7dd3fc;
+  transform: scale(1.04);
+}
+
+.btn-resume-dismiss {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.btn-resume-dismiss:hover {
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .sync-resume-banner {
+    top: auto;
+    bottom: 52px;
+    width: 92%;
+  }
+
+  .resume-banner-content {
+    width: 100%;
+    justify-content: space-between;
+    font-size: 11.5px;
+    padding: 6px 12px;
+  }
+}
+
+
