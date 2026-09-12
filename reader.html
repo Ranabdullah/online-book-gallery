@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Reading - Athenaeum</title>
-  <link rel="stylesheet" href="css/reader.css">
+  <link rel="stylesheet" href="css/reader.css?v=3.1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body data-paper="cream">
@@ -32,9 +35,15 @@
     </div>
 
     <div class="toolbar-right">
+      <!-- Reading Mode: Scroll Down vs Paginated -->
+      <button id="btn-mode-toggle" class="tool-btn" title="Toggle Scroll Down / Page Turn">
+        <span class="btn-icon" id="mode-icon">📜</span>
+        <span class="btn-text" id="mode-text">Scroll Down</span>
+      </button>
+
       <!-- Paper Type & Style Button -->
       <button id="btn-paper-toggle" class="tool-btn" title="Change Paper Type & Typography">
-        <span class="btn-icon">📜</span>
+        <span class="btn-icon">🎨</span>
         <span class="btn-text">Paper & Style</span>
       </button>
 
@@ -109,15 +118,12 @@
     </div>
 
     <div class="style-control-row">
-      <span class="style-control-label">Page Margins</span>
-      <select id="margin-select" class="font-select">
-        <option value="20px">Compact</option>
-        <option value="40px" selected>Balanced</option>
-        <option value="60px">Spacious</option>
+      <span class="style-control-label">Reading Mode</span>
+      <select id="reading-mode-select" class="font-select">
+        <option value="scroll" selected>📜 Vertical Scroll Down</option>
+        <option value="paginated">📖 Clean Page Turn</option>
       </select>
     </div>
-
-
   </div>
 
   <!-- Reader Main Layout -->
@@ -190,10 +196,10 @@
   <script src="js/vendor/jszip.min.js"></script>
   <script src="js/vendor/epub.min.js"></script>
   <script src="js/vendor/pdf.min.js"></script>
-  <script src="js/db.js"></script>
-  <script src="js/sync.js"></script>
+  <script src="js/db.js?v=3.1.0"></script>
+  <script src="js/sync.js?v=3.1.0"></script>
 
   <!-- Reader Script -->
-  <script src="js/reader.js"></script>
+  <script src="js/reader.js?v=3.1.0"></script>
 </body>
 </html>

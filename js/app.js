@@ -98,18 +98,23 @@ async function refreshAllBooks() {
 }
 
 function initStats() {
+  const hosted = allBooks.filter(b => b.isHosted && !b.needsFix);
+  const needsFix = allBooks.filter(b => !b.isHosted || b.needsFix);
+
   const statBooks = document.getElementById('stat-total-books');
   const statAuthors = document.getElementById('stat-total-authors');
   const statCategories = document.getElementById('stat-total-categories');
   const countAll = document.getElementById('count-all');
+  const countNeedsUpload = document.getElementById('count-needs-upload');
 
-  if (statBooks) statBooks.textContent = allBooks.length;
-  if (countAll) countAll.textContent = allBooks.length;
+  if (statBooks) statBooks.textContent = hosted.length;
+  if (countAll) countAll.textContent = hosted.length;
+  if (countNeedsUpload) countNeedsUpload.textContent = needsFix.length;
 
-  const authorsSet = new Set(allBooks.map(b => b.author.trim()).filter(Boolean));
+  const authorsSet = new Set(hosted.map(b => (b.author || '').trim()).filter(Boolean));
   if (statAuthors) statAuthors.textContent = authorsSet.size;
 
-  const catSet = new Set(allBooks.map(b => b.category).filter(Boolean));
+  const catSet = new Set(hosted.map(b => b.category).filter(Boolean));
   if (statCategories) statCategories.textContent = catSet.size;
 
   updateFavoritesBadge();
@@ -119,8 +124,14 @@ function filterAndSortBooks() {
   const favs = getFavorites();
 
   return allBooks.filter(b => {
-    if (currentCategory !== 'all' && b.category !== currentCategory) {
-      return false;
+    if (currentCategory === '__needs_upload__') {
+      if (b.isHosted && !b.needsFix) return false;
+    } else {
+      // Normal reading library: hide unhosted books
+      if (!b.isHosted || b.needsFix) return false;
+      if (currentCategory !== 'all' && b.category !== currentCategory) {
+        return false;
+      }
     }
 
     if (currentFormat !== 'all' && b.format !== currentFormat) {
@@ -186,11 +197,13 @@ function renderBooks() {
   grid.innerHTML = filtered.map(b => {
     const isFav = favs.includes(b.id);
     const readUrl = b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#';
+    const isNeedsUpload = !b.isHosted || b.needsFix;
 
     return `
-      <article class="book-card" data-id="${b.id}">
+      <article class="book-card ${isNeedsUpload ? 'card-needs-upload' : ''}" data-id="${b.id}">
         <div class="cover-wrapper">
           <img class="book-cover" src="${b.cover}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22 viewBox=%220 0 400 600%22><rect width=%22400%22 height=%22600%22 fill=%22%23f1f5f9%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-family=%22sans-serif%22 font-size=%2216%22>No Cover</text></svg>'">
+          ${isNeedsUpload ? `<span class="format-badge" style="background: #ea580c; left: 8px; right: auto; font-size: 10px; font-weight: 700;">⚠️ NEEDS FILE</span>` : ''}
           ${b.isUserAdded ? `<span class="user-added-badge">NEW</span>` : ''}
           <span class="format-badge ${b.format.toLowerCase()}">${b.format}</span>
           <button class="bookmark-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${b.id}')" title="${isFav ? 'Remove favorite' : 'Add favorite'}">
@@ -207,15 +220,15 @@ function renderBooks() {
           <div class="book-author" title="${escapeHtml(b.author)}">${escapeHtml(b.author)}</div>
 
           <div class="card-actions">
-            ${b.isHosted ? `
+            ${!isNeedsUpload ? `
               <a href="${readUrl}" class="btn-read" title="Read online in high-speed reader">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                 <span>Read</span>
               </a>
             ` : `
-              <button class="btn-read" style="background: #475569;" onclick="openLocalPrompt('${b.id}')" title="Large file. Click to load from local storage">
+              <button class="btn-read" style="background: #ea580c;" onclick="triggerDirectFileUpload('${b.id}')" title="Upload EPUB or PDF from PC to read">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <span>Load</span>
+                <span>Upload</span>
               </button>
             `}
             <button class="btn-card-edit" onclick="openEditModal('${b.id}')" title="Edit book name, author, category or cover">
@@ -232,6 +245,57 @@ function renderBooks() {
 
   attachCardDragAndDrop();
 }
+
+/**
+ * Direct File Upload Handler for Needs Upload Tab
+ */
+window.triggerDirectFileUpload = function(bookId) {
+  const book = allBooks.find(b => b.id === bookId);
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.epub,.pdf';
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    showToast(`Saving "${file.name}"...`);
+    try {
+      const buffer = await file.arrayBuffer();
+      if (book) {
+        book.fileData = buffer;
+        book.isHosted = true;
+        book.needsFix = false;
+        book.file = `idb://${bookId}`;
+        book.format = file.name.split('.').pop().toUpperCase();
+        book.sizeMB = Math.round((file.size / (1024 * 1024)) * 100) / 100;
+
+        if (window.AthenaeumDB) {
+          await window.AthenaeumDB.saveUserBook({
+            id: bookId,
+            title: book.title,
+            author: book.author,
+            category: book.category,
+            format: book.format,
+            cover: book.cover,
+            fileData: buffer,
+            sizeMB: book.sizeMB,
+            dateAdded: Date.now()
+          });
+        }
+
+        showToast(`✅ "${book.title}" is now ready! Opening...`);
+        initStats();
+        renderBooks();
+        setTimeout(() => {
+          window.location.href = `reader.html?book=${encodeURIComponent(book.file)}&title=${encodeURIComponent(book.title)}`;
+        }, 700);
+      }
+    } catch (err) {
+      alert('Error saving book file: ' + err.message);
+    }
+  };
+  input.click();
+};
 
 /**
  * Bulletproof Cover Saving & Image Optimization System

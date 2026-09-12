@@ -382,25 +382,62 @@ body {
 
 
 
+/* =======================================================
+   READING MODES: VERTICAL SCROLL DOWN vs PAGINATED TURN
+   ======================================================= */
 #epub-viewer {
   width: 100%;
   height: 100%;
   position: relative;
 }
 
+body.mode-scroll #epub-viewer {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: 100% !important;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.mode-scroll .nav-arrow {
+  opacity: 0.15;
+}
+
+body.mode-scroll .nav-arrow:hover {
+  opacity: 0.8;
+}
+
+body.mode-paginated #epub-viewer {
+  overflow: hidden !important;
+}
+
 #pdf-viewer-container {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0;
+  padding: 24px 0 60px 0;
+  gap: 20px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-#pdf-canvas {
+.pdf-page-slot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  max-width: 100%;
+}
+
+.pdf-page-canvas, #pdf-canvas {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   border-radius: 4px;
+  max-width: 100%;
+  background: white;
 }
 
 /* Nav arrows */

@@ -9,7 +9,8 @@
     "cover": "covers/book_0001.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "(Lib-Ebooks.com)020320211902 (952).pdf"
+    "originalName": "(Lib-Ebooks.com)020320211902 (952).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0002",
@@ -21,7 +22,8 @@
     "cover": "covers/book_0002.jpg",
     "isHosted": true,
     "file": "books/book_0002.epub",
-    "originalName": "1Q84 - Haruki Murakami.epub"
+    "originalName": "1Q84 - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0003",
@@ -33,7 +35,8 @@
     "cover": "covers/book_0003.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "1_Ziegler R. - Great Musicians (DK Eyewitness) - 2008.pdf"
+    "originalName": "1_Ziegler R. - Great Musicians (DK Eyewitness) - 2008.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0004",
@@ -45,7 +48,8 @@
     "cover": "covers/book_0004.jpg",
     "isHosted": true,
     "file": "books/book_0004.pdf",
-    "originalName": "8freebooks.net Mr. Mercedes by Stephen King.pdf"
+    "originalName": "8freebooks.net Mr. Mercedes by Stephen King.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0005",
@@ -57,7 +61,8 @@
     "cover": "covers/book_0005.jpg",
     "isHosted": true,
     "file": "books/book_0005.epub",
-    "originalName": "A Wild Sheep Chase - Haruki Murakami.epub"
+    "originalName": "A Wild Sheep Chase - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0006",
@@ -69,7 +74,8 @@
     "cover": "covers/book_0006.jpg",
     "isHosted": true,
     "file": "books/book_0006.pdf",
-    "originalName": "a-general-introduction-to-psychoanalysis-sigmund-freud.pdf"
+    "originalName": "a-general-introduction-to-psychoanalysis-sigmund-freud.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0007",
@@ -81,7 +87,8 @@
     "cover": "covers/book_0007.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Adams S. - Soldier (DK Eyewitness) - 2009.pdf"
+    "originalName": "Adams S. - Soldier (DK Eyewitness) - 2009.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0008",
@@ -93,7 +100,8 @@
     "cover": "covers/book_0008.jpg",
     "isHosted": true,
     "file": "books/book_0008.epub",
-    "originalName": "After Dark - Haruki Murakami.epub"
+    "originalName": "After Dark - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0009",
@@ -105,7 +113,8 @@
     "cover": "covers/book_0009.jpg",
     "isHosted": true,
     "file": "books/book_0009.epub",
-    "originalName": "After the Quake_ Stories - Haruki Murakami.epub"
+    "originalName": "After the Quake_ Stories - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0010",
@@ -117,7 +126,8 @@
     "cover": "covers/book_0010.jpg",
     "isHosted": true,
     "file": "books/book_0010.pdf",
-    "originalName": "Blender for Animation and Film-Based Production - 1st Edition (2015).pdf"
+    "originalName": "Blender for Animation and Film-Based Production - 1st Edition (2015).pdf",
+    "needsFix": false
   },
   {
     "id": "book_0011",
@@ -129,7 +139,8 @@
     "cover": "covers/book_0011.jpg",
     "isHosted": true,
     "file": "books/book_0011.epub",
-    "originalName": "Blind Willow, Sleeping Woman - Haruki Murakami.epub"
+    "originalName": "Blind Willow, Sleeping Woman - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0012",
@@ -141,7 +152,8 @@
     "cover": "covers/book_0012.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Bridgman R. - Technology (DK Eyewitness) - 2000.pdf"
+    "originalName": "Bridgman R. - Technology (DK Eyewitness) - 2000.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0013",
@@ -153,7 +165,8 @@
     "cover": "covers/book_0013.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Buckingham A. - Photography (DK Eyewitness) - 2004.pdf"
+    "originalName": "Buckingham A. - Photography (DK Eyewitness) - 2004.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0014",
@@ -165,7 +178,8 @@
     "cover": "covers/book_0014.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Buller L. - Food (DK Eyewitness) - 2011.pdf"
+    "originalName": "Buller L. - Food (DK Eyewitness) - 2011.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0015",
@@ -177,7 +191,8 @@
     "cover": "covers/book_0015.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Burnie D. - Tree (DK Eyewitness) - 2011.pdf"
+    "originalName": "Burnie D. - Tree (DK Eyewitness) - 2011.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0016",
@@ -189,7 +204,8 @@
     "cover": "covers/book_0016.jpg",
     "isHosted": true,
     "file": "books/book_0016.pdf",
-    "originalName": "College Essay Writing Skills with Readings (John Langan).pdf"
+    "originalName": "College Essay Writing Skills with Readings (John Langan).pdf",
+    "needsFix": false
   },
   {
     "id": "book_0017",
@@ -201,7 +217,8 @@
     "cover": "covers/book_0017.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Cotterell A. - Ancient China (DK Eyewitness) - 2005.pdf"
+    "originalName": "Cotterell A. - Ancient China (DK Eyewitness) - 2005.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0018",
@@ -213,7 +230,8 @@
     "cover": "covers/book_0018.jpg",
     "isHosted": true,
     "file": "books/book_0018.pdf",
-    "originalName": "Daly, Rengel - Norse Mythology (Mythology A to Z). 2010.pdf"
+    "originalName": "Daly, Rengel - Norse Mythology (Mythology A to Z). 2010.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0019",
@@ -225,7 +243,8 @@
     "cover": "covers/book_0019.jpg",
     "isHosted": true,
     "file": "books/book_0019.epub",
-    "originalName": "Dance Dance Dance - Haruki Murakami.epub"
+    "originalName": "Dance Dance Dance - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0020",
@@ -237,7 +256,8 @@
     "cover": "covers/book_0020.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "DK. English for Everyone - Course Book. Level 4 Advanced - 2016.pdf"
+    "originalName": "DK. English for Everyone - Course Book. Level 4 Advanced - 2016.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0021",
@@ -249,7 +269,8 @@
     "cover": "covers/book_0021.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Dorling Kindersley. DK Illustrated Family Bible (The New International Version, The Holy Bible NIV) - 2013.pdf"
+    "originalName": "Dorling Kindersley. DK Illustrated Family Bible (The New International Version, The Holy Bible NIV) - 2013.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0022",
@@ -261,7 +282,8 @@
     "cover": "covers/book_0022.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Dorling Kindersley. Smithsonian. Flora. Inside the Secret World of Plants - (DK Smithsonian) - 2018.pdf"
+    "originalName": "Dorling Kindersley. Smithsonian. Flora. Inside the Secret World of Plants - (DK Smithsonian) - 2018.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0023",
@@ -273,7 +295,8 @@
     "cover": "covers/book_0023.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Dorling Kindersley. Zoology. Inside the Secret World of Animals - (DK Smithsonian) - 2019.pdf"
+    "originalName": "Dorling Kindersley. Zoology. Inside the Secret World of Animals - (DK Smithsonian) - 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0024",
@@ -285,7 +308,8 @@
     "cover": "covers/book_0024.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "English for Everyone.pdf"
+    "originalName": "English for Everyone.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0025",
@@ -297,7 +321,8 @@
     "cover": "covers/book_0025.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "English_Skills_with_Readings_7th_Edition.pdf"
+    "originalName": "English_Skills_with_Readings_7th_Edition.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0026",
@@ -309,7 +334,8 @@
     "cover": "covers/book_0026.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Foster R. Peach S. - Geography of the World - 2006.pdf"
+    "originalName": "Foster R. Peach S. - Geography of the World - 2006.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0027",
@@ -321,7 +347,8 @@
     "cover": "covers/book_0027.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Game Art Complete.pdf"
+    "originalName": "Game Art Complete.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0028",
@@ -333,7 +360,8 @@
     "cover": "covers/book_0028.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Gamlin L. - Evolution (DK Eyewitness) - 2000.pdf"
+    "originalName": "Gamlin L. - Evolution (DK Eyewitness) - 2000.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0029",
@@ -345,7 +373,8 @@
     "cover": "covers/book_0029.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Grau A. - Dance (DK Eyewitness) - 2005.pdf"
+    "originalName": "Grau A. - Dance (DK Eyewitness) - 2005.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0030",
@@ -357,7 +386,8 @@
     "cover": "covers/book_0030.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Greenaway T. - Jungle (DK Eyewitness) - 2009.pdf"
+    "originalName": "Greenaway T. - Jungle (DK Eyewitness) - 2009.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0031",
@@ -369,7 +399,8 @@
     "cover": "covers/book_0031.jpg",
     "isHosted": true,
     "file": "books/book_0031.pdf",
-    "originalName": "Guitar scales easy music lessons.pdf"
+    "originalName": "Guitar scales easy music lessons.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0032",
@@ -381,7 +412,8 @@
     "cover": "covers/book_0032.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Halley N. - Farm (DK Eyewitness) - 2000.pdf"
+    "originalName": "Halley N. - Farm (DK Eyewitness) - 2000.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0033",
@@ -393,7 +425,8 @@
     "cover": "covers/book_0033.jpg",
     "isHosted": true,
     "file": "books/book_0033.epub",
-    "originalName": "Hear the Wind Sing - Haruki Murakami.epub"
+    "originalName": "Hear the Wind Sing - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0034",
@@ -405,7 +438,8 @@
     "cover": "covers/book_0034.jpg",
     "isHosted": true,
     "file": "books/book_0034.pdf",
-    "originalName": "heritage houses text.pdf"
+    "originalName": "heritage houses text.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0035",
@@ -417,7 +451,8 @@
     "cover": "covers/book_0035.jpg",
     "isHosted": true,
     "file": "books/book_0035.epub",
-    "originalName": "Kafka on the Shore - Haruki Murakami (1).epub"
+    "originalName": "Kafka on the Shore - Haruki Murakami (1).epub",
+    "needsFix": false
   },
   {
     "id": "book_0036",
@@ -429,7 +464,8 @@
     "cover": "covers/book_0036.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Langley M. - Religion (DK Eyewitness) - 2005.pdf"
+    "originalName": "Langley M. - Religion (DK Eyewitness) - 2005.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0037",
@@ -441,7 +477,8 @@
     "cover": "covers/book_0037.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Learn Spanish in Just 15 Minutes a Day.pdf"
+    "originalName": "Learn Spanish in Just 15 Minutes a Day.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0038",
@@ -453,7 +490,8 @@
     "cover": "covers/book_0038.jpg",
     "isHosted": true,
     "file": "books/book_0038.pdf",
-    "originalName": "Lindow. Norse Mythology.pdf"
+    "originalName": "Lindow. Norse Mythology.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0039",
@@ -465,7 +503,8 @@
     "cover": "covers/book_0039.jpg",
     "isHosted": true,
     "file": "books/book_0039.pdf",
-    "originalName": "Maths in Minutes.pdf"
+    "originalName": "Maths in Minutes.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0040",
@@ -477,7 +516,8 @@
     "cover": "covers/book_0040.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Murdoch D.S. - Cowboy (DK Eyewitness) - 2000.pdf"
+    "originalName": "Murdoch D.S. - Cowboy (DK Eyewitness) - 2000.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0041",
@@ -489,7 +529,8 @@
     "cover": "covers/book_0041.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Murdoch D.S. - North American Indian (DK Eyewitness) - 2005.pdf"
+    "originalName": "Murdoch D.S. - North American Indian (DK Eyewitness) - 2005.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0042",
@@ -501,7 +542,8 @@
     "cover": "covers/book_0042.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Operations Management_ Sustainability and Supply Chain Management (12th Edition 2016) Jay Heizer.pdf"
+    "originalName": "Operations Management_ Sustainability and Supply Chain Management (12th Edition 2016) Jay Heizer.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0043",
@@ -513,7 +555,8 @@
     "cover": "covers/book_0043.jpg",
     "isHosted": true,
     "file": "books/book_0043.epub",
-    "originalName": "Pinball, 1973 - Haruki Murakami.epub"
+    "originalName": "Pinball, 1973 - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0044",
@@ -525,7 +568,8 @@
     "cover": "covers/book_0044.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Platt R. - Pirate (DK Eyewitness) - 2002.pdf"
+    "originalName": "Platt R. - Pirate (DK Eyewitness) - 2002.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0045",
@@ -537,7 +581,8 @@
     "cover": "covers/book_0045.jpg",
     "isHosted": true,
     "file": "books/book_0045.epub",
-    "originalName": "Sanshiro - Natsume Soseki.epub"
+    "originalName": "Sanshiro - Natsume Soseki.epub",
+    "needsFix": false
   },
   {
     "id": "book_0046",
@@ -549,7 +594,8 @@
     "cover": "covers/book_0046.jpg",
     "isHosted": true,
     "file": "books/book_0046.epub",
-    "originalName": "South of the Border, West of th - Haruki Murakami.epub"
+    "originalName": "South of the Border, West of th - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0047",
@@ -561,7 +607,8 @@
     "cover": "covers/book_0047.jpg",
     "isHosted": true,
     "file": "books/book_0047.epub",
-    "originalName": "Sputnik Sweetheart - Haruki Murakami.epub"
+    "originalName": "Sputnik Sweetheart - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0048",
@@ -573,7 +620,8 @@
     "cover": "covers/book_0048.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Stephen Rogers Peck - Atlas of Human Anatomy for the Artist - 1982.pdf"
+    "originalName": "Stephen Rogers Peck - Atlas of Human Anatomy for the Artist - 1982.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0049",
@@ -585,7 +633,8 @@
     "cover": "covers/book_0049.jpg",
     "isHosted": true,
     "file": "books/book_0049.pdf",
-    "originalName": "Stephen_King_On_Writing.pdf"
+    "originalName": "Stephen_King_On_Writing.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0050",
@@ -597,7 +646,8 @@
     "cover": "covers/book_0050.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Symes R.F. - Rocks & Minerals (DK Eyewitness) - 2008.pdf"
+    "originalName": "Symes R.F. - Rocks & Minerals (DK Eyewitness) - 2008.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0051",
@@ -609,7 +659,8 @@
     "cover": "covers/book_0051.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Tambini M. - Future (DK Eyewitness) - 2004.pdf"
+    "originalName": "Tambini M. - Future (DK Eyewitness) - 2004.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0052",
@@ -621,7 +672,8 @@
     "cover": "covers/book_0052.jpg",
     "isHosted": true,
     "file": "books/book_0052.epub",
-    "originalName": "The 100 Best Business Books of All Time What They Say, Why They Matter, and How They Can Help You.epub"
+    "originalName": "The 100 Best Business Books of All Time What They Say, Why They Matter, and How They Can Help You.epub",
+    "needsFix": false
   },
   {
     "id": "book_0053",
@@ -633,7 +685,8 @@
     "cover": "covers/book_0053.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "The DK Children's Encyclopedia. The Book that Explains Everything - 2017.pdf"
+    "originalName": "The DK Children's Encyclopedia. The Book that Explains Everything - 2017.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0054",
@@ -645,7 +698,8 @@
     "cover": "covers/book_0054.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "The Economics Book.pdf"
+    "originalName": "The Economics Book.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0055",
@@ -657,7 +711,8 @@
     "cover": "covers/book_0055.jpg",
     "isHosted": true,
     "file": "books/book_0055.epub",
-    "originalName": "The Elephant Vanishes - Haruki Murakami.epub"
+    "originalName": "The Elephant Vanishes - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0056",
@@ -669,7 +724,8 @@
     "cover": "covers/book_0056.jpg",
     "isHosted": true,
     "file": "books/book_0056.epub",
-    "originalName": "The Memoirs of Cleopatra by Margaret George.epub"
+    "originalName": "The Memoirs of Cleopatra by Margaret George.epub",
+    "needsFix": false
   },
   {
     "id": "book_0057",
@@ -681,7 +737,8 @@
     "cover": "covers/book_0057.jpg",
     "isHosted": true,
     "file": "books/book_0057.pdf",
-    "originalName": "The Power of Visual Storytelling- How to Use Visuals, Videos, and Social Media to Market Your Brand ( PDFDrive ).pdf"
+    "originalName": "The Power of Visual Storytelling- How to Use Visuals, Videos, and Social Media to Market Your Brand ( PDFDrive ).pdf",
+    "needsFix": false
   },
   {
     "id": "book_0058",
@@ -693,7 +750,8 @@
     "cover": "covers/book_0058.jpg",
     "isHosted": true,
     "file": "books/book_0058.pdf",
-    "originalName": "The training of the imagination.pdf"
+    "originalName": "The training of the imagination.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0059",
@@ -705,7 +763,8 @@
     "cover": "covers/book_0059.jpg",
     "isHosted": true,
     "file": "books/book_0059.epub",
-    "originalName": "The Wind-Up Bird Chronicle - Haruki Murakami.epub"
+    "originalName": "The Wind-Up Bird Chronicle - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0060",
@@ -717,7 +776,8 @@
     "cover": "covers/book_0060.jpg",
     "isHosted": true,
     "file": "books/book_0060.pdf",
-    "originalName": "The-Secret-by-Rhonda-Byrne.pdf"
+    "originalName": "The-Secret-by-Rhonda-Byrne.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0061",
@@ -729,7 +789,8 @@
     "cover": "covers/book_0061.jpg",
     "isHosted": true,
     "file": "books/book_0061.pdf",
-    "originalName": "Thorn A. - Animating 2D Characters for Games in Blender - 2015.pdf"
+    "originalName": "Thorn A. - Animating 2D Characters for Games in Blender - 2015.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0062",
@@ -741,7 +802,8 @@
     "cover": "covers/book_0062.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "total04_digital_version.pdf"
+    "originalName": "total04_digital_version.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0063",
@@ -753,7 +815,8 @@
     "cover": "covers/book_0063.jpg",
     "isHosted": true,
     "file": "books/book_0063.epub",
-    "originalName": "What I Talk About When I Talk A - Haruki Murakami.epub"
+    "originalName": "What I Talk About When I Talk A - Haruki Murakami.epub",
+    "needsFix": false
   },
   {
     "id": "book_0064",
@@ -765,7 +828,8 @@
     "cover": "covers/book_0064.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Wilkinson P. (ed.) - Early Humans (DK Eyewitness) - 2005.pdf"
+    "originalName": "Wilkinson P. (ed.) - Early Humans (DK Eyewitness) - 2005.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0065",
@@ -777,7 +841,8 @@
     "cover": "covers/book_0065.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Wilkinson P. - Building (DK Eyewitness) - 2000.pdf"
+    "originalName": "Wilkinson P. - Building (DK Eyewitness) - 2000.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0066",
@@ -789,7 +854,8 @@
     "cover": "covers/book_0066.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Wonderbook _ the illustrated guide to creating imaginative fiction ( PDFDrive ).pdf"
+    "originalName": "Wonderbook _ the illustrated guide to creating imaginative fiction ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0067",
@@ -801,7 +867,8 @@
     "cover": "covers/book_0067.jpg",
     "isHosted": true,
     "file": "books/book_0067.pdf",
-    "originalName": "[Jean_Aitchison]-The Articulate Mammal.pdf"
+    "originalName": "[Jean_Aitchison]-The Articulate Mammal.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0068",
@@ -813,7 +880,8 @@
     "cover": "covers/book_0068.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "2DArtist_Issue_130_Oct16_highres.pdf"
+    "originalName": "2DArtist_Issue_130_Oct16_highres.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0069",
@@ -825,7 +893,8 @@
     "cover": "covers/book_0069.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "2DArtist_Issue_131_Nov16_highres.pdf"
+    "originalName": "2DArtist_Issue_131_Nov16_highres.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0070",
@@ -837,7 +906,8 @@
     "cover": "covers/book_0070.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "2DArtist_Issue_132_Dec16_highres.pdf"
+    "originalName": "2DArtist_Issue_132_Dec16_highres.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0071",
@@ -849,7 +919,8 @@
     "cover": "covers/book_0071.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Andrew Loomis - Drawing the Head and Hands.pdf"
+    "originalName": "Andrew Loomis - Drawing the Head and Hands.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0072",
@@ -861,7 +932,8 @@
     "cover": "covers/book_0072.jpg",
     "isHosted": true,
     "file": "books/book_0072.pdf",
-    "originalName": "Andrew Loomis - Fun WIth a Pencil.pdf"
+    "originalName": "Andrew Loomis - Fun WIth a Pencil.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0073",
@@ -873,7 +945,8 @@
     "cover": "covers/book_0073.jpg",
     "isHosted": true,
     "file": "books/book_0073.pdf",
-    "originalName": "AnimationMentor_HowToBecomeAnAnimator.pdf"
+    "originalName": "AnimationMentor_HowToBecomeAnAnimator.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0074",
@@ -885,7 +958,8 @@
     "cover": "covers/book_0074.jpg",
     "isHosted": true,
     "file": "books/book_0074.pdf",
-    "originalName": "AnimationMentor_IndustryReport.pdf"
+    "originalName": "AnimationMentor_IndustryReport.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0075",
@@ -897,7 +971,8 @@
     "cover": "covers/book_0075.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Basic Perspective Drawing- A Visual Approach ( PDFDrive ).pdf"
+    "originalName": "Basic Perspective Drawing- A Visual Approach ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0076",
@@ -909,7 +984,8 @@
     "cover": "covers/book_0076.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Cartoon Animation by Preston Blair ( PDFDrive ).pdf"
+    "originalName": "Cartoon Animation by Preston Blair ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0077",
@@ -921,7 +997,8 @@
     "cover": "covers/book_0077.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "cdq_sample_issue_2019.pdf"
+    "originalName": "cdq_sample_issue_2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0078",
@@ -933,7 +1010,8 @@
     "cover": "covers/book_0078.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Color and Light- A Guide for the Realist Painter ( PDFDrive ).pdf"
+    "originalName": "Color and Light- A Guide for the Realist Painter ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0079",
@@ -945,7 +1023,8 @@
     "cover": "covers/book_0079.jpg",
     "isHosted": true,
     "file": "books/book_0079.pdf",
-    "originalName": "Concept Art - Corel.pdf"
+    "originalName": "Concept Art - Corel.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0080",
@@ -957,7 +1036,8 @@
     "cover": "covers/book_0080.jpg",
     "isHosted": true,
     "file": "books/book_0080.pdf",
-    "originalName": "Concept Art - Tale of Tales.pdf"
+    "originalName": "Concept Art - Tale of Tales.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0081",
@@ -969,7 +1049,8 @@
     "cover": "covers/book_0081.jpg",
     "isHosted": true,
     "file": "books/book_0081.pdf",
-    "originalName": "Constructive Anatomy.pdf"
+    "originalName": "Constructive Anatomy.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0082",
@@ -981,7 +1062,8 @@
     "cover": "covers/book_0082.jpg",
     "isHosted": true,
     "file": "books/book_0082.pdf",
-    "originalName": "Creation of concept art for an RPG game.pdf"
+    "originalName": "Creation of concept art for an RPG game.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0083",
@@ -993,7 +1075,8 @@
     "cover": "covers/book_0083.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Digital colour in graphic design.pdf"
+    "originalName": "Digital colour in graphic design.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0084",
@@ -1005,7 +1088,8 @@
     "cover": "covers/book_0084.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "dokumen.tips_jack-hamm-drawing-the-head-and-figurepdf.pdf"
+    "originalName": "dokumen.tips_jack-hamm-drawing-the-head-and-figurepdf.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0085",
@@ -1017,7 +1101,8 @@
     "cover": "covers/book_0085.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "draw-with-jazza-easy-anatomy.pdf"
+    "originalName": "draw-with-jazza-easy-anatomy.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0086",
@@ -1029,7 +1114,8 @@
     "cover": "covers/book_0086.jpg",
     "isHosted": true,
     "file": "books/book_0086.pdf",
-    "originalName": "Drawing cartoons comics for dummies.pdf"
+    "originalName": "Drawing cartoons comics for dummies.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0088",
@@ -1041,7 +1127,8 @@
     "cover": "covers/book_0088.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Drawing comics the marvel way.pdf"
+    "originalName": "Drawing comics the marvel way.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0089",
@@ -1053,7 +1140,8 @@
     "cover": "covers/book_0089.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Drawing the Human Head (Practical Art Books) ( PDFDrive ).pdf"
+    "originalName": "Drawing the Human Head (Practical Art Books) ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0090",
@@ -1065,7 +1153,8 @@
     "cover": "covers/book_0090.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "epdf.pub_the-animators-survival-kit.pdf"
+    "originalName": "epdf.pub_the-animators-survival-kit.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0091",
@@ -1077,7 +1166,8 @@
     "cover": "covers/book_0091.jpg",
     "isHosted": true,
     "file": "books/book_0091.pdf",
-    "originalName": "Figure Drawing Master Class Lessons in Life Drawing - Dan Gheno.pdf"
+    "originalName": "Figure Drawing Master Class Lessons in Life Drawing - Dan Gheno.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0092",
@@ -1089,7 +1179,8 @@
     "cover": "covers/book_0092.jpg",
     "isHosted": true,
     "file": "books/book_0092.epub",
-    "originalName": "Freehand Perspective and Sketching.epub"
+    "originalName": "Freehand Perspective and Sketching.epub",
+    "needsFix": false
   },
   {
     "id": "book_0093",
@@ -1101,7 +1192,8 @@
     "cover": "covers/book_0093.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "free_chapter_bgts2.pdf"
+    "originalName": "free_chapter_bgts2.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0094",
@@ -1113,7 +1205,8 @@
     "cover": "covers/book_0094.jpg",
     "isHosted": true,
     "file": "books/book_0094.pdf",
-    "originalName": "graphic design basics.pdf"
+    "originalName": "graphic design basics.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0096",
@@ -1125,7 +1218,8 @@
     "cover": "covers/book_0096.jpg",
     "isHosted": true,
     "file": "books/book_0096.pdf",
-    "originalName": "How to Draw 101 Cartoon Characters.pdf"
+    "originalName": "How to Draw 101 Cartoon Characters.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0097",
@@ -1137,7 +1231,8 @@
     "cover": "covers/book_0097.jpg",
     "isHosted": true,
     "file": "books/book_0097.pdf",
-    "originalName": "Ken Fountain's Animation Workflow.pdf"
+    "originalName": "Ken Fountain's Animation Workflow.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0098",
@@ -1149,7 +1244,8 @@
     "cover": "covers/book_0098.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "kupdf.net_anatomy-for-sculptorspdf.pdf"
+    "originalName": "kupdf.net_anatomy-for-sculptorspdf.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0099",
@@ -1161,7 +1257,8 @@
     "cover": "covers/book_0099.jpg",
     "isHosted": true,
     "file": "books/book_0099.epub",
-    "originalName": "Modern Cartooning_ Essential Techniques for Drawing Today’s Popular Cartoons ( PDFDrive ).epub"
+    "originalName": "Modern Cartooning_ Essential Techniques for Drawing Today’s Popular Cartoons ( PDFDrive ).epub",
+    "needsFix": false
   },
   {
     "id": "book_0100",
@@ -1173,7 +1270,8 @@
     "cover": "covers/book_0100.jpg",
     "isHosted": true,
     "file": "books/book_0100.pdf",
-    "originalName": "Pencil Sketching, 2nd Edition.pdf"
+    "originalName": "Pencil Sketching, 2nd Edition.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0101",
@@ -1185,7 +1283,8 @@
     "cover": "covers/book_0101.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Perspective Made Easy.pdf"
+    "originalName": "Perspective Made Easy.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0102",
@@ -1197,7 +1296,8 @@
     "cover": "covers/book_0102.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Perspective Sketching Freehand and Digital Drawing Techniques for Artists & Designers.pdf"
+    "originalName": "Perspective Sketching Freehand and Digital Drawing Techniques for Artists & Designers.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0104",
@@ -1209,7 +1309,8 @@
     "cover": "covers/book_0104.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Richard Williams - The Animator's Survival Kit.pdf"
+    "originalName": "Richard Williams - The Animator's Survival Kit.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0105",
@@ -1221,7 +1322,8 @@
     "cover": "covers/book_0105.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Sketch Book for the Artist.pdf"
+    "originalName": "Sketch Book for the Artist.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0106",
@@ -1233,7 +1335,8 @@
     "cover": "covers/book_0106.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Sketch-based Interfaces and Modeling.pdf"
+    "originalName": "Sketch-based Interfaces and Modeling.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0107",
@@ -1245,7 +1348,8 @@
     "cover": "covers/book_0107.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "SKETCHING Drawing Techniques for Product Designers.pdf"
+    "originalName": "SKETCHING Drawing Techniques for Product Designers.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0108",
@@ -1257,7 +1361,8 @@
     "cover": "covers/book_0108.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Sketching People Life Drawing Basics - Jeff Mellem.pdf"
+    "originalName": "Sketching People Life Drawing Basics - Jeff Mellem.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0109",
@@ -1269,7 +1374,8 @@
     "cover": "covers/book_0109.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Sketching User Experiences Getting the Design Right and the Right Design.pdf"
+    "originalName": "Sketching User Experiences Getting the Design Right and the Right Design.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0110",
@@ -1281,7 +1387,8 @@
     "cover": "covers/book_0110.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "small-size-drawing-the-human-body.pdf"
+    "originalName": "small-size-drawing-the-human-body.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0111",
@@ -1293,7 +1400,8 @@
     "cover": "covers/book_0111.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "The Anatomy of Style_ Figure Drawing Techniques ( PDFDrive ).pdf"
+    "originalName": "The Anatomy of Style_ Figure Drawing Techniques ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0113",
@@ -1305,7 +1413,8 @@
     "cover": "covers/book_0113.jpg",
     "isHosted": true,
     "file": "books/book_0113.pdf",
-    "originalName": "The Art of Concept.pdf"
+    "originalName": "The Art of Concept.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0114",
@@ -1317,7 +1426,8 @@
     "cover": "covers/book_0114.jpg",
     "isHosted": true,
     "file": "books/book_0114.epub",
-    "originalName": "The Art of Sketching by Vivienne Coleman.epub"
+    "originalName": "The Art of Sketching by Vivienne Coleman.epub",
+    "needsFix": false
   },
   {
     "id": "book_0115",
@@ -1329,7 +1439,8 @@
     "cover": "covers/book_0115.jpg",
     "isHosted": true,
     "file": "books/book_0115.pdf",
-    "originalName": "The Big Bad World of concept art.pdf"
+    "originalName": "The Big Bad World of concept art.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0116",
@@ -1341,7 +1452,8 @@
     "cover": "covers/book_0116.jpg",
     "isHosted": true,
     "file": "books/book_0116.pdf",
-    "originalName": "The Drawings of Heinrich Kley.pdf"
+    "originalName": "The Drawings of Heinrich Kley.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0117",
@@ -1353,7 +1465,8 @@
     "cover": "covers/book_0117.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "The illusion of life_ Disney animation   ( PDFDrive ).pdf"
+    "originalName": "The illusion of life_ Disney animation   ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0118",
@@ -1365,7 +1478,8 @@
     "cover": "covers/book_0118.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "The New Drawing on the Right Side of the Brain ( PDFDrive ).pdf"
+    "originalName": "The New Drawing on the Right Side of the Brain ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0119",
@@ -1377,7 +1491,8 @@
     "cover": "covers/book_0119.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "The nine old men_ lessons, techniques, and inspiration from Disney's great animators ( PDFDrive ).pdf"
+    "originalName": "The nine old men_ lessons, techniques, and inspiration from Disney's great animators ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0121",
@@ -1389,7 +1504,8 @@
     "cover": "covers/book_0121.jpg",
     "isHosted": true,
     "file": "books/book_0121.pdf",
-    "originalName": "TipsAndTricks_Volume1.pdf"
+    "originalName": "TipsAndTricks_Volume1.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0122",
@@ -1401,7 +1517,8 @@
     "cover": "covers/book_0122.jpg",
     "isHosted": true,
     "file": "books/book_0122.pdf",
-    "originalName": "TipsAndTricks_Volume2.pdf"
+    "originalName": "TipsAndTricks_Volume2.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0123",
@@ -1413,7 +1530,8 @@
     "cover": "covers/book_0123.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "total_magazine_issue02.pdf"
+    "originalName": "total_magazine_issue02.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0124",
@@ -1425,7 +1543,8 @@
     "cover": "covers/book_0124.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Tradigital Animate CC_ 12 principles of animation in Adobe Animate ( PDFDrive ).pdf"
+    "originalName": "Tradigital Animate CC_ 12 principles of animation in Adobe Animate ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0125",
@@ -1437,7 +1556,8 @@
     "cover": "covers/book_0125.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Tradigital Blender_ A CG Animator's Guide to Applying the Classic Principles of Animation ( PDFDrive ).pdf"
+    "originalName": "Tradigital Blender_ A CG Animator's Guide to Applying the Classic Principles of Animation ( PDFDrive ).pdf",
+    "needsFix": true
   },
   {
     "id": "book_0126",
@@ -1449,7 +1569,8 @@
     "cover": "covers/book_0126.jpg",
     "isHosted": true,
     "file": "books/book_0126.pdf",
-    "originalName": "Creative Writing.pdf"
+    "originalName": "Creative Writing.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0127",
@@ -1461,7 +1582,8 @@
     "cover": "covers/book_0127.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Amateur Photographer - 05 July 2019.pdf"
+    "originalName": "Amateur Photographer - 05 July 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0128",
@@ -1473,7 +1595,8 @@
     "cover": "covers/book_0128.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Amateur Photographer - 12 July 2019.pdf"
+    "originalName": "Amateur Photographer - 12 July 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0129",
@@ -1485,7 +1608,8 @@
     "cover": "covers/book_0129.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Amateur Photographer - 26 July 2019.pdf"
+    "originalName": "Amateur Photographer - 26 July 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0130",
@@ -1497,7 +1621,8 @@
     "cover": "covers/book_0130.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Amateur Photographer - 28 June 2019.pdf"
+    "originalName": "Amateur Photographer - 28 June 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0131",
@@ -1509,7 +1634,8 @@
     "cover": "covers/book_0131.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Australian Photography - July 2019.pdf"
+    "originalName": "Australian Photography - July 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0132",
@@ -1521,7 +1647,8 @@
     "cover": "covers/book_0132.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Better Photography - July 2019.pdf"
+    "originalName": "Better Photography - July 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0133",
@@ -1533,7 +1660,8 @@
     "cover": "covers/book_0133.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "D-Photo - July 08, 2019.pdf"
+    "originalName": "D-Photo - July 08, 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0134",
@@ -1545,7 +1673,8 @@
     "cover": "covers/book_0134.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Digital Photographer - August 2019.pdf"
+    "originalName": "Digital Photographer - August 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0135",
@@ -1557,7 +1686,8 @@
     "cover": "covers/book_0135.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "N-Photo UK - August 2019.pdf"
+    "originalName": "N-Photo UK - August 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0136",
@@ -1569,7 +1699,8 @@
     "cover": "covers/book_0136.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "N-Photo UK - July 2019.pdf"
+    "originalName": "N-Photo UK - July 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0137",
@@ -1581,7 +1712,8 @@
     "cover": "covers/book_0137.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Outdoor Photographer - August 2019.pdf"
+    "originalName": "Outdoor Photographer - August 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0138",
@@ -1593,7 +1725,8 @@
     "cover": "covers/book_0138.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Photography Week - 04 July 2019.pdf"
+    "originalName": "Photography Week - 04 July 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0139",
@@ -1605,7 +1738,8 @@
     "cover": "covers/book_0139.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Photography Week - 20 June 2019.pdf"
+    "originalName": "Photography Week - 20 June 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0140",
@@ -1617,7 +1751,8 @@
     "cover": "covers/book_0140.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Photography Week - 27 June 2019.pdf"
+    "originalName": "Photography Week - 27 June 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0141",
@@ -1629,7 +1764,8 @@
     "cover": "covers/book_0141.jpg",
     "isHosted": false,
     "file": "",
-    "originalName": "Practical Photography - August 2019.pdf"
+    "originalName": "Practical Photography - August 2019.pdf",
+    "needsFix": true
   },
   {
     "id": "book_0142",
@@ -1641,7 +1777,8 @@
     "cover": "covers/book_0142.jpg",
     "isHosted": true,
     "file": "books/book_0142.pdf",
-    "originalName": "SLR Photography Guide - June 2019.pdf"
+    "originalName": "SLR Photography Guide - June 2019.pdf",
+    "needsFix": false
   },
   {
     "id": "book_0143",
@@ -1653,7 +1790,8 @@
     "cover": "covers/book_0143.jpg",
     "isHosted": true,
     "file": "books/book_0143.epub",
-    "originalName": "01 - The Last Wish.epub"
+    "originalName": "01 - The Last Wish.epub",
+    "needsFix": false
   },
   {
     "id": "book_0144",
@@ -1665,7 +1803,8 @@
     "cover": "covers/book_0144.jpg",
     "isHosted": true,
     "file": "books/book_0144.epub",
-    "originalName": "02 - AndrzejSapkowski-TheSwordOfDestiny.epub"
+    "originalName": "02 - AndrzejSapkowski-TheSwordOfDestiny.epub",
+    "needsFix": false
   },
   {
     "id": "book_0145",
@@ -1677,7 +1816,8 @@
     "cover": "covers/book_0145.jpg",
     "isHosted": true,
     "file": "books/book_0145.epub",
-    "originalName": "03 - Blood of Elves.epub"
+    "originalName": "03 - Blood of Elves.epub",
+    "needsFix": false
   },
   {
     "id": "book_0146",
@@ -1689,7 +1829,8 @@
     "cover": "covers/book_0146.jpg",
     "isHosted": true,
     "file": "books/book_0146.epub",
-    "originalName": "04 - The Time of Contempt - Andrzej Sapkowski.epub"
+    "originalName": "04 - The Time of Contempt - Andrzej Sapkowski.epub",
+    "needsFix": false
   },
   {
     "id": "book_0147",
@@ -1701,7 +1842,8 @@
     "cover": "covers/book_0147.jpg",
     "isHosted": true,
     "file": "books/book_0147.epub",
-    "originalName": "05 - Baptism of Fire - Andrzej Sapkowski.epub"
+    "originalName": "05 - Baptism of Fire - Andrzej Sapkowski.epub",
+    "needsFix": false
   },
   {
     "id": "book_0148",
@@ -1713,7 +1855,8 @@
     "cover": "covers/book_0148.jpg",
     "isHosted": true,
     "file": "books/book_0148.epub",
-    "originalName": "06 - The Tower of Swallows.epub"
+    "originalName": "06 - The Tower of Swallows.epub",
+    "needsFix": false
   },
   {
     "id": "book_0149",
@@ -1725,7 +1868,8 @@
     "cover": "covers/book_0149.jpg",
     "isHosted": true,
     "file": "books/book_0149.epub",
-    "originalName": "07 - Lady of the Lake.epub"
+    "originalName": "07 - Lady of the Lake.epub",
+    "needsFix": false
   },
   {
     "id": "book_0150",
@@ -1737,7 +1881,8 @@
     "cover": "covers/book_0150.jpg",
     "isHosted": true,
     "file": "books/book_0150.epub",
-    "originalName": "Abbie Farwell Brown - In the Days of Giants.epub"
+    "originalName": "Abbie Farwell Brown - In the Days of Giants.epub",
+    "needsFix": false
   },
   {
     "id": "book_0151",
@@ -1749,7 +1894,8 @@
     "cover": "covers/book_0151.jpg",
     "isHosted": true,
     "file": "books/book_0151.epub",
-    "originalName": "Albert Camus - The Stranger.epub"
+    "originalName": "Albert Camus - The Stranger.epub",
+    "needsFix": false
   },
   {
     "id": "book_0152",
@@ -1761,7 +1907,8 @@
     "cover": "covers/book_0152.jpg",
     "isHosted": true,
     "file": "books/book_0152.epub",
-    "originalName": "Aldous Huxley - Brave New World.epub"
+    "originalName": "Aldous Huxley - Brave New World.epub",
+    "needsFix": false
   },
   {
     "id": "book_0153",
@@ -1773,7 +1920,8 @@
     "cover": "covers/book_0153.jpg",
     "isHosted": true,
     "file": "books/book_0153.epub",
-    "originalName": "Aldous Huxley - Island.epub"
+    "originalName": "Aldous Huxley - Island.epub",
+    "needsFix": false
   },
   {
     "id": "book_0154",
@@ -1785,7 +1933,8 @@
     "cover": "covers/book_0154.jpg",
     "isHosted": true,
     "file": "books/book_0154.epub",
-    "originalName": "Alexandre Dumas - The Count of Monte Cristo.epub"
+    "originalName": "Alexandre Dumas - The Count of Monte Cristo.epub",
+    "needsFix": false
   },
   {
     "id": "book_0155",
@@ -1797,7 +1946,8 @@
     "cover": "covers/book_0155.jpg",
     "isHosted": true,
     "file": "books/book_0155.epub",
-    "originalName": "Andrew Lang - Tales of Troy and Greece.epub"
+    "originalName": "Andrew Lang - Tales of Troy and Greece.epub",
+    "needsFix": false
   },
   {
     "id": "book_0156",
@@ -1809,7 +1959,8 @@
     "cover": "covers/book_0156.jpg",
     "isHosted": true,
     "file": "books/book_0156.epub",
-    "originalName": "Andrzej Sapkowski - The Witcher 1 The Last Wish.epub"
+    "originalName": "Andrzej Sapkowski - The Witcher 1 The Last Wish.epub",
+    "needsFix": false
   },
   {
     "id": "book_0157",
@@ -1821,7 +1972,8 @@
     "cover": "covers/book_0157.jpg",
     "isHosted": true,
     "file": "books/book_0157.epub",
-    "originalName": "Andrzej Sapkowski - The Witcher 2 The Sword of Destiny.epub"
+    "originalName": "Andrzej Sapkowski - The Witcher 2 The Sword of Destiny.epub",
+    "needsFix": false
   },
   {
     "id": "book_0158",
@@ -1833,7 +1985,8 @@
     "cover": "covers/book_0158.jpg",
     "isHosted": true,
     "file": "books/book_0158.epub",
-    "originalName": "Andrzej Sapkowski - The Witcher 3 Season of Storms.epub"
+    "originalName": "Andrzej Sapkowski - The Witcher 3 Season of Storms.epub",
+    "needsFix": false
   },
   {
     "id": "book_0159",
@@ -1845,7 +1998,8 @@
     "cover": "covers/book_0159.jpg",
     "isHosted": true,
     "file": "books/book_0159.epub",
-    "originalName": "Andrzej Sapkowski - The Witcher 4 Blood of Elves.epub"
+    "originalName": "Andrzej Sapkowski - The Witcher 4 Blood of Elves.epub",
+    "needsFix": false
   },
   {
     "id": "book_0160",
@@ -1857,7 +2011,8 @@
     "cover": "covers/book_0160.jpg",
     "isHosted": true,
     "file": "books/book_0160.epub",
-    "originalName": "Andrzej Sapkowski - The Witcher 5 Time of Contempt.epub"
+    "originalName": "Andrzej Sapkowski - The Witcher 5 Time of Contempt.epub",
+    "needsFix": false
   },
   {
     "id": "book_0161",
@@ -1869,7 +2024,8 @@
     "cover": "covers/book_0161.jpg",
     "isHosted": true,
     "file": "books/book_0161.epub",
-    "originalName": "Andrzej Sapkowski - The Witcher 6 Baptism of Fire.epub"
+    "originalName": "Andrzej Sapkowski - The Witcher 6 Baptism of Fire.epub",
+    "needsFix": false
   },
   {
     "id": "book_0162",
@@ -1881,7 +2037,8 @@
     "cover": "covers/book_0162.jpg",
     "isHosted": true,
     "file": "books/book_0162.epub",
-    "originalName": "Andrzej Sapkowski - The Witcher 7 The Tower of the Swallow.epub"
+    "originalName": "Andrzej Sapkowski - The Witcher 7 The Tower of the Swallow.epub",
+    "needsFix": false
   },
   {
     "id": "book_0163",
@@ -1893,7 +2050,8 @@
     "cover": "covers/book_0163.jpg",
     "isHosted": true,
     "file": "books/book_0163.epub",
-    "originalName": "Andrzej Sapkowski - The Witcher 8 The Lady of the Lake.epub"
+    "originalName": "Andrzej Sapkowski - The Witcher 8 The Lady of the Lake.epub",
+    "needsFix": false
   },
   {
     "id": "book_0164",
@@ -1905,7 +2063,8 @@
     "cover": "covers/book_0164.jpg",
     "isHosted": true,
     "file": "books/book_0164.epub",
-    "originalName": "Anna Sewell - Black Beauty.epub"
+    "originalName": "Anna Sewell - Black Beauty.epub",
+    "needsFix": false
   },
   {
     "id": "book_0165",
@@ -1917,7 +2076,8 @@
     "cover": "covers/book_0165.jpg",
     "isHosted": true,
     "file": "books/book_0165.epub",
-    "originalName": "Arthur C. Clarke - 2001 A Space Odyssey.epub"
+    "originalName": "Arthur C. Clarke - 2001 A Space Odyssey.epub",
+    "needsFix": false
   },
   {
     "id": "book_0166",
@@ -1929,7 +2089,8 @@
     "cover": "covers/book_0166.jpg",
     "isHosted": true,
     "file": "books/book_0166.epub",
-    "originalName": "Arthur C. Clarke - Childhood's End.epub"
+    "originalName": "Arthur C. Clarke - Childhood's End.epub",
+    "needsFix": false
   },
   {
     "id": "book_0167",
@@ -1941,7 +2102,8 @@
     "cover": "covers/book_0167.jpg",
     "isHosted": true,
     "file": "books/book_0167.epub",
-    "originalName": "Arthur C. Clarke - Rendezvous With Rama.epub"
+    "originalName": "Arthur C. Clarke - Rendezvous With Rama.epub",
+    "needsFix": false
   },
   {
     "id": "book_0168",
@@ -1953,7 +2115,8 @@
     "cover": "covers/book_0168.jpg",
     "isHosted": true,
     "file": "books/book_0168.epub",
-    "originalName": "Arthur Conan Doyle - Professor Challenger 1 The Lost World.epub"
+    "originalName": "Arthur Conan Doyle - Professor Challenger 1 The Lost World.epub",
+    "needsFix": false
   },
   {
     "id": "book_0169",
@@ -1965,7 +2128,8 @@
     "cover": "covers/book_0169.jpg",
     "isHosted": true,
     "file": "books/book_0169.epub",
-    "originalName": "Arthur Conan Doyle - Sherlock Holmes 4 The Memoirs of Sherlock Holmes.epub"
+    "originalName": "Arthur Conan Doyle - Sherlock Holmes 4 The Memoirs of Sherlock Holmes.epub",
+    "needsFix": false
   },
   {
     "id": "book_0170",
@@ -1977,7 +2141,8 @@
     "cover": "covers/book_0170.jpg",
     "isHosted": true,
     "file": "books/book_0170.epub",
-    "originalName": "Arthur Conan Doyle - Sherlock Holmes 6 The Return of Sherlock Holmes.epub"
+    "originalName": "Arthur Conan Doyle - Sherlock Holmes 6 The Return of Sherlock Holmes.epub",
+    "needsFix": false
   },
   {
     "id": "book_0171",
@@ -1989,7 +2154,8 @@
     "cover": "covers/book_0171.jpg",
     "isHosted": true,
     "file": "books/book_0171.epub",
-    "originalName": "Arthur Conan Doyle - Tales of Terror and Mystery.epub"
+    "originalName": "Arthur Conan Doyle - Tales of Terror and Mystery.epub",
+    "needsFix": false
   },
   {
     "id": "book_0172",
@@ -2001,7 +2167,8 @@
     "cover": "covers/book_0172.jpg",
     "isHosted": true,
     "file": "books/book_0172.epub",
-    "originalName": "Arthur Golden - Memoirs of a Geisha.epub"
+    "originalName": "Arthur Golden - Memoirs of a Geisha.epub",
+    "needsFix": false
   },
   {
     "id": "book_0173",
@@ -2013,7 +2180,8 @@
     "cover": "covers/book_0173.jpg",
     "isHosted": true,
     "file": "books/book_0173.epub",
-    "originalName": "Arthur Schopenhauer - Counsels and Maxims.epub"
+    "originalName": "Arthur Schopenhauer - Counsels and Maxims.epub",
+    "needsFix": false
   },
   {
     "id": "book_0174",
@@ -2025,7 +2193,8 @@
     "cover": "covers/book_0174.jpg",
     "isHosted": true,
     "file": "books/book_0174.epub",
-    "originalName": "Arthur Schopenhauer - Essays of Schopenhauer.epub"
+    "originalName": "Arthur Schopenhauer - Essays of Schopenhauer.epub",
+    "needsFix": false
   },
   {
     "id": "book_0175",
@@ -2037,7 +2206,8 @@
     "cover": "covers/book_0175.jpg",
     "isHosted": true,
     "file": "books/book_0175.epub",
-    "originalName": "Arthur Schopenhauer - On Human Nature.epub"
+    "originalName": "Arthur Schopenhauer - On Human Nature.epub",
+    "needsFix": false
   },
   {
     "id": "book_0176",
@@ -2049,7 +2219,8 @@
     "cover": "covers/book_0176.jpg",
     "isHosted": true,
     "file": "books/book_0176.epub",
-    "originalName": "Arthur Schopenhauer - The Art of Controversy.epub"
+    "originalName": "Arthur Schopenhauer - The Art of Controversy.epub",
+    "needsFix": false
   },
   {
     "id": "book_0177",
@@ -2061,7 +2232,8 @@
     "cover": "covers/book_0177.jpg",
     "isHosted": true,
     "file": "books/book_0177.epub",
-    "originalName": "Arthur Schopenhauer - The Art of Literature.epub"
+    "originalName": "Arthur Schopenhauer - The Art of Literature.epub",
+    "needsFix": false
   },
   {
     "id": "book_0178",
@@ -2073,7 +2245,8 @@
     "cover": "covers/book_0178.jpg",
     "isHosted": true,
     "file": "books/book_0178.epub",
-    "originalName": "Arthur Schopenhauer - The Basis of Morality.epub"
+    "originalName": "Arthur Schopenhauer - The Basis of Morality.epub",
+    "needsFix": false
   },
   {
     "id": "book_0179",
@@ -2085,7 +2258,8 @@
     "cover": "covers/book_0179.jpg",
     "isHosted": true,
     "file": "books/book_0179.epub",
-    "originalName": "Arthur Schopenhauer - The World as Will and Idea Vol 2.epub"
+    "originalName": "Arthur Schopenhauer - The World as Will and Idea Vol 2.epub",
+    "needsFix": false
   },
   {
     "id": "book_0180",
@@ -2097,7 +2271,8 @@
     "cover": "covers/book_0180.jpg",
     "isHosted": true,
     "file": "books/book_0180.epub",
-    "originalName": "Arthur Schopenhauer - The World as Will and Idea Vol 3.epub"
+    "originalName": "Arthur Schopenhauer - The World as Will and Idea Vol 3.epub",
+    "needsFix": false
   },
   {
     "id": "book_0181",
@@ -2109,7 +2284,8 @@
     "cover": "covers/book_0181.jpg",
     "isHosted": true,
     "file": "books/book_0181.epub",
-    "originalName": "Bertrand Russell - History of Western Philosophy.epub"
+    "originalName": "Bertrand Russell - History of Western Philosophy.epub",
+    "needsFix": false
   },
   {
     "id": "book_0182",
@@ -2121,7 +2297,8 @@
     "cover": "covers/book_0182.jpg",
     "isHosted": true,
     "file": "books/book_0182.epub",
-    "originalName": "Beth Kempton - Wabi Sabi.epub"
+    "originalName": "Beth Kempton - Wabi Sabi.epub",
+    "needsFix": false
   },
   {
     "id": "book_0183",
@@ -2133,7 +2310,8 @@
     "cover": "covers/book_0183.jpg",
     "isHosted": true,
     "file": "books/book_0183.epub",
-    "originalName": "Bram Stoker - Dracula.epub"
+    "originalName": "Bram Stoker - Dracula.epub",
+    "needsFix": false
   },
   {
     "id": "book_0184",
@@ -2145,7 +2323,8 @@
     "cover": "covers/book_0184.jpg",
     "isHosted": true,
     "file": "books/book_0184.epub",
-    "originalName": "Brothers Grimm - Grimms' Fairy Stories.epub"
+    "originalName": "Brothers Grimm - Grimms' Fairy Stories.epub",
+    "needsFix": false
   },
   {
     "id": "book_0185",
@@ -2157,7 +2336,8 @@
     "cover": "covers/book_0185.jpg",
     "isHosted": true,
     "file": "books/book_0185.epub",
-    "originalName": "C. S. Lewis - The Chronicles of Narnia 1 The Lion, the Witch and the Wardrobe.epub"
+    "originalName": "C. S. Lewis - The Chronicles of Narnia 1 The Lion, the Witch and the Wardrobe.epub",
+    "needsFix": false
   },
   {
     "id": "book_0186",
@@ -2169,7 +2349,8 @@
     "cover": "covers/book_0186.jpg",
     "isHosted": true,
     "file": "books/book_0186.epub",
-    "originalName": "C. S. Lewis - The Chronicles of Narnia Complete Collection.epub"
+    "originalName": "C. S. Lewis - The Chronicles of Narnia Complete Collection.epub",
+    "needsFix": false
   },
   {
     "id": "book_0187",
@@ -2181,7 +2362,8 @@
     "cover": "covers/book_0187.jpg",
     "isHosted": true,
     "file": "books/book_0187.epub",
-    "originalName": "Carl Jung - Psychology of the Unconscious.epub"
+    "originalName": "Carl Jung - Psychology of the Unconscious.epub",
+    "needsFix": false
   },
   {
     "id": "book_0188",
@@ -2193,7 +2375,8 @@
     "cover": "covers/book_0188.jpg",
     "isHosted": true,
     "file": "books/book_0188.epub",
-    "originalName": "Carlo Collodi - The Adventures of Pinocchio.epub"
+    "originalName": "Carlo Collodi - The Adventures of Pinocchio.epub",
+    "needsFix": false
   },
   {
     "id": "book_0189",
@@ -2205,7 +2388,8 @@
     "cover": "covers/book_0189.jpg",
     "isHosted": true,
     "file": "books/book_0189.epub",
-    "originalName": "Carolyn Sherwin Bailey - Wonder Stories.epub"
+    "originalName": "Carolyn Sherwin Bailey - Wonder Stories.epub",
+    "needsFix": false
   },
   {
     "id": "book_0190",
@@ -2217,7 +2401,8 @@
     "cover": "covers/book_0190.jpg",
     "isHosted": true,
     "file": "books/book_0190.epub",
-    "originalName": "Charles Dickens - A Christmas Carol.epub"
+    "originalName": "Charles Dickens - A Christmas Carol.epub",
+    "needsFix": false
   },
   {
     "id": "book_0191",
@@ -2229,7 +2414,8 @@
     "cover": "covers/book_0191.jpg",
     "isHosted": true,
     "file": "books/book_0191.epub",
-    "originalName": "Charles Dickens - A Tale of Two Cities.epub"
+    "originalName": "Charles Dickens - A Tale of Two Cities.epub",
+    "needsFix": false
   },
   {
     "id": "book_0192",
@@ -2241,7 +2427,8 @@
     "cover": "covers/book_0192.jpg",
     "isHosted": true,
     "file": "books/book_0192.epub",
-    "originalName": "Charles Dickens - David Copperfield.epub"
+    "originalName": "Charles Dickens - David Copperfield.epub",
+    "needsFix": false
   },
   {
     "id": "book_0193",
@@ -2253,7 +2440,8 @@
     "cover": "covers/book_0193.jpg",
     "isHosted": true,
     "file": "books/book_0193.epub",
-    "originalName": "Charles Dickens - Great Expectations.epub"
+    "originalName": "Charles Dickens - Great Expectations.epub",
+    "needsFix": false
   },
   {
     "id": "book_0194",
@@ -2265,7 +2453,8 @@
     "cover": "covers/book_0194.jpg",
     "isHosted": true,
     "file": "books/book_0194.epub",
-    "originalName": "Charles Dickens - Oliver Twist.epub"
+    "originalName": "Charles Dickens - Oliver Twist.epub",
+    "needsFix": false
   },
   {
     "id": "book_0195",
@@ -2277,7 +2466,8 @@
     "cover": "covers/book_0195.jpg",
     "isHosted": true,
     "file": "books/book_0195.epub",
-    "originalName": "Charles Kingsley - The Heroes.epub"
+    "originalName": "Charles Kingsley - The Heroes.epub",
+    "needsFix": false
   },
   {
     "id": "book_0196",
@@ -2289,7 +2479,8 @@
     "cover": "covers/book_0196.jpg",
     "isHosted": true,
     "file": "books/book_0196.epub",
-    "originalName": "Charlotte Bronte - Jane Eyre.epub"
+    "originalName": "Charlotte Bronte - Jane Eyre.epub",
+    "needsFix": false
   },
   {
     "id": "book_0197",
@@ -2301,7 +2492,8 @@
     "cover": "covers/book_0197.jpg",
     "isHosted": true,
     "file": "books/book_0197.epub",
-    "originalName": "Christopher Paolini - Inheritance Cycle 4 Inheritance.epub"
+    "originalName": "Christopher Paolini - Inheritance Cycle 4 Inheritance.epub",
+    "needsFix": false
   },
   {
     "id": "book_0198",
@@ -2313,7 +2505,8 @@
     "cover": "covers/book_0198.jpg",
     "isHosted": true,
     "file": "books/book_0198.epub",
-    "originalName": "Chuck Palahniuk - Fight Club.epub"
+    "originalName": "Chuck Palahniuk - Fight Club.epub",
+    "needsFix": false
   },
   {
     "id": "book_0199",
@@ -2325,7 +2518,8 @@
     "cover": "covers/book_0199.jpg",
     "isHosted": true,
     "file": "books/book_0199.epub",
-    "originalName": "Colleen McCullough - The Thorn Birds.epub"
+    "originalName": "Colleen McCullough - The Thorn Birds.epub",
+    "needsFix": false
   },
   {
     "id": "book_0200",
@@ -2337,7 +2531,8 @@
     "cover": "covers/book_0200.jpg",
     "isHosted": true,
     "file": "books/book_0200.epub",
-    "originalName": "Cormac McCarthy - Blood Meridian.epub"
+    "originalName": "Cormac McCarthy - Blood Meridian.epub",
+    "needsFix": false
   },
   {
     "id": "book_0201",
@@ -2349,7 +2544,8 @@
     "cover": "covers/book_0201.jpg",
     "isHosted": true,
     "file": "books/book_0201.epub",
-    "originalName": "Cormac McCarthy - No Country for Old Men.epub"
+    "originalName": "Cormac McCarthy - No Country for Old Men.epub",
+    "needsFix": false
   },
   {
     "id": "book_0202",
@@ -2361,7 +2557,8 @@
     "cover": "covers/book_0202.jpg",
     "isHosted": true,
     "file": "books/book_0202.epub",
-    "originalName": "Cormac McCarthy - The Road.epub"
+    "originalName": "Cormac McCarthy - The Road.epub",
+    "needsFix": false
   },
   {
     "id": "book_0203",
@@ -2373,7 +2570,8 @@
     "cover": "covers/book_0203.jpg",
     "isHosted": true,
     "file": "books/book_0203.epub",
-    "originalName": "Dan Brown - Robert Langdon 2 The Da Vinci Code.epub"
+    "originalName": "Dan Brown - Robert Langdon 2 The Da Vinci Code.epub",
+    "needsFix": false
   },
   {
     "id": "book_0204",
@@ -2385,7 +2583,8 @@
     "cover": "covers/book_0204.jpg",
     "isHosted": true,
     "file": "books/book_0204.epub",
-    "originalName": "Daniel G. Brinton - American Hero-Myths.epub"
+    "originalName": "Daniel G. Brinton - American Hero-Myths.epub",
+    "needsFix": false
   },
   {
     "id": "book_0205",
@@ -2397,7 +2596,8 @@
     "cover": "covers/book_0205.jpg",
     "isHosted": true,
     "file": "books/book_0205.epub",
-    "originalName": "Dante Alighieri - The Divine Comedy.epub"
+    "originalName": "Dante Alighieri - The Divine Comedy.epub",
+    "needsFix": false
   },
   {
     "id": "book_0206",
@@ -2409,7 +2609,8 @@
     "cover": "covers/book_0206.jpg",
     "isHosted": true,
     "file": "books/book_0206.epub",
-    "originalName": "Daphne du Maurier - Rebecca.epub"
+    "originalName": "Daphne du Maurier - Rebecca.epub",
+    "needsFix": false
   },
   {
     "id": "book_0207",
@@ -2421,7 +2622,8 @@
     "cover": "covers/book_0207.jpg",
     "isHosted": true,
     "file": "books/book_0207.epub",
-    "originalName": "David Hume - A Treatise of Human Nature.epub"
+    "originalName": "David Hume - A Treatise of Human Nature.epub",
+    "needsFix": false
   },
   {
     "id": "book_0208",
@@ -2433,7 +2635,8 @@
     "cover": "covers/book_0208.jpg",
     "isHosted": true,
     "file": "books/book_0208.epub",
-    "originalName": "David Hume - Dialogues Concerning Natural Religion.epub"
+    "originalName": "David Hume - Dialogues Concerning Natural Religion.epub",
+    "needsFix": false
   },
   {
     "id": "book_0209",
@@ -2445,7 +2648,8 @@
     "cover": "covers/book_0209.jpg",
     "isHosted": true,
     "file": "books/book_0209.epub",
-    "originalName": "David Kalakaua - The Legends and Myths of Hawaii.epub"
+    "originalName": "David Kalakaua - The Legends and Myths of Hawaii.epub",
+    "needsFix": false
   },
   {
     "id": "book_0210",
@@ -2457,7 +2661,8 @@
     "cover": "covers/book_0210.jpg",
     "isHosted": true,
     "file": "books/book_0210.epub",
-    "originalName": "Donald A. Mackenzie - Myths of Babylonia and Assyria.epub"
+    "originalName": "Donald A. Mackenzie - Myths of Babylonia and Assyria.epub",
+    "needsFix": false
   },
   {
     "id": "book_0211",
@@ -2469,7 +2674,8 @@
     "cover": "covers/book_0211.jpg",
     "isHosted": true,
     "file": "books/book_0211.epub",
-    "originalName": "Douglas Adams - Dirk Gently 1 Dirk Gently's Holistic Detective Agency.epub"
+    "originalName": "Douglas Adams - Dirk Gently 1 Dirk Gently's Holistic Detective Agency.epub",
+    "needsFix": false
   },
   {
     "id": "book_0212",
@@ -2481,7 +2687,8 @@
     "cover": "covers/book_0212.jpg",
     "isHosted": true,
     "file": "books/book_0212.epub",
-    "originalName": "Douglas Adams - Dirk Gently 2 The Long Dark Tea-Time of the Soul.epub"
+    "originalName": "Douglas Adams - Dirk Gently 2 The Long Dark Tea-Time of the Soul.epub",
+    "needsFix": false
   },
   {
     "id": "book_0213",
@@ -2493,7 +2700,8 @@
     "cover": "covers/book_0213.jpg",
     "isHosted": true,
     "file": "books/book_0213.epub",
-    "originalName": "Douglas Adams - The Hitchhiker's Guide to the Galaxy 1 The Hitchhiker's Guide to the Galaxy.epub"
+    "originalName": "Douglas Adams - The Hitchhiker's Guide to the Galaxy 1 The Hitchhiker's Guide to the Galaxy.epub",
+    "needsFix": false
   },
   {
     "id": "book_0214",
@@ -2505,7 +2713,8 @@
     "cover": "covers/book_0214.jpg",
     "isHosted": true,
     "file": "books/book_0214.epub",
-    "originalName": "E. M. Berens - Myths and Legends of Ancient Greece and Rome.epub"
+    "originalName": "E. M. Berens - Myths and Legends of Ancient Greece and Rome.epub",
+    "needsFix": false
   },
   {
     "id": "book_0215",
@@ -2517,7 +2726,8 @@
     "cover": "covers/book_0215.jpg",
     "isHosted": true,
     "file": "books/book_0215.epub",
-    "originalName": "Eckhart Tolle - The Power of Now.epub"
+    "originalName": "Eckhart Tolle - The Power of Now.epub",
+    "needsFix": false
   },
   {
     "id": "book_0216",
@@ -2529,7 +2739,8 @@
     "cover": "covers/book_0216.jpg",
     "isHosted": true,
     "file": "books/book_0216.epub",
-    "originalName": "Edgar Allan Poe - Great Tales and Poems of Edgar Allan Poe.epub"
+    "originalName": "Edgar Allan Poe - Great Tales and Poems of Edgar Allan Poe.epub",
+    "needsFix": false
   },
   {
     "id": "book_0217",
@@ -2541,7 +2752,8 @@
     "cover": "covers/book_0217.jpg",
     "isHosted": true,
     "file": "books/book_0217.epub",
-    "originalName": "Elias Owen - Welsh Folk-Lore.epub"
+    "originalName": "Elias Owen - Welsh Folk-Lore.epub",
+    "needsFix": false
   },
   {
     "id": "book_0218",
@@ -2553,7 +2765,8 @@
     "cover": "covers/book_0218.jpg",
     "isHosted": true,
     "file": "books/book_0218.epub",
-    "originalName": "Ely Banister Soane - To Mesopotamia and Kurdistan in Disguise.epub"
+    "originalName": "Ely Banister Soane - To Mesopotamia and Kurdistan in Disguise.epub",
+    "needsFix": false
   },
   {
     "id": "book_0219",
@@ -2565,7 +2778,8 @@
     "cover": "covers/book_0219.jpg",
     "isHosted": true,
     "file": "books/book_0219.epub",
-    "originalName": "Emily Bronte - Wuthering Heights.epub"
+    "originalName": "Emily Bronte - Wuthering Heights.epub",
+    "needsFix": false
   },
   {
     "id": "book_0220",
@@ -2577,7 +2791,8 @@
     "cover": "covers/book_0220.jpg",
     "isHosted": true,
     "file": "books/book_0220.epub",
-    "originalName": "Eoin Colfer - Artemis Fowl 1 Artemis Fowl.epub"
+    "originalName": "Eoin Colfer - Artemis Fowl 1 Artemis Fowl.epub",
+    "needsFix": false
   },
   {
     "id": "book_0221",
@@ -2589,7 +2804,8 @@
     "cover": "covers/book_0221.jpg",
     "isHosted": true,
     "file": "books/book_0221.epub",
-    "originalName": "Epictetus - The Enchiridion.epub"
+    "originalName": "Epictetus - The Enchiridion.epub",
+    "needsFix": false
   },
   {
     "id": "book_0222",
@@ -2601,7 +2817,8 @@
     "cover": "covers/book_0222.jpg",
     "isHosted": true,
     "file": "books/book_0222.epub",
-    "originalName": "Ernest Hemingway - For Whom the Bell Tolls.epub"
+    "originalName": "Ernest Hemingway - For Whom the Bell Tolls.epub",
+    "needsFix": false
   },
   {
     "id": "book_0223",
@@ -2613,7 +2830,8 @@
     "cover": "covers/book_0223.jpg",
     "isHosted": true,
     "file": "books/book_0223.epub",
-    "originalName": "Ernest Hemingway - The Old Man and the Sea.epub"
+    "originalName": "Ernest Hemingway - The Old Man and the Sea.epub",
+    "needsFix": false
   },
   {
     "id": "book_0224",
@@ -2625,7 +2843,8 @@
     "cover": "covers/book_0224.jpg",
     "isHosted": true,
     "file": "books/book_0224.epub",
-    "originalName": "Ernest Hemingway - The Sun Also Rises.epub"
+    "originalName": "Ernest Hemingway - The Sun Also Rises.epub",
+    "needsFix": false
   },
   {
     "id": "book_0225",
@@ -2637,7 +2856,8 @@
     "cover": "covers/book_0225.jpg",
     "isHosted": true,
     "file": "books/book_0225.epub",
-    "originalName": "Evelyn Waugh - Brideshead Revisited.epub"
+    "originalName": "Evelyn Waugh - Brideshead Revisited.epub",
+    "needsFix": false
   },
   {
     "id": "book_0226",
@@ -2649,7 +2869,8 @@
     "cover": "covers/book_0226.jpg",
     "isHosted": true,
     "file": "books/book_0226.epub",
-    "originalName": "F. Hadland Davis - Myths and Legends of Japan.epub"
+    "originalName": "F. Hadland Davis - Myths and Legends of Japan.epub",
+    "needsFix": false
   },
   {
     "id": "book_0227",
@@ -2661,7 +2882,8 @@
     "cover": "covers/book_0227.jpg",
     "isHosted": true,
     "file": "books/book_0227.epub",
-    "originalName": "F. Scott Fitzgerald - The Great Gatsby.epub"
+    "originalName": "F. Scott Fitzgerald - The Great Gatsby.epub",
+    "needsFix": false
   },
   {
     "id": "book_0228",
@@ -2673,7 +2895,8 @@
     "cover": "covers/book_0228.jpg",
     "isHosted": true,
     "file": "books/book_0228.epub",
-    "originalName": "Ferdinand Schmidt - Gods and Heroes.epub"
+    "originalName": "Ferdinand Schmidt - Gods and Heroes.epub",
+    "needsFix": false
   },
   {
     "id": "book_0229",
@@ -2685,7 +2908,8 @@
     "cover": "covers/book_0229.jpg",
     "isHosted": true,
     "file": "books/book_0229.epub",
-    "originalName": "Frank Herbert - Dune 1 Dune.epub"
+    "originalName": "Frank Herbert - Dune 1 Dune.epub",
+    "needsFix": false
   },
   {
     "id": "book_0230",
@@ -2697,7 +2921,8 @@
     "cover": "covers/book_0230.jpg",
     "isHosted": true,
     "file": "books/book_0230.epub",
-    "originalName": "Franz Kafka - The Metamorphosis and Other Stories.epub"
+    "originalName": "Franz Kafka - The Metamorphosis and Other Stories.epub",
+    "needsFix": false
   },
   {
     "id": "book_0231",
@@ -2709,7 +2934,8 @@
     "cover": "covers/book_0231.jpg",
     "isHosted": true,
     "file": "books/book_0231.epub",
-    "originalName": "Franz Kafka - The Metamorphosis.epub"
+    "originalName": "Franz Kafka - The Metamorphosis.epub",
+    "needsFix": false
   },
   {
     "id": "book_0232",
@@ -2721,7 +2947,8 @@
     "cover": "covers/book_0232.jpg",
     "isHosted": true,
     "file": "books/book_0232.epub",
-    "originalName": "Franz Kafka - The Trial.epub"
+    "originalName": "Franz Kafka - The Trial.epub",
+    "needsFix": false
   },
   {
     "id": "book_0233",
@@ -2733,7 +2960,8 @@
     "cover": "covers/book_0233.jpg",
     "isHosted": true,
     "file": "books/book_0233.epub",
-    "originalName": "Friedrich de la Motte Fouque - Undine.epub"
+    "originalName": "Friedrich de la Motte Fouque - Undine.epub",
+    "needsFix": false
   },
   {
     "id": "book_0234",
@@ -2745,7 +2973,8 @@
     "cover": "covers/book_0234.jpg",
     "isHosted": true,
     "file": "books/book_0234.epub",
-    "originalName": "Friedrich Nietzsche - Basic Writings of Nietzsche.epub"
+    "originalName": "Friedrich Nietzsche - Basic Writings of Nietzsche.epub",
+    "needsFix": false
   },
   {
     "id": "book_0235",
@@ -2757,7 +2986,8 @@
     "cover": "covers/book_0235.jpg",
     "isHosted": true,
     "file": "books/book_0235.epub",
-    "originalName": "Friedrich Nietzsche - Beyond Good and Evil.epub"
+    "originalName": "Friedrich Nietzsche - Beyond Good and Evil.epub",
+    "needsFix": false
   },
   {
     "id": "book_0236",
@@ -2769,7 +2999,8 @@
     "cover": "covers/book_0236.jpg",
     "isHosted": true,
     "file": "books/book_0236.epub",
-    "originalName": "Friedrich Nietzsche - Early Greek Philosophy & Other Essays.epub"
+    "originalName": "Friedrich Nietzsche - Early Greek Philosophy & Other Essays.epub",
+    "needsFix": false
   },
   {
     "id": "book_0237",
@@ -2781,7 +3012,8 @@
     "cover": "covers/book_0237.jpg",
     "isHosted": true,
     "file": "books/book_0237.epub",
-    "originalName": "Friedrich Nietzsche - Ecce Homo.epub"
+    "originalName": "Friedrich Nietzsche - Ecce Homo.epub",
+    "needsFix": false
   },
   {
     "id": "book_0238",
@@ -2793,7 +3025,8 @@
     "cover": "covers/book_0238.jpg",
     "isHosted": true,
     "file": "books/book_0238.epub",
-    "originalName": "Friedrich Nietzsche - Human All Too Human Part 1.epub"
+    "originalName": "Friedrich Nietzsche - Human All Too Human Part 1.epub",
+    "needsFix": false
   },
   {
     "id": "book_0239",
@@ -2805,7 +3038,8 @@
     "cover": "covers/book_0239.jpg",
     "isHosted": true,
     "file": "books/book_0239.epub",
-    "originalName": "Friedrich Nietzsche - Human All Too Human Part 2.epub"
+    "originalName": "Friedrich Nietzsche - Human All Too Human Part 2.epub",
+    "needsFix": false
   },
   {
     "id": "book_0240",
@@ -2817,7 +3051,8 @@
     "cover": "covers/book_0240.jpg",
     "isHosted": true,
     "file": "books/book_0240.epub",
-    "originalName": "Friedrich Nietzsche - Index of the Project Gutenberg Works.epub"
+    "originalName": "Friedrich Nietzsche - Index of the Project Gutenberg Works.epub",
+    "needsFix": false
   },
   {
     "id": "book_0241",
@@ -2829,7 +3064,8 @@
     "cover": "covers/book_0241.jpg",
     "isHosted": true,
     "file": "books/book_0241.epub",
-    "originalName": "Friedrich Nietzsche - The Antichrist.epub"
+    "originalName": "Friedrich Nietzsche - The Antichrist.epub",
+    "needsFix": false
   },
   {
     "id": "book_0242",
@@ -2841,7 +3077,8 @@
     "cover": "covers/book_0242.jpg",
     "isHosted": true,
     "file": "books/book_0242.epub",
-    "originalName": "Friedrich Nietzsche - The Case of Wagner.epub"
+    "originalName": "Friedrich Nietzsche - The Case of Wagner.epub",
+    "needsFix": false
   },
   {
     "id": "book_0243",
@@ -2853,7 +3090,8 @@
     "cover": "covers/book_0243.jpg",
     "isHosted": true,
     "file": "books/book_0243.epub",
-    "originalName": "Friedrich Nietzsche - The Dawn of Day.epub"
+    "originalName": "Friedrich Nietzsche - The Dawn of Day.epub",
+    "needsFix": false
   },
   {
     "id": "book_0244",
@@ -2865,7 +3103,8 @@
     "cover": "covers/book_0244.jpg",
     "isHosted": true,
     "file": "books/book_0244.epub",
-    "originalName": "Friedrich Nietzsche - The Genealogy of Morals.epub"
+    "originalName": "Friedrich Nietzsche - The Genealogy of Morals.epub",
+    "needsFix": false
   },
   {
     "id": "book_0245",
@@ -2877,7 +3116,8 @@
     "cover": "covers/book_0245.jpg",
     "isHosted": true,
     "file": "books/book_0245.epub",
-    "originalName": "Friedrich Nietzsche - The Joyful Wisdom.epub"
+    "originalName": "Friedrich Nietzsche - The Joyful Wisdom.epub",
+    "needsFix": false
   },
   {
     "id": "book_0246",
@@ -2889,7 +3129,8 @@
     "cover": "covers/book_0246.jpg",
     "isHosted": true,
     "file": "books/book_0246.epub",
-    "originalName": "Friedrich Nietzsche - The Twilight of Idols.epub"
+    "originalName": "Friedrich Nietzsche - The Twilight of Idols.epub",
+    "needsFix": false
   },
   {
     "id": "book_0247",
@@ -2901,7 +3142,8 @@
     "cover": "covers/book_0247.jpg",
     "isHosted": true,
     "file": "books/book_0247.epub",
-    "originalName": "Friedrich Nietzsche - The Will to Power Book 1 & 2.epub"
+    "originalName": "Friedrich Nietzsche - The Will to Power Book 1 & 2.epub",
+    "needsFix": false
   },
   {
     "id": "book_0248",
@@ -2913,7 +3155,8 @@
     "cover": "covers/book_0248.jpg",
     "isHosted": true,
     "file": "books/book_0248.epub",
-    "originalName": "Friedrich Nietzsche - The Will to Power Book 3 & 4.epub"
+    "originalName": "Friedrich Nietzsche - The Will to Power Book 3 & 4.epub",
+    "needsFix": false
   },
   {
     "id": "book_0249",
@@ -2925,7 +3168,8 @@
     "cover": "covers/book_0249.jpg",
     "isHosted": true,
     "file": "books/book_0249.epub",
-    "originalName": "Friedrich Nietzsche - Thoughts out of Season.epub"
+    "originalName": "Friedrich Nietzsche - Thoughts out of Season.epub",
+    "needsFix": false
   },
   {
     "id": "book_0250",
@@ -2937,7 +3181,8 @@
     "cover": "covers/book_0250.jpg",
     "isHosted": true,
     "file": "books/book_0250.epub",
-    "originalName": "Friedrich Nietzsche - Thus Spoke Zarathustra.epub"
+    "originalName": "Friedrich Nietzsche - Thus Spoke Zarathustra.epub",
+    "needsFix": false
   },
   {
     "id": "book_0251",
@@ -2949,7 +3194,8 @@
     "cover": "covers/book_0251.jpg",
     "isHosted": true,
     "file": "books/book_0251.epub",
-    "originalName": "Fyodor Dostoevsky - Crime and Punishment.epub"
+    "originalName": "Fyodor Dostoevsky - Crime and Punishment.epub",
+    "needsFix": false
   },
   {
     "id": "book_0252",
@@ -2961,7 +3207,8 @@
     "cover": "covers/book_0252.jpg",
     "isHosted": true,
     "file": "books/book_0252.epub",
-    "originalName": "Fyodor Dostoevsky - Notes from Underground.epub"
+    "originalName": "Fyodor Dostoevsky - Notes from Underground.epub",
+    "needsFix": false
   },
   {
     "id": "book_0253",
@@ -2973,7 +3220,8 @@
     "cover": "covers/book_0253.jpg",
     "isHosted": true,
     "file": "books/book_0253.epub",
-    "originalName": "Fyodor Dostoevsky - Poor Folk.epub"
+    "originalName": "Fyodor Dostoevsky - Poor Folk.epub",
+    "needsFix": false
   },
   {
     "id": "book_0254",
@@ -2985,7 +3233,8 @@
     "cover": "covers/book_0254.jpg",
     "isHosted": true,
     "file": "books/book_0254.epub",
-    "originalName": "Fyodor Dostoevsky - The Brothers Karamazov.epub"
+    "originalName": "Fyodor Dostoevsky - The Brothers Karamazov.epub",
+    "needsFix": false
   },
   {
     "id": "book_0255",
@@ -2997,7 +3246,8 @@
     "cover": "covers/book_0255.jpg",
     "isHosted": true,
     "file": "books/book_0255.epub",
-    "originalName": "Fyodor Dostoevsky - The Gambler.epub"
+    "originalName": "Fyodor Dostoevsky - The Gambler.epub",
+    "needsFix": false
   },
   {
     "id": "book_0256",
@@ -3009,7 +3259,8 @@
     "cover": "covers/book_0256.jpg",
     "isHosted": true,
     "file": "books/book_0256.epub",
-    "originalName": "Fyodor Dostoevsky - The Idiot.epub"
+    "originalName": "Fyodor Dostoevsky - The Idiot.epub",
+    "needsFix": false
   },
   {
     "id": "book_0257",
@@ -3021,7 +3272,8 @@
     "cover": "covers/book_0257.jpg",
     "isHosted": true,
     "file": "books/book_0257.epub",
-    "originalName": "Fyodor Dostoevsky - The Possessed (Demons).epub"
+    "originalName": "Fyodor Dostoevsky - The Possessed (Demons).epub",
+    "needsFix": false
   },
   {
     "id": "book_0258",
@@ -3033,7 +3285,8 @@
     "cover": "covers/book_0258.jpg",
     "isHosted": true,
     "file": "books/book_0258.epub",
-    "originalName": "Gabriel Garcia Marquez - Love in the Time of Cholera.epub"
+    "originalName": "Gabriel Garcia Marquez - Love in the Time of Cholera.epub",
+    "needsFix": false
   },
   {
     "id": "book_0259",
@@ -3045,7 +3298,8 @@
     "cover": "covers/book_0259.jpg",
     "isHosted": true,
     "file": "books/book_0259.epub",
-    "originalName": "Gabriel Garcia Marquez - One Hundred Years of Solitude.epub"
+    "originalName": "Gabriel Garcia Marquez - One Hundred Years of Solitude.epub",
+    "needsFix": false
   },
   {
     "id": "book_0260",
@@ -3057,7 +3311,8 @@
     "cover": "covers/book_0260.jpg",
     "isHosted": true,
     "file": "books/book_0260.epub",
-    "originalName": "Gaston Leroux - The Phantom of the Opera.epub"
+    "originalName": "Gaston Leroux - The Phantom of the Opera.epub",
+    "needsFix": false
   },
   {
     "id": "book_0261",
@@ -3069,7 +3324,8 @@
     "cover": "covers/book_0261.jpg",
     "isHosted": true,
     "file": "books/book_0261.epub",
-    "originalName": "George Eliot - Middlemarch.epub"
+    "originalName": "George Eliot - Middlemarch.epub",
+    "needsFix": false
   },
   {
     "id": "book_0262",
@@ -3081,7 +3337,8 @@
     "cover": "covers/book_0262.jpg",
     "isHosted": true,
     "file": "books/book_0262.epub",
-    "originalName": "George Orwell - 1984.epub"
+    "originalName": "George Orwell - 1984.epub",
+    "needsFix": false
   },
   {
     "id": "book_0263",
@@ -3093,7 +3350,8 @@
     "cover": "covers/book_0263.jpg",
     "isHosted": true,
     "file": "books/book_0263.epub",
-    "originalName": "George Orwell - Animal Farm.epub"
+    "originalName": "George Orwell - Animal Farm.epub",
+    "needsFix": false
   },
   {
     "id": "book_0264",
@@ -3105,7 +3363,8 @@
     "cover": "covers/book_0264.jpg",
     "isHosted": true,
     "file": "books/book_0264.epub",
-    "originalName": "George Orwell - Down and Out in Paris and London.epub"
+    "originalName": "George Orwell - Down and Out in Paris and London.epub",
+    "needsFix": false
   },
   {
     "id": "book_0265",
@@ -3117,7 +3376,8 @@
     "cover": "covers/book_0265.jpg",
     "isHosted": true,
     "file": "books/book_0265.epub",
-    "originalName": "George Orwell - Homage to Catalonia.epub"
+    "originalName": "George Orwell - Homage to Catalonia.epub",
+    "needsFix": false
   },
   {
     "id": "book_0266",
@@ -3129,7 +3389,8 @@
     "cover": "covers/book_0266.jpg",
     "isHosted": true,
     "file": "books/book_0266.epub",
-    "originalName": "George R. R. Martin - A Song of Ice and Fire 1 A Game of Thrones.epub"
+    "originalName": "George R. R. Martin - A Song of Ice and Fire 1 A Game of Thrones.epub",
+    "needsFix": false
   },
   {
     "id": "book_0267",
@@ -3141,7 +3402,8 @@
     "cover": "covers/book_0267.jpg",
     "isHosted": true,
     "file": "books/book_0267.epub",
-    "originalName": "George R. R. Martin - A Song of Ice and Fire 2 A Clash of Kings.epub"
+    "originalName": "George R. R. Martin - A Song of Ice and Fire 2 A Clash of Kings.epub",
+    "needsFix": false
   },
   {
     "id": "book_0268",
@@ -3153,7 +3415,8 @@
     "cover": "covers/book_0268.jpg",
     "isHosted": true,
     "file": "books/book_0268.epub",
-    "originalName": "George R. R. Martin - A Song of Ice and Fire 3 A Storm of Swords.epub"
+    "originalName": "George R. R. Martin - A Song of Ice and Fire 3 A Storm of Swords.epub",
+    "needsFix": false
   },
   {
     "id": "book_0269",
@@ -3165,7 +3428,8 @@
     "cover": "covers/book_0269.jpg",
     "isHosted": true,
     "file": "books/book_0269.epub",
-    "originalName": "George R. R. Martin - A Song of Ice and Fire 4 A Feast for Crows.epub"
+    "originalName": "George R. R. Martin - A Song of Ice and Fire 4 A Feast for Crows.epub",
+    "needsFix": false
   },
   {
     "id": "book_0270",
@@ -3177,7 +3441,8 @@
     "cover": "covers/book_0270.jpg",
     "isHosted": true,
     "file": "books/book_0270.epub",
-    "originalName": "George R. R. Martin - A Song of Ice and Fire 5 A Dance with Dragons.epub"
+    "originalName": "George R. R. Martin - A Song of Ice and Fire 5 A Dance with Dragons.epub",
+    "needsFix": false
   },
   {
     "id": "book_0271",
@@ -3189,7 +3454,8 @@
     "cover": "covers/book_0271.jpg",
     "isHosted": true,
     "file": "books/book_0271.epub",
-    "originalName": "George R. R. Martin - The Tales of Dunk and Egg.epub"
+    "originalName": "George R. R. Martin - The Tales of Dunk and Egg.epub",
+    "needsFix": false
   },
   {
     "id": "book_0272",
@@ -3201,7 +3467,8 @@
     "cover": "covers/book_0272.jpg",
     "isHosted": true,
     "file": "books/book_0272.epub",
-    "originalName": "George W. Warder - The Universe a Vast Electric Organism.epub"
+    "originalName": "George W. Warder - The Universe a Vast Electric Organism.epub",
+    "needsFix": false
   },
   {
     "id": "book_0273",
@@ -3213,7 +3480,8 @@
     "cover": "covers/book_0273.jpg",
     "isHosted": true,
     "file": "books/book_0273.epub",
-    "originalName": "Gregory Maguire - Confessions of an Ugly Stepsister.epub"
+    "originalName": "Gregory Maguire - Confessions of an Ugly Stepsister.epub",
+    "needsFix": false
   },
   {
     "id": "book_0274",
@@ -3225,7 +3493,8 @@
     "cover": "covers/book_0274.jpg",
     "isHosted": true,
     "file": "books/book_0274.epub",
-    "originalName": "Gustave Flaubert - Madame Bovary.epub"
+    "originalName": "Gustave Flaubert - Madame Bovary.epub",
+    "needsFix": false
   },
   {
     "id": "book_0275",
@@ -3237,7 +3506,8 @@
     "cover": "covers/book_0275.jpg",
     "isHosted": true,
     "file": "books/book_0275.epub",
-    "originalName": "H. G. Wells - The War of the Worlds.epub"
+    "originalName": "H. G. Wells - The War of the Worlds.epub",
+    "needsFix": false
   },
   {
     "id": "book_0276",
@@ -3249,7 +3519,8 @@
     "cover": "covers/book_0276.jpg",
     "isHosted": true,
     "file": "books/book_0276.epub",
-    "originalName": "H. P. Lovecraft - At the Mountains of Madness.epub"
+    "originalName": "H. P. Lovecraft - At the Mountains of Madness.epub",
+    "needsFix": false
   },
   {
     "id": "book_0277",
@@ -3261,7 +3532,8 @@
     "cover": "covers/book_0277.jpg",
     "isHosted": true,
     "file": "books/book_0277.epub",
-    "originalName": "Hamilton Wright Mabie - Legends That Every Child Should Know.epub"
+    "originalName": "Hamilton Wright Mabie - Legends That Every Child Should Know.epub",
+    "needsFix": false
   },
   {
     "id": "book_0278",
@@ -3273,7 +3545,8 @@
     "cover": "covers/book_0278.jpg",
     "isHosted": true,
     "file": "books/book_0278.epub",
-    "originalName": "Harper Lee - To Kill a Mockingbird.epub"
+    "originalName": "Harper Lee - To Kill a Mockingbird.epub",
+    "needsFix": false
   },
   {
     "id": "book_0279",
@@ -3285,7 +3558,8 @@
     "cover": "covers/book_0279.jpg",
     "isHosted": true,
     "file": "books/book_0279.epub",
-    "originalName": "Haruki Murakami - Norwegian Wood.epub"
+    "originalName": "Haruki Murakami - Norwegian Wood.epub",
+    "needsFix": false
   },
   {
     "id": "book_0280",
@@ -3297,7 +3571,8 @@
     "cover": "covers/book_0280.jpg",
     "isHosted": true,
     "file": "books/book_0280.epub",
-    "originalName": "Hattie Greene Lockett - The Unwritten Literature of the Hopi.epub"
+    "originalName": "Hattie Greene Lockett - The Unwritten Literature of the Hopi.epub",
+    "needsFix": false
   },
   {
     "id": "book_0281",
@@ -3309,7 +3584,8 @@
     "cover": "covers/book_0281.jpg",
     "isHosted": true,
     "file": "books/book_0281.epub",
-    "originalName": "Hector Garcia & Francesc Miralles - Ikigai.epub"
+    "originalName": "Hector Garcia & Francesc Miralles - Ikigai.epub",
+    "needsFix": false
   },
   {
     "id": "book_0282",
@@ -3321,7 +3597,8 @@
     "cover": "covers/book_0282.jpg",
     "isHosted": true,
     "file": "books/book_0282.epub",
-    "originalName": "Helen Fielding - Bridget Jones 1 Bridget Jones's Diary.epub"
+    "originalName": "Helen Fielding - Bridget Jones 1 Bridget Jones's Diary.epub",
+    "needsFix": false
   },
   {
     "id": "book_0283",
@@ -3333,7 +3610,8 @@
     "cover": "covers/book_0283.jpg",
     "isHosted": true,
     "file": "books/book_0283.epub",
-    "originalName": "Henry David Thoreau - Walden and Civil Disobedience.epub"
+    "originalName": "Henry David Thoreau - Walden and Civil Disobedience.epub",
+    "needsFix": false
   },
   {
     "id": "book_0284",
@@ -3345,7 +3623,8 @@
     "cover": "covers/book_0284.jpg",
     "isHosted": true,
     "file": "books/book_0284.epub",
-    "originalName": "Henry James - The Turn of the Screw.epub"
+    "originalName": "Henry James - The Turn of the Screw.epub",
+    "needsFix": false
   },
   {
     "id": "book_0285",
@@ -3357,7 +3636,8 @@
     "cover": "covers/book_0285.jpg",
     "isHosted": true,
     "file": "books/book_0285.epub",
-    "originalName": "Henry Rowe Schoolcraft - The Indian Fairy Book.epub"
+    "originalName": "Henry Rowe Schoolcraft - The Indian Fairy Book.epub",
+    "needsFix": false
   },
   {
     "id": "book_0286",
@@ -3369,7 +3649,8 @@
     "cover": "covers/book_0286.jpg",
     "isHosted": true,
     "file": "books/book_0286.epub",
-    "originalName": "Henry Rowe Schoolcraft - The Myth of Hiawatha.epub"
+    "originalName": "Henry Rowe Schoolcraft - The Myth of Hiawatha.epub",
+    "needsFix": false
   },
   {
     "id": "book_0287",
@@ -3381,7 +3662,8 @@
     "cover": "covers/book_0287.jpg",
     "isHosted": true,
     "file": "books/book_0287.epub",
-    "originalName": "Herman Melville - Moby-Dick.epub"
+    "originalName": "Herman Melville - Moby-Dick.epub",
+    "needsFix": false
   },
   {
     "id": "book_0288",
@@ -3393,7 +3675,8 @@
     "cover": "covers/book_0288.jpg",
     "isHosted": true,
     "file": "books/book_0288.epub",
-    "originalName": "Hermann Hesse - Siddhartha.epub"
+    "originalName": "Hermann Hesse - Siddhartha.epub",
+    "needsFix": false
   },
   {
     "id": "book_0289",
@@ -3405,7 +3688,8 @@
     "cover": "covers/book_0289.jpg",
     "isHosted": true,
     "file": "books/book_0289.epub",
-    "originalName": "Homer - The Iliad.epub"
+    "originalName": "Homer - The Iliad.epub",
+    "needsFix": false
   },
   {
     "id": "book_0290",
@@ -3417,7 +3701,8 @@
     "cover": "covers/book_0290.jpg",
     "isHosted": true,
     "file": "books/book_0290.epub",
-    "originalName": "Homer - The Odyssey.epub"
+    "originalName": "Homer - The Odyssey.epub",
+    "needsFix": false
   },
   {
     "id": "book_0291",
@@ -3429,7 +3714,8 @@
     "cover": "covers/book_0291.jpg",
     "isHosted": true,
     "file": "books/book_0291.epub",
-    "originalName": "Honore de Balzac - Eugenie Grandet.epub"
+    "originalName": "Honore de Balzac - Eugenie Grandet.epub",
+    "needsFix": false
   },
   {
     "id": "book_0292",
@@ -3441,7 +3727,8 @@
     "cover": "covers/book_0292.jpg",
     "isHosted": true,
     "file": "books/book_0292.epub",
-    "originalName": "Isaac Asimov - Foundation 1 Foundation.epub"
+    "originalName": "Isaac Asimov - Foundation 1 Foundation.epub",
+    "needsFix": false
   },
   {
     "id": "book_0293",
@@ -3453,7 +3740,8 @@
     "cover": "covers/book_0293.jpg",
     "isHosted": true,
     "file": "books/book_0293.epub",
-    "originalName": "Isaac Asimov - Foundation 2 Foundation and Empire.epub"
+    "originalName": "Isaac Asimov - Foundation 2 Foundation and Empire.epub",
+    "needsFix": false
   },
   {
     "id": "book_0294",
@@ -3465,7 +3753,8 @@
     "cover": "covers/book_0294.jpg",
     "isHosted": true,
     "file": "books/book_0294.epub",
-    "originalName": "Isaac Asimov - Foundation 3 Second Foundation.epub"
+    "originalName": "Isaac Asimov - Foundation 3 Second Foundation.epub",
+    "needsFix": false
   },
   {
     "id": "book_0295",
@@ -3477,7 +3766,8 @@
     "cover": "covers/book_0295.jpg",
     "isHosted": true,
     "file": "books/book_0295.epub",
-    "originalName": "J. D. Salinger - The Catcher in the Rye.epub"
+    "originalName": "J. D. Salinger - The Catcher in the Rye.epub",
+    "needsFix": false
   },
   {
     "id": "book_0296",
@@ -3489,7 +3779,8 @@
     "cover": "covers/book_0296.jpg",
     "isHosted": true,
     "file": "books/book_0296.epub",
-    "originalName": "J. K. Rowling - A Journey Through 1 Charms and Defence Against the Dark Arts.epub"
+    "originalName": "J. K. Rowling - A Journey Through 1 Charms and Defence Against the Dark Arts.epub",
+    "needsFix": false
   },
   {
     "id": "book_0297",
@@ -3501,7 +3792,8 @@
     "cover": "covers/book_0297.jpg",
     "isHosted": true,
     "file": "books/book_0297.epub",
-    "originalName": "J. K. Rowling - A Journey Through 3 Divination and Astronomy.epub"
+    "originalName": "J. K. Rowling - A Journey Through 3 Divination and Astronomy.epub",
+    "needsFix": false
   },
   {
     "id": "book_0298",
@@ -3513,7 +3805,8 @@
     "cover": "covers/book_0298.jpg",
     "isHosted": true,
     "file": "books/book_0298.epub",
-    "originalName": "J. K. Rowling - A Journey Through 4 Care of Magical Creatures.epub"
+    "originalName": "J. K. Rowling - A Journey Through 4 Care of Magical Creatures.epub",
+    "needsFix": false
   },
   {
     "id": "book_0299",
@@ -3525,7 +3818,8 @@
     "cover": "covers/book_0299.jpg",
     "isHosted": true,
     "file": "books/book_0299.epub",
-    "originalName": "J. K. Rowling - Harry Potter 1 Harry Potter and the Sorcerer's Stone.epub"
+    "originalName": "J. K. Rowling - Harry Potter 1 Harry Potter and the Sorcerer's Stone.epub",
+    "needsFix": false
   },
   {
     "id": "book_0300",
@@ -3537,7 +3831,8 @@
     "cover": "covers/book_0300.jpg",
     "isHosted": true,
     "file": "books/book_0300.epub",
-    "originalName": "J. K. Rowling - Harry Potter 2 Harry Potter and the Chamber of Secrets.epub"
+    "originalName": "J. K. Rowling - Harry Potter 2 Harry Potter and the Chamber of Secrets.epub",
+    "needsFix": false
   },
   {
     "id": "book_0301",
@@ -3549,7 +3844,8 @@
     "cover": "covers/book_0301.jpg",
     "isHosted": true,
     "file": "books/book_0301.epub",
-    "originalName": "J. K. Rowling - Harry Potter 3 Harry Potter and the Prisoner of Azkaban.epub"
+    "originalName": "J. K. Rowling - Harry Potter 3 Harry Potter and the Prisoner of Azkaban.epub",
+    "needsFix": false
   },
   {
     "id": "book_0302",
@@ -3561,7 +3857,8 @@
     "cover": "covers/book_0302.jpg",
     "isHosted": true,
     "file": "books/book_0302.epub",
-    "originalName": "J. K. Rowling - Harry Potter 4 Harry Potter and the Goblet of Fire.epub"
+    "originalName": "J. K. Rowling - Harry Potter 4 Harry Potter and the Goblet of Fire.epub",
+    "needsFix": false
   },
   {
     "id": "book_0303",
@@ -3573,7 +3870,8 @@
     "cover": "covers/book_0303.jpg",
     "isHosted": true,
     "file": "books/book_0303.epub",
-    "originalName": "J. K. Rowling - Harry Potter 5 Harry Potter and the Order of the Phoenix.epub"
+    "originalName": "J. K. Rowling - Harry Potter 5 Harry Potter and the Order of the Phoenix.epub",
+    "needsFix": false
   },
   {
     "id": "book_0304",
@@ -3585,7 +3883,8 @@
     "cover": "covers/book_0304.jpg",
     "isHosted": true,
     "file": "books/book_0304.epub",
-    "originalName": "J. K. Rowling - Harry Potter 6 Harry Potter and the Half-Blood Prince.epub"
+    "originalName": "J. K. Rowling - Harry Potter 6 Harry Potter and the Half-Blood Prince.epub",
+    "needsFix": false
   },
   {
     "id": "book_0305",
@@ -3597,7 +3896,8 @@
     "cover": "covers/book_0305.jpg",
     "isHosted": true,
     "file": "books/book_0305.epub",
-    "originalName": "J. K. Rowling - Harry Potter 7 Harry Potter and the Deathly Hallows.epub"
+    "originalName": "J. K. Rowling - Harry Potter 7 Harry Potter and the Deathly Hallows.epub",
+    "needsFix": false
   },
   {
     "id": "book_0306",
@@ -3609,7 +3909,8 @@
     "cover": "covers/book_0306.jpg",
     "isHosted": true,
     "file": "books/book_0306.epub",
-    "originalName": "J. K. Rowling - Harry Potter Complete Collection 1-7.epub"
+    "originalName": "J. K. Rowling - Harry Potter Complete Collection 1-7.epub",
+    "needsFix": false
   },
   {
     "id": "book_0307",
@@ -3621,7 +3922,8 @@
     "cover": "covers/book_0307.jpg",
     "isHosted": true,
     "file": "books/book_0307.epub",
-    "originalName": "J. K. Rowling - Quidditch Through the Ages.epub"
+    "originalName": "J. K. Rowling - Quidditch Through the Ages.epub",
+    "needsFix": false
   },
   {
     "id": "book_0308",
@@ -3633,7 +3935,8 @@
     "cover": "covers/book_0308.jpg",
     "isHosted": true,
     "file": "books/book_0308.epub",
-    "originalName": "J. K. Rowling - The Tales of Beedle the Bard.epub"
+    "originalName": "J. K. Rowling - The Tales of Beedle the Bard.epub",
+    "needsFix": false
   },
   {
     "id": "book_0309",
@@ -3645,7 +3948,8 @@
     "cover": "covers/book_0309.jpg",
     "isHosted": true,
     "file": "books/book_0309.epub",
-    "originalName": "J. R. R. Tolkien - The Lord of the Rings.epub"
+    "originalName": "J. R. R. Tolkien - The Lord of the Rings.epub",
+    "needsFix": false
   },
   {
     "id": "book_0310",
@@ -3657,7 +3961,8 @@
     "cover": "covers/book_0310.jpg",
     "isHosted": true,
     "file": "books/book_0310.epub",
-    "originalName": "Jack London - The Call of the Wild.epub"
+    "originalName": "Jack London - The Call of the Wild.epub",
+    "needsFix": false
   },
   {
     "id": "book_0311",
@@ -3669,7 +3974,8 @@
     "cover": "covers/book_0311.jpg",
     "isHosted": true,
     "file": "books/book_0311.epub",
-    "originalName": "James Clear - Atomic Habits.epub"
+    "originalName": "James Clear - Atomic Habits.epub",
+    "needsFix": false
   },
   {
     "id": "book_0312",
@@ -3681,7 +3987,8 @@
     "cover": "covers/book_0312.jpg",
     "isHosted": true,
     "file": "books/book_0312.epub",
-    "originalName": "James Fenimore Cooper - The Leatherstocking Tales 2 The Last of the Mohicans.epub"
+    "originalName": "James Fenimore Cooper - The Leatherstocking Tales 2 The Last of the Mohicans.epub",
+    "needsFix": false
   },
   {
     "id": "book_0313",
@@ -3693,7 +4000,8 @@
     "cover": "covers/book_0313.jpg",
     "isHosted": true,
     "file": "books/book_0313.epub",
-    "originalName": "James Joyce - Dubliners.epub"
+    "originalName": "James Joyce - Dubliners.epub",
+    "needsFix": false
   },
   {
     "id": "book_0314",
@@ -3705,7 +4013,8 @@
     "cover": "covers/book_0314.jpg",
     "isHosted": true,
     "file": "books/book_0314.epub",
-    "originalName": "James Joyce - Ulysses.epub"
+    "originalName": "James Joyce - Ulysses.epub",
+    "needsFix": false
   },
   {
     "id": "book_0315",
@@ -3717,7 +4026,8 @@
     "cover": "covers/book_0315.jpg",
     "isHosted": true,
     "file": "books/book_0315.epub",
-    "originalName": "James Mooney - Myths of the Cherokee.epub"
+    "originalName": "James Mooney - Myths of the Cherokee.epub",
+    "needsFix": false
   },
   {
     "id": "book_0316",
@@ -3729,7 +4039,8 @@
     "cover": "covers/book_0316.jpg",
     "isHosted": true,
     "file": "books/book_0316.epub",
-    "originalName": "Jane Austen - Emma.epub"
+    "originalName": "Jane Austen - Emma.epub",
+    "needsFix": false
   },
   {
     "id": "book_0317",
@@ -3741,7 +4052,8 @@
     "cover": "covers/book_0317.jpg",
     "isHosted": true,
     "file": "books/book_0317.epub",
-    "originalName": "Jane Austen - Northanger Abbey.epub"
+    "originalName": "Jane Austen - Northanger Abbey.epub",
+    "needsFix": false
   },
   {
     "id": "book_0318",
@@ -3753,7 +4065,8 @@
     "cover": "covers/book_0318.jpg",
     "isHosted": true,
     "file": "books/book_0318.epub",
-    "originalName": "Jane Austen - Pride and Prejudice.epub"
+    "originalName": "Jane Austen - Pride and Prejudice.epub",
+    "needsFix": false
   },
   {
     "id": "book_0319",
@@ -3765,7 +4078,8 @@
     "cover": "covers/book_0319.jpg",
     "isHosted": true,
     "file": "books/book_0319.epub",
-    "originalName": "Jay Shetty - Think Like a Monk.epub"
+    "originalName": "Jay Shetty - Think Like a Monk.epub",
+    "needsFix": false
   },
   {
     "id": "book_0320",
@@ -3777,7 +4091,8 @@
     "cover": "covers/book_0320.jpg",
     "isHosted": true,
     "file": "books/book_0320.epub",
-    "originalName": "Jean Lang - A Book of Myths.epub"
+    "originalName": "Jean Lang - A Book of Myths.epub",
+    "needsFix": false
   },
   {
     "id": "book_0321",
@@ -3789,7 +4104,8 @@
     "cover": "covers/book_0321.jpg",
     "isHosted": true,
     "file": "books/book_0321.epub",
-    "originalName": "Jeffrey Archer - Kane and Abel 1 Kane and Abel.epub"
+    "originalName": "Jeffrey Archer - Kane and Abel 1 Kane and Abel.epub",
+    "needsFix": false
   },
   {
     "id": "book_0322",
@@ -3801,7 +4117,8 @@
     "cover": "covers/book_0322.jpg",
     "isHosted": true,
     "file": "books/book_0322.epub",
-    "originalName": "Jeremiah Curtin - Myths and Folk Tales of Ireland.epub"
+    "originalName": "Jeremiah Curtin - Myths and Folk Tales of Ireland.epub",
+    "needsFix": false
   },
   {
     "id": "book_0323",
@@ -3813,7 +4130,8 @@
     "cover": "covers/book_0323.jpg",
     "isHosted": true,
     "file": "books/book_0323.epub",
-    "originalName": "Johann Wolfgang von Goethe - Erotica Romana.epub"
+    "originalName": "Johann Wolfgang von Goethe - Erotica Romana.epub",
+    "needsFix": false
   },
   {
     "id": "book_0324",
@@ -3825,7 +4143,8 @@
     "cover": "covers/book_0324.jpg",
     "isHosted": true,
     "file": "books/book_0324.epub",
-    "originalName": "Johanna Spyri - Heidi.epub"
+    "originalName": "Johanna Spyri - Heidi.epub",
+    "needsFix": false
   },
   {
     "id": "book_0325",
@@ -3837,7 +4156,8 @@
     "cover": "covers/book_0325.jpg",
     "isHosted": true,
     "file": "books/book_0325.epub",
-    "originalName": "John Buchan - Richard Hannay 1 The Thirty-Nine Steps.epub"
+    "originalName": "John Buchan - Richard Hannay 1 The Thirty-Nine Steps.epub",
+    "needsFix": false
   },
   {
     "id": "book_0326",
@@ -3849,7 +4169,8 @@
     "cover": "covers/book_0326.jpg",
     "isHosted": true,
     "file": "books/book_0326.epub",
-    "originalName": "John Bunyan - The Pilgrim's Progress.epub"
+    "originalName": "John Bunyan - The Pilgrim's Progress.epub",
+    "needsFix": false
   },
   {
     "id": "book_0327",
@@ -3861,7 +4182,8 @@
     "cover": "covers/book_0327.jpg",
     "isHosted": true,
     "file": "books/book_0327.epub",
-    "originalName": "John Cleland - Memoirs of Fanny Hill.epub"
+    "originalName": "John Cleland - Memoirs of Fanny Hill.epub",
+    "needsFix": false
   },
   {
     "id": "book_0328",
@@ -3873,7 +4195,8 @@
     "cover": "covers/book_0328.jpg",
     "isHosted": true,
     "file": "books/book_0328.epub",
-    "originalName": "John Galt - The Provost.epub"
+    "originalName": "John Galt - The Provost.epub",
+    "needsFix": false
   },
   {
     "id": "book_0329",
@@ -3885,7 +4208,8 @@
     "cover": "covers/book_0329.jpg",
     "isHosted": true,
     "file": "books/book_0329.epub",
-    "originalName": "John Irving - A Prayer for Owen Meany.epub"
+    "originalName": "John Irving - A Prayer for Owen Meany.epub",
+    "needsFix": false
   },
   {
     "id": "book_0330",
@@ -3897,7 +4221,8 @@
     "cover": "covers/book_0330.jpg",
     "isHosted": true,
     "file": "books/book_0330.epub",
-    "originalName": "John Milton - Paradise Lost.epub"
+    "originalName": "John Milton - Paradise Lost.epub",
+    "needsFix": false
   },
   {
     "id": "book_0331",
@@ -3909,7 +4234,8 @@
     "cover": "covers/book_0331.jpg",
     "isHosted": true,
     "file": "books/book_0331.epub",
-    "originalName": "John Steinbeck - East of Eden.epub"
+    "originalName": "John Steinbeck - East of Eden.epub",
+    "needsFix": false
   },
   {
     "id": "book_0332",
@@ -3921,7 +4247,8 @@
     "cover": "covers/book_0332.jpg",
     "isHosted": true,
     "file": "books/book_0332.epub",
-    "originalName": "John Steinbeck - Of Mice and Men.epub"
+    "originalName": "John Steinbeck - Of Mice and Men.epub",
+    "needsFix": false
   },
   {
     "id": "book_0333",
@@ -3933,7 +4260,8 @@
     "cover": "covers/book_0333.jpg",
     "isHosted": true,
     "file": "books/book_0333.epub",
-    "originalName": "John Steinbeck - The Grapes of Wrath.epub"
+    "originalName": "John Steinbeck - The Grapes of Wrath.epub",
+    "needsFix": false
   },
   {
     "id": "book_0334",
@@ -3945,7 +4273,8 @@
     "cover": "covers/book_0334.jpg",
     "isHosted": true,
     "file": "books/book_0334.epub",
-    "originalName": "John Taylor Gatto - The Underground History of American Education.epub"
+    "originalName": "John Taylor Gatto - The Underground History of American Education.epub",
+    "needsFix": false
   },
   {
     "id": "book_0335",
@@ -3957,7 +4286,8 @@
     "cover": "covers/book_0335.jpg",
     "isHosted": true,
     "file": "books/book_0335.epub",
-    "originalName": "Jonathan Swift - Gulliver's Travels.epub"
+    "originalName": "Jonathan Swift - Gulliver's Travels.epub",
+    "needsFix": false
   },
   {
     "id": "book_0336",
@@ -3969,7 +4299,8 @@
     "cover": "covers/book_0336.jpg",
     "isHosted": true,
     "file": "books/book_0336.epub",
-    "originalName": "Jorge Luis Borges - Labyrinths.epub"
+    "originalName": "Jorge Luis Borges - Labyrinths.epub",
+    "needsFix": false
   },
   {
     "id": "book_0337",
@@ -3981,7 +4312,8 @@
     "cover": "covers/book_0337.jpg",
     "isHosted": true,
     "file": "books/book_0337.epub",
-    "originalName": "Joseph Conrad - Nostromo.epub"
+    "originalName": "Joseph Conrad - Nostromo.epub",
+    "needsFix": false
   },
   {
     "id": "book_0338",
@@ -3993,7 +4325,8 @@
     "cover": "covers/book_0338.jpg",
     "isHosted": true,
     "file": "books/book_0338.epub",
-    "originalName": "Joseph Dunn - The Ancient Irish Epic Tale Tain Bo Cualnge.epub"
+    "originalName": "Joseph Dunn - The Ancient Irish Epic Tale Tain Bo Cualnge.epub",
+    "needsFix": false
   },
   {
     "id": "book_0339",
@@ -4005,7 +4338,8 @@
     "cover": "covers/book_0339.jpg",
     "isHosted": true,
     "file": "books/book_0339.epub",
-    "originalName": "Joseph Heller - Catch-22.epub"
+    "originalName": "Joseph Heller - Catch-22.epub",
+    "needsFix": false
   },
   {
     "id": "book_0340",
@@ -4017,7 +4351,8 @@
     "cover": "covers/book_0340.jpg",
     "isHosted": true,
     "file": "books/book_0340.epub",
-    "originalName": "Joseph Jacobs - Celtic Folk and Fairy Tales.epub"
+    "originalName": "Joseph Jacobs - Celtic Folk and Fairy Tales.epub",
+    "needsFix": false
   },
   {
     "id": "book_0341",
@@ -4029,7 +4364,8 @@
     "cover": "covers/book_0341.jpg",
     "isHosted": true,
     "file": "books/book_0341.epub",
-    "originalName": "Joseph Murphy - The Power of Your Subconscious Mind.epub"
+    "originalName": "Joseph Murphy - The Power of Your Subconscious Mind.epub",
+    "needsFix": false
   },
   {
     "id": "book_0342",
@@ -4041,7 +4377,8 @@
     "cover": "covers/book_0342.jpg",
     "isHosted": true,
     "file": "books/book_0342.epub",
-    "originalName": "Jules Verne - Extraordinary Voyages 6 Twenty Thousand Leagues Under the Sea.epub"
+    "originalName": "Jules Verne - Extraordinary Voyages 6 Twenty Thousand Leagues Under the Sea.epub",
+    "needsFix": false
   },
   {
     "id": "book_0343",
@@ -4053,7 +4390,8 @@
     "cover": "covers/book_0343.jpg",
     "isHosted": true,
     "file": "books/book_0343.epub",
-    "originalName": "Kazuo Ishiguro - A Pale View of Hills.epub"
+    "originalName": "Kazuo Ishiguro - A Pale View of Hills.epub",
+    "needsFix": false
   },
   {
     "id": "book_0344",
@@ -4065,31 +4403,34 @@
     "cover": "covers/book_0344.jpg",
     "isHosted": true,
     "file": "books/book_0344.epub",
-    "originalName": "Kazuo Ishiguro - An Artist of the Floating World.epub"
+    "originalName": "Kazuo Ishiguro - An Artist of the Floating World.epub",
+    "needsFix": false
   },
   {
     "id": "book_0345",
     "title": "Never Let Me Go",
     "author": "Kazuo Ishiguro",
     "category": "Fiction & Modern Novels",
-    "format": "MOBI",
-    "sizeMB": 0.36,
+    "format": "EPUB",
+    "sizeMB": 0.19,
     "cover": "covers/book_0345.jpg",
-    "isHosted": false,
-    "file": "",
-    "originalName": "Kazuo Ishiguro - Never Let Me Go.mobi"
+    "isHosted": true,
+    "file": "books/book_0345.epub",
+    "originalName": "Kazuo Ishiguro - Never Let Me Go.mobi",
+    "needsFix": false
   },
   {
     "id": "book_0346",
     "title": "The Buried Giant",
     "author": "Kazuo Ishiguro",
     "category": "Fiction & Modern Novels",
-    "format": "MOBI",
-    "sizeMB": 0.8,
+    "format": "EPUB",
+    "sizeMB": 0.21,
     "cover": "covers/book_0346.jpg",
-    "isHosted": false,
-    "file": "",
-    "originalName": "Kazuo Ishiguro - The Buried Giant.mobi"
+    "isHosted": true,
+    "file": "books/book_0346.epub",
+    "originalName": "Kazuo Ishiguro - The Buried Giant.mobi",
+    "needsFix": false
   },
   {
     "id": "book_0347",
@@ -4101,7 +4442,8 @@
     "cover": "covers/book_0347.jpg",
     "isHosted": true,
     "file": "books/book_0347.epub",
-    "originalName": "Kazuo Ishiguro - The Remains of the Day.epub"
+    "originalName": "Kazuo Ishiguro - The Remains of the Day.epub",
+    "needsFix": false
   },
   {
     "id": "book_0348",
@@ -4113,7 +4455,8 @@
     "cover": "covers/book_0348.jpg",
     "isHosted": true,
     "file": "books/book_0348.epub",
-    "originalName": "Kazuo Ishiguro - The Unconsoled.epub"
+    "originalName": "Kazuo Ishiguro - The Unconsoled.epub",
+    "needsFix": false
   },
   {
     "id": "book_0349",
@@ -4125,7 +4468,8 @@
     "cover": "covers/book_0349.jpg",
     "isHosted": true,
     "file": "books/book_0349.epub",
-    "originalName": "Kazuo Ishiguro - When We Were Orphans.epub"
+    "originalName": "Kazuo Ishiguro - When We Were Orphans.epub",
+    "needsFix": false
   },
   {
     "id": "book_0350",
@@ -4137,7 +4481,8 @@
     "cover": "covers/book_0350.jpg",
     "isHosted": true,
     "file": "books/book_0350.epub",
-    "originalName": "Ken Follett - Kingsbridge 1 The Pillars of the Earth.epub"
+    "originalName": "Ken Follett - Kingsbridge 1 The Pillars of the Earth.epub",
+    "needsFix": false
   },
   {
     "id": "book_0351",
@@ -4149,7 +4494,8 @@
     "cover": "covers/book_0351.jpg",
     "isHosted": true,
     "file": "books/book_0351.epub",
-    "originalName": "Ken Grimwood - Replay.epub"
+    "originalName": "Ken Grimwood - Replay.epub",
+    "needsFix": false
   },
   {
     "id": "book_0352",
@@ -4161,7 +4507,8 @@
     "cover": "covers/book_0352.jpg",
     "isHosted": true,
     "file": "books/book_0352.epub",
-    "originalName": "Kenneth Grahame - The Wind in the Willows.epub"
+    "originalName": "Kenneth Grahame - The Wind in the Willows.epub",
+    "needsFix": false
   },
   {
     "id": "book_0353",
@@ -4173,7 +4520,8 @@
     "cover": "covers/book_0353.jpg",
     "isHosted": true,
     "file": "books/book_0353.epub",
-    "originalName": "Klara Stroebe - The Norwegian Fairy Book.epub"
+    "originalName": "Klara Stroebe - The Norwegian Fairy Book.epub",
+    "needsFix": false
   },
   {
     "id": "book_0354",
@@ -4185,7 +4533,8 @@
     "cover": "covers/book_0354.jpg",
     "isHosted": true,
     "file": "books/book_0354.epub",
-    "originalName": "Kurt Vonnegut - Slaughterhouse-Five.epub"
+    "originalName": "Kurt Vonnegut - Slaughterhouse-Five.epub",
+    "needsFix": false
   },
   {
     "id": "book_0355",
@@ -4197,7 +4546,8 @@
     "cover": "covers/book_0355.jpg",
     "isHosted": true,
     "file": "books/book_0355.epub",
-    "originalName": "L. Frank Baum - Little Wizard Stories of Oz.epub"
+    "originalName": "L. Frank Baum - Little Wizard Stories of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0356",
@@ -4209,7 +4559,8 @@
     "cover": "covers/book_0356.jpg",
     "isHosted": true,
     "file": "books/book_0356.epub",
-    "originalName": "L. Frank Baum - Oz 1 The Wonderful Wizard of Oz.epub"
+    "originalName": "L. Frank Baum - Oz 1 The Wonderful Wizard of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0357",
@@ -4221,7 +4572,8 @@
     "cover": "covers/book_0357.jpg",
     "isHosted": true,
     "file": "books/book_0357.epub",
-    "originalName": "L. Frank Baum - Oz 10 Rinkitink in Oz.epub"
+    "originalName": "L. Frank Baum - Oz 10 Rinkitink in Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0358",
@@ -4233,7 +4585,8 @@
     "cover": "covers/book_0358.jpg",
     "isHosted": true,
     "file": "books/book_0358.epub",
-    "originalName": "L. Frank Baum - Oz 11 The Lost Princess of Oz.epub"
+    "originalName": "L. Frank Baum - Oz 11 The Lost Princess of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0359",
@@ -4245,7 +4598,8 @@
     "cover": "covers/book_0359.jpg",
     "isHosted": true,
     "file": "books/book_0359.epub",
-    "originalName": "L. Frank Baum - Oz 12 The Tin Woodman of Oz.epub"
+    "originalName": "L. Frank Baum - Oz 12 The Tin Woodman of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0360",
@@ -4257,7 +4611,8 @@
     "cover": "covers/book_0360.jpg",
     "isHosted": true,
     "file": "books/book_0360.epub",
-    "originalName": "L. Frank Baum - Oz 13 The Magic of Oz.epub"
+    "originalName": "L. Frank Baum - Oz 13 The Magic of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0361",
@@ -4269,7 +4624,8 @@
     "cover": "covers/book_0361.jpg",
     "isHosted": true,
     "file": "books/book_0361.epub",
-    "originalName": "L. Frank Baum - Oz 14 Glinda of Oz.epub"
+    "originalName": "L. Frank Baum - Oz 14 Glinda of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0362",
@@ -4281,7 +4637,8 @@
     "cover": "covers/book_0362.jpg",
     "isHosted": true,
     "file": "books/book_0362.epub",
-    "originalName": "L. Frank Baum - Oz 7 The Patchwork Girl of Oz.epub"
+    "originalName": "L. Frank Baum - Oz 7 The Patchwork Girl of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0363",
@@ -4293,7 +4650,8 @@
     "cover": "covers/book_0363.jpg",
     "isHosted": true,
     "file": "books/book_0363.epub",
-    "originalName": "L. Frank Baum - Oz 8 Tik-Tok of Oz.epub"
+    "originalName": "L. Frank Baum - Oz 8 Tik-Tok of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0364",
@@ -4305,7 +4663,8 @@
     "cover": "covers/book_0364.jpg",
     "isHosted": true,
     "file": "books/book_0364.epub",
-    "originalName": "L. Frank Baum - Oz 9 The Scarecrow of Oz.epub"
+    "originalName": "L. Frank Baum - Oz 9 The Scarecrow of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0365",
@@ -4317,7 +4676,8 @@
     "cover": "covers/book_0365.jpg",
     "isHosted": true,
     "file": "books/book_0365.epub",
-    "originalName": "Ruth Plumly Thompson - Oz 15 The Royal Book of Oz.epub"
+    "originalName": "Ruth Plumly Thompson - Oz 15 The Royal Book of Oz.epub",
+    "needsFix": false
   },
   {
     "id": "book_0366",
@@ -4329,7 +4689,8 @@
     "cover": "covers/book_0366.jpg",
     "isHosted": true,
     "file": "books/book_0366.epub",
-    "originalName": "Leo Tolstoy - Anna Karenina.epub"
+    "originalName": "Leo Tolstoy - Anna Karenina.epub",
+    "needsFix": false
   },
   {
     "id": "book_0367",
@@ -4341,7 +4702,8 @@
     "cover": "covers/book_0367.jpg",
     "isHosted": true,
     "file": "books/book_0367.epub",
-    "originalName": "Leo Tolstoy - The Death of Ivan Ilyich and Master and Man.epub"
+    "originalName": "Leo Tolstoy - The Death of Ivan Ilyich and Master and Man.epub",
+    "needsFix": false
   },
   {
     "id": "book_0368",
@@ -4353,7 +4715,8 @@
     "cover": "covers/book_0368.jpg",
     "isHosted": true,
     "file": "books/book_0368.epub",
-    "originalName": "Leo Tolstoy - War and Peace.epub"
+    "originalName": "Leo Tolstoy - War and Peace.epub",
+    "needsFix": false
   },
   {
     "id": "book_0369",
@@ -4365,7 +4728,8 @@
     "cover": "covers/book_0369.jpg",
     "isHosted": true,
     "file": "books/book_0369.epub",
-    "originalName": "Lewis Carroll - Alice's Adventures in Wonderland.epub"
+    "originalName": "Lewis Carroll - Alice's Adventures in Wonderland.epub",
+    "needsFix": false
   },
   {
     "id": "book_0370",
@@ -4377,7 +4741,8 @@
     "cover": "covers/book_0370.jpg",
     "isHosted": true,
     "file": "books/book_0370.epub",
-    "originalName": "Lewis Richard Farnell - Greece and Babylon.epub"
+    "originalName": "Lewis Richard Farnell - Greece and Babylon.epub",
+    "needsFix": false
   },
   {
     "id": "book_0371",
@@ -4389,7 +4754,8 @@
     "cover": "covers/book_0371.jpg",
     "isHosted": true,
     "file": "books/book_0371.epub",
-    "originalName": "Lewis Spence - The Myths of Mexico and Peru.epub"
+    "originalName": "Lewis Spence - The Myths of Mexico and Peru.epub",
+    "needsFix": false
   },
   {
     "id": "book_0372",
@@ -4401,7 +4767,8 @@
     "cover": "covers/book_0372.jpg",
     "isHosted": true,
     "file": "books/book_0372.epub",
-    "originalName": "Lewis Spence - The Myths of the North American Indians.epub"
+    "originalName": "Lewis Spence - The Myths of the North American Indians.epub",
+    "needsFix": false
   },
   {
     "id": "book_0373",
@@ -4413,7 +4780,8 @@
     "cover": "covers/book_0373.jpg",
     "isHosted": true,
     "file": "books/book_0373.epub",
-    "originalName": "Louis de Bernieres - Captain Corelli's Mandolin.epub"
+    "originalName": "Louis de Bernieres - Captain Corelli's Mandolin.epub",
+    "needsFix": false
   },
   {
     "id": "book_0374",
@@ -4425,7 +4793,8 @@
     "cover": "covers/book_0374.jpg",
     "isHosted": true,
     "file": "books/book_0374.epub",
-    "originalName": "Louis Sachar - Holes 1 Holes.epub"
+    "originalName": "Louis Sachar - Holes 1 Holes.epub",
+    "needsFix": false
   },
   {
     "id": "book_0375",
@@ -4437,7 +4806,8 @@
     "cover": "covers/book_0375.jpg",
     "isHosted": true,
     "file": "books/book_0375.epub",
-    "originalName": "Louisa May Alcott - Little Women 1 Little Women.epub"
+    "originalName": "Louisa May Alcott - Little Women 1 Little Women.epub",
+    "needsFix": false
   },
   {
     "id": "book_0376",
@@ -4449,7 +4819,8 @@
     "cover": "covers/book_0376.jpg",
     "isHosted": true,
     "file": "books/book_0376.epub",
-    "originalName": "Marcus Aurelius - Meditations.epub"
+    "originalName": "Marcus Aurelius - Meditations.epub",
+    "needsFix": false
   },
   {
     "id": "book_0377",
@@ -4461,7 +4832,8 @@
     "cover": "covers/book_0377.jpg",
     "isHosted": true,
     "file": "books/book_0377.epub",
-    "originalName": "Margaret Mitchell - Gone with the Wind.epub"
+    "originalName": "Margaret Mitchell - Gone with the Wind.epub",
+    "needsFix": false
   },
   {
     "id": "book_0378",
@@ -4473,7 +4845,8 @@
     "cover": "covers/book_0378.jpg",
     "isHosted": true,
     "file": "books/book_0378.epub",
-    "originalName": "Mark Twain - Adventures of Huckleberry Finn.epub"
+    "originalName": "Mark Twain - Adventures of Huckleberry Finn.epub",
+    "needsFix": false
   },
   {
     "id": "book_0379",
@@ -4485,7 +4858,8 @@
     "cover": "covers/book_0379.jpg",
     "isHosted": true,
     "file": "books/book_0379.epub",
-    "originalName": "Mark Twain - The Adventures of Tom Sawyer.epub"
+    "originalName": "Mark Twain - The Adventures of Tom Sawyer.epub",
+    "needsFix": false
   },
   {
     "id": "book_0380",
@@ -4497,7 +4871,8 @@
     "cover": "covers/book_0380.jpg",
     "isHosted": true,
     "file": "books/book_0380.epub",
-    "originalName": "Mary Antin - Atlantic Narratives Modern Short Stories.epub"
+    "originalName": "Mary Antin - Atlantic Narratives Modern Short Stories.epub",
+    "needsFix": false
   },
   {
     "id": "book_0381",
@@ -4509,7 +4884,8 @@
     "cover": "covers/book_0381.jpg",
     "isHosted": true,
     "file": "books/book_0381.epub",
-    "originalName": "Mary Shelley - Frankenstein.epub"
+    "originalName": "Mary Shelley - Frankenstein.epub",
+    "needsFix": false
   },
   {
     "id": "book_0382",
@@ -4521,7 +4897,8 @@
     "cover": "covers/book_0382.jpg",
     "isHosted": true,
     "file": "books/book_0382.epub",
-    "originalName": "Max Barry - Machine Man.epub"
+    "originalName": "Max Barry - Machine Man.epub",
+    "needsFix": false
   },
   {
     "id": "book_0383",
@@ -4533,7 +4910,8 @@
     "cover": "covers/book_0383.jpg",
     "isHosted": true,
     "file": "books/book_0383.epub",
-    "originalName": "Michelle Magorian - Goodnight Mister Tom.epub"
+    "originalName": "Michelle Magorian - Goodnight Mister Tom.epub",
+    "needsFix": false
   },
   {
     "id": "book_0384",
@@ -4541,11 +4919,12 @@
     "author": "Miguel de Cervantes",
     "category": "Classics & Literature",
     "format": "EPUB",
-    "sizeMB": 100.21,
+    "sizeMB": 18.53,
     "cover": "covers/book_0384.jpg",
-    "isHosted": false,
-    "file": "",
-    "originalName": "Miguel de Cervantes - Don Quixote.epub"
+    "isHosted": true,
+    "file": "books/book_0384.epub",
+    "originalName": "Miguel de Cervantes - Don Quixote.epub",
+    "needsFix": false
   },
   {
     "id": "book_0385",
@@ -4557,7 +4936,8 @@
     "cover": "covers/book_0385.jpg",
     "isHosted": true,
     "file": "books/book_0385.epub",
-    "originalName": "Morris Jastrow & Albert T. Clay - An Old Babylonian Version of the Gilgamesh Epic.epub"
+    "originalName": "Morris Jastrow & Albert T. Clay - An Old Babylonian Version of the Gilgamesh Epic.epub",
+    "needsFix": false
   },
   {
     "id": "book_0386",
@@ -4569,7 +4949,8 @@
     "cover": "covers/book_0386.jpg",
     "isHosted": true,
     "file": "books/book_0386.epub",
-    "originalName": "N. K. Jemisin - Inheritance 1 The Hundred Thousand Kingdoms.epub"
+    "originalName": "N. K. Jemisin - Inheritance 1 The Hundred Thousand Kingdoms.epub",
+    "needsFix": false
   },
   {
     "id": "book_0387",
@@ -4581,7 +4962,8 @@
     "cover": "covers/book_0387.jpg",
     "isHosted": true,
     "file": "books/book_0387.epub",
-    "originalName": "N. K. Jemisin - Inheritance 2 The Broken Kingdoms.epub"
+    "originalName": "N. K. Jemisin - Inheritance 2 The Broken Kingdoms.epub",
+    "needsFix": false
   },
   {
     "id": "book_0388",
@@ -4593,7 +4975,8 @@
     "cover": "covers/book_0388.jpg",
     "isHosted": true,
     "file": "books/book_0388.epub",
-    "originalName": "N. K. Jemisin - Inheritance 3 The Kingdom of Gods.epub"
+    "originalName": "N. K. Jemisin - Inheritance 3 The Kingdom of Gods.epub",
+    "needsFix": false
   },
   {
     "id": "book_0389",
@@ -4605,7 +4988,8 @@
     "cover": "covers/book_0389.jpg",
     "isHosted": true,
     "file": "books/book_0389.epub",
-    "originalName": "N. K. Jemisin - Inheritance 3.1-3.3 Shades in Shadow.epub"
+    "originalName": "N. K. Jemisin - Inheritance 3.1-3.3 Shades in Shadow.epub",
+    "needsFix": false
   },
   {
     "id": "book_0390",
@@ -4617,7 +5001,8 @@
     "cover": "covers/book_0390.jpg",
     "isHosted": true,
     "file": "books/book_0390.epub",
-    "originalName": "N. K. Jemisin - Inheritance 3.5 The Awakened Kingdom.epub"
+    "originalName": "N. K. Jemisin - Inheritance 3.5 The Awakened Kingdom.epub",
+    "needsFix": false
   },
   {
     "id": "book_0391",
@@ -4629,7 +5014,8 @@
     "cover": "covers/book_0391.jpg",
     "isHosted": true,
     "file": "books/book_0391.epub",
-    "originalName": "N. K. Jemisin - The Broken Earth 1 The Fifth Season.epub"
+    "originalName": "N. K. Jemisin - The Broken Earth 1 The Fifth Season.epub",
+    "needsFix": false
   },
   {
     "id": "book_0392",
@@ -4641,7 +5027,8 @@
     "cover": "covers/book_0392.jpg",
     "isHosted": true,
     "file": "books/book_0392.epub",
-    "originalName": "Nathaniel Hawthorne - The Scarlet Letter.epub"
+    "originalName": "Nathaniel Hawthorne - The Scarlet Letter.epub",
+    "needsFix": false
   },
   {
     "id": "book_0393",
@@ -4653,7 +5040,8 @@
     "cover": "covers/book_0393.jpg",
     "isHosted": true,
     "file": "books/book_0393.epub",
-    "originalName": "Neal Stephenson - Snow Crash.epub"
+    "originalName": "Neal Stephenson - Snow Crash.epub",
+    "needsFix": false
   },
   {
     "id": "book_0394",
@@ -4665,7 +5053,8 @@
     "cover": "covers/book_0394.jpg",
     "isHosted": true,
     "file": "books/book_0394.epub",
-    "originalName": "Neil Gaiman - American Gods.epub"
+    "originalName": "Neil Gaiman - American Gods.epub",
+    "needsFix": false
   },
   {
     "id": "book_0395",
@@ -4677,7 +5066,8 @@
     "cover": "covers/book_0395.jpg",
     "isHosted": true,
     "file": "books/book_0395.epub",
-    "originalName": "Neil Gaiman - Neverwhere.epub"
+    "originalName": "Neil Gaiman - Neverwhere.epub",
+    "needsFix": false
   },
   {
     "id": "book_0396",
@@ -4689,7 +5079,8 @@
     "cover": "covers/book_0396.jpg",
     "isHosted": true,
     "file": "books/book_0396.epub",
-    "originalName": "Neil Gaiman & Terry Pratchett - Good Omens.epub"
+    "originalName": "Neil Gaiman & Terry Pratchett - Good Omens.epub",
+    "needsFix": false
   },
   {
     "id": "book_0397",
@@ -4701,7 +5092,8 @@
     "cover": "covers/book_0397.jpg",
     "isHosted": true,
     "file": "books/book_0397.epub",
-    "originalName": "Nevil Shute - A Town Like Alice.epub"
+    "originalName": "Nevil Shute - A Town Like Alice.epub",
+    "needsFix": false
   },
   {
     "id": "book_0398",
@@ -4713,7 +5105,8 @@
     "cover": "covers/book_0398.jpg",
     "isHosted": true,
     "file": "books/book_0398.epub",
-    "originalName": "Orson Scott Card - Ender Saga 1 Ender's Game.epub"
+    "originalName": "Orson Scott Card - Ender Saga 1 Ender's Game.epub",
+    "needsFix": false
   },
   {
     "id": "book_0399",
@@ -4725,7 +5118,8 @@
     "cover": "covers/book_0399.jpg",
     "isHosted": true,
     "file": "books/book_0399.epub",
-    "originalName": "Orson Scott Card - Ender Saga 1.1 A War of Gifts.epub"
+    "originalName": "Orson Scott Card - Ender Saga 1.1 A War of Gifts.epub",
+    "needsFix": false
   },
   {
     "id": "book_0400",
@@ -4737,7 +5131,8 @@
     "cover": "covers/book_0400.jpg",
     "isHosted": true,
     "file": "books/book_0400.epub",
-    "originalName": "Orson Scott Card - Ender Saga 1.5 Ender in Exile.epub"
+    "originalName": "Orson Scott Card - Ender Saga 1.5 Ender in Exile.epub",
+    "needsFix": false
   },
   {
     "id": "book_0401",
@@ -4749,7 +5144,8 @@
     "cover": "covers/book_0401.jpg",
     "isHosted": true,
     "file": "books/book_0401.epub",
-    "originalName": "Orson Scott Card - Ender Saga 2 Speaker for the Dead.epub"
+    "originalName": "Orson Scott Card - Ender Saga 2 Speaker for the Dead.epub",
+    "needsFix": false
   },
   {
     "id": "book_0402",
@@ -4761,7 +5157,8 @@
     "cover": "covers/book_0402.jpg",
     "isHosted": true,
     "file": "books/book_0402.epub",
-    "originalName": "Orson Scott Card - Ender Saga 3 Xenocide.epub"
+    "originalName": "Orson Scott Card - Ender Saga 3 Xenocide.epub",
+    "needsFix": false
   },
   {
     "id": "book_0403",
@@ -4773,7 +5170,8 @@
     "cover": "covers/book_0403.jpg",
     "isHosted": true,
     "file": "books/book_0403.epub",
-    "originalName": "Orson Scott Card - Ender Saga 4 Children of the Mind.epub"
+    "originalName": "Orson Scott Card - Ender Saga 4 Children of the Mind.epub",
+    "needsFix": false
   },
   {
     "id": "book_0404",
@@ -4785,7 +5183,8 @@
     "cover": "covers/book_0404.jpg",
     "isHosted": true,
     "file": "books/book_0404.epub",
-    "originalName": "Orson Scott Card - First Meetings in the Enderverse.epub"
+    "originalName": "Orson Scott Card - First Meetings in the Enderverse.epub",
+    "needsFix": false
   },
   {
     "id": "book_0405",
@@ -4797,7 +5196,8 @@
     "cover": "covers/book_0405.jpg",
     "isHosted": true,
     "file": "books/book_0405.epub",
-    "originalName": "Orson Scott Card - Shadow Saga 1 Ender's Shadow.epub"
+    "originalName": "Orson Scott Card - Shadow Saga 1 Ender's Shadow.epub",
+    "needsFix": false
   },
   {
     "id": "book_0406",
@@ -4809,7 +5209,8 @@
     "cover": "covers/book_0406.jpg",
     "isHosted": true,
     "file": "books/book_0406.epub",
-    "originalName": "Orson Scott Card - Shadow Saga 2 Shadow of the Hegemon.epub"
+    "originalName": "Orson Scott Card - Shadow Saga 2 Shadow of the Hegemon.epub",
+    "needsFix": false
   },
   {
     "id": "book_0407",
@@ -4821,7 +5222,8 @@
     "cover": "covers/book_0407.jpg",
     "isHosted": true,
     "file": "books/book_0407.epub",
-    "originalName": "Orson Scott Card - Shadow Saga 3 Shadow Puppets.epub"
+    "originalName": "Orson Scott Card - Shadow Saga 3 Shadow Puppets.epub",
+    "needsFix": false
   },
   {
     "id": "book_0408",
@@ -4833,7 +5235,8 @@
     "cover": "covers/book_0408.jpg",
     "isHosted": true,
     "file": "books/book_0408.epub",
-    "originalName": "Orson Scott Card - Shadow Saga 5 Shadows in Flight.epub"
+    "originalName": "Orson Scott Card - Shadow Saga 5 Shadows in Flight.epub",
+    "needsFix": false
   },
   {
     "id": "book_0409",
@@ -4845,7 +5248,8 @@
     "cover": "covers/book_0409.jpg",
     "isHosted": true,
     "file": "books/book_0409.epub",
-    "originalName": "Orson Scott Card - The Ender's Shadow Series Box Set.epub"
+    "originalName": "Orson Scott Card - The Ender's Shadow Series Box Set.epub",
+    "needsFix": false
   },
   {
     "id": "book_0410",
@@ -4857,7 +5261,8 @@
     "cover": "covers/book_0410.jpg",
     "isHosted": true,
     "file": "books/book_0410.epub",
-    "originalName": "Oscar Wilde - The Picture of Dorian Gray.epub"
+    "originalName": "Oscar Wilde - The Picture of Dorian Gray.epub",
+    "needsFix": false
   },
   {
     "id": "book_0411",
@@ -4869,7 +5274,8 @@
     "cover": "covers/book_0411.jpg",
     "isHosted": true,
     "file": "books/book_0411.epub",
-    "originalName": "Ovid - Metamorphoses.epub"
+    "originalName": "Ovid - Metamorphoses.epub",
+    "needsFix": false
   },
   {
     "id": "book_0412",
@@ -4881,7 +5287,8 @@
     "cover": "covers/book_0412.jpg",
     "isHosted": true,
     "file": "books/book_0412.epub",
-    "originalName": "Padraic Colum - The Children of Odin.epub"
+    "originalName": "Padraic Colum - The Children of Odin.epub",
+    "needsFix": false
   },
   {
     "id": "book_0413",
@@ -4893,7 +5300,8 @@
     "cover": "covers/book_0413.jpg",
     "isHosted": true,
     "file": "books/book_0413.epub",
-    "originalName": "Padraic Colum - The Golden Fleece and The Heroes Who Lived Before Achilles.epub"
+    "originalName": "Padraic Colum - The Golden Fleece and The Heroes Who Lived Before Achilles.epub",
+    "needsFix": false
   },
   {
     "id": "book_0414",
@@ -4905,7 +5313,8 @@
     "cover": "covers/book_0414.jpg",
     "isHosted": true,
     "file": "books/book_0414.epub",
-    "originalName": "Philip Jose Farmer - Riverworld 1 To Your Scattered Bodies Go.epub"
+    "originalName": "Philip Jose Farmer - Riverworld 1 To Your Scattered Bodies Go.epub",
+    "needsFix": false
   },
   {
     "id": "book_0415",
@@ -4917,7 +5326,8 @@
     "cover": "covers/book_0415.jpg",
     "isHosted": true,
     "file": "books/book_0415.epub",
-    "originalName": "Philip Jose Farmer - Riverworld 2 The Fabulous Riverboat.epub"
+    "originalName": "Philip Jose Farmer - Riverworld 2 The Fabulous Riverboat.epub",
+    "needsFix": false
   },
   {
     "id": "book_0416",
@@ -4929,7 +5339,8 @@
     "cover": "covers/book_0416.jpg",
     "isHosted": true,
     "file": "books/book_0416.epub",
-    "originalName": "Philip Jose Farmer - Riverworld 3 The Dark Design.epub"
+    "originalName": "Philip Jose Farmer - Riverworld 3 The Dark Design.epub",
+    "needsFix": false
   },
   {
     "id": "book_0417",
@@ -4941,7 +5352,8 @@
     "cover": "covers/book_0417.jpg",
     "isHosted": true,
     "file": "books/book_0417.epub",
-    "originalName": "Philip Jose Farmer - Riverworld 4 The Magic Labyrinth.epub"
+    "originalName": "Philip Jose Farmer - Riverworld 4 The Magic Labyrinth.epub",
+    "needsFix": false
   },
   {
     "id": "book_0418",
@@ -4953,7 +5365,8 @@
     "cover": "covers/book_0418.jpg",
     "isHosted": true,
     "file": "books/book_0418.epub",
-    "originalName": "Philip Jose Farmer - Riverworld 5 Gods of Riverworld.epub"
+    "originalName": "Philip Jose Farmer - Riverworld 5 Gods of Riverworld.epub",
+    "needsFix": false
   },
   {
     "id": "book_0419",
@@ -4965,7 +5378,8 @@
     "cover": "covers/book_0419.jpg",
     "isHosted": true,
     "file": "books/book_0419.epub",
-    "originalName": "Philip K. Dick - A Scanner Darkly.epub"
+    "originalName": "Philip K. Dick - A Scanner Darkly.epub",
+    "needsFix": false
   },
   {
     "id": "book_0420",
@@ -4977,7 +5391,8 @@
     "cover": "covers/book_0420.jpg",
     "isHosted": true,
     "file": "books/book_0420.epub",
-    "originalName": "Philip K. Dick - Do Androids Dream of Electric Sheep.epub"
+    "originalName": "Philip K. Dick - Do Androids Dream of Electric Sheep.epub",
+    "needsFix": false
   },
   {
     "id": "book_0421",
@@ -4989,7 +5404,8 @@
     "cover": "covers/book_0421.jpg",
     "isHosted": true,
     "file": "books/book_0421.epub",
-    "originalName": "Philip K. Dick - Selected Stories of Philip K. Dick.epub"
+    "originalName": "Philip K. Dick - Selected Stories of Philip K. Dick.epub",
+    "needsFix": false
   },
   {
     "id": "book_0422",
@@ -5001,7 +5417,8 @@
     "cover": "covers/book_0422.jpg",
     "isHosted": true,
     "file": "books/book_0422.epub",
-    "originalName": "Philip K. Dick - The Man in the High Castle.epub"
+    "originalName": "Philip K. Dick - The Man in the High Castle.epub",
+    "needsFix": false
   },
   {
     "id": "book_0423",
@@ -5013,7 +5430,8 @@
     "cover": "covers/book_0423.jpg",
     "isHosted": true,
     "file": "books/book_0423.epub",
-    "originalName": "Philip K. Dick - The Minority Report.epub"
+    "originalName": "Philip K. Dick - The Minority Report.epub",
+    "needsFix": false
   },
   {
     "id": "book_0424",
@@ -5025,7 +5443,8 @@
     "cover": "covers/book_0424.jpg",
     "isHosted": true,
     "file": "books/book_0424.epub",
-    "originalName": "Philip K. Dick - Ubik.epub"
+    "originalName": "Philip K. Dick - Ubik.epub",
+    "needsFix": false
   },
   {
     "id": "book_0425",
@@ -5037,7 +5456,8 @@
     "cover": "covers/book_0425.jpg",
     "isHosted": true,
     "file": "books/book_0425.epub",
-    "originalName": "Plato - Apology.epub"
+    "originalName": "Plato - Apology.epub",
+    "needsFix": false
   },
   {
     "id": "book_0426",
@@ -5049,7 +5469,8 @@
     "cover": "covers/book_0426.jpg",
     "isHosted": true,
     "file": "books/book_0426.epub",
-    "originalName": "Plato - Great Dialogues of Plato.epub"
+    "originalName": "Plato - Great Dialogues of Plato.epub",
+    "needsFix": false
   },
   {
     "id": "book_0427",
@@ -5061,7 +5482,8 @@
     "cover": "covers/book_0427.jpg",
     "isHosted": true,
     "file": "books/book_0427.epub",
-    "originalName": "Plato - Phaedrus.epub"
+    "originalName": "Plato - Phaedrus.epub",
+    "needsFix": false
   },
   {
     "id": "book_0428",
@@ -5073,7 +5495,8 @@
     "cover": "covers/book_0428.jpg",
     "isHosted": true,
     "file": "books/book_0428.epub",
-    "originalName": "Plato - Symposium.epub"
+    "originalName": "Plato - Symposium.epub",
+    "needsFix": false
   },
   {
     "id": "book_0429",
@@ -5085,7 +5508,8 @@
     "cover": "covers/book_0429.jpg",
     "isHosted": true,
     "file": "books/book_0429.epub",
-    "originalName": "Plato - The Republic.epub"
+    "originalName": "Plato - The Republic.epub",
+    "needsFix": false
   },
   {
     "id": "book_0430",
@@ -5097,7 +5521,8 @@
     "cover": "covers/book_0430.jpg",
     "isHosted": true,
     "file": "books/book_0430.epub",
-    "originalName": "Ray Bradbury - Fahrenheit 451.epub"
+    "originalName": "Ray Bradbury - Fahrenheit 451.epub",
+    "needsFix": false
   },
   {
     "id": "book_0431",
@@ -5109,7 +5534,8 @@
     "cover": "covers/book_0431.jpg",
     "isHosted": true,
     "file": "books/book_0431.epub",
-    "originalName": "Ray Bradbury - The Martian Chronicles.epub"
+    "originalName": "Ray Bradbury - The Martian Chronicles.epub",
+    "needsFix": false
   },
   {
     "id": "book_0432",
@@ -5121,7 +5547,8 @@
     "cover": "covers/book_0432.jpg",
     "isHosted": true,
     "file": "books/book_0432.epub",
-    "originalName": "Richard Adams - Watership Down.epub"
+    "originalName": "Richard Adams - Watership Down.epub",
+    "needsFix": false
   },
   {
     "id": "book_0433",
@@ -5133,7 +5560,8 @@
     "cover": "covers/book_0433.jpg",
     "isHosted": true,
     "file": "books/book_0433.epub",
-    "originalName": "Richard Folkard - Plant Lore, Legends, and Lyrics.epub"
+    "originalName": "Richard Folkard - Plant Lore, Legends, and Lyrics.epub",
+    "needsFix": false
   },
   {
     "id": "book_0434",
@@ -5145,7 +5573,8 @@
     "cover": "covers/book_0434.jpg",
     "isHosted": true,
     "file": "books/book_0434.epub",
-    "originalName": "Rick Riordan - Percy Jackson and the Olympians 1 The Lightning Thief.epub"
+    "originalName": "Rick Riordan - Percy Jackson and the Olympians 1 The Lightning Thief.epub",
+    "needsFix": false
   },
   {
     "id": "book_0435",
@@ -5157,7 +5586,8 @@
     "cover": "covers/book_0435.jpg",
     "isHosted": true,
     "file": "books/book_0435.epub",
-    "originalName": "Rick Riordan - Percy Jackson and the Olympians 2 The Sea of Monsters.epub"
+    "originalName": "Rick Riordan - Percy Jackson and the Olympians 2 The Sea of Monsters.epub",
+    "needsFix": false
   },
   {
     "id": "book_0436",
@@ -5169,7 +5599,8 @@
     "cover": "covers/book_0436.jpg",
     "isHosted": true,
     "file": "books/book_0436.epub",
-    "originalName": "Rick Riordan - Percy Jackson and the Olympians 3 The Titan's Curse.epub"
+    "originalName": "Rick Riordan - Percy Jackson and the Olympians 3 The Titan's Curse.epub",
+    "needsFix": false
   },
   {
     "id": "book_0437",
@@ -5181,7 +5612,8 @@
     "cover": "covers/book_0437.jpg",
     "isHosted": true,
     "file": "books/book_0437.epub",
-    "originalName": "Rick Riordan - Percy Jackson and the Olympians 4 The Battle of the Labyrinth.epub"
+    "originalName": "Rick Riordan - Percy Jackson and the Olympians 4 The Battle of the Labyrinth.epub",
+    "needsFix": false
   },
   {
     "id": "book_0438",
@@ -5193,7 +5625,8 @@
     "cover": "covers/book_0438.jpg",
     "isHosted": true,
     "file": "books/book_0438.epub",
-    "originalName": "Rick Riordan - Percy Jackson and the Olympians 5 The Last Olympian.epub"
+    "originalName": "Rick Riordan - Percy Jackson and the Olympians 5 The Last Olympian.epub",
+    "needsFix": false
   },
   {
     "id": "book_0439",
@@ -5205,7 +5638,8 @@
     "cover": "covers/book_0439.jpg",
     "isHosted": true,
     "file": "books/book_0439.epub",
-    "originalName": "Rick Riordan - The Heroes of Olympus 1 The Lost Hero.epub"
+    "originalName": "Rick Riordan - The Heroes of Olympus 1 The Lost Hero.epub",
+    "needsFix": false
   },
   {
     "id": "book_0440",
@@ -5217,7 +5651,8 @@
     "cover": "covers/book_0440.jpg",
     "isHosted": true,
     "file": "books/book_0440.epub",
-    "originalName": "Rick Riordan - The Heroes of Olympus 2 The Son of Neptune.epub"
+    "originalName": "Rick Riordan - The Heroes of Olympus 2 The Son of Neptune.epub",
+    "needsFix": false
   },
   {
     "id": "book_0441",
@@ -5229,7 +5664,8 @@
     "cover": "covers/book_0441.jpg",
     "isHosted": true,
     "file": "books/book_0441.epub",
-    "originalName": "Roald Dahl - Charlie Bucket 1 Charlie and the Chocolate Factory.epub"
+    "originalName": "Roald Dahl - Charlie Bucket 1 Charlie and the Chocolate Factory.epub",
+    "needsFix": false
   },
   {
     "id": "book_0442",
@@ -5241,7 +5677,8 @@
     "cover": "covers/book_0442.jpg",
     "isHosted": true,
     "file": "books/book_0442.epub",
-    "originalName": "Robert Jordan - The Wheel of Time 13 Towers of Midnight.epub"
+    "originalName": "Robert Jordan - The Wheel of Time 13 Towers of Midnight.epub",
+    "needsFix": false
   },
   {
     "id": "book_0443",
@@ -5253,7 +5690,8 @@
     "cover": "covers/book_0443.jpg",
     "isHosted": true,
     "file": "books/book_0443.epub",
-    "originalName": "Robert Jordan - The Wheel of Time 14 A Memory of Light.epub"
+    "originalName": "Robert Jordan - The Wheel of Time 14 A Memory of Light.epub",
+    "needsFix": false
   },
   {
     "id": "book_0444",
@@ -5265,7 +5703,8 @@
     "cover": "covers/book_0444.jpg",
     "isHosted": true,
     "file": "books/book_0444.epub",
-    "originalName": "Robert Kiyosaki - Rich Dad Poor Dad.epub"
+    "originalName": "Robert Kiyosaki - Rich Dad Poor Dad.epub",
+    "needsFix": false
   },
   {
     "id": "book_0445",
@@ -5277,7 +5716,8 @@
     "cover": "covers/book_0445.jpg",
     "isHosted": true,
     "file": "books/book_0445.epub",
-    "originalName": "Robert Louis Stevenson - The Strange Case of Dr Jekyll and Mr Hyde.epub"
+    "originalName": "Robert Louis Stevenson - The Strange Case of Dr Jekyll and Mr Hyde.epub",
+    "needsFix": false
   },
   {
     "id": "book_0446",
@@ -5289,7 +5729,8 @@
     "cover": "covers/book_0446.jpg",
     "isHosted": true,
     "file": "books/book_0446.epub",
-    "originalName": "Robert Louis Stevenson - Treasure Island.epub"
+    "originalName": "Robert Louis Stevenson - Treasure Island.epub",
+    "needsFix": false
   },
   {
     "id": "book_0447",
@@ -5301,7 +5742,8 @@
     "cover": "covers/book_0447.jpg",
     "isHosted": true,
     "file": "books/book_0447.epub",
-    "originalName": "Robert Tressell - The Ragged-Trousered Philanthropists.epub"
+    "originalName": "Robert Tressell - The Ragged-Trousered Philanthropists.epub",
+    "needsFix": false
   },
   {
     "id": "book_0448",
@@ -5313,7 +5755,8 @@
     "cover": "covers/book_0448.jpg",
     "isHosted": true,
     "file": "books/book_0448.epub",
-    "originalName": "Robin Sharma - The 5 AM Club.epub"
+    "originalName": "Robin Sharma - The 5 AM Club.epub",
+    "needsFix": false
   },
   {
     "id": "book_0449",
@@ -5325,7 +5768,8 @@
     "cover": "covers/book_0449.jpg",
     "isHosted": true,
     "file": "books/book_0449.epub",
-    "originalName": "Rudyard Kipling - The Jungle Book.epub"
+    "originalName": "Rudyard Kipling - The Jungle Book.epub",
+    "needsFix": false
   },
   {
     "id": "book_0450",
@@ -5337,7 +5781,8 @@
     "cover": "covers/book_0450.jpg",
     "isHosted": true,
     "file": "books/book_0450.epub",
-    "originalName": "Salman Rushdie - Midnight's Children.epub"
+    "originalName": "Salman Rushdie - Midnight's Children.epub",
+    "needsFix": false
   },
   {
     "id": "book_0451",
@@ -5349,7 +5794,8 @@
     "cover": "covers/book_0451.jpg",
     "isHosted": true,
     "file": "books/book_0451.epub",
-    "originalName": "Sigmund Freud - A Young Girl's Diary.epub"
+    "originalName": "Sigmund Freud - A Young Girl's Diary.epub",
+    "needsFix": false
   },
   {
     "id": "book_0452",
@@ -5361,7 +5807,8 @@
     "cover": "covers/book_0452.jpg",
     "isHosted": true,
     "file": "books/book_0452.epub",
-    "originalName": "Sigmund Freud - Beyond the Pleasure Principle.epub"
+    "originalName": "Sigmund Freud - Beyond the Pleasure Principle.epub",
+    "needsFix": false
   },
   {
     "id": "book_0453",
@@ -5373,7 +5820,8 @@
     "cover": "covers/book_0453.jpg",
     "isHosted": true,
     "file": "books/book_0453.epub",
-    "originalName": "Sigmund Freud - Civilization and Its Discontents.epub"
+    "originalName": "Sigmund Freud - Civilization and Its Discontents.epub",
+    "needsFix": false
   },
   {
     "id": "book_0454",
@@ -5385,7 +5833,8 @@
     "cover": "covers/book_0454.jpg",
     "isHosted": true,
     "file": "books/book_0454.epub",
-    "originalName": "Sigmund Freud - Delusion and Dream.epub"
+    "originalName": "Sigmund Freud - Delusion and Dream.epub",
+    "needsFix": false
   },
   {
     "id": "book_0455",
@@ -5397,7 +5846,8 @@
     "cover": "covers/book_0455.jpg",
     "isHosted": true,
     "file": "books/book_0455.epub",
-    "originalName": "Sigmund Freud - Dream Psychology.epub"
+    "originalName": "Sigmund Freud - Dream Psychology.epub",
+    "needsFix": false
   },
   {
     "id": "book_0456",
@@ -5409,7 +5859,8 @@
     "cover": "covers/book_0456.jpg",
     "isHosted": true,
     "file": "books/book_0456.epub",
-    "originalName": "Sigmund Freud - Group Psychology and the Analysis of the Ego.epub"
+    "originalName": "Sigmund Freud - Group Psychology and the Analysis of the Ego.epub",
+    "needsFix": false
   },
   {
     "id": "book_0457",
@@ -5421,7 +5872,8 @@
     "cover": "covers/book_0457.jpg",
     "isHosted": true,
     "file": "books/book_0457.epub",
-    "originalName": "Sigmund Freud - Introductory Lectures on Psycho-Analysis.epub"
+    "originalName": "Sigmund Freud - Introductory Lectures on Psycho-Analysis.epub",
+    "needsFix": false
   },
   {
     "id": "book_0458",
@@ -5433,7 +5885,8 @@
     "cover": "covers/book_0458.jpg",
     "isHosted": true,
     "file": "books/book_0458.epub",
-    "originalName": "Sigmund Freud - Leonardo da Vinci.epub"
+    "originalName": "Sigmund Freud - Leonardo da Vinci.epub",
+    "needsFix": false
   },
   {
     "id": "book_0459",
@@ -5445,7 +5898,8 @@
     "cover": "covers/book_0459.jpg",
     "isHosted": true,
     "file": "books/book_0459.epub",
-    "originalName": "Sigmund Freud - On Dreams.epub"
+    "originalName": "Sigmund Freud - On Dreams.epub",
+    "needsFix": false
   },
   {
     "id": "book_0460",
@@ -5457,7 +5911,8 @@
     "cover": "covers/book_0460.jpg",
     "isHosted": true,
     "file": "books/book_0460.epub",
-    "originalName": "Sigmund Freud - Psychopathology of Everyday Life.epub"
+    "originalName": "Sigmund Freud - Psychopathology of Everyday Life.epub",
+    "needsFix": false
   },
   {
     "id": "book_0461",
@@ -5469,7 +5924,8 @@
     "cover": "covers/book_0461.jpg",
     "isHosted": true,
     "file": "books/book_0461.epub",
-    "originalName": "Sigmund Freud - Reflections on War and Death.epub"
+    "originalName": "Sigmund Freud - Reflections on War and Death.epub",
+    "needsFix": false
   },
   {
     "id": "book_0462",
@@ -5481,7 +5937,8 @@
     "cover": "covers/book_0462.jpg",
     "isHosted": true,
     "file": "books/book_0462.epub",
-    "originalName": "Sigmund Freud - The Future of an Illusion.epub"
+    "originalName": "Sigmund Freud - The Future of an Illusion.epub",
+    "needsFix": false
   },
   {
     "id": "book_0463",
@@ -5493,7 +5950,8 @@
     "cover": "covers/book_0463.jpg",
     "isHosted": true,
     "file": "books/book_0463.epub",
-    "originalName": "Sigmund Freud - The History of the Psychoanalytic Movement.epub"
+    "originalName": "Sigmund Freud - The History of the Psychoanalytic Movement.epub",
+    "needsFix": false
   },
   {
     "id": "book_0464",
@@ -5505,7 +5963,8 @@
     "cover": "covers/book_0464.jpg",
     "isHosted": true,
     "file": "books/book_0464.epub",
-    "originalName": "Sigmund Freud - The Problem of Lay-Analyses.epub"
+    "originalName": "Sigmund Freud - The Problem of Lay-Analyses.epub",
+    "needsFix": false
   },
   {
     "id": "book_0465",
@@ -5517,7 +5976,8 @@
     "cover": "covers/book_0465.jpg",
     "isHosted": true,
     "file": "books/book_0465.epub",
-    "originalName": "Sigmund Freud - Totem and Taboo.epub"
+    "originalName": "Sigmund Freud - Totem and Taboo.epub",
+    "needsFix": false
   },
   {
     "id": "book_0466",
@@ -5529,7 +5989,8 @@
     "cover": "covers/book_0466.jpg",
     "isHosted": true,
     "file": "books/book_0466.epub",
-    "originalName": "Sigmund Freud - Wit and Its Relation to the Unconscious.epub"
+    "originalName": "Sigmund Freud - Wit and Its Relation to the Unconscious.epub",
+    "needsFix": false
   },
   {
     "id": "book_0467",
@@ -5541,7 +6002,8 @@
     "cover": "covers/book_0467.jpg",
     "isHosted": true,
     "file": "books/book_0467.epub",
-    "originalName": "Sophocles - Plays of Sophocles.epub"
+    "originalName": "Sophocles - Plays of Sophocles.epub",
+    "needsFix": false
   },
   {
     "id": "book_0468",
@@ -5553,7 +6015,8 @@
     "cover": "covers/book_0468.jpg",
     "isHosted": true,
     "file": "books/book_0468.epub",
-    "originalName": "Soren Kierkegaard - Selections from the Writings of Kierkegaard.epub"
+    "originalName": "Soren Kierkegaard - Selections from the Writings of Kierkegaard.epub",
+    "needsFix": false
   },
   {
     "id": "book_0469",
@@ -5565,7 +6028,8 @@
     "cover": "covers/book_0469.jpg",
     "isHosted": true,
     "file": "books/book_0469.epub",
-    "originalName": "St. Augustine - Confessions.epub"
+    "originalName": "St. Augustine - Confessions.epub",
+    "needsFix": false
   },
   {
     "id": "book_0470",
@@ -5577,7 +6041,8 @@
     "cover": "covers/book_0470.jpg",
     "isHosted": true,
     "file": "books/book_0470.epub",
-    "originalName": "Stephen Crisp - A Short History of a Long Travel from Babylon to Bethel.epub"
+    "originalName": "Stephen Crisp - A Short History of a Long Travel from Babylon to Bethel.epub",
+    "needsFix": false
   },
   {
     "id": "book_0471",
@@ -5589,7 +6054,8 @@
     "cover": "covers/book_0471.jpg",
     "isHosted": true,
     "file": "books/book_0471.epub",
-    "originalName": "Stephen Graham - Through Russian Central Asia.epub"
+    "originalName": "Stephen Graham - Through Russian Central Asia.epub",
+    "needsFix": false
   },
   {
     "id": "book_0472",
@@ -5601,7 +6067,8 @@
     "cover": "covers/book_0472.jpg",
     "isHosted": true,
     "file": "books/book_0472.epub",
-    "originalName": "Stephen King - Apt Pupil.epub"
+    "originalName": "Stephen King - Apt Pupil.epub",
+    "needsFix": false
   },
   {
     "id": "book_0473",
@@ -5613,7 +6080,8 @@
     "cover": "covers/book_0473.jpg",
     "isHosted": true,
     "file": "books/book_0473.epub",
-    "originalName": "Stephen King - Insomnia.epub"
+    "originalName": "Stephen King - Insomnia.epub",
+    "needsFix": false
   },
   {
     "id": "book_0474",
@@ -5625,7 +6093,8 @@
     "cover": "covers/book_0474.jpg",
     "isHosted": true,
     "file": "books/book_0474.epub",
-    "originalName": "Stephen King - Salem's Lot.epub"
+    "originalName": "Stephen King - Salem's Lot.epub",
+    "needsFix": false
   },
   {
     "id": "book_0475",
@@ -5637,7 +6106,8 @@
     "cover": "covers/book_0475.jpg",
     "isHosted": true,
     "file": "books/book_0475.epub",
-    "originalName": "Stephen King - The Dark Tower 1 The Gunslinger.epub"
+    "originalName": "Stephen King - The Dark Tower 1 The Gunslinger.epub",
+    "needsFix": false
   },
   {
     "id": "book_0476",
@@ -5649,7 +6119,8 @@
     "cover": "covers/book_0476.jpg",
     "isHosted": true,
     "file": "books/book_0476.epub",
-    "originalName": "Stephen King - The Dark Tower 2 The Drawing of the Three.epub"
+    "originalName": "Stephen King - The Dark Tower 2 The Drawing of the Three.epub",
+    "needsFix": false
   },
   {
     "id": "book_0477",
@@ -5661,7 +6132,8 @@
     "cover": "covers/book_0477.jpg",
     "isHosted": true,
     "file": "books/book_0477.epub",
-    "originalName": "Stephen King - The Dark Tower 3 The Waste Lands.epub"
+    "originalName": "Stephen King - The Dark Tower 3 The Waste Lands.epub",
+    "needsFix": false
   },
   {
     "id": "book_0478",
@@ -5673,7 +6145,8 @@
     "cover": "covers/book_0478.jpg",
     "isHosted": true,
     "file": "books/book_0478.epub",
-    "originalName": "Stephen King - The Dark Tower 4 Wizard and Glass.epub"
+    "originalName": "Stephen King - The Dark Tower 4 Wizard and Glass.epub",
+    "needsFix": false
   },
   {
     "id": "book_0479",
@@ -5685,7 +6158,8 @@
     "cover": "covers/book_0479.jpg",
     "isHosted": true,
     "file": "books/book_0479.epub",
-    "originalName": "Stephen King - The Dark Tower 5 Wolves of the Calla.epub"
+    "originalName": "Stephen King - The Dark Tower 5 Wolves of the Calla.epub",
+    "needsFix": false
   },
   {
     "id": "book_0480",
@@ -5697,7 +6171,8 @@
     "cover": "covers/book_0480.jpg",
     "isHosted": true,
     "file": "books/book_0480.epub",
-    "originalName": "Stephen King - The Dark Tower 6 Song of Susannah.epub"
+    "originalName": "Stephen King - The Dark Tower 6 Song of Susannah.epub",
+    "needsFix": false
   },
   {
     "id": "book_0481",
@@ -5709,7 +6184,8 @@
     "cover": "covers/book_0481.jpg",
     "isHosted": true,
     "file": "books/book_0481.epub",
-    "originalName": "Stephen King - The Dark Tower 7 The Dark Tower.epub"
+    "originalName": "Stephen King - The Dark Tower 7 The Dark Tower.epub",
+    "needsFix": false
   },
   {
     "id": "book_0482",
@@ -5721,7 +6197,8 @@
     "cover": "covers/book_0482.jpg",
     "isHosted": true,
     "file": "books/book_0482.epub",
-    "originalName": "Stephen King - The Mist.epub"
+    "originalName": "Stephen King - The Mist.epub",
+    "needsFix": false
   },
   {
     "id": "book_0483",
@@ -5733,7 +6210,8 @@
     "cover": "covers/book_0483.jpg",
     "isHosted": true,
     "file": "books/book_0483.epub",
-    "originalName": "Stephen King - The Stand.epub"
+    "originalName": "Stephen King - The Stand.epub",
+    "needsFix": false
   },
   {
     "id": "book_0484",
@@ -5745,7 +6223,8 @@
     "cover": "covers/book_0484.jpg",
     "isHosted": true,
     "file": "books/book_0484.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 1 Gardens of the Moon.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 1 Gardens of the Moon.epub",
+    "needsFix": false
   },
   {
     "id": "book_0485",
@@ -5757,7 +6236,8 @@
     "cover": "covers/book_0485.jpg",
     "isHosted": true,
     "file": "books/book_0485.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 10 The Crippled God.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 10 The Crippled God.epub",
+    "needsFix": false
   },
   {
     "id": "book_0486",
@@ -5769,7 +6249,8 @@
     "cover": "covers/book_0486.jpg",
     "isHosted": true,
     "file": "books/book_0486.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 2 Deadhouse Gates.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 2 Deadhouse Gates.epub",
+    "needsFix": false
   },
   {
     "id": "book_0487",
@@ -5781,7 +6262,8 @@
     "cover": "covers/book_0487.jpg",
     "isHosted": true,
     "file": "books/book_0487.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 3 Memories of Ice.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 3 Memories of Ice.epub",
+    "needsFix": false
   },
   {
     "id": "book_0488",
@@ -5793,7 +6275,8 @@
     "cover": "covers/book_0488.jpg",
     "isHosted": true,
     "file": "books/book_0488.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 4 House of Chains.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 4 House of Chains.epub",
+    "needsFix": false
   },
   {
     "id": "book_0489",
@@ -5805,7 +6288,8 @@
     "cover": "covers/book_0489.jpg",
     "isHosted": true,
     "file": "books/book_0489.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 5 Midnight Tides.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 5 Midnight Tides.epub",
+    "needsFix": false
   },
   {
     "id": "book_0490",
@@ -5817,7 +6301,8 @@
     "cover": "covers/book_0490.jpg",
     "isHosted": true,
     "file": "books/book_0490.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 6 The Bonehunters.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 6 The Bonehunters.epub",
+    "needsFix": false
   },
   {
     "id": "book_0491",
@@ -5829,7 +6314,8 @@
     "cover": "covers/book_0491.jpg",
     "isHosted": true,
     "file": "books/book_0491.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 7 Reaper's Gale.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 7 Reaper's Gale.epub",
+    "needsFix": false
   },
   {
     "id": "book_0492",
@@ -5841,7 +6327,8 @@
     "cover": "covers/book_0492.jpg",
     "isHosted": true,
     "file": "books/book_0492.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 8 Toll the Hounds.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 8 Toll the Hounds.epub",
+    "needsFix": false
   },
   {
     "id": "book_0493",
@@ -5853,7 +6340,8 @@
     "cover": "covers/book_0493.jpg",
     "isHosted": true,
     "file": "books/book_0493.epub",
-    "originalName": "Steven Erikson - Malazan Book of the Fallen 9 Dust of Dreams.epub"
+    "originalName": "Steven Erikson - Malazan Book of the Fallen 9 Dust of Dreams.epub",
+    "needsFix": false
   },
   {
     "id": "book_0494",
@@ -5865,7 +6353,8 @@
     "cover": "covers/book_0494.jpg",
     "isHosted": true,
     "file": "books/book_0494.epub",
-    "originalName": "Suzanne Collins - The Hunger Games 1 The Hunger Games.epub"
+    "originalName": "Suzanne Collins - The Hunger Games 1 The Hunger Games.epub",
+    "needsFix": false
   },
   {
     "id": "book_0495",
@@ -5877,7 +6366,8 @@
     "cover": "covers/book_0495.jpg",
     "isHosted": true,
     "file": "books/book_0495.epub",
-    "originalName": "Suzanne Collins - The Hunger Games 2 Catching Fire.epub"
+    "originalName": "Suzanne Collins - The Hunger Games 2 Catching Fire.epub",
+    "needsFix": false
   },
   {
     "id": "book_0496",
@@ -5889,7 +6379,8 @@
     "cover": "covers/book_0496.jpg",
     "isHosted": true,
     "file": "books/book_0496.epub",
-    "originalName": "Suzanne Collins - The Hunger Games 3 Mockingjay.epub"
+    "originalName": "Suzanne Collins - The Hunger Games 3 Mockingjay.epub",
+    "needsFix": false
   },
   {
     "id": "book_0497",
@@ -5901,7 +6392,8 @@
     "cover": "covers/book_0497.jpg",
     "isHosted": true,
     "file": "books/book_0497.epub",
-    "originalName": "Terry Pratchett - Discworld 1 The Colour of Magic.epub"
+    "originalName": "Terry Pratchett - Discworld 1 The Colour of Magic.epub",
+    "needsFix": false
   },
   {
     "id": "book_0498",
@@ -5913,7 +6405,8 @@
     "cover": "covers/book_0498.jpg",
     "isHosted": true,
     "file": "books/book_0498.epub",
-    "originalName": "Terry Pratchett - Discworld 2 The Light Fantastic.epub"
+    "originalName": "Terry Pratchett - Discworld 2 The Light Fantastic.epub",
+    "needsFix": false
   },
   {
     "id": "book_0499",
@@ -5925,7 +6418,8 @@
     "cover": "covers/book_0499.jpg",
     "isHosted": true,
     "file": "books/book_0499.epub",
-    "originalName": "Terry Pratchett - Discworld 3 Equal Rites.epub"
+    "originalName": "Terry Pratchett - Discworld 3 Equal Rites.epub",
+    "needsFix": false
   },
   {
     "id": "book_0500",
@@ -5937,7 +6431,8 @@
     "cover": "covers/book_0500.jpg",
     "isHosted": true,
     "file": "books/book_0500.epub",
-    "originalName": "Terry Pratchett - Discworld 4 Mort.epub"
+    "originalName": "Terry Pratchett - Discworld 4 Mort.epub",
+    "needsFix": false
   },
   {
     "id": "book_0501",
@@ -5949,7 +6444,8 @@
     "cover": "covers/book_0501.jpg",
     "isHosted": true,
     "file": "books/book_0501.epub",
-    "originalName": "Terry Pratchett - Discworld 5 Sourcery.epub"
+    "originalName": "Terry Pratchett - Discworld 5 Sourcery.epub",
+    "needsFix": false
   },
   {
     "id": "book_0502",
@@ -5961,7 +6457,8 @@
     "cover": "covers/book_0502.jpg",
     "isHosted": true,
     "file": "books/book_0502.epub",
-    "originalName": "Terry Pratchett - Discworld 6 Wyrd Sisters.epub"
+    "originalName": "Terry Pratchett - Discworld 6 Wyrd Sisters.epub",
+    "needsFix": false
   },
   {
     "id": "book_0503",
@@ -5973,7 +6470,8 @@
     "cover": "covers/book_0503.jpg",
     "isHosted": true,
     "file": "books/book_0503.epub",
-    "originalName": "Terry Pratchett - Discworld 7 Pyramids.epub"
+    "originalName": "Terry Pratchett - Discworld 7 Pyramids.epub",
+    "needsFix": false
   },
   {
     "id": "book_0504",
@@ -5985,7 +6483,8 @@
     "cover": "covers/book_0504.jpg",
     "isHosted": true,
     "file": "books/book_0504.epub",
-    "originalName": "Terry Pratchett - Discworld 8 Guards! Guards!.epub"
+    "originalName": "Terry Pratchett - Discworld 8 Guards! Guards!.epub",
+    "needsFix": false
   },
   {
     "id": "book_0505",
@@ -5997,7 +6496,8 @@
     "cover": "covers/book_0505.jpg",
     "isHosted": true,
     "file": "books/book_0505.epub",
-    "originalName": "Terry Pratchett - Discworld 9 Eric.epub"
+    "originalName": "Terry Pratchett - Discworld 9 Eric.epub",
+    "needsFix": false
   },
   {
     "id": "book_0506",
@@ -6009,7 +6509,8 @@
     "cover": "covers/book_0506.jpg",
     "isHosted": true,
     "file": "books/book_0506.epub",
-    "originalName": "Thomas Bulfinch - The Age of Fable.epub"
+    "originalName": "Thomas Bulfinch - The Age of Fable.epub",
+    "needsFix": false
   },
   {
     "id": "book_0507",
@@ -6021,7 +6522,8 @@
     "cover": "covers/book_0507.jpg",
     "isHosted": true,
     "file": "books/book_0507.epub",
-    "originalName": "Thomas Hardy - Tess of the d'Urbervilles.epub"
+    "originalName": "Thomas Hardy - Tess of the d'Urbervilles.epub",
+    "needsFix": false
   },
   {
     "id": "book_0508",
@@ -6033,7 +6535,8 @@
     "cover": "covers/book_0508.jpg",
     "isHosted": true,
     "file": "books/book_0508.epub",
-    "originalName": "Thomas Hobbes - Leviathan.epub"
+    "originalName": "Thomas Hobbes - Leviathan.epub",
+    "needsFix": false
   },
   {
     "id": "book_0509",
@@ -6045,7 +6548,8 @@
     "cover": "covers/book_0509.jpg",
     "isHosted": true,
     "file": "books/book_0509.epub",
-    "originalName": "Thomas J. Stanley - The Millionaire Next Door.epub"
+    "originalName": "Thomas J. Stanley - The Millionaire Next Door.epub",
+    "needsFix": false
   },
   {
     "id": "book_0510",
@@ -6057,7 +6561,8 @@
     "cover": "covers/book_0510.jpg",
     "isHosted": true,
     "file": "books/book_0510.epub",
-    "originalName": "Thomas Whittaker - Schopenhauer.epub"
+    "originalName": "Thomas Whittaker - Schopenhauer.epub",
+    "needsFix": false
   },
   {
     "id": "book_0511",
@@ -6069,7 +6574,8 @@
     "cover": "covers/book_0511.jpg",
     "isHosted": true,
     "file": "books/book_0511.epub",
-    "originalName": "Upton Sinclair - The Jungle.epub"
+    "originalName": "Upton Sinclair - The Jungle.epub",
+    "needsFix": false
   },
   {
     "id": "book_0512",
@@ -6081,7 +6587,8 @@
     "cover": "covers/book_0512.jpg",
     "isHosted": true,
     "file": "books/book_0512.epub",
-    "originalName": "Ursula K. Le Guin - Earthsea 1 A Wizard of Earthsea.epub"
+    "originalName": "Ursula K. Le Guin - Earthsea 1 A Wizard of Earthsea.epub",
+    "needsFix": false
   },
   {
     "id": "book_0513",
@@ -6093,7 +6600,8 @@
     "cover": "covers/book_0513.jpg",
     "isHosted": true,
     "file": "books/book_0513.epub",
-    "originalName": "V. M. Hillyer - A Child's History of the World.epub"
+    "originalName": "V. M. Hillyer - A Child's History of the World.epub",
+    "needsFix": false
   },
   {
     "id": "book_0514",
@@ -6105,7 +6613,8 @@
     "cover": "covers/book_0514.jpg",
     "isHosted": true,
     "file": "books/book_0514.epub",
-    "originalName": "Vatsyayana - The Kama Sutra.epub"
+    "originalName": "Vatsyayana - The Kama Sutra.epub",
+    "needsFix": false
   },
   {
     "id": "book_0515",
@@ -6117,7 +6626,8 @@
     "cover": "covers/book_0515.jpg",
     "isHosted": true,
     "file": "books/book_0515.epub",
-    "originalName": "Victor Hugo - Les Miserables.epub"
+    "originalName": "Victor Hugo - Les Miserables.epub",
+    "needsFix": false
   },
   {
     "id": "book_0516",
@@ -6129,7 +6639,8 @@
     "cover": "covers/book_0516.jpg",
     "isHosted": true,
     "file": "books/book_0516.epub",
-    "originalName": "Virgil - The Aeneid.epub"
+    "originalName": "Virgil - The Aeneid.epub",
+    "needsFix": false
   },
   {
     "id": "book_0517",
@@ -6141,7 +6652,8 @@
     "cover": "covers/book_0517.jpg",
     "isHosted": true,
     "file": "books/book_0517.epub",
-    "originalName": "Virginia Woolf - Mrs Dalloway.epub"
+    "originalName": "Virginia Woolf - Mrs Dalloway.epub",
+    "needsFix": false
   },
   {
     "id": "book_0518",
@@ -6153,7 +6665,8 @@
     "cover": "covers/book_0518.jpg",
     "isHosted": true,
     "file": "books/book_0518.epub",
-    "originalName": "Virginia Woolf - To the Lighthouse.epub"
+    "originalName": "Virginia Woolf - To the Lighthouse.epub",
+    "needsFix": false
   },
   {
     "id": "book_0519",
@@ -6165,7 +6678,8 @@
     "cover": "covers/book_0519.jpg",
     "isHosted": true,
     "file": "books/book_0519.epub",
-    "originalName": "Voltaire - Candide.epub"
+    "originalName": "Voltaire - Candide.epub",
+    "needsFix": false
   },
   {
     "id": "book_0520",
@@ -6177,7 +6691,8 @@
     "cover": "covers/book_0520.jpg",
     "isHosted": true,
     "file": "books/book_0520.epub",
-    "originalName": "W. R. S. Ralston - Russian Fairy Tales.epub"
+    "originalName": "W. R. S. Ralston - Russian Fairy Tales.epub",
+    "needsFix": false
   },
   {
     "id": "book_0521",
@@ -6189,7 +6704,8 @@
     "cover": "covers/book_0521.jpg",
     "isHosted": true,
     "file": "books/book_0521.epub",
-    "originalName": "Washington Irving - The Legend of Sleepy Hollow.epub"
+    "originalName": "Washington Irving - The Legend of Sleepy Hollow.epub",
+    "needsFix": false
   },
   {
     "id": "book_0522",
@@ -6201,7 +6717,8 @@
     "cover": "covers/book_0522.jpg",
     "isHosted": true,
     "file": "books/book_0522.epub",
-    "originalName": "Wilkie Collins - The Moonstone.epub"
+    "originalName": "Wilkie Collins - The Moonstone.epub",
+    "needsFix": false
   },
   {
     "id": "book_0523",
@@ -6213,7 +6730,8 @@
     "cover": "covers/book_0523.jpg",
     "isHosted": true,
     "file": "books/book_0523.epub",
-    "originalName": "Will Durant - Philosophy and the Social Problem.epub"
+    "originalName": "Will Durant - Philosophy and the Social Problem.epub",
+    "needsFix": false
   },
   {
     "id": "book_0524",
@@ -6225,7 +6743,8 @@
     "cover": "covers/book_0524.jpg",
     "isHosted": true,
     "file": "books/book_0524.epub",
-    "originalName": "William Golding - Lord of the Flies.epub"
+    "originalName": "William Golding - Lord of the Flies.epub",
+    "needsFix": false
   },
   {
     "id": "book_0525",
@@ -6237,7 +6756,8 @@
     "cover": "covers/book_0525.jpg",
     "isHosted": true,
     "file": "books/book_0525.epub",
-    "originalName": "William Makepeace Thackeray - Vanity Fair.epub"
+    "originalName": "William Makepeace Thackeray - Vanity Fair.epub",
+    "needsFix": false
   },
   {
     "id": "book_0526",
@@ -6249,7 +6769,8 @@
     "cover": "covers/book_0526.jpg",
     "isHosted": true,
     "file": "books/book_0526.epub",
-    "originalName": "William Shakespeare - A Midsummer Night's Dream.epub"
+    "originalName": "William Shakespeare - A Midsummer Night's Dream.epub",
+    "needsFix": false
   },
   {
     "id": "book_0527",
@@ -6261,7 +6782,8 @@
     "cover": "covers/book_0527.jpg",
     "isHosted": true,
     "file": "books/book_0527.epub",
-    "originalName": "William Shakespeare - All's Well That Ends Well.epub"
+    "originalName": "William Shakespeare - All's Well That Ends Well.epub",
+    "needsFix": false
   },
   {
     "id": "book_0528",
@@ -6273,7 +6795,8 @@
     "cover": "covers/book_0528.jpg",
     "isHosted": true,
     "file": "books/book_0528.epub",
-    "originalName": "William Shakespeare - Antony and Cleopatra.epub"
+    "originalName": "William Shakespeare - Antony and Cleopatra.epub",
+    "needsFix": false
   },
   {
     "id": "book_0529",
@@ -6285,7 +6808,8 @@
     "cover": "covers/book_0529.jpg",
     "isHosted": true,
     "file": "books/book_0529.epub",
-    "originalName": "William Shakespeare - As You Like It.epub"
+    "originalName": "William Shakespeare - As You Like It.epub",
+    "needsFix": false
   },
   {
     "id": "book_0530",
@@ -6297,7 +6821,8 @@
     "cover": "covers/book_0530.jpg",
     "isHosted": true,
     "file": "books/book_0530.epub",
-    "originalName": "William Shakespeare - Coriolanus.epub"
+    "originalName": "William Shakespeare - Coriolanus.epub",
+    "needsFix": false
   },
   {
     "id": "book_0531",
@@ -6309,7 +6834,8 @@
     "cover": "covers/book_0531.jpg",
     "isHosted": true,
     "file": "books/book_0531.epub",
-    "originalName": "William Shakespeare - Cymbeline.epub"
+    "originalName": "William Shakespeare - Cymbeline.epub",
+    "needsFix": false
   },
   {
     "id": "book_0532",
@@ -6321,7 +6847,8 @@
     "cover": "covers/book_0532.jpg",
     "isHosted": true,
     "file": "books/book_0532.epub",
-    "originalName": "William Shakespeare - Henry IV Part 1.epub"
+    "originalName": "William Shakespeare - Henry IV Part 1.epub",
+    "needsFix": false
   },
   {
     "id": "book_0533",
@@ -6333,7 +6860,8 @@
     "cover": "covers/book_0533.jpg",
     "isHosted": true,
     "file": "books/book_0533.epub",
-    "originalName": "William Shakespeare - Henry IV Part 2.epub"
+    "originalName": "William Shakespeare - Henry IV Part 2.epub",
+    "needsFix": false
   },
   {
     "id": "book_0534",
@@ -6345,7 +6873,8 @@
     "cover": "covers/book_0534.jpg",
     "isHosted": true,
     "file": "books/book_0534.epub",
-    "originalName": "William Shakespeare - Henry V.epub"
+    "originalName": "William Shakespeare - Henry V.epub",
+    "needsFix": false
   },
   {
     "id": "book_0535",
@@ -6357,7 +6886,8 @@
     "cover": "covers/book_0535.jpg",
     "isHosted": true,
     "file": "books/book_0535.epub",
-    "originalName": "William Shakespeare - Henry VI Part 1.epub"
+    "originalName": "William Shakespeare - Henry VI Part 1.epub",
+    "needsFix": false
   },
   {
     "id": "book_0536",
@@ -6369,7 +6899,8 @@
     "cover": "covers/book_0536.jpg",
     "isHosted": true,
     "file": "books/book_0536.epub",
-    "originalName": "William Shakespeare - Henry VI Part 2.epub"
+    "originalName": "William Shakespeare - Henry VI Part 2.epub",
+    "needsFix": false
   },
   {
     "id": "book_0537",
@@ -6381,7 +6912,8 @@
     "cover": "covers/book_0537.jpg",
     "isHosted": true,
     "file": "books/book_0537.epub",
-    "originalName": "William Shakespeare - Henry VI Part 3.epub"
+    "originalName": "William Shakespeare - Henry VI Part 3.epub",
+    "needsFix": false
   },
   {
     "id": "book_0538",
@@ -6393,7 +6925,8 @@
     "cover": "covers/book_0538.jpg",
     "isHosted": true,
     "file": "books/book_0538.epub",
-    "originalName": "William Shakespeare - Henry VIII.epub"
+    "originalName": "William Shakespeare - Henry VIII.epub",
+    "needsFix": false
   },
   {
     "id": "book_0539",
@@ -6405,7 +6938,8 @@
     "cover": "covers/book_0539.jpg",
     "isHosted": true,
     "file": "books/book_0539.epub",
-    "originalName": "William Shakespeare - Julius Caesar.epub"
+    "originalName": "William Shakespeare - Julius Caesar.epub",
+    "needsFix": false
   },
   {
     "id": "book_0540",
@@ -6417,7 +6951,8 @@
     "cover": "covers/book_0540.jpg",
     "isHosted": true,
     "file": "books/book_0540.epub",
-    "originalName": "William Shakespeare - King John.epub"
+    "originalName": "William Shakespeare - King John.epub",
+    "needsFix": false
   },
   {
     "id": "book_0541",
@@ -6429,7 +6964,8 @@
     "cover": "covers/book_0541.jpg",
     "isHosted": true,
     "file": "books/book_0541.epub",
-    "originalName": "William Shakespeare - King Lear.epub"
+    "originalName": "William Shakespeare - King Lear.epub",
+    "needsFix": false
   },
   {
     "id": "book_0542",
@@ -6441,7 +6977,8 @@
     "cover": "covers/book_0542.jpg",
     "isHosted": true,
     "file": "books/book_0542.epub",
-    "originalName": "William Shakespeare - Love's Labour's Lost.epub"
+    "originalName": "William Shakespeare - Love's Labour's Lost.epub",
+    "needsFix": false
   },
   {
     "id": "book_0543",
@@ -6453,7 +6990,8 @@
     "cover": "covers/book_0543.jpg",
     "isHosted": true,
     "file": "books/book_0543.epub",
-    "originalName": "William Shakespeare - Macbeth.epub"
+    "originalName": "William Shakespeare - Macbeth.epub",
+    "needsFix": false
   },
   {
     "id": "book_0544",
@@ -6465,7 +7003,8 @@
     "cover": "covers/book_0544.jpg",
     "isHosted": true,
     "file": "books/book_0544.epub",
-    "originalName": "William Shakespeare - Measure for Measure.epub"
+    "originalName": "William Shakespeare - Measure for Measure.epub",
+    "needsFix": false
   },
   {
     "id": "book_0545",
@@ -6477,7 +7016,8 @@
     "cover": "covers/book_0545.jpg",
     "isHosted": true,
     "file": "books/book_0545.epub",
-    "originalName": "William Shakespeare - Much Ado About Nothing.epub"
+    "originalName": "William Shakespeare - Much Ado About Nothing.epub",
+    "needsFix": false
   },
   {
     "id": "book_0546",
@@ -6489,7 +7029,8 @@
     "cover": "covers/book_0546.jpg",
     "isHosted": true,
     "file": "books/book_0546.epub",
-    "originalName": "William Shakespeare - Othello.epub"
+    "originalName": "William Shakespeare - Othello.epub",
+    "needsFix": false
   },
   {
     "id": "book_0547",
@@ -6501,7 +7042,8 @@
     "cover": "covers/book_0547.jpg",
     "isHosted": true,
     "file": "books/book_0547.epub",
-    "originalName": "William Shakespeare - Pericles.epub"
+    "originalName": "William Shakespeare - Pericles.epub",
+    "needsFix": false
   },
   {
     "id": "book_0548",
@@ -6513,7 +7055,8 @@
     "cover": "covers/book_0548.jpg",
     "isHosted": true,
     "file": "books/book_0548.epub",
-    "originalName": "William Shakespeare - Richard II.epub"
+    "originalName": "William Shakespeare - Richard II.epub",
+    "needsFix": false
   },
   {
     "id": "book_0549",
@@ -6525,7 +7068,8 @@
     "cover": "covers/book_0549.jpg",
     "isHosted": true,
     "file": "books/book_0549.epub",
-    "originalName": "William Shakespeare - Richard III.epub"
+    "originalName": "William Shakespeare - Richard III.epub",
+    "needsFix": false
   },
   {
     "id": "book_0550",
@@ -6537,7 +7081,8 @@
     "cover": "covers/book_0550.jpg",
     "isHosted": true,
     "file": "books/book_0550.epub",
-    "originalName": "William Shakespeare - Romeo and Juliet.epub"
+    "originalName": "William Shakespeare - Romeo and Juliet.epub",
+    "needsFix": false
   },
   {
     "id": "book_0551",
@@ -6549,7 +7094,8 @@
     "cover": "covers/book_0551.jpg",
     "isHosted": true,
     "file": "books/book_0551.epub",
-    "originalName": "William Shakespeare - The Comedy of Errors.epub"
+    "originalName": "William Shakespeare - The Comedy of Errors.epub",
+    "needsFix": false
   },
   {
     "id": "book_0552",
@@ -6561,7 +7107,8 @@
     "cover": "covers/book_0552.jpg",
     "isHosted": true,
     "file": "books/book_0552.epub",
-    "originalName": "William Shakespeare - The Merchant of Venice.epub"
+    "originalName": "William Shakespeare - The Merchant of Venice.epub",
+    "needsFix": false
   },
   {
     "id": "book_0553",
@@ -6573,7 +7120,8 @@
     "cover": "covers/book_0553.jpg",
     "isHosted": true,
     "file": "books/book_0553.epub",
-    "originalName": "William Shakespeare - The Merry Wives of Windsor.epub"
+    "originalName": "William Shakespeare - The Merry Wives of Windsor.epub",
+    "needsFix": false
   },
   {
     "id": "book_0554",
@@ -6585,7 +7133,8 @@
     "cover": "covers/book_0554.jpg",
     "isHosted": true,
     "file": "books/book_0554.epub",
-    "originalName": "William Shakespeare - The Taming of the Shrew.epub"
+    "originalName": "William Shakespeare - The Taming of the Shrew.epub",
+    "needsFix": false
   },
   {
     "id": "book_0555",
@@ -6597,7 +7146,8 @@
     "cover": "covers/book_0555.jpg",
     "isHosted": true,
     "file": "books/book_0555.epub",
-    "originalName": "William Shakespeare - The Tempest.epub"
+    "originalName": "William Shakespeare - The Tempest.epub",
+    "needsFix": false
   },
   {
     "id": "book_0556",
@@ -6609,7 +7159,8 @@
     "cover": "covers/book_0556.jpg",
     "isHosted": true,
     "file": "books/book_0556.epub",
-    "originalName": "William Shakespeare - The Two Gentlemen of Verona.epub"
+    "originalName": "William Shakespeare - The Two Gentlemen of Verona.epub",
+    "needsFix": false
   },
   {
     "id": "book_0557",
@@ -6621,7 +7172,8 @@
     "cover": "covers/book_0557.jpg",
     "isHosted": true,
     "file": "books/book_0557.epub",
-    "originalName": "William Shakespeare - The Winter's Tale.epub"
+    "originalName": "William Shakespeare - The Winter's Tale.epub",
+    "needsFix": false
   },
   {
     "id": "book_0558",
@@ -6633,7 +7185,8 @@
     "cover": "covers/book_0558.jpg",
     "isHosted": true,
     "file": "books/book_0558.epub",
-    "originalName": "William Shakespeare - The Works of William Shakespeare Vol 8.epub"
+    "originalName": "William Shakespeare - The Works of William Shakespeare Vol 8.epub",
+    "needsFix": false
   },
   {
     "id": "book_0559",
@@ -6645,7 +7198,8 @@
     "cover": "covers/book_0559.jpg",
     "isHosted": true,
     "file": "books/book_0559.epub",
-    "originalName": "William Shakespeare - Timon of Athens.epub"
+    "originalName": "William Shakespeare - Timon of Athens.epub",
+    "needsFix": false
   },
   {
     "id": "book_0560",
@@ -6657,7 +7211,8 @@
     "cover": "covers/book_0560.jpg",
     "isHosted": true,
     "file": "books/book_0560.epub",
-    "originalName": "William Shakespeare - Troilus and Cressida.epub"
+    "originalName": "William Shakespeare - Troilus and Cressida.epub",
+    "needsFix": false
   },
   {
     "id": "book_0561",
@@ -6669,7 +7224,8 @@
     "cover": "covers/book_0561.jpg",
     "isHosted": true,
     "file": "books/book_0561.epub",
-    "originalName": "William Shakespeare - Twelfth Night.epub"
+    "originalName": "William Shakespeare - Twelfth Night.epub",
+    "needsFix": false
   },
   {
     "id": "book_0562",
@@ -6681,6 +7237,7 @@
     "cover": "covers/book_0562.jpg",
     "isHosted": true,
     "file": "books/book_0562.epub",
-    "originalName": "Wirt Sikes - British Goblins.epub"
+    "originalName": "Wirt Sikes - British Goblins.epub",
+    "needsFix": false
   }
 ]
