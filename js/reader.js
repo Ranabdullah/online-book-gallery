@@ -237,22 +237,6 @@ function initEpubReaderWithBuffer(buffer, identifier) {
     currentBook = ePub(buffer);
     setupEpubRendition();
 
-    // Generate locations for accurate percentage progress tracking (paginated mode)
-    currentBook.ready.then(() => {
-      const storedLocations = localStorage.getItem(`athenaeum_locs_${identifier}`);
-      if (storedLocations) {
-        currentBook.locations.load(storedLocations);
-      } else {
-        currentBook.locations.generate(1600).then(() => {
-          try {
-            localStorage.setItem(`athenaeum_locs_${identifier}`, currentBook.locations.save());
-          } catch (e) {
-            // Storage quota — ignore, locations will regenerate next time
-          }
-        }).catch(() => {});
-      }
-    }).catch(() => {});
-
     // TOC Navigation
     currentBook.loaded.navigation.then((nav) => {
       const tocList = document.getElementById('toc-list');
