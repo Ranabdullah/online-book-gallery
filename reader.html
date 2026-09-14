@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Reading - Athenaeum</title>
-  <link rel="stylesheet" href="css/reader.css?v=3.1.0">
+  <link rel="stylesheet" href="css/reader.css?v=3.2.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body data-paper="cream">
@@ -124,6 +124,14 @@
         <option value="paginated">📖 Clean Page Turn</option>
       </select>
     </div>
+
+    <div class="style-control-row">
+      <span class="style-control-label">Text Alignment</span>
+      <select id="text-align-select" class="font-select">
+        <option value="left" selected>Left (Natural spacing, no gaps)</option>
+        <option value="justify">Justified (Book layout)</option>
+      </select>
+    </div>
   </div>
 
   <!-- Reader Main Layout -->
@@ -196,10 +204,10 @@
   <script src="js/vendor/jszip.min.js"></script>
   <script src="js/vendor/epub.min.js"></script>
   <script src="js/vendor/pdf.min.js"></script>
-  <script src="js/db.js?v=3.1.0"></script>
-  <script src="js/sync.js?v=3.1.0"></script>
+  <script src="js/db.js?v=3.2.0"></script>
+  <script src="js/sync.js?v=3.2.0"></script>
 
   <!-- Reader Script -->
-  <script src="js/reader.js?v=3.1.0"></script>
+  <script src="js/reader.js?v=3.2.0"></script>
 </body>
 </html>

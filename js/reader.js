@@ -24,7 +24,8 @@ let readerPrefs = {
   fontFamily: localStorage.getItem('athenaeum_font') || 'Merriweather, Georgia, serif',
   fontSize: parseInt(localStorage.getItem('athenaeum_font_size') || '100', 10),
   margin: localStorage.getItem('athenaeum_margin') || '40px',
-  mode: localStorage.getItem('athenaeum_reading_mode') || 'scroll' // Default to Vertical Scroll Down
+  mode: localStorage.getItem('athenaeum_reading_mode') || 'scroll', // Default to Vertical Scroll Down
+  textAlign: localStorage.getItem('athenaeum_text_align') || 'left' // Natural spacing, prevents awkward word gaps
 };
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -333,6 +334,44 @@ function setupEpubRendition() {
 }
 
 /**
+ * Cross-Device Reading Position Sync Prompt
+ */
+async function checkAndPromptCrossDeviceResume(bookId, format) {
+  if (!window.AthenaeumSync) return;
+  try {
+    const remote = await window.AthenaeumSync.getLatestCrossDeviceProgress(bookId);
+    if (!remote || !remote.percentage) return;
+
+    const localPct = parseInt(localStorage.getItem(`athenaeum_pct_${bookId}`) || '0', 10);
+    if (remote.percentage > localPct && remote.percentage > 1) {
+      if (document.getElementById('sync-resume-banner')) return;
+      const banner = document.createElement('div');
+      banner.id = 'sync-resume-banner';
+      banner.style.cssText = 'position: fixed; top: 68px; left: 50%; transform: translateX(-50%); z-index: 100; background: #0f172a; color: white; padding: 10px 18px; border-radius: 30px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); font-family: sans-serif; font-size: 13px;';
+      banner.innerHTML = `
+        <span>📱 Resume reading from another device: <strong>${remote.percentage}%</strong></span>
+        <button id="btn-sync-jump" style="background: #3b82f6; color: white; border: none; padding: 4px 12px; border-radius: 16px; cursor: pointer; font-size: 12px; font-weight: 600;">Jump</button>
+        <button id="btn-sync-dismiss" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 16px; line-height: 1;">&times;</button>
+      `;
+      document.body.appendChild(banner);
+
+      document.getElementById('btn-sync-jump')?.addEventListener('click', () => {
+        if (format === 'epub' && currentRendition && remote.cfi) {
+          currentRendition.display(remote.cfi);
+        } else if (format === 'pdf' && remote.page) {
+          jumpToPdfPage(remote.page);
+        }
+        banner.remove();
+      });
+      document.getElementById('btn-sync-dismiss')?.addEventListener('click', () => banner.remove());
+      setTimeout(() => banner.remove(), 12000);
+    }
+  } catch (e) {
+    console.warn('Sync resume prompt check error:', e);
+  }
+}
+
+/**
  * PDF Engine (Supports Continuous Vertical Scroll and Paginated Modes)
  */
 let pdfObserver = null;
@@ -620,6 +659,7 @@ function applyCurrentStylesToRendition() {
   const isMobile = window.innerWidth <= 768;
   const effectiveMargin = isMobile ? (readerPrefs.margin === '60px' ? '20px' : '10px') : readerPrefs.margin;
   const effectiveLineHeight = isMobile ? '1.55 !important' : '1.65 !important';
+  const textAlign = readerPrefs.textAlign === 'justify' ? 'justify' : 'left';
 
   try {
     currentRendition.themes.default({
@@ -628,11 +668,33 @@ function applyCurrentStylesToRendition() {
         color: `${colors.text} !important`,
         'font-family': `${readerPrefs.fontFamily} !important`,
         padding: `0 ${effectiveMargin} !important`,
-        'line-height': effectiveLineHeight
+        'line-height': effectiveLineHeight,
+        'text-align': `${textAlign} !important`,
+        'text-align-last': 'left !important',
+        'text-justify': 'inter-word !important',
+        'word-spacing': 'normal !important',
+        'letter-spacing': 'normal !important',
+        'word-break': 'normal !important',
+        'overflow-wrap': 'break-word !important',
+        'word-wrap': 'break-word !important',
+        '-webkit-hyphens': 'auto !important',
+        'hyphens': 'auto !important'
       },
       p: {
         'font-family': `${readerPrefs.fontFamily} !important`,
-        'line-height': effectiveLineHeight
+        'line-height': effectiveLineHeight,
+        'text-align': `${textAlign} !important`,
+        'text-align-last': 'left !important',
+        'word-spacing': 'normal !important',
+        'letter-spacing': 'normal !important',
+        'word-break': 'normal !important',
+        'overflow-wrap': 'break-word !important',
+        'word-wrap': 'break-word !important'
+      },
+      'span, a, em, strong, i, b, font': {
+        'letter-spacing': 'normal !important',
+        'word-break': 'normal !important',
+        'overflow-wrap': 'break-word !important'
       }
     });
     currentRendition.themes.fontSize(`${readerPrefs.fontSize}%`);
@@ -642,62 +704,126 @@ function applyCurrentStylesToRendition() {
 }
 
 /**
- * Dynamic OCR Text Cleanup Filter (Runtime Layer)
+ * Dynamic OCR & Layout Artifacts Cleanup Filter (Runtime Layer)
+ * Repairs split words, internal gaps, soft-hyphens, spaced punctuation, and line-chopped text
  */
 function cleanRenderedOcrArtifacts(rootNode) {
   if (!rootNode) return;
+
+  // 1. Walk and clean text nodes
   const walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, null, false);
   let node;
-  const replacements = [
-    [/\bBrave\s+Ne\s*w\s+World\b/g, 'Brave New World'],
-    [/\bNe\s+w\b/g, 'New'],
-    [/\bne\s+w\b/g, 'new'],
-    [/\bChapte\s+r\b/g, 'Chapter'],
-    [/\bchapte\s+r\b/g, 'chapter'],
-    [/\bgre\s+y\b/g, 'grey'],
-    [/\bOve\s+r\b/g, 'Over'],
-    [/\bove\s+r\b/g, 'over'],
-    [/\bm\s+a\s+in\b/g, 'main'],
-    [/\be\s+ntra\s+nce\b/g, 'entrance'],
-    [/\be\s+nte\s+re\s+d\b/g, 'entered'],
-    [/\be\s+norm\s+ous\b/g, 'enormous'],
-    [/\ba\s+nd\b/g, 'and'],
-    [/\ba\s+ll\b/g, 'all'],
-    [/\ba\s+t\b/g, 'at'],
-    [/\ba\s+s\b/g, 'as'],
-    [/\ba\s+n\b/g, 'an'],
-    [/\bm\s+otto\b/g, 'motto'],
-    [/\bSta\s+te\b/g, 'State'],
-    [/\bsta\s+te\b/g, 'state'],
-    [/\bbe\s+yond\b/g, 'beyond'],
-    [/\bsa\s+id\b/g, 'said'],
-    [/\bgre\s*a\s*t\s+m\s*a\s*n\b/g, 'great man'],
-    [/\bgre\s*a\s*t\b/g, 'great'],
-    [/\bGre\s*a\s*t\b/g, 'Great'],
-    [/\bstude\s*nts\b/g, 'students'],
-    [/\bde\s*pa\s*rtm\s*e\s*nts\b/g, 'departments'],
-    [/\bm\s+out\s*h\b/g, 'mouth'],
-    [/\bhe\s+a\s+t\b/g, 'heat'],
-    [/\bhe\s+at\b/g, 'heat'],
-    [/\bitse\s+lf\b/g, 'itself'],
-    [/\b([A-Za-z]+)\s+'([stdm]|ll|re|ve)\b/g, "$1'$2"],
-    [/\b([A-Za-z]+'s)([A-Za-z]+)\b/g, '$1 $2'],
-    [/\s+([,.:;?!])/g, '$1'],
-    [/[ \t]{2,}/g, ' ']
-  ];
-
+  const textNodes = [];
   while ((node = walker.nextNode())) {
-    let val = node.nodeValue;
+    textNodes.push(node);
+  }
+
+  for (const textNode of textNodes) {
+    let val = textNode.nodeValue;
     if (!val || val.trim().length === 0) continue;
-    let changed = false;
-    for (const [pat, rep] of replacements) {
-      if (pat.test(val)) {
-        val = val.replace(pat, rep);
-        changed = true;
-      }
+
+    const original = val;
+
+    // A. Strip soft hyphens, zero-width spaces, and control characters that cause artificial gaps
+    val = val.replace(/[\u00AD\u200B\u200C\u200D\uFEFF]/g, '');
+
+    // B. Normalize non-breaking spaces and collapse duplicate spaces / tabs
+    val = val.replace(/\u00A0/g, ' ');
+    val = val.replace(/[ \t]{2,}/g, ' ');
+
+    // C. Fix punctuation separated by whitespace (e.g. "are you ?" -> "are you?", "hello , how" -> "hello, how")
+    // This prevents punctuation like '?' wrapping onto its own line alone!
+    val = val.replace(/\s+([,.:;?!'’"”\)\]\}])/g, '$1');
+
+    // D. Fix space after opening quotes or brackets (e.g. "( hello" -> "(hello")
+    val = val.replace(/([‘“\(\[\{])\s+/g, '$1');
+
+    // E. Fix split contractions: e.g. "don 't" -> "don't", "I 'm" -> "I'm", "they 'll" -> "they'll"
+    val = val.replace(/\b([A-Za-z]+)\s+(['’][stdm]|['’]ll|['’]re|['’]ve)\b/g, '$1$2');
+
+    // F. Fix split possessives: e.g. "world 's" -> "world's"
+    val = val.replace(/\b([A-Za-z]+)\s+['’]s\b/g, "$1's");
+
+    // G. Suffix stitching: when OCR splits word and suffix (e.g. "read ing" -> "reading", "popula tion" -> "population")
+    val = val.replace(/\b([a-zA-Z]{3,})\s+(ing|tion|tions|ment|ments|ly|able|ness|ful|fully|less|lessly)\b/g, '$1$2');
+
+    // H. High-frequency OCR split words dictionary
+    val = val.replace(/\bthe\s+se\b/gi, (m) => m[0] === 'T' ? 'These' : 'these');
+    val = val.replace(/\bba\s+ck\b/gi, (m) => m[0] === 'B' ? 'Back' : 'back');
+    val = val.replace(/\bsha\s+ll\b/gi, (m) => m[0] === 'S' ? 'Shall' : 'shall');
+    val = val.replace(/\bbe\s+ing\b/gi, (m) => m[0] === 'B' ? 'Being' : 'being');
+    val = val.replace(/\bwe\s+ll\b/gi, (m) => m[0] === 'W' ? 'Well' : 'well');
+    val = val.replace(/\bwe\s+nt\b/gi, (m) => m[0] === 'W' ? 'Went' : 'went');
+    val = val.replace(/\bta\s+ll\b/gi, (m) => m[0] === 'T' ? 'Tall' : 'tall');
+    val = val.replace(/\bthe\s+re\b/gi, (m) => m[0] === 'T' ? 'There' : 'there');
+    val = val.replace(/\bwi\s+th\b/gi, (m) => m[0] === 'W' ? 'With' : 'with');
+    val = val.replace(/\bwhi\s+ch\b/gi, (m) => m[0] === 'W' ? 'Which' : 'which');
+    val = val.replace(/\bwha\s+t\b/gi, (m) => m[0] === 'W' ? 'What' : 'what');
+    val = val.replace(/\bwhe\s+re\b/gi, (m) => m[0] === 'W' ? 'Where' : 'where');
+    val = val.replace(/\bwhe\s+n\b/gi, (m) => m[0] === 'W' ? 'When' : 'when');
+    val = val.replace(/\bha\s+ve\b/gi, (m) => m[0] === 'H' ? 'Have' : 'have');
+    val = val.replace(/\bha\s+d\b/gi, (m) => m[0] === 'H' ? 'Had' : 'had');
+    val = val.replace(/\bha\s+s\b/gi, (m) => m[0] === 'H' ? 'Has' : 'has');
+    val = val.replace(/\bcou\s+ld\b/gi, (m) => m[0] === 'C' ? 'Could' : 'could');
+    val = val.replace(/\bwou\s+ld\b/gi, (m) => m[0] === 'W' ? 'Would' : 'would');
+    val = val.replace(/\bshou\s+ld\b/gi, (m) => m[0] === 'S' ? 'Should' : 'should');
+    val = val.replace(/\babo\s+ut\b/gi, (m) => m[0] === 'A' ? 'About' : 'about');
+    val = val.replace(/\bbe\s+fore\b/gi, (m) => m[0] === 'B' ? 'Before' : 'before');
+    val = val.replace(/\baft\s+er\b/gi, (m) => m[0] === 'A' ? 'After' : 'after');
+    val = val.replace(/\bag\s+ain\b/gi, (m) => m[0] === 'A' ? 'Again' : 'again');
+    val = val.replace(/\bne\s+ver\b/gi, (m) => m[0] === 'N' ? 'Never' : 'never');
+    val = val.replace(/\bal\s+ways\b/gi, (m) => m[0] === 'A' ? 'Always' : 'always');
+    val = val.replace(/\bpe\s+ople\b/gi, (m) => m[0] === 'P' ? 'People' : 'people');
+    val = val.replace(/\bthi\s+ng\b/gi, (m) => m[0] === 'T' ? 'Thing' : 'thing');
+    val = val.replace(/\bthi\s+ngs\b/gi, (m) => m[0] === 'T' ? 'Things' : 'things');
+    val = val.replace(/\blitt\s+le\b/gi, (m) => m[0] === 'L' ? 'Little' : 'little');
+    val = val.replace(/\bne\s+w\b/gi, (m) => m[0] === 'N' ? 'New' : 'new');
+    val = val.replace(/\bove\s+r\b/gi, (m) => m[0] === 'O' ? 'Over' : 'over');
+    val = val.replace(/\bsta\s+te\b/gi, (m) => m[0] === 'S' ? 'State' : 'state');
+    val = val.replace(/\bbe\s+yond\b/gi, (m) => m[0] === 'B' ? 'Beyond' : 'beyond');
+    val = val.replace(/\bitse\s+lf\b/gi, (m) => m[0] === 'I' ? 'Itself' : 'itself');
+    val = val.replace(/\bhe\s+at\b/gi, (m) => m[0] === 'H' ? 'Heat' : 'heat');
+    val = val.replace(/\bhe\s+a\s+t\b/gi, (m) => m[0] === 'H' ? 'Heat' : 'heat');
+    val = val.replace(/\bha\s+bit\b/gi, (m) => m[0] === 'H' ? 'Habit' : 'habit');
+    val = val.replace(/\bscie\s+ntific\b/gi, (m) => m[0] === 'S' ? 'Scientific' : 'scientific');
+    val = val.replace(/\bscie\s+nce\b/gi, (m) => m[0] === 'S' ? 'Science' : 'science');
+    val = val.replace(/\bindividua\s+ls\b/gi, (m) => m[0] === 'I' ? 'Individuals' : 'individuals');
+    val = val.replace(/\bindividua\s+l\b/gi, (m) => m[0] === 'I' ? 'Individual' : 'individual');
+    val = val.replace(/\bde\s+fe\s+ct\b/gi, (m) => m[0] === 'D' ? 'Defect' : 'defect');
+    val = val.replace(/\bde\s+fe\s+re\s+ntia\s+l\b/gi, (m) => m[0] === 'D' ? 'Deferential' : 'deferential');
+    val = val.replace(/\binte\s+rrupt\b/gi, (m) => m[0] === 'I' ? 'Interrupt' : 'interrupt');
+    val = val.replace(/\binte\s+rrupting\b/gi, (m) => m[0] === 'I' ? 'Interrupting' : 'interrupting');
+    val = val.replace(/\bm\s+otto\b/gi, (m) => m[0] === 'M' ? 'Motto' : 'motto');
+    val = val.replace(/\bstude\s+nts\b/gi, (m) => m[0] === 'S' ? 'Students' : 'students');
+    val = val.replace(/\bstude\s+nt\b/gi, (m) => m[0] === 'S' ? 'Student' : 'student');
+    val = val.replace(/\bde\s+pa\s+rtm\s+e\s+nts\b/gi, (m) => m[0] === 'D' ? 'Departments' : 'departments');
+    val = val.replace(/\be\s+norm\s+ous\b/gi, (m) => m[0] === 'E' ? 'Enormous' : 'enormous');
+    val = val.replace(/\be\s+ntra\s+nce\b/gi, (m) => m[0] === 'E' ? 'Entrance' : 'entrance');
+    val = val.replace(/\be\s+nte\s+re\s+d\b/gi, (m) => m[0] === 'E' ? 'Entered' : 'entered');
+
+    if (val !== original) {
+      textNode.nodeValue = val;
     }
-    if (changed) {
-      node.nodeValue = val;
+  }
+
+  // 2. Fix Abbyy / OCR single-line chopped paragraphs:
+  // If an EPUB has consecutive <p> tags where the first <p> ends without punctuation (. ! ? " ” : ;)
+  // and the next <p> starts with a lowercase letter, stitch or style them so they don't break lines unnaturally!
+  const paragraphs = rootNode.querySelectorAll('p');
+  for (let i = 0; i < paragraphs.length - 1; i++) {
+    const p1 = paragraphs[i];
+    const p2 = paragraphs[i + 1];
+    const t1 = p1.textContent.trim();
+    const t2 = p2.textContent.trim();
+    if (t1.length > 0 && t2.length > 0) {
+      const lastChar = t1[t1.length - 1];
+      const firstChar = t2[0];
+      if (!/[.!?:"”;\-—]/.test(lastChar) && /^[a-z]/.test(firstChar)) {
+        p1.style.marginBottom = '0px';
+        p1.style.display = 'inline';
+        p2.style.textIndent = '0px';
+        p2.style.display = 'inline';
+      }
     }
   }
 }
@@ -895,6 +1021,17 @@ function setupMenuControls() {
     modeSelect.value = readerPrefs.mode;
     modeSelect.addEventListener('change', (e) => {
       toggleReadingMode(e.target.value);
+    });
+  }
+
+  // Text Alignment Select
+  const alignSelect = document.getElementById('text-align-select');
+  if (alignSelect) {
+    alignSelect.value = readerPrefs.textAlign;
+    alignSelect.addEventListener('change', (e) => {
+      readerPrefs.textAlign = e.target.value;
+      localStorage.setItem('athenaeum_text_align', readerPrefs.textAlign);
+      applyCurrentStylesToRendition();
     });
   }
 }
