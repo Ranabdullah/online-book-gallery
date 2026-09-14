@@ -280,31 +280,60 @@ function setupEpubRendition() {
 
   // Dynamic OCR clean-up filter & touch swipe inside iframe
   currentRendition.hooks.content.register((contents) => {
-    cleanRenderedOcrArtifacts(contents.document.body);
-    attachTouchAndTapNavigation(contents.document);
+    try {
+      if (contents && contents.document) {
+        if (contents.document.body) {
+          cleanRenderedOcrArtifacts(contents.document.body);
+        }
+        attachTouchAndTapNavigation(contents.document);
+      }
+    } catch (hookErr) {
+      console.warn('Content hook non-fatal error:', hookErr);
+    }
   });
 
   // Apply paper theme styles
   applyCurrentStylesToRendition();
 
+  // Safety timer: under NO circumstances should the reader stay locked on "Opening Book..."
+  const loaderSafetyTimer = setTimeout(() => {
+    hideLoader();
+  }, 3500);
+
+  const onDisplaySuccess = () => {
+    clearTimeout(loaderSafetyTimer);
+    hideLoader();
+    applyCurrentStylesToRendition();
+    try {
+      checkAndPromptCrossDeviceResume(currentBookIdentifier, 'epub');
+    } catch (e) {
+      console.warn('Cross device resume check warning:', e);
+    }
+  };
+
   // Restore saved reading position
   const savedCfi = localStorage.getItem(`athenaeum_pos_${currentBookIdentifier}`);
   const displayPromise = savedCfi ? currentRendition.display(savedCfi) : currentRendition.display();
 
-  displayPromise.then(() => {
-    hideLoader();
-    applyCurrentStylesToRendition();
-    checkAndPromptCrossDeviceResume(currentBookIdentifier, 'epub');
-  }).catch((displayErr) => {
-    console.warn('Initial display error, falling back to default:', displayErr);
-    currentRendition.display().then(() => {
+  displayPromise.then(onDisplaySuccess).catch((displayErr) => {
+    console.warn('Initial display error, resetting position and falling back to default:', displayErr);
+    // In case the saved CFI was from an older version of the book file
+    localStorage.removeItem(`athenaeum_pos_${currentBookIdentifier}`);
+    currentRendition.display().then(onDisplaySuccess).catch(e => {
+      clearTimeout(loaderSafetyTimer);
       hideLoader();
-      checkAndPromptCrossDeviceResume(currentBookIdentifier, 'epub');
-    }).catch(e => showError('EPUB render error: ' + e.message));
+      showError('EPUB render error: ' + e.message);
+    });
   });
 
   // Tracking position & progress
+  currentRendition.on('rendered', () => {
+    clearTimeout(loaderSafetyTimer);
+    hideLoader();
+  });
+
   currentRendition.on('relocated', (location) => {
+    clearTimeout(loaderSafetyTimer);
     hideLoader();
     if (location && location.start) {
       localStorage.setItem(`athenaeum_pos_${currentBookIdentifier}`, location.start.cfi);
@@ -709,11 +738,14 @@ function applyCurrentStylesToRendition() {
  */
 function cleanRenderedOcrArtifacts(rootNode) {
   if (!rootNode) return;
+  try {
+    const doc = rootNode.ownerDocument || (rootNode.getRootNode && rootNode.getRootNode()) || document;
+    if (!doc || typeof doc.createTreeWalker !== 'function') return;
 
-  // 1. Walk and clean text nodes
-  const walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, null, false);
-  let node;
-  const textNodes = [];
+    // 1. Walk and clean text nodes
+    const walker = doc.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    const textNodes = [];
   while ((node = walker.nextNode())) {
     textNodes.push(node);
   }
@@ -826,6 +858,9 @@ function cleanRenderedOcrArtifacts(rootNode) {
       }
     }
   }
+  } catch (err) {
+    console.warn('cleanRenderedOcrArtifacts warning:', err);
+  }
 }
 
 /**
@@ -833,55 +868,59 @@ function cleanRenderedOcrArtifacts(rootNode) {
  */
 function attachTouchAndTapNavigation(target) {
   if (!target || target._hasTouchNav) return;
-  target._hasTouchNav = true;
+  try {
+    target._hasTouchNav = true;
 
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let touchStartTime = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
 
-  target.addEventListener('touchstart', (e) => {
-    if (e.touches && e.touches.length === 1) {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      touchStartTime = Date.now();
-    }
-  }, { passive: true });
-
-  target.addEventListener('touchend', (e) => {
-    if (e.changedTouches && e.changedTouches.length === 1) {
-      const touchEndX = e.changedTouches[0].clientX;
-      const touchEndY = e.changedTouches[0].clientY;
-      const dx = touchEndX - touchStartX;
-      const dy = touchEndY - touchStartY;
-      const dt = Date.now() - touchStartTime;
-
-      // 1. Horizontal Swipe (turn pages)
-      if (Math.abs(dx) > 40 && Math.abs(dy) < 80 && dt < 600) {
-        if (dx < -40) turnPage('next');
-        else if (dx > 40) turnPage('prev');
-        return;
+    target.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
       }
+    }, { passive: true });
 
-      // 2. Mobile screen tap zones
-      if (Math.abs(dx) < 15 && Math.abs(dy) < 15 && dt < 350) {
-        const width = target.clientWidth || window.innerWidth;
-        const tapX = touchEndX;
+    target.addEventListener('touchend', (e) => {
+      if (e.changedTouches && e.changedTouches.length === 1) {
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const dx = touchEndX - touchStartX;
+        const dy = touchEndY - touchStartY;
+        const dt = Date.now() - touchStartTime;
 
-        // Left 22% -> Prev
-        if (tapX < width * 0.22) {
-          turnPage('prev');
+        // 1. Horizontal Swipe (turn pages)
+        if (Math.abs(dx) > 40 && Math.abs(dy) < 80 && dt < 600) {
+          if (dx < -40) turnPage('next');
+          else if (dx > 40) turnPage('prev');
+          return;
         }
-        // Right 22% -> Next
-        else if (tapX > width * 0.78) {
-          turnPage('next');
-        }
-        // Center -> Toggle Immersive Fullscreen Mode on mobile
-        else if (window.innerWidth <= 768) {
-          toggleImmersiveMode();
+
+        // 2. Mobile screen tap zones
+        if (Math.abs(dx) < 15 && Math.abs(dy) < 15 && dt < 350) {
+          const width = target.clientWidth || window.innerWidth;
+          const tapX = touchEndX;
+
+          // Left 22% -> Prev
+          if (tapX < width * 0.22) {
+            turnPage('prev');
+          }
+          // Right 22% -> Next
+          else if (tapX > width * 0.78) {
+            turnPage('next');
+          }
+          // Center -> Toggle Immersive Fullscreen Mode on mobile
+          else if (window.innerWidth <= 768) {
+            toggleImmersiveMode();
+          }
         }
       }
-    }
-  }, { passive: true });
+    }, { passive: true });
+  } catch (err) {
+    console.warn('attachTouchAndTapNavigation warning:', err);
+  }
 }
 
 function toggleImmersiveMode() {
@@ -1069,7 +1108,10 @@ function hideLoader() {
   const loader = document.getElementById('reader-loader');
   if (loader) {
     loader.style.opacity = '0';
-    setTimeout(() => { loader.style.display = 'none'; }, 280);
+    loader.style.pointerEvents = 'none';
+    setTimeout(() => { 
+      loader.style.display = 'none'; 
+    }, 280);
   }
 }
 
