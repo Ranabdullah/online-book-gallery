@@ -237,6 +237,22 @@ function initEpubReaderWithBuffer(buffer, identifier) {
     currentBook = ePub(buffer);
     setupEpubRendition();
 
+    // Generate locations for accurate percentage progress tracking (paginated mode)
+    currentBook.ready.then(() => {
+      const storedLocations = localStorage.getItem(`athenaeum_locs_${identifier}`);
+      if (storedLocations) {
+        currentBook.locations.load(storedLocations);
+      } else {
+        currentBook.locations.generate(1600).then(() => {
+          try {
+            localStorage.setItem(`athenaeum_locs_${identifier}`, currentBook.locations.save());
+          } catch (e) {
+            // Storage quota — ignore, locations will regenerate next time
+          }
+        }).catch(() => {});
+      }
+    }).catch(() => {});
+
     // TOC Navigation
     currentBook.loaded.navigation.then((nav) => {
       const tocList = document.getElementById('toc-list');
@@ -346,15 +362,28 @@ function setupEpubRendition() {
     hideLoader();
     if (location && location.start) {
       localStorage.setItem(`athenaeum_pos_${currentBookIdentifier}`, location.start.cfi);
-      const pct = location.start.percentage ? Math.round(location.start.percentage * 100) : 0;
-      if (location.start.percentage) {
-        document.getElementById('reader-percentage').textContent = `${pct}%`;
-        document.getElementById('progress-bar-fill').style.width = `${pct}%`;
-      }
+
+      // Always update percentage (even 0% is valid — removing falsy guard)
+      const pct = location.start.percentage != null ? Math.round(location.start.percentage * 100) : 0;
+      const pctEl = document.getElementById('reader-percentage');
+      const barEl = document.getElementById('progress-bar-fill');
+      if (pctEl) pctEl.textContent = `${pct}%`;
+      if (barEl) barEl.style.width = `${pct}%`;
+
+      // Page label: use displayed page per chapter, or chapter index
       const pageNum = (location.start.displayed && location.start.displayed.page) ? location.start.displayed.page : null;
-      if (pageNum) {
-        document.getElementById('reader-progress-text').textContent = `Page ${pageNum}`;
+      const totalPages = (location.start.displayed && location.start.displayed.total) ? location.start.displayed.total : null;
+      const progressEl = document.getElementById('reader-progress-text');
+      if (progressEl) {
+        if (pageNum && totalPages && totalPages > 1) {
+          progressEl.textContent = `Page ${pageNum} of ${totalPages}`;
+        } else if (pageNum) {
+          progressEl.textContent = `Page ${pageNum}`;
+        } else {
+          progressEl.textContent = `${pct}%`;
+        }
       }
+
       // Save to Cross-Device Sync Engine
       if (window.AthenaeumSync) {
         const titleEl = document.getElementById('reader-book-title');
@@ -370,6 +399,7 @@ function setupEpubRendition() {
     }
   });
 }
+
 
 /**
  * Cross-Device Reading Position Sync Prompt

@@ -303,81 +303,48 @@ body {
   background: rgba(0, 0, 0, 0.05);
 }
 
-/* Clean Book Stage & Reading Area */
+/* Clean Gmail-Style Reading Area — flat, minimal, no 3D effects */
 .book-stage {
   flex: 1;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   position: relative;
   overflow: hidden;
   background-color: var(--reader-bg);
-  padding: 12px 20px;
+  padding: 0;
 }
 
 .book-page-wrapper {
   width: 100%;
-  max-width: 900px;
-  height: calc(100% - 16px);
+  max-width: 780px;
+  height: 100%;
   position: relative;
   background-color: var(--reader-bg);
-  border-radius: 6px;
-  box-shadow: 
-    0 12px 48px rgba(0, 0, 0, 0.12),
-    0 2px 10px rgba(0, 0, 0, 0.06),
-    inset 0 0 70px rgba(0, 0, 0, 0.02);
+  border-radius: 0;
+  box-shadow: none;
   overflow: hidden;
+  border-left: 1px solid rgba(0,0,0,0.08);
+  border-right: 1px solid rgba(0,0,0,0.08);
 }
 
-/* 3D Physical Stack of Pages (Book Block Depth) */
+/* 3D decorations — hidden for clean reading */
 .book-edge-stack {
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
-  width: 5px;
-  pointer-events: none;
-  z-index: 15;
+  display: none;
 }
 
 .book-edge-stack.left {
-  left: 0;
-  background: repeating-linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.1) 0px,
-    rgba(255, 255, 255, 0.4) 1px,
-    rgba(0, 0, 0, 0.05) 2px
-  );
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.06);
+  display: none;
 }
 
 .book-edge-stack.right {
-  right: 0;
-  background: repeating-linear-gradient(
-    to left,
-    rgba(0, 0, 0, 0.1) 0px,
-    rgba(255, 255, 255, 0.4) 1px,
-    rgba(0, 0, 0, 0.05) 2px
-  );
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.06);
+  display: none;
 }
 
-/* Authentic Page Spine Depth & Cylindrical Lighting */
+/* Spine shadow — hidden */
 .spine-shadow-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 44px;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.14) 0%,
-    rgba(0, 0, 0, 0.07) 12%,
-    rgba(0, 0, 0, 0.02) 28%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  pointer-events: none;
-  z-index: 20;
+  display: none;
 }
 
 
