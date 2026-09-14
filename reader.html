@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Reading - Athenaeum</title>
-  <link rel="stylesheet" href="css/reader.css?v=3.3.1">
+  <link rel="stylesheet" href="css/reader.css?v=3.4.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body data-paper="cream">
@@ -35,6 +35,24 @@
     </div>
 
     <div class="toolbar-right">
+      <!-- AI Book Intelligence Link -->
+      <a id="btn-reader-analysis" class="tool-btn" href="#" title="AI Book Intelligence (Summary, Style, Concepts, Vocabulary)">
+        <span class="btn-icon">🧠</span>
+        <span class="btn-text">AI Intel</span>
+      </a>
+
+      <!-- Vocabulary Drawer Toggle -->
+      <button id="btn-vocab-toggle" class="tool-btn" title="Saved Vocabulary & Flashcards">
+        <span class="btn-icon">⭐</span>
+        <span class="btn-text">Vocab (<span id="vocab-badge-count">0</span>)</span>
+      </button>
+
+      <!-- Notes Drawer Toggle -->
+      <button id="btn-notes-toggle" class="tool-btn" title="Highlights & Margin Notes">
+        <span class="btn-icon">📝</span>
+        <span class="btn-text">Notes (<span id="notes-badge-count">0</span>)</span>
+      </button>
+
       <!-- Reading Mode: Scroll Down vs Paginated -->
       <button id="btn-mode-toggle" class="tool-btn" title="Toggle Scroll Down / Page Turn">
         <span class="btn-icon" id="mode-icon">📜</span>
@@ -181,6 +199,93 @@
 
   </div>
 
+  <!-- Slide-out Vocabulary Drawer -->
+  <aside class="reader-side-drawer" id="reader-vocab-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title-row">
+        <span class="drawer-title">⭐ My Vocabulary</span>
+        <span class="drawer-badge" id="drawer-vocab-count">0</span>
+      </div>
+      <button type="button" class="tool-btn btn-drawer-close" id="btn-vocab-drawer-close" title="Close drawer">&times;</button>
+    </div>
+    <div class="drawer-toolbar">
+      <input type="text" id="vocab-search-input" class="drawer-search-input" placeholder="Search saved words...">
+      <a href="#" id="btn-vocab-to-flashcards" class="btn-vocab-action" title="Open Flashcard Practice Mode">
+        <span>🃏 Flashcards</span>
+      </a>
+    </div>
+    <div class="drawer-list" id="vocab-drawer-list">
+      <div class="drawer-empty-state">
+        <p>No saved vocabulary words yet.</p>
+        <span class="drawer-empty-hint">Click or highlight any word in the book to look up its definition and save it!</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Slide-out Notes & Highlights Drawer -->
+  <aside class="reader-side-drawer" id="reader-notes-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title-row">
+        <span class="drawer-title">📝 Notes & Highlights</span>
+        <span class="drawer-badge" id="drawer-notes-count">0</span>
+      </div>
+      <button type="button" class="tool-btn btn-drawer-close" id="btn-notes-drawer-close" title="Close drawer">&times;</button>
+    </div>
+    <div class="drawer-toolbar">
+      <input type="text" id="notes-search-input" class="drawer-search-input" placeholder="Filter notes and quotes...">
+    </div>
+    <div class="drawer-list" id="notes-drawer-list">
+      <div class="drawer-empty-state">
+        <p>No highlights or margin notes yet.</p>
+        <span class="drawer-empty-hint">Highlight any text passage in the reader and click "Add Note" to write annotations!</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Floating Word & Definition Popover -->
+  <div class="reader-word-popover" id="reader-word-popover" style="display: none;">
+    <div class="popover-header">
+      <div class="popover-title-row">
+        <span class="popover-word" id="popover-word">Word</span>
+        <span class="popover-phonetic" id="popover-phonetic"></span>
+        <button type="button" class="popover-btn-audio" id="popover-btn-audio" title="Listen to pronunciation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        </button>
+      </div>
+      <button type="button" class="popover-btn-close" id="popover-btn-close" title="Close">&times;</button>
+    </div>
+
+    <div class="popover-body" id="popover-body">
+      <div class="popover-loading">
+        <span class="popover-spinner"></span>
+        <span>Looking up definition...</span>
+      </div>
+    </div>
+
+    <div class="popover-actions">
+      <button type="button" class="popover-act-btn btn-save-vocab" id="popover-btn-save-vocab">
+        ⭐ Save to Vocab
+      </button>
+      <button type="button" class="popover-act-btn btn-toggle-note" id="popover-btn-toggle-note">
+        📝 Add Note
+      </button>
+    </div>
+
+    <!-- Inline Note Annotation Form -->
+    <div class="popover-note-form" id="popover-note-form" style="display: none;">
+      <textarea id="popover-note-input" placeholder="Write personal margin note or thoughts..." rows="2"></textarea>
+      <div class="popover-note-bottom">
+        <div class="color-chips" id="note-color-chips">
+          <span class="color-chip active" data-color="#fef08a" style="background: #fef08a;" title="Yellow highlight"></span>
+          <span class="color-chip" data-color="#bbf7d0" style="background: #bbf7d0;" title="Green highlight"></span>
+          <span class="color-chip" data-color="#bae6fd" style="background: #bae6fd;" title="Blue highlight"></span>
+          <span class="color-chip" data-color="#fbcfe8" style="background: #fbcfe8;" title="Pink highlight"></span>
+        </div>
+        <button type="button" class="btn-submit-note" id="popover-btn-submit-note">Save Note</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Cross-Device Reading Resume Banner -->
   <div class="sync-resume-banner" id="sync-resume-banner" style="display: none;">
     <div class="resume-banner-content">
@@ -204,10 +309,10 @@
   <script src="js/vendor/jszip.min.js"></script>
   <script src="js/vendor/epub.min.js"></script>
   <script src="js/vendor/pdf.min.js"></script>
-  <script src="js/db.js?v=3.3.1"></script>
-  <script src="js/sync.js?v=3.3.1"></script>
+  <script src="js/db.js?v=3.4.0"></script>
+  <script src="js/sync.js?v=3.4.0"></script>
 
   <!-- Reader Script -->
-  <script src="js/reader.js?v=3.3.1"></script>
+  <script src="js/reader.js?v=3.4.0"></script>
 </body>
 </html>

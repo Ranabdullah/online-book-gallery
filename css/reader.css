@@ -88,7 +88,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  z-index: 50;
+  z-index: 95;
   position: relative;
   font-family: 'Inter', sans-serif;
 }
@@ -825,5 +825,594 @@ body.immersive-mode .reader-footer {
     padding: 6px 12px;
   }
 }
+
+/* ==========================================================================
+   Book Intelligence, Vocabulary & Notes Topbar Badges
+   ========================================================================== */
+
+#btn-reader-analysis {
+  background: rgba(147, 51, 234, 0.1);
+  color: #9333ea;
+  border-color: rgba(147, 51, 234, 0.25);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#btn-reader-analysis:hover {
+  background: rgba(147, 51, 234, 0.18);
+  border-color: #9333ea;
+}
+
+[data-paper="charcoal"] #btn-reader-analysis {
+  background: rgba(192, 132, 252, 0.15);
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.3);
+}
+
+.tool-btn .btn-text span {
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Slide-out Drawers (Vocabulary & Notes)
+   ========================================================================== */
+
+.reader-side-drawer {
+  width: 350px;
+  max-width: 90vw;
+  background-color: var(--reader-sidebar-bg);
+  border-left: 1px solid var(--reader-border);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  transform: translateX(100%);
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -6px 0 25px rgba(0, 0, 0, 0.12);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.reader-side-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--reader-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drawer-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drawer-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--reader-text);
+}
+
+.drawer-badge {
+  background: #3b82f6;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+
+.drawer-toolbar {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--reader-border);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.drawer-search-input {
+  flex: 1;
+  background: var(--reader-bg);
+  border: 1px solid var(--reader-border);
+  color: var(--reader-text);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-family: inherit;
+  outline: none;
+}
+
+.drawer-search-input:focus {
+  border-color: #3b82f6;
+}
+
+.btn-vocab-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #4f46e5;
+  color: white;
+  text-decoration: none;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.btn-vocab-action:hover {
+  background: #4338ca;
+  transform: scale(1.02);
+}
+
+.drawer-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drawer-empty-state {
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--text-muted);
+}
+
+.drawer-empty-state p {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.drawer-empty-hint {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+/* Vocabulary Cards in Drawer */
+.drawer-vocab-card {
+  background: var(--reader-bg);
+  border: 1px solid var(--reader-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.15s;
+}
+
+.drawer-vocab-card:hover {
+  border-color: #cbd5e1;
+}
+
+.drawer-vocab-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.drawer-vocab-word {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--reader-text);
+}
+
+.drawer-vocab-phonetic {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-left: 6px;
+}
+
+.drawer-vocab-pos {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: #e0e7ff;
+  color: #4338ca;
+  margin-right: 6px;
+}
+
+.drawer-vocab-def {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--reader-text);
+  margin-top: 4px;
+}
+
+.drawer-vocab-context {
+  font-size: 11.5px;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 6px;
+  padding-left: 8px;
+  border-left: 2px solid #cbd5e1;
+}
+
+.drawer-vocab-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--reader-border);
+}
+
+.drawer-btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 12px;
+  transition: all 0.15s;
+}
+
+.drawer-btn-icon:hover {
+  color: var(--reader-text);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.drawer-btn-delete:hover {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+/* Note Cards in Drawer */
+.drawer-note-card {
+  background: var(--reader-bg);
+  border: 1px solid var(--reader-border);
+  border-left: 4px solid #fef08a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.drawer-note-quote {
+  font-family: Georgia, serif;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--reader-text);
+  margin-bottom: 8px;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.drawer-note-body {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--reader-text);
+  font-weight: 500;
+}
+
+.drawer-note-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--reader-border);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.drawer-btn-jump {
+  color: #2563eb;
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.drawer-btn-jump:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Floating Word & Definition Popover
+   ========================================================================== */
+
+.reader-word-popover {
+  position: absolute;
+  z-index: 1000;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  background: #ffffff;
+  color: #1e293b;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  padding: 14px 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  animation: popover-fade-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+[data-paper="charcoal"] .reader-word-popover {
+  background: #202024;
+  color: #f1f5f9;
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+@keyframes popover-fade-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.popover-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 8px;
+}
+
+[data-paper="charcoal"] .popover-header {
+  border-bottom-color: #334155;
+}
+
+.popover-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.popover-word {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+[data-paper="charcoal"] .popover-word {
+  color: #f8fafc;
+}
+
+.popover-phonetic {
+  font-size: 12px;
+  color: #64748b;
+  font-style: italic;
+  font-family: 'Inter', sans-serif;
+}
+
+.popover-btn-audio {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4338ca;
+  transition: all 0.15s;
+}
+
+.popover-btn-audio:hover {
+  background: #e0e7ff;
+  transform: scale(1.1);
+}
+
+.popover-btn-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.popover-body {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #334155;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+[data-paper="charcoal"] .popover-body {
+  color: #cbd5e1;
+}
+
+.popover-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  padding: 8px 0;
+  font-size: 12.5px;
+}
+
+.popover-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #cbd5e1;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.popover-pos-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #e0e7ff;
+  color: #4338ca;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.popover-def-item {
+  margin-bottom: 6px;
+}
+
+.popover-example {
+  display: block;
+  font-style: italic;
+  color: #64748b;
+  font-size: 12px;
+  margin-top: 2px;
+  padding-left: 8px;
+  border-left: 2px solid #cbd5e1;
+}
+
+.popover-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.popover-act-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+  transition: all 0.15s;
+}
+
+.popover-act-btn:hover {
+  background: #f1f5f9;
+}
+
+.popover-act-btn.btn-save-vocab {
+  background: #fefce8;
+  border-color: #fef08a;
+  color: #854d0e;
+}
+
+.popover-act-btn.btn-save-vocab:hover {
+  background: #fef9c3;
+}
+
+.popover-note-form {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f1f5f9;
+}
+
+[data-paper="charcoal"] .popover-note-form {
+  border-top-color: #334155;
+}
+
+.popover-note-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 12px;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 8px;
+}
+
+.popover-note-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.color-chips {
+  display: flex;
+  gap: 6px;
+}
+
+.color-chip {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.15s;
+}
+
+.color-chip.active {
+  border-color: #0f172a;
+  transform: scale(1.15);
+}
+
+.btn-submit-note {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-submit-note:hover {
+  background: #1d4ed8;
+}
+
+/* ==========================================================================
+   PDF Text Layer (Selectable & Clickable Words in PDF)
+   ========================================================================== */
+
+.pdf-page-slot {
+  position: relative;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.pdf-text-layer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  line-height: 1;
+  user-select: text;
+  -webkit-user-select: text;
+  pointer-events: auto;
+}
+
+.pdf-text-layer > span {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+
+.pdf-text-layer ::selection {
+  background: rgba(56, 189, 248, 0.4);
+}
+
 
 

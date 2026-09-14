@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>AI Book Intelligence - Athenaeum</title>
+  <link rel="stylesheet" href="css/analysis.css?v=3.4.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+</head>
+<body data-paper="cream">
+
+  <!-- Sticky Top Bar -->
+  <header class="analysis-topbar">
+    <div class="topbar-left">
+      <a href="index.html" class="topbar-btn btn-back" id="btn-back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Library</span>
+      </a>
+      <div class="topbar-divider"></div>
+      <div class="topbar-book-title" id="topbar-title">Book Intelligence</div>
+    </div>
+
+    <div class="topbar-right">
+      <button class="topbar-btn" id="btn-toggle-vocab" title="View Saved Vocabulary">
+        <span>⭐</span>
+        <span class="btn-text">My Vocabulary</span>
+        <span class="vocab-badge" id="vocab-count-badge">0</span>
+      </button>
+
+      <a href="#" class="topbar-btn btn-primary" id="btn-read-now-top">
+        <span>📖</span>
+        <span class="btn-text">Read Book</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="analysis-container">
+
+    <!-- Loading State -->
+    <div class="analysis-loader" id="analysis-loader">
+      <div class="loader-spinner"></div>
+      <h3 style="margin-top: 16px; font-family: 'Playfair Display', serif;">Synthesizing Literary Intelligence...</h3>
+      <p style="color: var(--text-muted); font-size: 13px; margin-top: 6px;">Analyzing prose, syntax architecture, thematic concepts, and elevated vocabulary</p>
+    </div>
+
+    <!-- Hero Header -->
+    <section class="analysis-hero" id="analysis-hero" style="display: none;">
+      <div class="hero-cover-container">
+        <img id="hero-cover" src="covers/default.jpg" alt="Book Cover" class="hero-cover-img">
+        <div class="hero-cover-shadow"></div>
+      </div>
+
+      <div class="hero-details">
+        <div class="hero-badges" id="hero-badges">
+          <span class="badge badge-genre" id="badge-genre">Classics</span>
+          <span class="badge badge-difficulty" id="badge-difficulty">Elevated Literature</span>
+          <span class="badge badge-time" id="badge-time">~5 hrs read</span>
+        </div>
+
+        <h1 class="hero-title" id="hero-title">Book Title</h1>
+        <div class="hero-author" id="hero-author">by Author Name</div>
+
+        <div class="hero-thesis-box">
+          <div class="thesis-header">
+            <span class="thesis-icon">💡</span>
+            <span class="thesis-label">What This Book Says (Core Premise)</span>
+          </div>
+          <p class="thesis-text" id="hero-thesis">Loading core premise...</p>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#" class="action-btn action-primary" id="btn-read-hero">
+            <span>📖</span> Start Reading
+          </a>
+          <button class="action-btn action-secondary" id="btn-regenerate-ai">
+            <span>✨</span> Refresh AI Dossier
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="analysis-nav" id="analysis-nav" style="display: none;">
+      <button class="nav-tab active" data-tab="summary">
+        <span>📖</span> Summary & Arc
+      </button>
+      <button class="nav-tab" data-tab="style">
+        <span>🖋️</span> Writing Style
+      </button>
+      <button class="nav-tab" data-tab="grammar">
+        <span>📐</span> Grammar & Syntax
+      </button>
+      <button class="nav-tab" data-tab="topics">
+        <span>🏛️</span> Key Topics
+      </button>
+      <button class="nav-tab" data-tab="concepts">
+        <span>💡</span> Core Concepts
+      </button>
+      <button class="nav-tab" data-tab="vocabulary">
+        <span>📚</span> Elevated Words <span class="tab-pill" id="vocab-tab-count">0</span>
+      </button>
+      <button class="nav-tab" data-tab="scholar">
+        <span>🧠</span> AI Scholar Q&A
+      </button>
+    </nav>
+
+    <!-- Content Panels -->
+    <main class="analysis-content" id="analysis-content" style="display: none;">
+
+      <!-- Tab 1: Summary -->
+      <section class="tab-pane active" id="pane-summary">
+        <div class="section-card">
+          <h2 class="card-title">Executive Overview</h2>
+          <p class="card-lead" id="summary-elevator">Elevator pitch loading...</p>
+        </div>
+
+        <div class="section-card">
+          <h2 class="card-title">Comprehensive Chapter & Act Breakdown</h2>
+          <div class="act-timeline" id="summary-acts-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2 class="card-title">Philosophical & Moral Conclusions</h2>
+          <ul class="conclusions-list" id="summary-conclusions">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- Tab 2: Writing Style -->
+      <section class="tab-pane" id="pane-style">
+        <div class="section-card">
+          <h2 class="card-title">Authorial Voice & Perspective</h2>
+          <p class="card-lead" id="style-voice">Voice description...</p>
+        </div>
+
+        <div class="section-card">
+          <h2 class="card-title">Tone, Rhythm & Narrative Cadence</h2>
+          <p class="card-body" id="style-tone">Tone description...</p>
+          <div class="highlight-callout" id="style-montage" style="margin-top: 14px;">
+            <!-- Narrative technique callout -->
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2 class="card-title">Key Literary Devices & Symbolism Matrix</h2>
+          <div class="symbolism-grid" id="style-symbolism">
+            <!-- Symbolism items -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 3: Grammar & Syntax -->
+      <section class="tab-pane" id="pane-grammar">
+        <div class="section-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 class="card-title" style="margin: 0;">Linguistic & Syntactic Architecture</h2>
+            <div class="score-badge" id="grammar-score">Complexity: 8.5 / 10</div>
+          </div>
+          <div class="grammar-metric-row">
+            <div class="metric-box">
+              <div class="metric-label">Sentence Construction</div>
+              <div class="metric-desc" id="grammar-syntax">Syntax description...</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Diction & Lexical Register</div>
+              <div class="metric-desc" id="grammar-diction">Diction description...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2 class="card-title">Stylistic Neologisms & Linguistic Quirks</h2>
+          <p class="card-body" id="grammar-neologisms">Neologisms description...</p>
+        </div>
+      </section>
+
+      <!-- Tab 4: Key Topics -->
+      <section class="tab-pane" id="pane-topics">
+        <div class="section-card">
+          <h2 class="card-title">Major Topics & Thematic Inquiries</h2>
+          <div class="topics-grid" id="topics-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 5: Core Concepts -->
+      <section class="tab-pane" id="pane-concepts">
+        <div class="section-card">
+          <h2 class="card-title">Core Philosophical & World-Building Concepts</h2>
+          <div class="concepts-accordion" id="concepts-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 6: Elevated Vocabulary -->
+      <section class="tab-pane" id="pane-vocabulary">
+        <div class="section-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <h2 class="card-title" style="margin: 0;">Elevated & Difficult Words Glossary</h2>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Master the challenging literary vocabulary used in this book. Click any word to hear pronunciation or save to your personal flashcard bank.</p>
+            </div>
+            <input type="text" id="vocab-search" class="search-input" placeholder="Search words in glossary...">
+          </div>
+
+          <div class="vocab-cards-grid" id="vocab-cards-container">
+            <!-- Word cards -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 7: AI Scholar Q&A -->
+      <section class="tab-pane" id="pane-scholar">
+        <div class="section-card scholar-card">
+          <div class="scholar-header">
+            <div class="scholar-avatar">🧠</div>
+            <div>
+              <h2 class="card-title" style="margin: 0;">Interactive AI Literary Scholar</h2>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Ask deep analytical questions about characters, themes, symbolism, or historical context.</p>
+            </div>
+          </div>
+
+          <div class="scholar-chat-box" id="scholar-chat-box">
+            <div class="scholar-message bot">
+              <p>Welcome! I am your AI Literary Companion for this book. Ask me anything—from dissecting a specific chapter to comparing its themes with other masterpieces.</p>
+            </div>
+          </div>
+
+          <!-- Suggested prompts -->
+          <div class="scholar-suggestions" id="scholar-suggestions">
+            <!-- Buttons dynamically populated -->
+          </div>
+
+          <form class="scholar-input-row" id="scholar-form">
+            <input type="text" id="scholar-input" class="scholar-text-input" placeholder="Ask a question about this book..." required>
+            <button type="submit" class="scholar-submit-btn">Ask</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Vocabulary Drawer Modal -->
+  <div class="vocab-drawer-backdrop" id="vocab-drawer-backdrop"></div>
+  <aside class="vocab-drawer" id="vocab-drawer">
+    <div class="vocab-drawer-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 20px;">⭐</span>
+        <h3 style="margin: 0; font-size: 16px; font-weight: 700;">My Vocabulary Bank</h3>
+      </div>
+      <button class="topbar-btn" id="btn-close-vocab-drawer" style="width: 32px; height: 32px; border-radius: 50%;">&times;</button>
+    </div>
+
+    <!-- Flashcard practice toggle -->
+    <div style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.02);">
+      <span style="font-size: 13px; font-weight: 600;">Saved Words (<span id="drawer-vocab-total">0</span>)</span>
+      <button class="action-btn" id="btn-start-flashcards" style="padding: 4px 10px; font-size: 12px;">🎴 Flashcard Practice</button>
+    </div>
+
+    <div class="vocab-drawer-list" id="drawer-vocab-list">
+      <!-- Dynamically populated -->
+    </div>
+  </aside>
+
+  <!-- Flashcard Practice Modal -->
+  <div class="flashcard-modal-backdrop" id="flashcard-modal-backdrop" style="display: none;">
+    <div class="flashcard-modal">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <span style="font-size: 13px; font-weight: 700; color: var(--text-muted);" id="flashcard-progress">Word 1 of 10</span>
+        <button id="btn-close-flashcards" class="topbar-btn" style="width: 28px; height: 28px; border-radius: 50%;">&times;</button>
+      </div>
+
+      <div class="flashcard-flip-container" id="flashcard-card">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div class="fc-word" id="fc-word">Viviparous</div>
+            <div class="fc-phonetics" id="fc-phonetics">/vɪˈvɪp.ər.əs/</div>
+            <div class="fc-hint">Tap or click to reveal definition</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="fc-part" id="fc-part">adjective</div>
+            <div class="fc-def" id="fc-def">Bringing forth living young rather than eggs.</div>
+            <div class="fc-quote" id="fc-quote">"Human beings used to be viviparous..."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard-controls">
+        <button class="fc-btn" id="fc-btn-prev">⬅️ Prev</button>
+        <button class="fc-btn fc-btn-star" id="fc-btn-mastered">✅ Mastered</button>
+        <button class="fc-btn" id="fc-btn-next">Next ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/db.js?v=3.4.0"></script>
+  <script src="js/sync.js?v=3.4.0"></script>
+  <script src="js/analysis.js?v=3.4.0"></script>
+</body>
+</html>

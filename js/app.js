@@ -231,6 +231,9 @@ function renderBooks() {
                 <span>Upload</span>
               </button>
             `}
+            <a href="book-analysis.html?book=${encodeURIComponent(b.id || b.file)}" class="btn-card-edit" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; color: #9333ea;" title="AI Book Intelligence, Summary & Vocabulary">
+              🧠
+            </a>
             <button class="btn-card-edit" onclick="openEditModal('${b.id}')" title="Edit book name, author, category or cover">
               ✏️
             </button>
@@ -662,6 +665,11 @@ function openBookModal(bookId) {
       modal.classList.remove('active');
       openLocalPrompt(book.id);
     };
+  }
+
+  const analysisBtn = document.getElementById('info-analysis-link');
+  if (analysisBtn) {
+    analysisBtn.href = `book-analysis.html?book=${encodeURIComponent(book.id || book.file)}`;
   }
 
   if (editBtn) {

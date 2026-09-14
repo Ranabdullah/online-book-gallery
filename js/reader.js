@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   applyReadingMode(readerPrefs.mode);
   setupMenuControls();
   setupNavControls();
+  initIntelligenceAndDrawers();
 
   if (isLocal) {
     loadLocalSessionBook();
@@ -82,6 +83,8 @@ async function loadFromCatalogOrDB(url) {
         document.getElementById('reader-book-title').textContent = match.title;
         document.getElementById('reader-book-author').textContent = match.author ? `by ${match.author}` : '';
         document.title = `${match.title} - Athenaeum Reader`;
+        updateIntelligenceLink();
+        refreshDrawerBadges();
       }
     }
   } catch (e) {}
@@ -278,7 +281,7 @@ function setupEpubRendition() {
     spread: (isMobile || isScroll) ? 'none' : 'auto'
   });
 
-  // Dynamic OCR clean-up filter & touch swipe inside iframe
+  // Dynamic OCR clean-up filter, touch swipe, and word definition lookup inside iframe
   currentRendition.hooks.content.register((contents) => {
     try {
       if (contents && contents.document) {
@@ -286,10 +289,16 @@ function setupEpubRendition() {
           cleanRenderedOcrArtifacts(contents.document.body);
         }
         attachTouchAndTapNavigation(contents.document);
+        attachEpubWordLookupListeners(contents);
       }
     } catch (hookErr) {
       console.warn('Content hook non-fatal error:', hookErr);
     }
+  });
+
+  // Native EPUB text selection hook
+  currentRendition.on('selected', (cfiRange, contents) => {
+    handleEpubSelection(cfiRange, contents);
   });
 
   // Apply paper theme styles
@@ -531,6 +540,32 @@ async function renderPdfPageInSlot(num) {
     if (slot) slot.style.minHeight = `${viewport.height}px`;
 
     await page.render({ canvasContext: ctx, viewport }).promise;
+
+    // Render PDF Text Layer for selection and dictionary lookup
+    try {
+      const slot = document.getElementById(`pdf-page-slot-${num}`);
+      if (slot) {
+        let textLayerDiv = slot.querySelector('.pdf-text-layer');
+        if (!textLayerDiv) {
+          textLayerDiv = document.createElement('div');
+          textLayerDiv.className = 'pdf-text-layer textLayer';
+          slot.appendChild(textLayerDiv);
+        }
+        textLayerDiv.innerHTML = '';
+        textLayerDiv.style.width = `${viewport.width}px`;
+        textLayerDiv.style.height = `${viewport.height}px`;
+        const textContent = await page.getTextContent();
+        if (pdfjsLib.renderTextLayer) {
+          await pdfjsLib.renderTextLayer({
+            textContentSource: textContent,
+            container: textLayerDiv,
+            viewport: viewport
+          }).promise;
+        }
+      }
+    } catch (textErr) {
+      console.warn(`PDF slot ${num} text layer error:`, textErr);
+    }
   } catch (e) {
     console.error(`PDF slot render error on page ${num}:`, e);
   }
@@ -567,7 +602,11 @@ function renderPdfPaginatedMode(num) {
     pdfObserver.disconnect();
   }
 
-  container.innerHTML = '<canvas id="pdf-canvas" class="pdf-page-canvas"></canvas>';
+  container.innerHTML = `
+    <div class="pdf-page-slot" id="pdf-paginated-slot" style="position: relative; display: flex; justify-content: center; width: 100%;">
+      <canvas id="pdf-canvas" class="pdf-page-canvas"></canvas>
+    </div>
+  `;
   renderPdfPage(num);
 }
 
@@ -592,6 +631,31 @@ async function renderPdfPage(num) {
     canvas.width = viewport.width;
 
     await page.render({ canvasContext: ctx, viewport }).promise;
+
+    // Render PDF Text Layer for selection and dictionary lookup in paginated mode
+    try {
+      const slot = document.getElementById('pdf-paginated-slot') || container;
+      let textLayerDiv = slot.querySelector('.pdf-text-layer');
+      if (!textLayerDiv) {
+        textLayerDiv = document.createElement('div');
+        textLayerDiv.className = 'pdf-text-layer textLayer';
+        slot.appendChild(textLayerDiv);
+      }
+      textLayerDiv.innerHTML = '';
+      textLayerDiv.style.width = `${viewport.width}px`;
+      textLayerDiv.style.height = `${viewport.height}px`;
+      const textContent = await page.getTextContent();
+      if (pdfjsLib.renderTextLayer) {
+        await pdfjsLib.renderTextLayer({
+          textContentSource: textContent,
+          container: textLayerDiv,
+          viewport: viewport
+        }).promise;
+      }
+    } catch (textErr) {
+      console.warn('Paginated PDF text layer error:', textErr);
+    }
+
     updatePdfProgress(num);
   } catch (e) {
     console.error('PDF render error:', e);
@@ -1150,3 +1214,615 @@ function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+
+// ==========================================================================
+// Athenaeum AI Book Intelligence, Vocabulary Bank & Margin Notes Engine
+// ==========================================================================
+
+let currentWordPopoverData = null;
+let activeNoteColor = '#fef08a';
+
+function initIntelligenceAndDrawers() {
+  updateIntelligenceLink();
+  setupDrawerEventListeners();
+  setupPdfWordLookupListeners();
+  refreshDrawerBadges();
+}
+
+function updateIntelligenceLink() {
+  const analysisBtn = document.getElementById('btn-reader-analysis');
+  if (analysisBtn) {
+    analysisBtn.href = `book-analysis.html?book=${encodeURIComponent(currentBookIdentifier)}`;
+  }
+  const flashcardLink = document.getElementById('btn-vocab-to-flashcards');
+  if (flashcardLink) {
+    flashcardLink.href = `book-analysis.html?book=${encodeURIComponent(currentBookIdentifier)}#glossary`;
+  }
+}
+
+function setupDrawerEventListeners() {
+  const btnVocab = document.getElementById('btn-vocab-toggle');
+  const btnNotes = document.getElementById('btn-notes-toggle');
+  const backdrop = document.getElementById('reader-backdrop');
+
+  const vocabDrawer = document.getElementById('reader-vocab-drawer');
+  const notesDrawer = document.getElementById('reader-notes-drawer');
+  const tocSidebar = document.getElementById('reader-sidebar');
+
+  if (btnVocab && vocabDrawer) {
+    btnVocab.addEventListener('click', () => {
+      const isOpen = vocabDrawer.classList.contains('open');
+      closeAllDrawers();
+      if (!isOpen) {
+        vocabDrawer.classList.add('open');
+        if (backdrop) backdrop.classList.add('active');
+        loadAndRenderVocabDrawer();
+      }
+    });
+  }
+
+  if (btnNotes && notesDrawer) {
+    btnNotes.addEventListener('click', () => {
+      const isOpen = notesDrawer.classList.contains('open');
+      closeAllDrawers();
+      if (!isOpen) {
+        notesDrawer.classList.add('open');
+        if (backdrop) backdrop.classList.add('active');
+        loadAndRenderNotesDrawer();
+      }
+    });
+  }
+
+  const btnVocabClose = document.getElementById('btn-vocab-drawer-close');
+  if (btnVocabClose) {
+    btnVocabClose.addEventListener('click', closeAllDrawers);
+  }
+
+  const btnNotesClose = document.getElementById('btn-notes-drawer-close');
+  if (btnNotesClose) {
+    btnNotesClose.addEventListener('click', closeAllDrawers);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', () => {
+      closeAllDrawers();
+      hideWordPopover();
+    });
+  }
+
+  // Search filter inputs
+  const vocabSearch = document.getElementById('vocab-search-input');
+  if (vocabSearch) {
+    vocabSearch.addEventListener('input', (e) => {
+      loadAndRenderVocabDrawer(e.target.value.trim().toLowerCase());
+    });
+  }
+
+  const notesSearch = document.getElementById('notes-search-input');
+  if (notesSearch) {
+    notesSearch.addEventListener('input', (e) => {
+      loadAndRenderNotesDrawer(e.target.value.trim().toLowerCase());
+    });
+  }
+
+  // Popover close button
+  const popoverClose = document.getElementById('popover-btn-close');
+  if (popoverClose) {
+    popoverClose.addEventListener('click', hideWordPopover);
+  }
+
+  // Dismiss popover on Escape or click outside
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeAllDrawers();
+      hideWordPopover();
+    }
+  });
+
+  document.addEventListener('mousedown', (e) => {
+    const popover = document.getElementById('reader-word-popover');
+    if (popover && popover.style.display !== 'none') {
+      if (!popover.contains(e.target) && !e.target.closest('.popover-btn-audio') && !e.target.closest('.btn-save-vocab')) {
+        hideWordPopover();
+      }
+    }
+  });
+
+  // Color chips for notes
+  document.querySelectorAll('#note-color-chips .color-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#note-color-chips .color-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeNoteColor = chip.dataset.color || '#fef08a';
+    });
+  });
+
+  // Toggle Note Form in popover
+  const toggleNoteBtn = document.getElementById('popover-btn-toggle-note');
+  const noteForm = document.getElementById('popover-note-form');
+  if (toggleNoteBtn && noteForm) {
+    toggleNoteBtn.addEventListener('click', () => {
+      const isVisible = noteForm.style.display === 'block';
+      noteForm.style.display = isVisible ? 'none' : 'block';
+      if (!isVisible) {
+        document.getElementById('popover-note-input')?.focus();
+      }
+    });
+  }
+
+  // Save Word to Vocabulary button
+  const saveVocabBtn = document.getElementById('popover-btn-save-vocab');
+  if (saveVocabBtn) {
+    saveVocabBtn.addEventListener('click', async () => {
+      if (!currentWordPopoverData || !window.AthenaeumDB) return;
+      saveVocabBtn.textContent = 'Saving...';
+      try {
+        await window.AthenaeumDB.saveVocabularyWord({
+          word: currentWordPopoverData.word,
+          phonetic: currentWordPopoverData.phonetic || '',
+          partOfSpeech: currentWordPopoverData.partOfSpeech || '',
+          definition: currentWordPopoverData.definition || 'Saved vocabulary entry',
+          example: currentWordPopoverData.example || '',
+          contextSentence: currentWordPopoverData.contextSentence || '',
+          bookId: currentBookIdentifier,
+          bookTitle: document.getElementById('reader-book-title')?.textContent || 'Current Book'
+        });
+        saveVocabBtn.textContent = '✓ Saved to Vocab!';
+        saveVocabBtn.disabled = true;
+        refreshDrawerBadges();
+      } catch (err) {
+        console.warn('Error saving vocabulary:', err);
+        saveVocabBtn.textContent = '⭐ Save to Vocab';
+      }
+    });
+  }
+
+  // Submit Note Button
+  const submitNoteBtn = document.getElementById('popover-btn-submit-note');
+  if (submitNoteBtn) {
+    submitNoteBtn.addEventListener('click', async () => {
+      if (!currentWordPopoverData || !window.AthenaeumDB) return;
+      const noteInput = document.getElementById('popover-note-input');
+      const noteContent = noteInput ? noteInput.value.trim() : '';
+      if (!noteContent) {
+        if (noteInput) noteInput.focus();
+        return;
+      }
+
+      submitNoteBtn.textContent = 'Saving...';
+      const loc = currentWordPopoverData.locator || {};
+      let cfiOrPage = '';
+      if (loc.format === 'epub' && loc.cfiRange) {
+        cfiOrPage = loc.cfiRange;
+        try {
+          if (currentRendition && currentRendition.annotations) {
+            currentRendition.annotations.highlight(loc.cfiRange, {}, () => {}, 'custom-hl', {
+              fill: activeNoteColor,
+              'fill-opacity': '0.35'
+            });
+          }
+        } catch (hlErr) {}
+      } else if (loc.format === 'pdf') {
+        cfiOrPage = `Page ${loc.page || pdfCurrentPage}`;
+      }
+
+      try {
+        await window.AthenaeumDB.saveBookNote({
+          bookId: currentBookIdentifier,
+          bookTitle: document.getElementById('reader-book-title')?.textContent || 'Current Book',
+          format: loc.format || currentFormat || 'epub',
+          cfiOrPage: cfiOrPage,
+          selectedText: currentWordPopoverData.contextSentence || currentWordPopoverData.word,
+          noteText: noteContent,
+          color: activeNoteColor
+        });
+
+        submitNoteBtn.textContent = '✓ Saved!';
+        if (noteInput) noteInput.value = '';
+        setTimeout(() => {
+          if (noteForm) noteForm.style.display = 'none';
+          hideWordPopover();
+        }, 700);
+        refreshDrawerBadges();
+      } catch (noteErr) {
+        console.warn('Error saving book note:', noteErr);
+        submitNoteBtn.textContent = 'Save Note';
+      }
+    });
+  }
+}
+
+function closeAllDrawers() {
+  const vocabDrawer = document.getElementById('reader-vocab-drawer');
+  const notesDrawer = document.getElementById('reader-notes-drawer');
+  const tocSidebar = document.getElementById('reader-sidebar');
+  const backdrop = document.getElementById('reader-backdrop');
+
+  if (vocabDrawer) vocabDrawer.classList.remove('open');
+  if (notesDrawer) notesDrawer.classList.remove('open');
+  if (tocSidebar) tocSidebar.classList.remove('open');
+  if (backdrop) backdrop.classList.remove('active');
+}
+
+function hideWordPopover() {
+  const popover = document.getElementById('reader-word-popover');
+  if (popover) {
+    popover.style.display = 'none';
+  }
+  const noteForm = document.getElementById('popover-note-form');
+  if (noteForm) noteForm.style.display = 'none';
+  currentWordPopoverData = null;
+}
+
+async function refreshDrawerBadges() {
+  if (!window.AthenaeumDB) return;
+  try {
+    const vocabList = await window.AthenaeumDB.getAllVocabulary();
+    const notesList = await window.AthenaeumDB.getBookNotes(currentBookIdentifier);
+
+    const vocabCount = vocabList ? vocabList.length : 0;
+    const notesCount = notesList ? notesList.length : 0;
+
+    const vBadge = document.getElementById('vocab-badge-count');
+    const dVBadge = document.getElementById('drawer-vocab-count');
+    if (vBadge) vBadge.textContent = vocabCount;
+    if (dVBadge) dVBadge.textContent = vocabCount;
+
+    const nBadge = document.getElementById('notes-badge-count');
+    const dNBadge = document.getElementById('drawer-notes-count');
+    if (nBadge) nBadge.textContent = notesCount;
+    if (dNBadge) dNBadge.textContent = notesCount;
+  } catch (e) {
+    console.warn('Badge refresh warning:', e);
+  }
+}
+
+async function loadAndRenderVocabDrawer(filterQuery = '') {
+  const listEl = document.getElementById('vocab-drawer-list');
+  if (!listEl || !window.AthenaeumDB) return;
+
+  try {
+    let items = await window.AthenaeumDB.getAllVocabulary();
+    if (filterQuery) {
+      items = items.filter(w => 
+        w.word.toLowerCase().includes(filterQuery) || 
+        (w.definition && w.definition.toLowerCase().includes(filterQuery))
+      );
+    }
+
+    if (!items || items.length === 0) {
+      listEl.innerHTML = `
+        <div class="drawer-empty-state">
+          <p>${filterQuery ? 'No matching words' : 'No saved vocabulary words yet'}</p>
+          <span class="drawer-empty-hint">Click or highlight any word in the book to look up its definition and save it!</span>
+        </div>
+      `;
+      return;
+    }
+
+    listEl.innerHTML = items.map(item => `
+      <div class="drawer-vocab-card" data-id="${escapeHtml(item.id)}">
+        <div class="drawer-vocab-top">
+          <div>
+            <span class="drawer-vocab-word">${escapeHtml(item.word)}</span>
+            ${item.phonetic ? `<span class="drawer-vocab-phonetic">${escapeHtml(item.phonetic)}</span>` : ''}
+          </div>
+          <button type="button" class="drawer-btn-icon" onclick="pronounceWord('${escapeHtml(item.word)}')" title="Listen">
+            🔊
+          </button>
+        </div>
+        ${item.partOfSpeech ? `<span class="drawer-vocab-pos">${escapeHtml(item.partOfSpeech)}</span>` : ''}
+        <div class="drawer-vocab-def">${escapeHtml(item.definition || '')}</div>
+        ${item.contextSentence ? `<div class="drawer-vocab-context">"${escapeHtml(item.contextSentence)}"</div>` : ''}
+        <div class="drawer-vocab-actions">
+          <span style="font-size: 10.5px; color: var(--text-muted);">${escapeHtml(item.bookTitle || '')}</span>
+          <button type="button" class="drawer-btn-icon drawer-btn-delete" onclick="deleteSavedVocabWord('${escapeHtml(item.id)}')" title="Delete from vocabulary">
+            🗑️ Remove
+          </button>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.warn('Error loading vocab drawer:', err);
+  }
+}
+
+async function loadAndRenderNotesDrawer(filterQuery = '') {
+  const listEl = document.getElementById('notes-drawer-list');
+  if (!listEl || !window.AthenaeumDB) return;
+
+  try {
+    let notes = await window.AthenaeumDB.getBookNotes(currentBookIdentifier);
+    if (filterQuery) {
+      notes = notes.filter(n => 
+        (n.noteText && n.noteText.toLowerCase().includes(filterQuery)) ||
+        (n.selectedText && n.selectedText.toLowerCase().includes(filterQuery))
+      );
+    }
+
+    if (!notes || notes.length === 0) {
+      listEl.innerHTML = `
+        <div class="drawer-empty-state">
+          <p>${filterQuery ? 'No matching notes' : 'No highlights or margin notes yet'}</p>
+          <span class="drawer-empty-hint">Highlight any passage in the reader and click "Add Note" to write annotations!</span>
+        </div>
+      `;
+      return;
+    }
+
+    listEl.innerHTML = notes.map(note => {
+      const dateStr = note.createdAt ? new Date(note.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
+      return `
+        <div class="drawer-note-card" style="border-left-color: ${note.color || '#fef08a'};" data-id="${escapeHtml(note.id)}">
+          ${note.selectedText ? `<div class="drawer-note-quote">"${escapeHtml(note.selectedText)}"</div>` : ''}
+          <div class="drawer-note-body">${escapeHtml(note.noteText)}</div>
+          <div class="drawer-note-meta">
+            <span>${escapeHtml(dateStr)} ${note.cfiOrPage ? `&bull; ${escapeHtml(note.cfiOrPage)}` : ''}</span>
+            <div style="display: flex; gap: 4px; align-items: center;">
+              ${note.cfiOrPage ? `<button type="button" class="drawer-btn-jump" onclick="jumpToNoteLocation('${escapeHtml(note.id)}')">Jump</button>` : ''}
+              <button type="button" class="drawer-btn-icon drawer-btn-delete" onclick="deleteSavedBookNote('${escapeHtml(note.id)}')" title="Delete note">
+                🗑️
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (err) {
+    console.warn('Error loading notes drawer:', err);
+  }
+}
+
+window.pronounceWord = function(word) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(word);
+    utter.rate = 0.9;
+    utter.lang = 'en-US';
+    window.speechSynthesis.speak(utter);
+  }
+};
+
+window.deleteSavedVocabWord = async function(id) {
+  if (!confirm('Remove this word from your vocabulary bank?')) return;
+  if (window.AthenaeumDB) {
+    await window.AthenaeumDB.deleteVocabularyWord(id);
+    await refreshDrawerBadges();
+    await loadAndRenderVocabDrawer();
+  }
+};
+
+window.deleteSavedBookNote = async function(id) {
+  if (!confirm('Delete this reading note?')) return;
+  if (window.AthenaeumDB) {
+    await window.AthenaeumDB.deleteBookNote(id);
+    await refreshDrawerBadges();
+    await loadAndRenderNotesDrawer();
+  }
+};
+
+window.jumpToNoteLocation = async function(id) {
+  if (!window.AthenaeumDB) return;
+  const notes = await window.AthenaeumDB.getBookNotes(currentBookIdentifier);
+  const note = notes.find(n => n.id === id);
+  if (!note || !note.cfiOrPage) return;
+
+  closeAllDrawers();
+
+  if (note.format === 'epub' && currentRendition) {
+    currentRendition.display(note.cfiOrPage);
+  } else if (note.format === 'pdf') {
+    const pageMatch = note.cfiOrPage.match(/\d+/);
+    if (pageMatch && window.jumpToPdfPage) {
+      window.jumpToPdfPage(parseInt(pageMatch[0], 10));
+    }
+  }
+};
+
+// EPUB & PDF Word Popover Display Logic
+async function showWordPopover(rawText, clientX, clientY, locator) {
+  const popover = document.getElementById('reader-word-popover');
+  if (!popover) return;
+
+  const trimmed = rawText.trim();
+  const isMultipleWords = trimmed.split(/\s+/).length > 2;
+  const cleanWord = trimmed.replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
+
+  if (!cleanWord && !isMultipleWords) return;
+
+  currentWordPopoverData = {
+    word: cleanWord || trimmed,
+    phonetic: '',
+    partOfSpeech: '',
+    definition: '',
+    example: '',
+    contextSentence: locator && locator.surroundingContext ? locator.surroundingContext.trim().substring(0, 180) : trimmed,
+    locator: locator
+  };
+
+  // Position popover
+  popover.style.display = 'block';
+  const popWidth = Math.min(320, window.innerWidth - 24);
+  let popLeft = clientX - popWidth / 2;
+  popLeft = Math.max(12, Math.min(window.innerWidth - popWidth - 12, popLeft));
+
+  let popTop = clientY + 12;
+  if (popTop + 240 > window.innerHeight) {
+    popTop = Math.max(50, clientY - 250);
+  }
+
+  popover.style.left = `${popLeft}px`;
+  popover.style.top = `${popTop}px`;
+
+  // Populate basic header
+  const wordEl = document.getElementById('popover-word');
+  const phoneticEl = document.getElementById('popover-phonetic');
+  const audioBtn = document.getElementById('popover-btn-audio');
+  const bodyEl = document.getElementById('popover-body');
+  const saveVocabBtn = document.getElementById('popover-btn-save-vocab');
+  const noteForm = document.getElementById('popover-note-form');
+
+  if (noteForm) noteForm.style.display = 'none';
+  if (saveVocabBtn) {
+    saveVocabBtn.textContent = '⭐ Save to Vocab';
+    saveVocabBtn.disabled = false;
+  }
+
+  wordEl.textContent = cleanWord || trimmed;
+  phoneticEl.textContent = '';
+
+  if (audioBtn) {
+    audioBtn.style.display = isMultipleWords ? 'none' : 'inline-flex';
+    audioBtn.onclick = () => pronounceWord(cleanWord);
+  }
+
+  if (isMultipleWords) {
+    bodyEl.innerHTML = `
+      <div style="font-size: 12.5px; color: var(--reader-text); line-height: 1.45;">
+        <p style="font-style: italic; margin-bottom: 6px;">"${escapeHtml(trimmed.substring(0, 120))}${trimmed.length > 120 ? '...' : ''}"</p>
+        <span style="color: var(--text-muted); font-size: 11.5px;">Click "Add Note" to write margin notes or highlight this passage!</span>
+      </div>
+    `;
+    return;
+  }
+
+  // Fetch online definition from Free Dictionary API
+  bodyEl.innerHTML = `
+    <div class="popover-loading">
+      <span class="popover-spinner"></span>
+      <span>Looking up "${escapeHtml(cleanWord)}"...</span>
+    </div>
+  `;
+
+  try {
+    const resp = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord.toLowerCase())}`);
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data && data.length > 0) {
+        const entry = data[0];
+        const phonetic = entry.phonetic || (entry.phonetics && entry.phonetics.find(p => p.text)?.text) || '';
+        phoneticEl.textContent = phonetic;
+        currentWordPopoverData.phonetic = phonetic;
+
+        let defsHtml = '';
+        if (entry.meanings && entry.meanings.length > 0) {
+          const primaryMeaning = entry.meanings[0];
+          currentWordPopoverData.partOfSpeech = primaryMeaning.partOfSpeech || '';
+
+          entry.meanings.slice(0, 2).forEach(m => {
+            const pos = m.partOfSpeech ? `<span class="popover-pos-badge">${escapeHtml(m.partOfSpeech)}</span>` : '';
+            const defObj = m.definitions && m.definitions[0];
+            if (defObj) {
+              if (!currentWordPopoverData.definition) {
+                currentWordPopoverData.definition = defObj.definition;
+                currentWordPopoverData.example = defObj.example || '';
+              }
+              defsHtml += `
+                <div class="popover-def-item">
+                  ${pos}<span>${escapeHtml(defObj.definition)}</span>
+                  ${defObj.example ? `<span class="popover-example">"${escapeHtml(defObj.example)}"</span>` : ''}
+                </div>
+              `;
+            }
+          });
+        }
+        bodyEl.innerHTML = defsHtml || '<div>Definition retrieved.</div>';
+      } else {
+        throw new Error('No definition found');
+      }
+    } else {
+      throw new Error('Word not in online dictionary');
+    }
+  } catch (err) {
+    bodyEl.innerHTML = `
+      <div style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
+        <p style="font-weight: 600; color: var(--reader-text); margin-bottom: 4px;">Word Lookup Offline / Term Not Found</p>
+        <span>You can still save "${escapeHtml(cleanWord)}" to your personal vocabulary bank or write a reading note below!</span>
+      </div>
+    `;
+  }
+}
+
+function handleEpubSelection(cfiRange, contents) {
+  try {
+    const win = (contents && contents.window) ? contents.window : window;
+    const sel = win.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const text = sel.toString().trim();
+    if (!text || text.length === 0 || text.length > 400) return;
+
+    const range = sel.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    const iframe = document.querySelector('#epub-viewer iframe');
+    const iframeRect = iframe ? iframe.getBoundingClientRect() : { top: 0, left: 0 };
+
+    const clientX = iframeRect.left + rect.left + rect.width / 2;
+    const clientY = iframeRect.top + rect.bottom;
+
+    showWordPopover(text, clientX, clientY, {
+      format: 'epub',
+      cfiRange: cfiRange,
+      contents: contents,
+      surroundingContext: range.commonAncestorContainer ? range.commonAncestorContainer.textContent : ''
+    });
+  } catch (e) {
+    console.warn('EPUB selection warning:', e);
+  }
+}
+
+function attachEpubWordLookupListeners(contents) {
+  try {
+    const doc = contents.document;
+    if (!doc || doc._hasWordLookup) return;
+    doc._hasWordLookup = true;
+
+    doc.addEventListener('dblclick', (e) => {
+      setTimeout(() => {
+        const sel = contents.window ? contents.window.getSelection() : doc.getSelection();
+        if (sel && sel.toString().trim()) {
+          handleEpubSelection(null, contents);
+        }
+      }, 30);
+    });
+
+    doc.addEventListener('mouseup', (e) => {
+      setTimeout(() => {
+        const sel = contents.window ? contents.window.getSelection() : doc.getSelection();
+        if (sel && !sel.isCollapsed && sel.toString().trim()) {
+          handleEpubSelection(null, contents);
+        }
+      }, 60);
+    });
+  } catch (err) {
+    console.warn('attachEpubWordLookupListeners error:', err);
+  }
+}
+
+function setupPdfWordLookupListeners() {
+  const container = document.getElementById('pdf-viewer-container');
+  if (!container || container._hasWordLookup) return;
+  container._hasWordLookup = true;
+
+  container.addEventListener('mouseup', (e) => {
+    setTimeout(() => {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed) return;
+      const text = sel.toString().trim();
+      if (!text || text.length === 0 || text.length > 400) return;
+
+      if (!container.contains(sel.anchorNode)) return;
+
+      const range = sel.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+      const clientX = rect.left + rect.width / 2;
+      const clientY = rect.bottom;
+
+      showWordPopover(text, clientX, clientY, {
+        format: 'pdf',
+        page: pdfCurrentPage,
+        surroundingContext: range.commonAncestorContainer ? range.commonAncestorContainer.textContent : ''
+      });
+    }, 60);
+  });
+}
+
