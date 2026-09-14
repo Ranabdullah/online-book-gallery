@@ -623,17 +623,16 @@ function turnPage(direction) {
 
 function advanceReaderPage(direction) {
   if (readerPrefs.mode === 'scroll') {
-    // Scroll down or up smoothly by 80% of window height
-    const scrollAmount = window.innerHeight * 0.82;
+    const scrollAmount = window.innerHeight * 0.78;
     if (currentFormat === 'epub') {
-      const viewer = document.getElementById('epub-viewer');
-      if (viewer) {
-        viewer.scrollBy({ top: direction === 'next' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+      const scrollEl = document.querySelector('.epub-container') || document.getElementById('epub-viewer');
+      if (scrollEl) {
+        scrollEl.scrollBy({ top: direction === 'next' ? scrollAmount : -scrollAmount, behavior: 'auto' });
       }
     } else if (currentFormat === 'pdf') {
       const container = document.getElementById('pdf-viewer-container');
       if (container) {
-        container.scrollBy({ top: direction === 'next' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+        container.scrollBy({ top: direction === 'next' ? scrollAmount : -scrollAmount, behavior: 'auto' });
       }
     }
     return;
@@ -891,29 +890,42 @@ function attachTouchAndTapNavigation(target) {
         const dy = touchEndY - touchStartY;
         const dt = Date.now() - touchStartTime;
 
-        // 1. Horizontal Swipe (turn pages)
-        if (Math.abs(dx) > 40 && Math.abs(dy) < 80 && dt < 600) {
-          if (dx < -40) turnPage('next');
-          else if (dx > 40) turnPage('prev');
-          return;
-        }
-
-        // 2. Mobile screen tap zones
-        if (Math.abs(dx) < 15 && Math.abs(dy) < 15 && dt < 350) {
-          const width = target.clientWidth || window.innerWidth;
-          const tapX = touchEndX;
-
-          // Left 22% -> Prev
-          if (tapX < width * 0.22) {
-            turnPage('prev');
+        // In Paginated (Page Turn) mode: handle page turn swipes and tap zones
+        if (readerPrefs.mode === 'paginated') {
+          // 1. Horizontal Swipe (turn pages)
+          if (Math.abs(dx) > 40 && Math.abs(dy) < 80 && dt < 600) {
+            if (dx < -40) turnPage('next');
+            else if (dx > 40) turnPage('prev');
+            return;
           }
-          // Right 22% -> Next
-          else if (tapX > width * 0.78) {
-            turnPage('next');
+
+          // 2. Mobile screen tap zones
+          if (Math.abs(dx) < 15 && Math.abs(dy) < 15 && dt < 350) {
+            const width = target.clientWidth || window.innerWidth;
+            const tapX = touchEndX;
+
+            // Left 22% -> Prev page
+            if (tapX < width * 0.22) {
+              turnPage('prev');
+            }
+            // Right 22% -> Next page
+            else if (tapX > width * 0.78) {
+              turnPage('next');
+            }
+            // Center -> Toggle Immersive Fullscreen Mode on mobile
+            else if (window.innerWidth <= 768) {
+              toggleImmersiveMode();
+            }
           }
-          // Center -> Toggle Immersive Fullscreen Mode on mobile
-          else if (window.innerWidth <= 768) {
-            toggleImmersiveMode();
+        } else {
+          // In Scroll mode: NEVER automatically jump down on tap or swipe!
+          // Only center tap toggles immersive UI toolbar
+          if (Math.abs(dx) < 15 && Math.abs(dy) < 15 && dt < 350) {
+            const width = target.clientWidth || window.innerWidth;
+            const tapX = touchEndX;
+            if (tapX >= width * 0.25 && tapX <= width * 0.75 && window.innerWidth <= 768) {
+              toggleImmersiveMode();
+            }
           }
         }
       }
