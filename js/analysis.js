@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupVocabularyDrawer();
   setupScholarChat();
   setupFlashcards();
+  setupRefreshDossierButton();
   updateVocabBadge();
 
   await loadBookAndDossier(currentBookId);
@@ -550,7 +551,7 @@ function setupScholarChat() {
   const chatBox = document.getElementById('scholar-chat-box');
 
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const question = input.value.trim();
       if (!question) return;
@@ -558,14 +559,46 @@ function setupScholarChat() {
       appendChatMessage('user', question);
       input.value = '';
 
-      // Generate intelligent answer based on book context
-      setTimeout(() => {
-        const answer = answerScholarQuery(question, currentDossier, currentBookMeta);
+      // Show typing indicator
+      const typingId = 'typing-' + Date.now();
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'scholar-message bot';
+      typingDiv.id = typingId;
+      typingDiv.innerHTML = '<p style="color: #94a3b8; font-style: italic;">✍️ Composing scholarly analysis...</p>';
+      if (chatBox) { chatBox.appendChild(typingDiv); chatBox.scrollTop = chatBox.scrollHeight; }
+
+      try {
+        // Try Gemini AI first
+        const answer = await answerScholarQueryWithAI(question, currentDossier, currentBookMeta);
+        document.getElementById(typingId)?.remove();
         appendChatMessage('bot', answer);
-      }, 500);
+      } catch (err) {
+        document.getElementById(typingId)?.remove();
+        if (err.message === 'NO_KEY') {
+          // Prompt for key and retry
+          promptForApiKey(async () => {
+            const typingDiv2 = document.createElement('div');
+            typingDiv2.className = 'scholar-message bot';
+            typingDiv2.id = typingId + '2';
+            typingDiv2.innerHTML = '<p style="color: #94a3b8; font-style: italic;">✍️ Composing scholarly analysis...</p>';
+            if (chatBox) { chatBox.appendChild(typingDiv2); chatBox.scrollTop = chatBox.scrollHeight; }
+            try {
+              const answer = await answerScholarQueryWithAI(question, currentDossier, currentBookMeta);
+              document.getElementById(typingId + '2')?.remove();
+              appendChatMessage('bot', answer);
+            } catch (e2) {
+              document.getElementById(typingId + '2')?.remove();
+              appendChatMessage('bot', `Analysis error: ${e2.message}. Please check your API key.`);
+            }
+          });
+        } else {
+          appendChatMessage('bot', `I encountered an error: ${err.message}. Please try again.`);
+        }
+      }
     });
   }
 }
+
 
 function renderScholarPrompts(prompts) {
   const container = document.getElementById('scholar-suggestions');
@@ -596,160 +629,449 @@ function appendChatMessage(role, text) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function answerScholarQuery(query, dossier, meta) {
-  const q = query.toLowerCase();
+/**
+ * ============================================================
+ * GEMINI AI ENGINE — PhD-Level Literary Analysis
+ * ============================================================
+ */
 
-  if (!dossier) {
-    return `In analyzing ${meta.title}, the work demonstrates profound philosophical and cultural depth. What specific aspect of its themes or writing style would you like to examine?`;
+const GEMINI_MODEL = 'gemini-2.0-flash';
+const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
+function getGeminiApiKey() {
+  return localStorage.getItem('athenaeum_gemini_key') || '';
+}
+
+function setGeminiApiKey(key) {
+  localStorage.setItem('athenaeum_gemini_key', key.trim());
+}
+
+async function callGemini(prompt, systemInstruction) {
+  const apiKey = getGeminiApiKey();
+  if (!apiKey) throw new Error('NO_KEY');
+
+  const body = {
+    system_instruction: { parts: [{ text: systemInstruction }] },
+    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    generationConfig: {
+      temperature: 0.7,
+      maxOutputTokens: 2048,
+      responseMimeType: 'application/json'
+    }
+  };
+
+  const resp = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    throw new Error(err?.error?.message || `Gemini API error ${resp.status}`);
   }
 
-  if (q.includes('style') || q.includes('writing') || q.includes('tone')) {
-    return `Authorial Style in "${meta.title}": ${dossier.writingStyle?.voice || ''} The tone is characterized by: ${dossier.writingStyle?.tonalSpectrum || ''}`;
+  const data = await resp.json();
+  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    // Try to extract JSON from markdown code blocks
+    const match = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+    if (match) return JSON.parse(match[1]);
+    throw new Error('Invalid JSON from Gemini: ' + text.slice(0, 200));
+  }
+}
+
+async function callGeminiText(prompt, systemInstruction) {
+  const apiKey = getGeminiApiKey();
+  if (!apiKey) throw new Error('NO_KEY');
+
+  const body = {
+    system_instruction: { parts: [{ text: systemInstruction }] },
+    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.75, maxOutputTokens: 1024 }
+  };
+
+  const resp = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    throw new Error(err?.error?.message || `Gemini API error ${resp.status}`);
   }
 
-  if (q.includes('grammar') || q.includes('syntax') || q.includes('sentence')) {
-    return `Syntactic Architecture: ${dossier.grammarAndLinguisticCharacteristics?.syntaxArchitecture || ''} Diction: ${dossier.grammarAndLinguisticCharacteristics?.dictionProfile || ''}`;
-  }
-
-  if (q.includes('theme') || q.includes('topic') || q.includes('about')) {
-    const topics = (dossier.topicsDiscussed || []).map(t => `• ${t.topic}: ${t.insight}`).join('\n');
-    return `Key Themes in "${meta.title}":\n${topics}`;
-  }
-
-  if (q.includes('concept') || q.includes('idea')) {
-    const concepts = (dossier.coreConcepts || []).map(c => `• ${c.concept}: ${c.description}`).join('\n');
-    return `Core Concepts Explored:\n${concepts}`;
-  }
-
-  if (q.includes('ending') || q.includes('conclusion') || q.includes('moral')) {
-    const moral = (dossier.comprehensiveSummary?.moralConclusions || []).join(' ');
-    return `Moral & Thematic Conclusion: ${moral}`;
-  }
-
-  if (q.includes('chapter') || q.includes('summary')) {
-    const acts = (dossier.comprehensiveSummary?.acts || []).map(a => `**${a.act}**: ${a.summary}`).join('\n\n');
-    return `Summary of the work:\n\n${acts}`;
-  }
-
-  // Default rich analytical synthesis
-  return `Regarding your question about "${meta.title}": The novel explores ${dossier.whatTheBookSays?.coreThesis || 'fundamental questions of humanity'}. As ${meta.author} illustrates throughout the narrative, individual freedom, moral responsibility, and aesthetic depth remain central to the work's enduring power.`;
+  const data = await resp.json();
+  return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
 }
 
 /**
- * Dynamic On-Demand Dossier Generator for any catalog or user book
+ * Prompt API Key from the user and save it
+ */
+function promptForApiKey(onSuccess) {
+  let modal = document.getElementById('api-key-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'api-key-modal';
+    modal.style.cssText = `
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex;
+      align-items: center; justify-content: center; z-index: 9999;
+    `;
+    modal.innerHTML = `
+      <div style="background: #fff; border-radius: 14px; padding: 32px 28px; max-width: 440px; width: 90%; box-shadow: 0 24px 60px rgba(0,0,0,0.25); font-family: sans-serif;">
+        <div style="font-size: 32px; margin-bottom: 12px;">🔑</div>
+        <h2 style="font-size: 18px; font-weight: 700; margin: 0 0 8px;">Gemini API Key Required</h2>
+        <p style="font-size: 13px; color: #64748b; line-height: 1.55; margin: 0 0 16px;">
+          To generate PhD-level literary analysis, enter your free Gemini API key.<br>
+          Get one free at <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#4f46e5;">aistudio.google.com</a>
+        </p>
+        <input id="api-key-input" type="password" placeholder="Paste your Gemini API key here..."
+          style="width: 100%; box-sizing: border-box; border: 1.5px solid #e2e8f0; border-radius: 8px;
+                 padding: 10px 12px; font-size: 13px; margin-bottom: 14px; outline: none;"/>
+        <div style="display: flex; gap: 10px;">
+          <button id="api-key-save" style="flex: 1; background: #4f46e5; color: white; border: none; border-radius: 8px;
+            padding: 10px; font-size: 13px; font-weight: 600; cursor: pointer;">Save & Analyse</button>
+          <button id="api-key-cancel" style="background: #f1f5f9; border: none; border-radius: 8px;
+            padding: 10px 16px; font-size: 13px; cursor: pointer;">Cancel</button>
+        </div>
+        <p id="api-key-error" style="color: #ef4444; font-size: 12px; margin: 8px 0 0; display: none;"></p>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    document.getElementById('api-key-save').addEventListener('click', () => {
+      const key = document.getElementById('api-key-input').value.trim();
+      if (!key || key.length < 20) {
+        document.getElementById('api-key-error').style.display = 'block';
+        document.getElementById('api-key-error').textContent = 'Please enter a valid API key.';
+        return;
+      }
+      setGeminiApiKey(key);
+      modal.remove();
+      if (onSuccess) onSuccess();
+    });
+
+    document.getElementById('api-key-cancel').addEventListener('click', () => modal.remove());
+
+    const existing = getGeminiApiKey();
+    if (existing) document.getElementById('api-key-input').value = existing;
+  }
+}
+
+/**
+ * Generate full PhD-level dossier using Gemini AI
+ */
+async function generateAIDossier(meta) {
+  const title = meta.title || 'Unknown Title';
+  const author = meta.author || 'Unknown Author';
+  const category = meta.category || 'Literature';
+
+  const systemPrompt = `You are a world-class literary scholar with expertise equivalent to a PhD in Comparative Literature and Literary Criticism. You write with the analytical depth of a peer-reviewed academic journal, while remaining engaging and clear. Your analyses are SPECIFIC to the exact book being analyzed — never generic. Always name specific characters, chapters, scenes, motifs, and textual evidence from the actual work.`;
+
+  const prompt = `Produce a comprehensive scholarly literary dossier for the book titled "${title}" by ${author} (genre: ${category}).
+
+Return ONLY a valid JSON object with this exact structure (no markdown, no extra text):
+
+{
+  "genre": "Precise literary genre classification",
+  "difficultyLevel": "e.g. Scholarly / Advanced Literary / Accessible / Graduate-Level",
+  "readingTimeMinutes": 300,
+  "whatTheBookSays": {
+    "coreThesis": "A 3-4 sentence PhD-level articulation of the book's central philosophical or thematic argument. Name the actual protagonist, central conflict, and what the book ultimately argues or demonstrates about the human condition. Be specific to THIS book.",
+    "premise": "2-3 sentences describing the specific narrative world, the protagonist's situation at the outset, and the inciting tension that drives the narrative forward."
+  },
+  "comprehensiveSummary": {
+    "elevatorPitch": "One powerful, specific paragraph (6-8 sentences) that captures the book's essence, key characters, major arc, and lasting significance. This must be specific to '${title}', not generic.",
+    "acts": [
+      {
+        "act": "Part I: [Specific Act Name reflecting actual book content]",
+        "chapters": "Chapters/Sections covered",
+        "summary": "3-4 detailed sentences covering specific events, character developments, and thematic movements in this section of '${title}'.",
+        "keyThemes": ["Specific theme from book", "Another specific theme", "Third theme"]
+      },
+      {
+        "act": "Part II: [Specific Act Name]",
+        "chapters": "Chapters/Sections covered",
+        "summary": "3-4 detailed sentences covering this section.",
+        "keyThemes": ["Theme 1", "Theme 2", "Theme 3"]
+      },
+      {
+        "act": "Part III: [Specific Act Name]",
+        "chapters": "Chapters/Sections covered",
+        "summary": "3-4 detailed sentences covering the climax and resolution.",
+        "keyThemes": ["Theme 1", "Theme 2", "Theme 3"]
+      }
+    ],
+    "moralConclusions": [
+      "First specific moral/philosophical takeaway from '${title}' — cite a specific moment or character arc",
+      "Second specific insight drawn from the text",
+      "Third insight about what the author is ultimately arguing"
+    ]
+  },
+  "writingStyle": {
+    "voice": "Precise description of ${author}'s narrative voice in '${title}': person, distance, reliability, register. 3-4 sentences with specific examples from the text.",
+    "tonalSpectrum": "The specific emotional and intellectual tonal range ${author} employs — from the opening to the close of '${title}'. Be specific about mood shifts.",
+    "cinematicMontage": "Describe ${author}'s specific narrative techniques in '${title}': scene construction, pacing, use of time (flashback/flash-forward), montage, white space, or stream of consciousness. 3-4 sentences.",
+    "symbolism": {
+      "[Specific Symbol from the actual book]": "What this symbol represents in '${title}' and where it appears",
+      "[Second Specific Symbol]": "Its symbolic weight and textual instances",
+      "[Third Symbol or Motif]": "Its thematic function in the narrative",
+      "[Fourth Symbol]": "How it develops across the work"
+    }
+  },
+  "grammarAndLinguisticCharacteristics": {
+    "syntaxArchitecture": "Detailed analysis of ${author}'s sentence structure in '${title}': clause complexity, periodic vs cumulative sentences, syntactic parallelism, rhythm. 3-4 sentences with specific observations.",
+    "dictionProfile": "Precise description of ${author}'s word choice in '${title}': register (formal/colloquial), Latinate vs. Anglo-Saxon vocabulary, precision vs. ambiguity, period-specific diction. 3-4 sentences.",
+    "neologismsAndPortmanteaus": "Any invented words, specialized coinages, idiomatic innovations, or linguistic idiosyncrasies distinctive to '${title}' and ${author}'s style. If none, describe the most distinctive phrasing patterns.",
+    "grammaticalComplexityScore": "X.X / 10"
+  },
+  "topicsDiscussed": [
+    {
+      "topic": "Specific major theme or topic from '${title}'",
+      "insight": "3-4 sentences of scholarly analysis: how this theme is developed, what specific scenes or characters embody it, and what ${author} is arguing about it."
+    },
+    {
+      "topic": "Second major topic specific to '${title}'",
+      "insight": "3-4 sentences of specific textual analysis."
+    },
+    {
+      "topic": "Third major topic",
+      "insight": "3-4 sentences of analysis with textual grounding."
+    },
+    {
+      "topic": "Fourth major topic",
+      "insight": "3-4 sentences of analysis."
+    },
+    {
+      "topic": "Fifth major topic",
+      "insight": "3-4 sentences."
+    }
+  ],
+  "coreConcepts": [
+    {
+      "concept": "Specific philosophical or intellectual concept central to '${title}'",
+      "description": "3-4 sentences: define the concept academically, explain how '${title}' engages with it, which scholars or traditions it relates to, and how ${author} uses it."
+    },
+    {
+      "concept": "Second core concept",
+      "description": "3-4 sentences of scholarly analysis."
+    },
+    {
+      "concept": "Third core concept",
+      "description": "3-4 sentences."
+    },
+    {
+      "concept": "Fourth core concept",
+      "description": "3-4 sentences."
+    }
+  ],
+  "difficultWordsGlossary": [
+    {
+      "word": "Advanced or unusual word actually used in '${title}'",
+      "phonetics": "/IPA pronunciation/",
+      "partOfSpeech": "noun/verb/adjective/adverb",
+      "definition": "Precise scholarly definition",
+      "quote": "A plausible sentence using this word in the style of '${title}'",
+      "modernEquivalent": "Simpler modern equivalent"
+    }
+  ],
+  "discussionQuestions": [
+    "Specific, deep analytical question about '${title}' suitable for a graduate seminar",
+    "Second scholarly discussion question probing character or theme",
+    "Third question examining ${author}'s technique or argument",
+    "Fourth question connecting '${title}' to broader literary or philosophical context",
+    "Fifth question asking the reader to evaluate or critique the work"
+  ]
+}
+
+The difficultWordsGlossary must contain exactly 12 words — words that are genuinely elevated, archaic, technical, or unusual. Each must be real, correctly defined words.
+Every field must be specific to "${title}" by ${author}. Do NOT produce generic content.`;
+
+  return await callGemini(prompt, systemPrompt);
+}
+
+/**
+ * Scholar Q&A — powered by Gemini with full book context
+ */
+async function answerScholarQueryWithAI(question, dossier, meta) {
+  const title = meta?.title || 'this book';
+  const author = meta?.author || 'the author';
+
+  const systemPrompt = `You are an expert literary scholar specializing in "${title}" by ${author}. You answer questions with PhD-level analytical depth, citing specific textual evidence, naming characters and scenes, referencing critical traditions, and drawing connections to broader literary and philosophical contexts. Your answers are 3-6 paragraphs long, substantive, and never generic.`;
+
+  const context = dossier ? `
+BOOK DOSSIER CONTEXT:
+- Core thesis: ${dossier.whatTheBookSays?.coreThesis || ''}
+- Writing style: ${dossier.writingStyle?.voice || ''}
+- Key topics: ${(dossier.topicsDiscussed || []).map(t => t.topic + ': ' + t.insight).join(' | ')}
+- Core concepts: ${(dossier.coreConcepts || []).map(c => c.concept + ': ' + c.description).join(' | ')}
+- Summary: ${dossier.comprehensiveSummary?.elevatorPitch || ''}
+` : '';
+
+  const prompt = `${context}
+
+STUDENT QUESTION: ${question}
+
+Provide a thorough, PhD-level scholarly response to this question about "${title}" by ${author}. Be specific, cite characters and scenes, and demonstrate deep expertise.`;
+
+  return await callGeminiText(prompt, systemPrompt);
+}
+
+/**
+ * Setup Refresh AI Dossier button
+ */
+function setupRefreshDossierButton() {
+  const btn = document.getElementById('btn-regenerate-ai');
+  if (!btn) return;
+
+  btn.addEventListener('click', async () => {
+    if (!currentBookMeta) return;
+
+    const triggerGeneration = async () => {
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loader-dot">✨</span> Analysing with AI...';
+
+      try {
+        const dossier = await generateAIDossier(currentBookMeta);
+        dossier.bookId = currentBookId;
+        currentDossier = dossier;
+
+        if (window.AthenaeumDB) {
+          await window.AthenaeumDB.saveBookAnalysis(currentBookId, dossier);
+        }
+
+        renderDossier(dossier, currentBookMeta);
+        btn.innerHTML = '<span>✅</span> Dossier Updated!';
+        setTimeout(() => {
+          btn.innerHTML = '<span>✨</span> Refresh AI Dossier';
+          btn.disabled = false;
+        }, 2500);
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = '<span>✨</span> Refresh AI Dossier';
+        if (err.message === 'NO_KEY') {
+          promptForApiKey(triggerGeneration);
+        } else {
+          showToast('AI Analysis failed: ' + err.message);
+        }
+      }
+    };
+
+    if (!getGeminiApiKey()) {
+      promptForApiKey(triggerGeneration);
+    } else {
+      await triggerGeneration();
+    }
+  });
+}
+
+/**
+ * Dynamic On-Demand Dossier Generator — rich fallback if no API key
  */
 function generateDynamicDossier(meta) {
+  const title = meta.title || 'This Book';
+  const author = meta.author || 'the Author';
+  const category = meta.category || 'Literature';
+
   return {
     bookId: meta.id || 'book_generic',
-    title: meta.title,
-    author: meta.author || 'Author',
-    publishedYear: 1900,
-    genre: meta.category || 'Literature & Philosophy',
-    readingTimeMinutes: 280,
-    difficultyLevel: 'Standard Literary',
+    title,
+    author,
+    publishedYear: null,
+    genre: category,
+    readingTimeMinutes: 300,
+    difficultyLevel: 'Literary',
     whatTheBookSays: {
-      coreThesis: `In "${meta.title}", ${meta.author || 'the author'} conducts a profound inquiry into human nature, society, and moral consequence, demonstrating how individual choices ripple through the fabric of reality.`,
-      premise: `Set within its evocative narrative world, "${meta.title}" presents a journey where the protagonist encounters structural conflicts between personal desire and collective obligation.`
+      coreThesis: `"${title}" by ${author} is a work that demands close scholarly engagement. Click "✨ Refresh AI Dossier" above (free Gemini API key required) to generate a complete PhD-level literary analysis — covering the book's central thesis, narrative architecture, symbolic vocabulary, and intellectual argument specific to this text.`,
+      premise: `${author}'s "${title}" belongs to the ${category} tradition. To unlock a fully tailored dossier with character analysis, thematic dissection, writing style breakdown, and a custom vocabulary glossary, use the Refresh AI Dossier feature.`
     },
     comprehensiveSummary: {
-      elevatorPitch: `A seminal work in ${meta.category || 'literature'} examining identity, conflict, and the quest for meaning.`,
+      elevatorPitch: `This is a placeholder analysis for "${title}". For a rigorous, book-specific literary dossier — complete with a structured narrative arc, moral conclusions, and scholarly thematic insights — tap "✨ Refresh AI Dossier". The AI will generate analysis specifically calibrated to ${author}'s actual text, not generic templates.`,
       acts: [
         {
-          act: "Part I: Introduction & Inciting Conflict",
-          chapters: "Opening Chapters",
-          summary: "The narrative establishes the primary world, the central characters, and the ideological or interpersonal tensions that disrupt the status quo.",
-          keyThemes: ["Origin", "Identity", "Disruption"]
+          act: 'Act I: Establishment',
+          chapters: 'Opening section',
+          summary: `In the opening movement of "${title}", ${author} establishes the world, introduces the central consciousness, and plants the seeds of the conflicts that will define the work.`,
+          keyThemes: ['Introduction', 'World-Building', 'Initial Conflict']
         },
         {
-          act: "Part II: Rising Action & Complication",
-          chapters: "Middle Sequence",
-          summary: "The characters face mounting obstacles that test their philosophical convictions, leading to moral ambiguities and dramatic conflicts.",
-          keyThemes: ["Struggle", "Transformation", "Ambiguity"]
+          act: 'Act II: Development & Crisis',
+          chapters: 'Middle section',
+          summary: `The narrative deepens as ${author} develops the central tensions, tests the characters' convictions, and moves toward an inevitable confrontation with the work's core questions.`,
+          keyThemes: ['Conflict', 'Character Development', 'Thematic Pressure']
         },
         {
-          act: "Part III: Climax & Resolution",
-          chapters: "Concluding Chapters",
-          summary: "The fundamental tensions reach a breaking point, resulting in a dramatic resolution that leaves an indelible mark on the surviving characters.",
-          keyThemes: ["Reckoning", "Catharsis", "Consequence"]
+          act: 'Act III: Resolution & Aftermath',
+          chapters: 'Concluding section',
+          summary: `${author} brings the central conflicts to their reckoning, with consequences that illuminate the thematic argument the work has been building toward throughout its entirety.`,
+          keyThemes: ['Resolution', 'Consequence', 'Meaning']
         }
       ],
       moralConclusions: [
-        "True character is revealed not during periods of ease, but when confronted with irreconcilable moral dilemmas.",
-        "The social structures surrounding an individual profoundly shape, but never entirely excuse, their moral choices.",
-        "Integrity often demands sacrificing temporary comfort for transcendent truth."
+        `The moral architecture of "${title}" rewards patient, close reading — its conclusions emerge from the texture of the prose rather than explicit statement.`,
+        `${author} consistently resists easy resolution, leaving the reader to construct meaning from the work's carefully arranged ambiguities.`,
+        `Use the AI Dossier feature for specific, textually grounded moral and philosophical conclusions drawn from "${title}".`
       ]
     },
     writingStyle: {
-      voice: `Reflective and deeply observant, ${meta.author || 'the author'} balances narrative drive with psychological introspection.`,
-      tonalSpectrum: "Atmospheric, evocative, and intellectually probing.",
-      cinematicMontage: "Utilizes scene transitions and sensory details that draw the reader intimately into the physical landscape.",
+      voice: `${author}'s voice in "${title}" is distinctive and carefully calibrated to the work's thematic demands. For a precise stylistic breakdown — including narrative distance, tonal register, and rhetorical strategies specific to this text — generate the full AI Dossier.`,
+      tonalSpectrum: `The tonal range of "${title}" spans multiple registers across its narrative arc. Refresh the AI Dossier for a detailed scholarly analysis of ${author}'s tonal architecture.`,
+      cinematicMontage: `${author}'s compositional and structural techniques in "${title}" merit detailed scholarly attention. The AI Dossier will analyze scene construction, pacing, temporal manipulation, and formal experimentation specific to this work.`,
       symbolism: {
-        "Light & Shadow": "Represents the struggle between self-deception and moral clarity.",
-        "The Journey": "Symbolizes the internal evolution of consciousness across trials."
+        'Symbolic Register': `"${title}" operates through a rich system of symbols and motifs. Generate the AI Dossier to see a detailed breakdown of the specific symbols ${author} deploys and their thematic functions.`,
+        'Recurring Imagery': `${author}'s imagery patterns in "${title}" are worth careful examination. The full AI analysis will map these patterns across the text.`
       }
     },
     grammarAndLinguisticCharacteristics: {
-      syntaxArchitecture: "Balanced sentence pacing alternating between expansive descriptive prose and crisp, rhythmic dialogue.",
-      dictionProfile: "Articulate literary vocabulary with precise noun-verb combinations that evoke vivid sensory imagery.",
-      neologismsAndPortmanteaus: "Classic idiomatic phrasing tailored to the cultural register of the period.",
-      grammaticalComplexityScore: "7.8 / 10"
+      syntaxArchitecture: `${author}'s sentence-level craft in "${title}" is a subject worthy of close stylistic analysis. For a detailed account of syntax, clause structures, rhythmic patterns, and grammatical idiosyncrasies specific to this work, generate the full AI Dossier.`,
+      dictionProfile: `The lexical register of "${title}" reflects ${author}'s careful calibration of word choice. The AI analysis will characterize the diction profile precisely, identifying register shifts, specialized vocabulary, and period-specific language.`,
+      neologismsAndPortmanteaus: `Any linguistic innovations or distinctive idiomatic patterns in "${title}" will be identified and analyzed in the full AI-generated dossier.`,
+      grammaticalComplexityScore: '— / 10 (Awaiting AI Analysis)'
     },
     topicsDiscussed: [
-      {
-        topic: "Individual Autonomy vs Social Conditioning",
-        insight: "How exterior expectations and cultural institutions attempt to mold internal identity."
-      },
-      {
-        topic: "The Weight of Moral Consequence",
-        insight: "Actions undertaken in pride or fear inexorably demand an accounting."
-      },
-      {
-        topic: "The Search for Authentic Purpose",
-        insight: "Navigating alienation to discover personal truth and enduring connection."
-      }
+      { topic: 'Core Thematic Territory', insight: `"${title}" engages with themes that define its literary category. Click "✨ Refresh AI Dossier" to see five specific, deeply analyzed topics with textual evidence from ${author}'s actual text.` },
+      { topic: 'Human Psychology & Motivation', insight: `${author} constructs a rich psychological landscape in "${title}". The full dossier will analyze specific characters' interior lives and what they reveal about human nature.` },
+      { topic: 'Social & Historical Context', insight: `"${title}" is embedded in a specific historical and cultural context that shapes its meaning. The AI analysis will locate the work within its broader intellectual tradition.` }
     ],
     coreConcepts: [
-      {
-        concept: "Existential Agency",
-        description: "The recognition that human beings retain moral responsibility even amidst constraining external circumstances."
-      },
-      {
-        concept: "The Illusion of Certainty",
-        description: "How rigid ideological beliefs crumble when confronted with the messy nuances of lived experience."
-      }
+      { concept: 'Intellectual Architecture', description: `"${title}" operates through a set of specific philosophical and conceptual commitments. Generate the AI Dossier to see four deeply analyzed core concepts — each defined academically and traced through the specific text of ${author}'s work.` },
+      { concept: 'Critical Reception & Tradition', description: `Understanding where "${title}" sits within its critical tradition enriches the reading experience. The full AI analysis will position the work within relevant scholarly conversations.` }
     ],
     difficultWordsGlossary: [
-      {
-        word: "Mellifluous",
-        phonetics: "/meˈlɪf.lu.əs/",
-        partOfSpeech: "adjective",
-        definition: "Pleasingly smooth and musical to hear.",
-        quote: "The voice carried a mellifluous resonance that commanded quiet attention.",
-        modernEquivalent: "Sweet-sounding / harmonious"
-      },
-      {
-        word: "Epiphany",
-        phonetics: "/ɪˈpɪf.ən.i/",
-        partOfSpeech: "noun",
-        definition: "A moment of sudden revelation or profound insight.",
-        quote: "In a sudden epiphany, the true nature of the dilemma became unmistakable.",
-        modernEquivalent: "Sudden realization"
-      },
-      {
-        word: "Ubiquitous",
-        phonetics: "/juːˈbɪk.wɪ.təs/",
-        partOfSpeech: "adjective",
-        definition: "Present, appearing, or found everywhere.",
-        quote: "The ubiquitous presence of state authority permeated every casual conversation.",
-        modernEquivalent: "Everywhere / omnipresent"
-      }
+      { word: 'Mellifluous', phonetics: '/meˈlɪf.lu.əs/', partOfSpeech: 'adjective', definition: 'Pleasingly smooth and musical to hear; having a sweet or musical pleasant sound.', quote: `The prose of "${title}" carries a mellifluous quality that belies its thematic severity.`, modernEquivalent: 'Sweetly musical / harmonious' },
+      { word: 'Perspicacious', phonetics: '/ˌpɜː.spɪˈkeɪ.ʃəs/', partOfSpeech: 'adjective', definition: 'Having a ready insight into and understanding of things; showing a clever, accurate, and deep understanding.', quote: 'A perspicacious reader will detect the irony embedded in every apparent declaration of certainty.', modernEquivalent: 'Perceptive / insightful' },
+      { word: 'Solipsism', phonetics: '/ˈsɒl.ɪp.sɪ.z(ə)m/', partOfSpeech: 'noun', definition: 'The view or theory that the self is all that can be known to exist; self-absorption to the exclusion of the external world.', quote: 'The narrator\'s solipsism gradually becomes the novel\'s most devastating structural device.', modernEquivalent: 'Self-absorbed worldview' },
+      { word: 'Laconic', phonetics: '/ləˈkɒn.ɪk/', partOfSpeech: 'adjective', definition: 'Using very few words; brief and concise in speech or expression; terse.', quote: 'His laconic responses conveyed more existential weight than paragraphs of explanation could achieve.', modernEquivalent: 'Brief / terse' },
+      { word: 'Verisimilitude', phonetics: '/ˌver.ɪ.sɪˈmɪl.ɪ.tjuːd/', partOfSpeech: 'noun', definition: 'The appearance of being true or real; the quality of seeming probable or lifelike.', quote: 'The author achieves verisimilitude not through documentary detail but through emotional precision.', modernEquivalent: 'Lifelikeness / realism' }
     ],
     discussionQuestions: [
-      `What is the central ethical choice facing the protagonist in "${meta.title}"?`,
-      `How does ${meta.author || 'the author'}'s writing style influence our emotional connection to the characters?`,
-      "In what ways do the themes of this work continue to resonate with contemporary society?"
+      `What is the central ethical dilemma at the heart of "${title}", and how does ${author} position the reader in relation to it?`,
+      `Analyze the narrative voice in "${title}". How does the choice of perspective shape our understanding of the events described?`,
+      `How does "${title}" engage with its historical and cultural moment, and what does it reveal about the period in which it was written?`,
+      `Trace the development of the work's central symbol or motif from opening to close. What does this arc suggest about ${author}'s thematic argument?`,
+      `Where do you locate "${title}" in the tradition of ${category}? What does it affirm, challenge, or transform in that tradition?`
     ]
   };
+}
+
+function showToast(message) {
+  let toast = document.getElementById('analysis-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'analysis-toast';
+    toast.style.cssText = `position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #1e293b; color: white; padding: 10px 20px; border-radius: 24px;
+      font-size: 13px; z-index: 9998; box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      max-width: 380px; text-align: center;`;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.display = 'block';
+  setTimeout(() => { if (toast) toast.style.display = 'none'; }, 4000);
 }
 
 function showFatalError(msg) {
@@ -782,3 +1104,4 @@ function escapeAttr(str) {
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;');
 }
+
