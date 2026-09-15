@@ -273,15 +273,20 @@ function setupEpubRendition() {
   const isMobile = window.innerWidth <= 768;
   const isScroll = readerPrefs.mode === 'scroll';
 
+  // epub.js MUST get pixel height for paginated mode — '100%' resolves to 0 in some flex layouts
+  const stageEl = document.getElementById('book-stage') || document.querySelector('.book-page-wrapper');
+  const pixelH = stageEl ? stageEl.clientHeight : window.innerHeight - 100;
+  const renderHeight = isScroll ? '100%' : Math.max(400, pixelH);
+
   currentRendition = currentBook.renderTo('epub-viewer', {
     width: '100%',
-    height: '100%',
+    height: renderHeight,
     flow: isScroll ? 'scrolled-doc' : 'paginated',
     manager: isScroll ? 'continuous' : 'default',
-    spread: (isMobile || isScroll) ? 'none' : 'auto'
+    spread: 'none'   // always single column — avoids blank double-page spread
   });
 
-  // Dynamic OCR clean-up filter, touch swipe, and word definition lookup inside iframe
+  // Word lookup inside iframe
   currentRendition.hooks.content.register((contents) => {
     try {
       if (contents && contents.document) {
@@ -915,26 +920,8 @@ function cleanRenderedOcrArtifacts(rootNode) {
     }
   }
 
-  // 2. Fix Abbyy / OCR single-line chopped paragraphs:
-  // If an EPUB has consecutive <p> tags where the first <p> ends without punctuation (. ! ? " ” : ;)
-  // and the next <p> starts with a lowercase letter, stitch or style them so they don't break lines unnaturally!
-  const paragraphs = rootNode.querySelectorAll('p');
-  for (let i = 0; i < paragraphs.length - 1; i++) {
-    const p1 = paragraphs[i];
-    const p2 = paragraphs[i + 1];
-    const t1 = p1.textContent.trim();
-    const t2 = p2.textContent.trim();
-    if (t1.length > 0 && t2.length > 0) {
-      const lastChar = t1[t1.length - 1];
-      const firstChar = t2[0];
-      if (!/[.!?:"”;\-—]/.test(lastChar) && /^[a-z]/.test(firstChar)) {
-        p1.style.marginBottom = '0px';
-        p1.style.display = 'inline';
-        p2.style.textIndent = '0px';
-        p2.style.display = 'inline';
-      }
-    }
-  }
+  // Paragraph stitching removed — setting display:inline on <p> breaks epub.js scroll
+  // and causes the scroll-push-down bug. Text-node OCR word-gap regex above handles word gaps.
   } catch (err) {
     console.warn('cleanRenderedOcrArtifacts warning:', err);
   }
@@ -1334,9 +1321,11 @@ function setupDrawerEventListeners() {
   });
 
   document.addEventListener('mousedown', (e) => {
+    // Guard: if popover was just shown from the iframe, skip this dismiss cycle
+    if (window._popoverJustShown) return;
     const popover = document.getElementById('reader-word-popover');
     if (popover && popover.style.display !== 'none') {
-      if (!popover.contains(e.target) && !e.target.closest('.popover-btn-audio') && !e.target.closest('.btn-save-vocab')) {
+      if (!popover.contains(e.target)) {
         hideWordPopover();
       }
     }
@@ -1803,6 +1792,9 @@ function attachEpubWordLookupListeners(contents) {
       setTimeout(() => {
         const sel = contents.window ? contents.window.getSelection() : doc.getSelection();
         if (sel && !sel.isCollapsed && sel.toString().trim()) {
+          // Flag so document mousedown handler does not immediately dismiss the popover
+          window._popoverJustShown = true;
+          setTimeout(() => { window._popoverJustShown = false; }, 200);
           handleEpubSelection(null, contents);
         }
       }, 60);
