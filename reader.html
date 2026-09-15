@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Reading - Athenaeum</title>
-  <link rel="stylesheet" href="css/reader.css?v=3.5.0">
+  <link rel="stylesheet" href="css/reader.css?v=3.6.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body data-paper="cream">
@@ -17,66 +17,43 @@
 
   <!-- Reader Sticky Toolbar -->
   <header class="reader-toolbar" id="reader-toolbar">
-    <div class="toolbar-left">
-      <a href="index.html" class="tool-btn btn-back" title="Back to Library">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <span class="btn-text">Library</span>
-      </a>
-
-      <button id="btn-toc-toggle" class="tool-btn" title="Table of Contents">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        <span class="btn-text">Chapters</span>
-      </button>
-    </div>
-
-    <div class="toolbar-center">
-      <div class="book-title-display" id="reader-book-title">Loading book...</div>
-      <div class="book-author-display" id="reader-book-author"></div>
-    </div>
-
-    <div class="toolbar-right">
-      <!-- AI Book Intelligence Link -->
-      <a id="btn-reader-analysis" class="tool-btn" href="#" title="AI Book Intelligence (Summary, Style, Concepts, Vocabulary)">
-        <span class="btn-icon">🧠</span>
-        <span class="btn-text">AI Intel</span>
-      </a>
-
-      <!-- Vocabulary Drawer Toggle -->
-      <button id="btn-vocab-toggle" class="tool-btn" title="Saved Vocabulary & Flashcards">
-        <span class="btn-icon">⭐</span>
-        <span class="btn-text">Vocab (<span id="vocab-badge-count">0</span>)</span>
-      </button>
-
-      <!-- Notes Drawer Toggle -->
-      <button id="btn-notes-toggle" class="tool-btn" title="Highlights & Margin Notes">
-        <span class="btn-icon">📝</span>
-        <span class="btn-text">Notes (<span id="notes-badge-count">0</span>)</span>
-      </button>
-
-      <!-- Reading Mode: Scroll Down vs Paginated -->
-      <button id="btn-mode-toggle" class="tool-btn" title="Toggle Scroll Down / Page Turn">
-        <span class="btn-icon" id="mode-icon">📜</span>
-        <span class="btn-text" id="mode-text">Scroll Down</span>
-      </button>
-
-      <!-- Paper Type & Style Button -->
-      <button id="btn-paper-toggle" class="tool-btn" title="Change Paper Type & Typography">
-        <span class="btn-icon">🎨</span>
-        <span class="btn-text">Paper & Style</span>
-      </button>
-
-      <!-- Zoom controls (for PDF) -->
-      <div id="pdf-controls" style="display: none; gap: 4px;">
-        <button id="btn-pdf-zoom-out" class="tool-btn" title="Zoom out">-</button>
-        <button id="btn-pdf-zoom-in" class="tool-btn" title="Zoom in">+</button>
-      </div>
-
-      <!-- Fullscreen -->
-      <button id="btn-fullscreen" class="tool-btn" title="Toggle Fullscreen">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-      </button>
+    <form class="word-search-bar" id="word-search-form" role="search">
+      <label class="sr-only" for="word-search-input">Look up a word</label>
+      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg>
+      <input id="word-search-input" type="search" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Look up a word…">
+      <button type="submit">Search</button>
+    </form>
+    <button id="btn-reader-menu" class="reader-menu-trigger" type="button" aria-label="Open reader menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+      <span class="reader-menu-label">Menu</span>
+    </button>
+    <!-- Kept in the header for title updates; the menu is intentionally the visible navigation. -->
+    <div class="reader-book-meta" aria-live="polite">
+      <div id="reader-book-title">Loading book...</div>
+      <div id="reader-book-author"></div>
     </div>
   </header>
+
+  <!-- One place for all reader actions, leaving the top bar free for word lookup. -->
+  <aside class="reader-menu-drawer" id="reader-menu-drawer" aria-label="Reader menu">
+    <div class="drawer-header">
+      <span class="drawer-title">Reader menu</span>
+      <button type="button" class="tool-btn btn-drawer-close" id="btn-reader-menu-close" title="Close menu">&times;</button>
+    </div>
+    <div class="reader-menu-content">
+      <a href="index.html" class="reader-menu-item">← Back to library</a>
+      <button id="btn-toc-toggle" class="reader-menu-item" type="button">☰ Chapters</button>
+      <a id="btn-reader-analysis" class="reader-menu-item" href="#">🧠 Book intelligence</a>
+      <button id="btn-vocab-toggle" class="reader-menu-item" type="button">⭐ Vocabulary <span id="vocab-badge-count">0</span></button>
+      <button id="btn-notes-toggle" class="reader-menu-item" type="button">📝 Notes <span id="notes-badge-count">0</span></button>
+      <button id="btn-mode-toggle" class="reader-menu-item" type="button"><span id="mode-icon">📜</span> <span id="mode-text">Scroll Down</span></button>
+      <button id="btn-paper-toggle" class="reader-menu-item" type="button">🎨 Paper &amp; style</button>
+      <div id="pdf-controls" class="reader-menu-inline-controls" style="display: none;">
+        <span>PDF zoom</span><button id="btn-pdf-zoom-out" class="tool-btn" type="button" title="Zoom out">−</button><button id="btn-pdf-zoom-in" class="tool-btn" type="button" title="Zoom in">+</button>
+      </div>
+      <button id="btn-fullscreen" class="reader-menu-item" type="button">⛶ Full screen</button>
+    </div>
+  </aside>
 
   <!-- Paper & Typography Menu -->
   <div class="paper-menu" id="paper-menu">
@@ -313,6 +290,6 @@
   <script src="js/sync.js?v=3.4.0"></script>
 
   <!-- Reader Script -->
-  <script src="js/reader.js?v=3.5.2"></script>
+  <script src="js/reader.js?v=3.6.0"></script>
 </body>
 </html>

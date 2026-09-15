@@ -86,12 +86,73 @@ body {
   border-bottom: 1px solid var(--reader-border);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 16px;
   z-index: 95;
   position: relative;
   font-family: 'Inter', sans-serif;
 }
+
+.word-search-bar {
+  width: min(540px, calc(100% - 94px));
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 6px 0 12px;
+  border: 1px solid var(--reader-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.56);
+  color: #64748b;
+  font-family: 'Inter', sans-serif;
+}
+
+[data-paper="charcoal"] .word-search-bar { background: rgba(255, 255, 255, 0.08); color: #cbd5e1; }
+
+.word-search-bar input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--reader-text);
+  font: 13px 'Inter', sans-serif;
+}
+
+.word-search-bar input::placeholder { color: #94a3b8; }
+
+.word-search-bar button {
+  border: 0;
+  border-radius: 7px;
+  padding: 6px 10px;
+  color: white;
+  background: #2563eb;
+  cursor: pointer;
+  font: 600 12px 'Inter', sans-serif;
+}
+
+.reader-menu-trigger {
+  position: absolute;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 36px;
+  border: 1px solid var(--reader-border);
+  border-radius: 8px;
+  padding: 0 9px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: 600 12px 'Inter', sans-serif;
+}
+
+.reader-menu-trigger > span:not(.reader-menu-label) { width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+.reader-menu-label { margin-left: 3px; }
+
+/* Keep title data available to assistive technology without competing with word search. */
+.reader-book-meta { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 .toolbar-left, .toolbar-right {
   display: flex;
@@ -266,6 +327,49 @@ body {
   transform: translateX(0);
 }
 
+/* Primary action menu: every reader control lives here instead of the top bar. */
+.reader-menu-drawer {
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(360px, 88vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--reader-sidebar-bg);
+  border-left: 1px solid var(--reader-border);
+  box-shadow: -12px 0 35px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  transition: transform .28s cubic-bezier(.16, 1, .3, 1);
+  font-family: 'Inter', sans-serif;
+}
+
+.reader-menu-drawer.open { transform: translateX(0); }
+.reader-menu-content { padding: 10px; overflow-y: auto; }
+.reader-menu-item {
+  width: 100%;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  font: 600 14px 'Inter', sans-serif;
+}
+
+.reader-menu-item:hover { background: rgba(0, 0, 0, .06); }
+[data-paper="charcoal"] .reader-menu-item:hover { background: rgba(255, 255, 255, .1); }
+.reader-menu-inline-controls { align-items: center; gap: 8px; padding: 10px 12px; font: 600 13px 'Inter', sans-serif; }
+.reader-menu-inline-controls span { flex: 1; }
+
 .sidebar-header {
   padding: 16px;
   border-bottom: 1px solid var(--reader-border);
@@ -328,6 +432,24 @@ body {
   border-left: 1px solid rgba(0,0,0,0.08);
   border-right: 1px solid rgba(0,0,0,0.08);
 }
+
+/* Clear page-turn acknowledgement for paginated EPUB and PDF reading. */
+.book-page-wrapper::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,.3), rgba(148,163,184,.12), rgba(255,255,255,.3));
+}
+
+.book-page-wrapper.page-turn-next { animation: page-turn-next .34s ease-out; }
+.book-page-wrapper.page-turn-prev { animation: page-turn-prev .34s ease-out; }
+.book-page-wrapper.page-turn-next::after, .book-page-wrapper.page-turn-prev::after { animation: page-turn-flash .34s ease-out; }
+@keyframes page-turn-next { 0% { filter: blur(0); transform: translateX(0); } 42% { filter: blur(2px); transform: translateX(-7px); } 100% { filter: blur(0); transform: translateX(0); } }
+@keyframes page-turn-prev { 0% { filter: blur(0); transform: translateX(0); } 42% { filter: blur(2px); transform: translateX(7px); } 100% { filter: blur(0); transform: translateX(0); } }
+@keyframes page-turn-flash { 0% { opacity: 0; } 40% { opacity: 1; } 100% { opacity: 0; } }
 
 /* 3D decorations — hidden for clean reading */
 .book-edge-stack {

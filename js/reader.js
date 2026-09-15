@@ -722,6 +722,7 @@ function advanceReaderPage(direction) {
   }
 
   // Paginated mode
+  playPageTurnFeedback(direction);
   if (currentFormat === 'epub' && currentRendition) {
     if (direction === 'next') {
       currentRendition.next();
@@ -737,6 +738,17 @@ function advanceReaderPage(direction) {
       renderPdfPage(pdfCurrentPage);
     }
   }
+}
+
+// A brief, restrained blur/slide makes a page change obvious without slowing reading.
+function playPageTurnFeedback(direction) {
+  const page = document.getElementById('book-page-wrapper');
+  if (!page) return;
+  page.classList.remove('page-turn-next', 'page-turn-prev');
+  // Force a new animation when the reader turns pages quickly.
+  void page.offsetWidth;
+  page.classList.add(direction === 'prev' ? 'page-turn-prev' : 'page-turn-next');
+  window.setTimeout(() => page.classList.remove('page-turn-next', 'page-turn-prev'), 360);
 }
 
 /**
@@ -1015,6 +1027,7 @@ function setupNavControls() {
   if (btnNext) btnNext.addEventListener('click', () => turnPage('next'));
 
   document.addEventListener('keydown', (e) => {
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
     if (e.key === 'ArrowLeft') turnPage('prev');
     if (e.key === 'ArrowRight') turnPage('next');
   });
@@ -1029,7 +1042,7 @@ function setupNavControls() {
     renderPdfPage(pdfCurrentPage);
   });
 
-  // Sidebar
+  // Chapters drawer
   document.getElementById('btn-toc-toggle').addEventListener('click', () => toggleSidebar());
   document.getElementById('btn-sidebar-close').addEventListener('click', () => toggleSidebar(false));
 
@@ -1047,6 +1060,33 @@ function setupNavControls() {
       document.exitFullscreen().catch(() => {});
     }
   });
+
+  const wordSearchForm = document.getElementById('word-search-form');
+  const wordSearchInput = document.getElementById('word-search-input');
+  if (wordSearchForm && wordSearchInput) {
+    wordSearchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const word = wordSearchInput.value.trim();
+      if (!word) {
+        wordSearchInput.focus();
+        return;
+      }
+      const rect = wordSearchInput.getBoundingClientRect();
+      showWordPopover(word, rect.left + rect.width / 2, rect.bottom + 8, {
+        format: 'search',
+        surroundingContext: word
+      });
+      wordSearchInput.select();
+    });
+  }
+
+  const menu = document.getElementById('reader-menu-drawer');
+  const menuButton = document.getElementById('btn-reader-menu');
+  const menuClose = document.getElementById('btn-reader-menu-close');
+  if (menuButton && menu) {
+    menuButton.addEventListener('click', () => toggleReaderMenu());
+  }
+  if (menuClose) menuClose.addEventListener('click', () => toggleReaderMenu(false));
 }
 
 function setupMenuControls() {
@@ -1070,6 +1110,7 @@ function setupMenuControls() {
     backdrop.addEventListener('click', () => {
       toggleSidebar(false);
       togglePaperMenu(false);
+      toggleReaderMenu(false);
     });
   }
 
@@ -1156,6 +1197,7 @@ function toggleSidebar(forceState) {
   const sidebar = document.getElementById('reader-sidebar');
   const backdrop = document.getElementById('reader-backdrop');
   const paperMenu = document.getElementById('paper-menu');
+  toggleReaderMenu(false);
   if (paperMenu) paperMenu.classList.remove('active');
   const isOpen = typeof forceState === 'boolean' ? forceState : !sidebar.classList.contains('open');
   sidebar.classList.toggle('open', isOpen);
@@ -1164,10 +1206,22 @@ function toggleSidebar(forceState) {
   }
 }
 
+function toggleReaderMenu(forceState) {
+  const menu = document.getElementById('reader-menu-drawer');
+  const trigger = document.getElementById('btn-reader-menu');
+  const backdrop = document.getElementById('reader-backdrop');
+  if (!menu) return;
+  const isOpen = typeof forceState === 'boolean' ? forceState : !menu.classList.contains('open');
+  menu.classList.toggle('open', isOpen);
+  if (trigger) trigger.setAttribute('aria-expanded', String(isOpen));
+  if (backdrop) backdrop.classList.toggle('active', isOpen);
+}
+
 function togglePaperMenu(forceState) {
   const paperMenu = document.getElementById('paper-menu');
   const backdrop = document.getElementById('reader-backdrop');
   const sidebar = document.getElementById('reader-sidebar');
+  toggleReaderMenu(false);
   if (sidebar) sidebar.classList.remove('open');
   const isActive = typeof forceState === 'boolean' ? forceState : !paperMenu.classList.contains('active');
   paperMenu.classList.toggle('active', isActive);
@@ -1221,6 +1275,7 @@ function escapeHtml(str) {
 // ==========================================================================
 
 let currentWordPopoverData = null;
+let wordLookupRequest = 0;
 let activeNoteColor = '#fef08a';
 
 function initIntelligenceAndDrawers() {
@@ -1444,6 +1499,7 @@ function closeAllDrawers() {
   if (vocabDrawer) vocabDrawer.classList.remove('open');
   if (notesDrawer) notesDrawer.classList.remove('open');
   if (tocSidebar) tocSidebar.classList.remove('open');
+  toggleReaderMenu(false);
   if (backdrop) backdrop.classList.remove('active');
 }
 
@@ -1632,6 +1688,7 @@ async function showWordPopover(rawText, clientX, clientY, locator) {
   const cleanWord = trimmed.replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
 
   if (!cleanWord && !isMultipleWords) return;
+  const requestId = ++wordLookupRequest;
 
   currentWordPopoverData = {
     word: cleanWord || trimmed,
@@ -1689,7 +1746,8 @@ async function showWordPopover(rawText, clientX, clientY, locator) {
     return;
   }
 
-  // Fetch online definition from Free Dictionary API
+  // Fetch an online definition. A timeout and fallback prevent the lookup from
+  // appearing to hang when either free dictionary service is unavailable.
   bodyEl.innerHTML = `
     <div class="popover-loading">
       <span class="popover-spinner"></span>
@@ -1698,9 +1756,33 @@ async function showWordPopover(rawText, clientX, clientY, locator) {
   `;
 
   try {
-    const resp = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord.toLowerCase())}`);
+    const fetchDefinition = async (url) => {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 7000);
+      try {
+        return await fetch(url, { signal: controller.signal });
+      } finally {
+        window.clearTimeout(timeout);
+      }
+    };
+    let resp = await fetchDefinition(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord.toLowerCase())}`);
+    if (!resp.ok) {
+      resp = await fetchDefinition(`https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(cleanWord.toLowerCase())}`);
+      if (!resp.ok) throw new Error('Word not found');
+      const wikiData = await resp.json();
+      if (requestId !== wordLookupRequest) return;
+      const english = wikiData.en || [];
+      const first = english.find(item => item.definitions && item.definitions.length);
+      if (!first) throw new Error('No English definition found');
+      const definition = (first.definitions[0].definition || '').replace(/<[^>]+>/g, '');
+      currentWordPopoverData.partOfSpeech = first.partOfSpeech || '';
+      currentWordPopoverData.definition = definition;
+      bodyEl.innerHTML = `<div class="popover-def-item"><span class="popover-pos-badge">${escapeHtml(first.partOfSpeech || 'definition')}</span><span>${escapeHtml(definition)}</span></div>`;
+      return;
+    }
     if (resp.ok) {
       const data = await resp.json();
+      if (requestId !== wordLookupRequest) return;
       if (data && data.length > 0) {
         const entry = data[0];
         const phonetic = entry.phonetic || (entry.phonetics && entry.phonetics.find(p => p.text)?.text) || '';
@@ -1737,6 +1819,7 @@ async function showWordPopover(rawText, clientX, clientY, locator) {
       throw new Error('Word not in online dictionary');
     }
   } catch (err) {
+    if (requestId !== wordLookupRequest) return;
     bodyEl.innerHTML = `
       <div style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
         <p style="font-weight: 600; color: var(--reader-text); margin-bottom: 4px;">Word Lookup Offline / Term Not Found</p>
@@ -1799,6 +1882,17 @@ function attachEpubWordLookupListeners(contents) {
         }
       }, 60);
     });
+
+    // Long-press selection on phones does not emit mouseup. Read the native
+    // selection after touchend so it works the same way as desktop selection.
+    doc.addEventListener('touchend', () => {
+      setTimeout(() => {
+        const sel = contents.window ? contents.window.getSelection() : doc.getSelection();
+        if (sel && !sel.isCollapsed && sel.toString().trim()) {
+          handleEpubSelection(null, contents);
+        }
+      }, 80);
+    }, { passive: true });
   } catch (err) {
     console.warn('attachEpubWordLookupListeners error:', err);
   }
@@ -1830,5 +1924,17 @@ function setupPdfWordLookupListeners() {
       });
     }, 60);
   });
+
+  container.addEventListener('touchend', () => {
+    setTimeout(() => {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || !sel.toString().trim() || !container.contains(sel.anchorNode)) return;
+      const rect = sel.getRangeAt(0).getBoundingClientRect();
+      showWordPopover(sel.toString().trim(), rect.left + rect.width / 2, rect.bottom, {
+        format: 'pdf', page: pdfCurrentPage,
+        surroundingContext: sel.getRangeAt(0).commonAncestorContainer?.textContent || ''
+      });
+    }, 80);
+  }, { passive: true });
 }
 
