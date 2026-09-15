@@ -1276,6 +1276,26 @@ function escapeHtml(str) {
 
 let currentWordPopoverData = null;
 let wordLookupRequest = 0;
+const dictionaryCachePrefix = 'athenaeum_dictionary_';
+let offlineDictionaryPromise = null;
+const builtInDefinitions = {
+  often: { partOfSpeech: 'adverb', definition: 'Frequently; many times or on many occasions.' }
+};
+
+function getOfflineDictionary() {
+  if (!offlineDictionaryPromise) {
+    offlineDictionaryPromise = fetch('data/offline-dictionary.json?v=2')
+      .then(response => {
+        if (!response.ok) throw new Error('Offline dictionary file unavailable');
+        return response.json();
+      })
+      .catch(error => {
+        console.warn('Offline dictionary unavailable:', error);
+        return {};
+      });
+  }
+  return offlineDictionaryPromise;
+}
 let activeNoteColor = '#fef08a';
 
 function initIntelligenceAndDrawers() {
@@ -1756,68 +1776,77 @@ async function showWordPopover(rawText, clientX, clientY, locator) {
   `;
 
   try {
+    const normalizedWord = cleanWord.toLowerCase();
+    let result = builtInDefinitions[normalizedWord];
+    if (!result) {
+      const offlineDictionary = await getOfflineDictionary();
+      const offlineEntry = offlineDictionary[normalizedWord];
+      if (offlineEntry) {
+        result = { partOfSpeech: offlineEntry[0], definition: offlineEntry[1] };
+      }
+    }
+    // Cached online entries are useful only for terms not covered by the
+    // bundled dictionary. This preserves WordNet's normal sense order.
+    if (!result) {
+      try { result = JSON.parse(localStorage.getItem(dictionaryCachePrefix + normalizedWord) || 'null'); } catch (_) {}
+    }
+
     const fetchDefinition = async (url) => {
       const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 7000);
-      try {
-        return await fetch(url, { signal: controller.signal });
-      } finally {
-        window.clearTimeout(timeout);
-      }
+      const timeout = window.setTimeout(() => controller.abort(), 4500);
+      try { return await fetch(url, { signal: controller.signal }); }
+      finally { window.clearTimeout(timeout); }
     };
-    let resp = await fetchDefinition(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord.toLowerCase())}`);
-    if (!resp.ok) {
-      resp = await fetchDefinition(`https://en.wiktionary.org/api/rest_v1/page/definition/${encodeURIComponent(cleanWord.toLowerCase())}`);
-      if (!resp.ok) throw new Error('Word not found');
-      const wikiData = await resp.json();
-      if (requestId !== wordLookupRequest) return;
-      const english = wikiData.en || [];
-      const first = english.find(item => item.definitions && item.definitions.length);
-      if (!first) throw new Error('No English definition found');
-      const definition = (first.definitions[0].definition || '').replace(/<[^>]+>/g, '');
-      currentWordPopoverData.partOfSpeech = first.partOfSpeech || '';
-      currentWordPopoverData.definition = definition;
-      bodyEl.innerHTML = `<div class="popover-def-item"><span class="popover-pos-badge">${escapeHtml(first.partOfSpeech || 'definition')}</span><span>${escapeHtml(definition)}</span></div>`;
-      return;
-    }
-    if (resp.ok) {
-      const data = await resp.json();
-      if (requestId !== wordLookupRequest) return;
-      if (data && data.length > 0) {
-        const entry = data[0];
-        const phonetic = entry.phonetic || (entry.phonetics && entry.phonetics.find(p => p.text)?.text) || '';
-        phoneticEl.textContent = phonetic;
-        currentWordPopoverData.phonetic = phonetic;
 
-        let defsHtml = '';
-        if (entry.meanings && entry.meanings.length > 0) {
-          const primaryMeaning = entry.meanings[0];
-          currentWordPopoverData.partOfSpeech = primaryMeaning.partOfSpeech || '';
-
-          entry.meanings.slice(0, 2).forEach(m => {
-            const pos = m.partOfSpeech ? `<span class="popover-pos-badge">${escapeHtml(m.partOfSpeech)}</span>` : '';
-            const defObj = m.definitions && m.definitions[0];
-            if (defObj) {
-              if (!currentWordPopoverData.definition) {
-                currentWordPopoverData.definition = defObj.definition;
-                currentWordPopoverData.example = defObj.example || '';
-              }
-              defsHtml += `
-                <div class="popover-def-item">
-                  ${pos}<span>${escapeHtml(defObj.definition)}</span>
-                  ${defObj.example ? `<span class="popover-example">"${escapeHtml(defObj.example)}"</span>` : ''}
-                </div>
-              `;
-            }
-          });
+    // Online sources are only a fallback for words not present in bundled WordNet.
+    if (!result) {
+      try {
+        const resp = await fetchDefinition(`https://api.datamuse.com/words?sp=${encodeURIComponent(normalizedWord)}&md=d&max=1`);
+        const data = resp.ok ? await resp.json() : [];
+        const defs = data?.[0]?.defs || [];
+        if (defs.length) {
+          const [partOfSpeech, definition] = defs[0].split('\t');
+          result = { partOfSpeech: partOfSpeech || 'definition', definition: definition || defs[0] };
         }
-        bodyEl.innerHTML = defsHtml || '<div>Definition retrieved.</div>';
-      } else {
-        throw new Error('No definition found');
-      }
-    } else {
-      throw new Error('Word not in online dictionary');
+      } catch (_) {}
     }
+
+    // Retain a second source for words WordNet does not cover.
+    if (!result) {
+      const resp = await fetchDefinition(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(normalizedWord)}`);
+      if (resp.ok) {
+        const data = await resp.json();
+        const entry = data?.[0];
+        const meaning = entry?.meanings?.[0];
+        const firstDefinition = meaning?.definitions?.[0];
+        if (firstDefinition) {
+          result = {
+            partOfSpeech: meaning.partOfSpeech || 'definition',
+            definition: firstDefinition.definition,
+            example: firstDefinition.example || '',
+            phonetic: entry.phonetic || entry.phonetics?.find(p => p.text)?.text || ''
+          };
+        }
+      }
+    }
+
+    if (!result || !result.definition) throw new Error('No definition found');
+    if (requestId !== wordLookupRequest) return;
+
+    currentWordPopoverData.partOfSpeech = result.partOfSpeech || '';
+    currentWordPopoverData.definition = result.definition;
+    currentWordPopoverData.example = result.example || '';
+    currentWordPopoverData.phonetic = result.phonetic || '';
+    phoneticEl.textContent = result.phonetic || '';
+    try { localStorage.setItem(dictionaryCachePrefix + normalizedWord, JSON.stringify(result)); } catch (_) {}
+
+    bodyEl.innerHTML = `
+      <div class="popover-def-item">
+        <span class="popover-pos-badge">${escapeHtml(result.partOfSpeech || 'definition')}</span>
+        <span>${escapeHtml(result.definition)}</span>
+        ${result.example ? `<span class="popover-example">"${escapeHtml(result.example)}"</span>` : ''}
+      </div>
+    `;
   } catch (err) {
     if (requestId !== wordLookupRequest) return;
     bodyEl.innerHTML = `

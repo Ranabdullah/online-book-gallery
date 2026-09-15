@@ -290,6 +290,11 @@
   <script src="js/sync.js?v=3.4.0"></script>
 
   <!-- Reader Script -->
-  <script src="js/reader.js?v=3.6.0"></script>
+  <script src="js/reader.js?v=3.7.1"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+  </script>
 </body>
 </html>
