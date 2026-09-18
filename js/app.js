@@ -49,7 +49,7 @@ function updateFavoritesBadge() {
 
 async function loadCatalog() {
   try {
-    const resp = await fetch('data/books.json');
+    const resp = await fetch(`data/books.json?v=3.6.1&t=${Date.now()}`, { cache: 'no-cache' });
     if (resp.ok) {
       baseBooks = await resp.json();
     }

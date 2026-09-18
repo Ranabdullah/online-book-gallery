@@ -10,7 +10,7 @@
     "isHosted": true,
     "file": "books/book_0001.pdf",
     "originalName": "(Lib-Ebooks.com)020320211902 (952).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0002",
@@ -36,7 +36,7 @@
     "isHosted": true,
     "file": "books/book_0003.pdf",
     "originalName": "1_Ziegler R. - Great Musicians (DK Eyewitness) - 2008.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0004",
@@ -88,7 +88,7 @@
     "isHosted": true,
     "file": "books/book_0007.pdf",
     "originalName": "Adams S. - Soldier (DK Eyewitness) - 2009.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0008",
@@ -153,7 +153,7 @@
     "isHosted": true,
     "file": "books/book_0012.pdf",
     "originalName": "Bridgman R. - Technology (DK Eyewitness) - 2000.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0013",
@@ -166,7 +166,7 @@
     "isHosted": true,
     "file": "books/book_0013.pdf",
     "originalName": "Buckingham A. - Photography (DK Eyewitness) - 2004.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0014",
@@ -179,7 +179,7 @@
     "isHosted": true,
     "file": "books/book_0014.pdf",
     "originalName": "Buller L. - Food (DK Eyewitness) - 2011.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0015",
@@ -192,7 +192,7 @@
     "isHosted": true,
     "file": "books/book_0015.pdf",
     "originalName": "Burnie D. - Tree (DK Eyewitness) - 2011.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0016",
@@ -218,7 +218,7 @@
     "isHosted": true,
     "file": "books/book_0017.pdf",
     "originalName": "Cotterell A. - Ancient China (DK Eyewitness) - 2005.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0018",
@@ -257,7 +257,7 @@
     "isHosted": true,
     "file": "books/book_0020.pdf",
     "originalName": "DK. English for Everyone - Course Book. Level 4 Advanced - 2016.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0021",
@@ -270,7 +270,7 @@
     "isHosted": true,
     "file": "books/book_0021.pdf",
     "originalName": "Dorling Kindersley. DK Illustrated Family Bible (The New International Version, The Holy Bible NIV) - 2013.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0022",
@@ -283,7 +283,7 @@
     "isHosted": true,
     "file": "books/book_0022.pdf",
     "originalName": "Dorling Kindersley. Smithsonian. Flora. Inside the Secret World of Plants - (DK Smithsonian) - 2018.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0023",
@@ -296,7 +296,7 @@
     "isHosted": true,
     "file": "books/book_0023.pdf",
     "originalName": "Dorling Kindersley. Zoology. Inside the Secret World of Animals - (DK Smithsonian) - 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0024",
@@ -309,7 +309,7 @@
     "isHosted": true,
     "file": "books/book_0024.pdf",
     "originalName": "English for Everyone.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0025",
@@ -322,7 +322,7 @@
     "isHosted": true,
     "file": "books/book_0025.pdf",
     "originalName": "English_Skills_with_Readings_7th_Edition.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0026",
@@ -335,7 +335,7 @@
     "isHosted": true,
     "file": "books/book_0026.pdf",
     "originalName": "Foster R. Peach S. - Geography of the World - 2006.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0027",
@@ -348,7 +348,7 @@
     "isHosted": true,
     "file": "books/book_0027.pdf",
     "originalName": "Game Art Complete.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0028",
@@ -361,7 +361,7 @@
     "isHosted": true,
     "file": "books/book_0028.pdf",
     "originalName": "Gamlin L. - Evolution (DK Eyewitness) - 2000.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0029",
@@ -374,7 +374,7 @@
     "isHosted": true,
     "file": "books/book_0029.pdf",
     "originalName": "Grau A. - Dance (DK Eyewitness) - 2005.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0030",
@@ -387,7 +387,7 @@
     "isHosted": true,
     "file": "books/book_0030.pdf",
     "originalName": "Greenaway T. - Jungle (DK Eyewitness) - 2009.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0031",
@@ -413,7 +413,7 @@
     "isHosted": true,
     "file": "books/book_0032.pdf",
     "originalName": "Halley N. - Farm (DK Eyewitness) - 2000.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0033",
@@ -465,7 +465,7 @@
     "isHosted": true,
     "file": "books/book_0036.pdf",
     "originalName": "Langley M. - Religion (DK Eyewitness) - 2005.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0037",
@@ -478,7 +478,7 @@
     "isHosted": true,
     "file": "books/book_0037.pdf",
     "originalName": "Learn Spanish in Just 15 Minutes a Day.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0038",
@@ -517,7 +517,7 @@
     "isHosted": true,
     "file": "books/book_0040.pdf",
     "originalName": "Murdoch D.S. - Cowboy (DK Eyewitness) - 2000.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0041",
@@ -530,7 +530,7 @@
     "isHosted": true,
     "file": "books/book_0041.pdf",
     "originalName": "Murdoch D.S. - North American Indian (DK Eyewitness) - 2005.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0042",
@@ -543,7 +543,7 @@
     "isHosted": true,
     "file": "books/book_0042.pdf",
     "originalName": "Operations Management_ Sustainability and Supply Chain Management (12th Edition 2016) Jay Heizer.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0043",
@@ -569,7 +569,7 @@
     "isHosted": true,
     "file": "books/book_0044.pdf",
     "originalName": "Platt R. - Pirate (DK Eyewitness) - 2002.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0045",
@@ -621,7 +621,7 @@
     "isHosted": true,
     "file": "books/book_0048.pdf",
     "originalName": "Stephen Rogers Peck - Atlas of Human Anatomy for the Artist - 1982.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0049",
@@ -647,7 +647,7 @@
     "isHosted": true,
     "file": "books/book_0050.pdf",
     "originalName": "Symes R.F. - Rocks & Minerals (DK Eyewitness) - 2008.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0051",
@@ -660,7 +660,7 @@
     "isHosted": true,
     "file": "books/book_0051.pdf",
     "originalName": "Tambini M. - Future (DK Eyewitness) - 2004.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0052",
@@ -686,7 +686,7 @@
     "isHosted": true,
     "file": "books/book_0053.pdf",
     "originalName": "The DK Children's Encyclopedia. The Book that Explains Everything - 2017.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0054",
@@ -699,7 +699,7 @@
     "isHosted": true,
     "file": "books/book_0054.pdf",
     "originalName": "The Economics Book.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0055",
@@ -803,7 +803,7 @@
     "isHosted": true,
     "file": "books/book_0062.pdf",
     "originalName": "total04_digital_version.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0063",
@@ -829,7 +829,7 @@
     "isHosted": true,
     "file": "books/book_0064.pdf",
     "originalName": "Wilkinson P. (ed.) - Early Humans (DK Eyewitness) - 2005.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0065",
@@ -842,7 +842,7 @@
     "isHosted": true,
     "file": "books/book_0065.pdf",
     "originalName": "Wilkinson P. - Building (DK Eyewitness) - 2000.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0066",
@@ -855,7 +855,7 @@
     "isHosted": true,
     "file": "books/book_0066.pdf",
     "originalName": "Wonderbook _ the illustrated guide to creating imaginative fiction ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0067",
@@ -881,7 +881,7 @@
     "isHosted": true,
     "file": "books/book_0068.pdf",
     "originalName": "2DArtist_Issue_130_Oct16_highres.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0069",
@@ -894,7 +894,7 @@
     "isHosted": true,
     "file": "books/book_0069.pdf",
     "originalName": "2DArtist_Issue_131_Nov16_highres.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0070",
@@ -907,7 +907,7 @@
     "isHosted": true,
     "file": "books/book_0070.pdf",
     "originalName": "2DArtist_Issue_132_Dec16_highres.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0071",
@@ -920,7 +920,7 @@
     "isHosted": true,
     "file": "books/book_0071.pdf",
     "originalName": "Andrew Loomis - Drawing the Head and Hands.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0072",
@@ -972,7 +972,7 @@
     "isHosted": true,
     "file": "books/book_0075.pdf",
     "originalName": "Basic Perspective Drawing- A Visual Approach ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0076",
@@ -985,7 +985,7 @@
     "isHosted": true,
     "file": "books/book_0076.pdf",
     "originalName": "Cartoon Animation by Preston Blair ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0077",
@@ -998,7 +998,7 @@
     "isHosted": true,
     "file": "books/book_0077.pdf",
     "originalName": "cdq_sample_issue_2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0078",
@@ -1011,7 +1011,7 @@
     "isHosted": true,
     "file": "books/book_0078.pdf",
     "originalName": "Color and Light- A Guide for the Realist Painter ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0079",
@@ -1076,7 +1076,7 @@
     "isHosted": true,
     "file": "books/book_0083.pdf",
     "originalName": "Digital colour in graphic design.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0084",
@@ -1089,7 +1089,7 @@
     "isHosted": true,
     "file": "books/book_0084.pdf",
     "originalName": "dokumen.tips_jack-hamm-drawing-the-head-and-figurepdf.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0085",
@@ -1102,7 +1102,7 @@
     "isHosted": true,
     "file": "books/book_0085.pdf",
     "originalName": "draw-with-jazza-easy-anatomy.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0086",
@@ -1128,7 +1128,7 @@
     "isHosted": true,
     "file": "books/book_0088.pdf",
     "originalName": "Drawing comics the marvel way.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0089",
@@ -1141,7 +1141,7 @@
     "isHosted": true,
     "file": "books/book_0089.pdf",
     "originalName": "Drawing the Human Head (Practical Art Books) ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0090",
@@ -1154,7 +1154,7 @@
     "isHosted": true,
     "file": "books/book_0090.pdf",
     "originalName": "epdf.pub_the-animators-survival-kit.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0091",
@@ -1193,7 +1193,7 @@
     "isHosted": true,
     "file": "books/book_0093.pdf",
     "originalName": "free_chapter_bgts2.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0094",
@@ -1245,7 +1245,7 @@
     "isHosted": true,
     "file": "books/book_0098.pdf",
     "originalName": "kupdf.net_anatomy-for-sculptorspdf.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0099",
@@ -1284,7 +1284,7 @@
     "isHosted": true,
     "file": "books/book_0101.pdf",
     "originalName": "Perspective Made Easy.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0102",
@@ -1297,7 +1297,7 @@
     "isHosted": true,
     "file": "books/book_0102.pdf",
     "originalName": "Perspective Sketching Freehand and Digital Drawing Techniques for Artists & Designers.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0104",
@@ -1310,7 +1310,7 @@
     "isHosted": true,
     "file": "books/book_0104.pdf",
     "originalName": "Richard Williams - The Animator's Survival Kit.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0105",
@@ -1323,7 +1323,7 @@
     "isHosted": true,
     "file": "books/book_0105.pdf",
     "originalName": "Sketch Book for the Artist.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0106",
@@ -1336,7 +1336,7 @@
     "isHosted": true,
     "file": "books/book_0106.pdf",
     "originalName": "Sketch-based Interfaces and Modeling.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0107",
@@ -1349,7 +1349,7 @@
     "isHosted": true,
     "file": "books/book_0107.pdf",
     "originalName": "SKETCHING Drawing Techniques for Product Designers.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0108",
@@ -1362,7 +1362,7 @@
     "isHosted": true,
     "file": "books/book_0108.pdf",
     "originalName": "Sketching People Life Drawing Basics - Jeff Mellem.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0109",
@@ -1375,7 +1375,7 @@
     "isHosted": true,
     "file": "books/book_0109.pdf",
     "originalName": "Sketching User Experiences Getting the Design Right and the Right Design.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0110",
@@ -1388,7 +1388,7 @@
     "isHosted": true,
     "file": "books/book_0110.pdf",
     "originalName": "small-size-drawing-the-human-body.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0111",
@@ -1401,7 +1401,7 @@
     "isHosted": true,
     "file": "books/book_0111.pdf",
     "originalName": "The Anatomy of Style_ Figure Drawing Techniques ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0113",
@@ -1466,7 +1466,7 @@
     "isHosted": true,
     "file": "books/book_0117.pdf",
     "originalName": "The illusion of life_ Disney animation   ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0118",
@@ -1479,7 +1479,7 @@
     "isHosted": true,
     "file": "books/book_0118.pdf",
     "originalName": "The New Drawing on the Right Side of the Brain ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0119",
@@ -1492,7 +1492,7 @@
     "isHosted": true,
     "file": "books/book_0119.pdf",
     "originalName": "The nine old men_ lessons, techniques, and inspiration from Disney's great animators ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0121",
@@ -1531,7 +1531,7 @@
     "isHosted": true,
     "file": "books/book_0123.pdf",
     "originalName": "total_magazine_issue02.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0124",
@@ -1544,7 +1544,7 @@
     "isHosted": true,
     "file": "books/book_0124.pdf",
     "originalName": "Tradigital Animate CC_ 12 principles of animation in Adobe Animate ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0125",
@@ -1557,7 +1557,7 @@
     "isHosted": true,
     "file": "books/book_0125.pdf",
     "originalName": "Tradigital Blender_ A CG Animator's Guide to Applying the Classic Principles of Animation ( PDFDrive ).pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0126",
@@ -1583,7 +1583,7 @@
     "isHosted": true,
     "file": "books/book_0127.pdf",
     "originalName": "Amateur Photographer - 05 July 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0128",
@@ -1596,7 +1596,7 @@
     "isHosted": true,
     "file": "books/book_0128.pdf",
     "originalName": "Amateur Photographer - 12 July 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0129",
@@ -1609,7 +1609,7 @@
     "isHosted": true,
     "file": "books/book_0129.pdf",
     "originalName": "Amateur Photographer - 26 July 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0130",
@@ -1622,7 +1622,7 @@
     "isHosted": true,
     "file": "books/book_0130.pdf",
     "originalName": "Amateur Photographer - 28 June 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0131",
@@ -1635,7 +1635,7 @@
     "isHosted": true,
     "file": "books/book_0131.pdf",
     "originalName": "Australian Photography - July 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0132",
@@ -1648,7 +1648,7 @@
     "isHosted": true,
     "file": "books/book_0132.pdf",
     "originalName": "Better Photography - July 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0133",
@@ -1661,7 +1661,7 @@
     "isHosted": true,
     "file": "books/book_0133.pdf",
     "originalName": "D-Photo - July 08, 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0134",
@@ -1674,7 +1674,7 @@
     "isHosted": true,
     "file": "books/book_0134.pdf",
     "originalName": "Digital Photographer - August 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0135",
@@ -1687,7 +1687,7 @@
     "isHosted": true,
     "file": "books/book_0135.pdf",
     "originalName": "N-Photo UK - August 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0136",
@@ -1700,7 +1700,7 @@
     "isHosted": true,
     "file": "books/book_0136.pdf",
     "originalName": "N-Photo UK - July 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0137",
@@ -1713,7 +1713,7 @@
     "isHosted": true,
     "file": "books/book_0137.pdf",
     "originalName": "Outdoor Photographer - August 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0138",
@@ -1726,7 +1726,7 @@
     "isHosted": true,
     "file": "books/book_0138.pdf",
     "originalName": "Photography Week - 04 July 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0139",
@@ -1739,7 +1739,7 @@
     "isHosted": true,
     "file": "books/book_0139.pdf",
     "originalName": "Photography Week - 20 June 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0140",
@@ -1752,7 +1752,7 @@
     "isHosted": true,
     "file": "books/book_0140.pdf",
     "originalName": "Photography Week - 27 June 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0141",
@@ -1765,7 +1765,7 @@
     "isHosted": true,
     "file": "books/book_0141.pdf",
     "originalName": "Practical Photography - August 2019.pdf",
-    "needsFix": true
+    "needsFix": false
   },
   {
     "id": "book_0142",
@@ -7249,7 +7249,8 @@
     "sizeMB": 1.86,
     "cover": "covers/default.jpg",
     "isHosted": true,
-    "file": "books/book_0563.epub"
+    "file": "books/book_0563.epub",
+    "needsFix": false
   },
   {
     "id": "book_0564",
@@ -7260,7 +7261,8 @@
     "sizeMB": 1.15,
     "cover": "covers/default.jpg",
     "isHosted": true,
-    "file": "books/book_0564.epub"
+    "file": "books/book_0564.epub",
+    "needsFix": false
   },
   {
     "id": "book_0565",
@@ -7271,7 +7273,8 @@
     "sizeMB": 3.51,
     "cover": "covers/default.jpg",
     "isHosted": true,
-    "file": "books/book_0565.epub"
+    "file": "books/book_0565.epub",
+    "needsFix": false
   },
   {
     "id": "book_0566",
@@ -7282,7 +7285,8 @@
     "sizeMB": 1.51,
     "cover": "covers/default.jpg",
     "isHosted": true,
-    "file": "books/book_0566.epub"
+    "file": "books/book_0566.epub",
+    "needsFix": false
   },
   {
     "id": "book_0567",
@@ -7293,6 +7297,7 @@
     "sizeMB": 0.27,
     "cover": "covers/book_0567.jpg",
     "isHosted": true,
-    "file": "books/book_0567.epub"
+    "file": "books/book_0567.epub",
+    "needsFix": false
   }
 ]
