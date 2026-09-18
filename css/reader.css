@@ -444,8 +444,19 @@ body {
   background: linear-gradient(90deg, rgba(255,255,255,.3), rgba(148,163,184,.12), rgba(255,255,255,.3));
 }
 
-.book-page-wrapper.page-turn-next { animation: page-turn-next .34s ease-out; }
-.book-page-wrapper.page-turn-prev { animation: page-turn-prev .34s ease-out; }
+.book-page-wrapper.page-turn-next,
+.book-page-wrapper.page-turn-next #epub-viewer,
+.book-page-wrapper.page-turn-next iframe,
+.book-page-wrapper.page-turn-next #pdf-viewer-container {
+  animation: page-turn-next .34s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+
+.book-page-wrapper.page-turn-prev,
+.book-page-wrapper.page-turn-prev #epub-viewer,
+.book-page-wrapper.page-turn-prev iframe,
+.book-page-wrapper.page-turn-prev #pdf-viewer-container {
+  animation: page-turn-prev .34s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
 .book-page-wrapper.page-turn-next::after, .book-page-wrapper.page-turn-prev::after { animation: page-turn-flash .34s ease-out; }
 @keyframes page-turn-next { 0% { filter: blur(0); transform: translateX(0); } 42% { filter: blur(2px); transform: translateX(-7px); } 100% { filter: blur(0); transform: translateX(0); } }
 @keyframes page-turn-prev { 0% { filter: blur(0); transform: translateX(0); } 42% { filter: blur(2px); transform: translateX(7px); } 100% { filter: blur(0); transform: translateX(0); } }
@@ -1219,8 +1230,8 @@ body.immersive-mode .reader-footer {
    ========================================================================== */
 
 .reader-word-popover {
-  position: absolute;
-  z-index: 1000;
+  position: fixed;
+  z-index: 10000;
   width: 320px;
   max-width: calc(100vw - 32px);
   background: #ffffff;
@@ -1505,3 +1516,18 @@ body.immersive-mode .reader-footer {
 
 
 
+
+@media (max-width: 600px) {
+  .reader-word-popover {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    top: auto !important;
+    bottom: 16px !important;
+    width: auto !important;
+    max-width: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+    z-index: 10000 !important;
+  }
+}

@@ -1885,42 +1885,170 @@ function handleEpubSelection(cfiRange, contents) {
   }
 }
 
+function getWordAtPoint(doc, win, x, y) {
+  try {
+    let range = null;
+    if (doc.caretRangeFromPoint) {
+      range = doc.caretRangeFromPoint(x, y);
+    } else if (doc.caretPositionFromPoint) {
+      const pos = doc.caretPositionFromPoint(x, y);
+      if (pos && pos.offsetNode) {
+        range = doc.createRange();
+        range.setStart(pos.offsetNode, pos.offset);
+        range.collapse(true);
+      }
+    }
+    if (!range) return null;
+
+    let node = range.startContainer;
+    let offset = range.startOffset;
+
+    if (!node) return null;
+    if (node.nodeType !== Node.TEXT_NODE) {
+      if (node.nodeType === Node.ELEMENT_NODE && node.childNodes.length > 0) {
+        for (const child of node.childNodes) {
+          if (child.nodeType === Node.TEXT_NODE && child.textContent.trim()) {
+            node = child;
+            offset = Math.min(offset, child.textContent.length);
+            break;
+          }
+        }
+      }
+      if (node.nodeType !== Node.TEXT_NODE) return null;
+    }
+
+    const text = node.textContent;
+    if (!text || offset < 0 || offset > text.length) return null;
+
+    let start = offset;
+    while (start > 0 && /[\w'-]/.test(text[start - 1])) {
+      start--;
+    }
+    let end = offset;
+    while (end < text.length && /[\w'-]/.test(text[end])) {
+      end++;
+    }
+
+    const rawWord = text.slice(start, end).trim();
+    const cleanWord = rawWord.replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
+    if (!cleanWord || cleanWord.length < 2 || !/[a-zA-Z]/.test(cleanWord)) return null;
+
+    const wordRange = doc.createRange();
+    wordRange.setStart(node, start);
+    wordRange.setEnd(node, end);
+    const rect = wordRange.getBoundingClientRect();
+
+    return {
+      word: cleanWord,
+      rect: rect,
+      context: text
+    };
+  } catch (err) {
+    return null;
+  }
+}
+
 function attachEpubWordLookupListeners(contents) {
   try {
     const doc = contents.document;
     if (!doc || doc._hasWordLookup) return;
     doc._hasWordLookup = true;
+    const win = contents.window || window;
 
+    // 1. Double click on PC
     doc.addEventListener('dblclick', (e) => {
       setTimeout(() => {
-        const sel = contents.window ? contents.window.getSelection() : doc.getSelection();
+        const sel = win.getSelection ? win.getSelection() : doc.getSelection();
         if (sel && sel.toString().trim()) {
+          window._popoverJustShown = true;
+          setTimeout(() => { window._popoverJustShown = false; }, 300);
           handleEpubSelection(null, contents);
         }
       }, 30);
     });
 
+    // 2. Drag / mouseup selection
     doc.addEventListener('mouseup', (e) => {
       setTimeout(() => {
-        const sel = contents.window ? contents.window.getSelection() : doc.getSelection();
+        const sel = win.getSelection ? win.getSelection() : doc.getSelection();
         if (sel && !sel.isCollapsed && sel.toString().trim()) {
-          // Flag so document mousedown handler does not immediately dismiss the popover
           window._popoverJustShown = true;
-          setTimeout(() => { window._popoverJustShown = false; }, 200);
+          setTimeout(() => { window._popoverJustShown = false; }, 300);
           handleEpubSelection(null, contents);
         }
       }, 60);
     });
 
-    // Long-press selection on phones does not emit mouseup. Read the native
-    // selection after touchend so it works the same way as desktop selection.
-    doc.addEventListener('touchend', () => {
+    // 3. Single click on any word (PC desktop)
+    doc.addEventListener('click', (e) => {
+      const sel = win.getSelection ? win.getSelection() : doc.getSelection();
+      if (sel && !sel.isCollapsed && sel.toString().trim()) return;
+      if (e.target && e.target.closest && e.target.closest('a')) return;
+
+      const wordInfo = getWordAtPoint(doc, win, e.clientX, e.clientY);
+      if (wordInfo && wordInfo.word) {
+        window._popoverJustShown = true;
+        setTimeout(() => { window._popoverJustShown = false; }, 300);
+
+        const iframe = document.querySelector('#epub-viewer iframe');
+        const iframeRect = iframe ? iframe.getBoundingClientRect() : { top: 0, left: 0 };
+        const screenX = iframeRect.left + wordInfo.rect.left + wordInfo.rect.width / 2;
+        const screenY = iframeRect.top + wordInfo.rect.bottom;
+
+        showWordPopover(wordInfo.word, screenX, screenY, {
+          format: 'epub',
+          contents: contents,
+          surroundingContext: wordInfo.context
+        });
+      }
+    });
+
+    // 4. Mobile touch & tap on any word (Phone & Tablet)
+    let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+    doc.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }
+    }, { passive: true });
+
+    doc.addEventListener('touchend', (e) => {
+      const dt = Date.now() - touchStartTime;
+      const touch = e.changedTouches ? e.changedTouches[0] : null;
+
       setTimeout(() => {
-        const sel = contents.window ? contents.window.getSelection() : doc.getSelection();
+        const sel = win.getSelection ? win.getSelection() : doc.getSelection();
         if (sel && !sel.isCollapsed && sel.toString().trim()) {
+          window._popoverJustShown = true;
+          setTimeout(() => { window._popoverJustShown = false; }, 300);
           handleEpubSelection(null, contents);
+          return;
         }
-      }, 80);
+
+        if (touch && dt < 450) {
+          const dx = Math.abs(touch.clientX - touchStartX);
+          const dy = Math.abs(touch.clientY - touchStartY);
+          if (dx < 14 && dy < 14) {
+            const wordInfo = getWordAtPoint(doc, win, touch.clientX, touch.clientY);
+            if (wordInfo && wordInfo.word) {
+              window._popoverJustShown = true;
+              setTimeout(() => { window._popoverJustShown = false; }, 300);
+
+              const iframe = document.querySelector('#epub-viewer iframe');
+              const iframeRect = iframe ? iframe.getBoundingClientRect() : { top: 0, left: 0 };
+              const screenX = iframeRect.left + wordInfo.rect.left + wordInfo.rect.width / 2;
+              const screenY = iframeRect.top + wordInfo.rect.bottom;
+
+              showWordPopover(wordInfo.word, screenX, screenY, {
+                format: 'epub',
+                contents: contents,
+                surroundingContext: wordInfo.context
+              });
+            }
+          }
+        }
+      }, 70);
     }, { passive: true });
   } catch (err) {
     console.warn('attachEpubWordLookupListeners error:', err);
@@ -1946,6 +2074,9 @@ function setupPdfWordLookupListeners() {
       const clientX = rect.left + rect.width / 2;
       const clientY = rect.bottom;
 
+      window._popoverJustShown = true;
+      setTimeout(() => { window._popoverJustShown = false; }, 300);
+
       showWordPopover(text, clientX, clientY, {
         format: 'pdf',
         page: pdfCurrentPage,
@@ -1954,16 +2085,61 @@ function setupPdfWordLookupListeners() {
     }, 60);
   });
 
-  container.addEventListener('touchend', () => {
+  container.addEventListener('click', (e) => {
+    const sel = window.getSelection();
+    if (sel && !sel.isCollapsed && sel.toString().trim()) return;
+
+    const wordInfo = getWordAtPoint(document, window, e.clientX, e.clientY);
+    if (wordInfo && wordInfo.word) {
+      window._popoverJustShown = true;
+      setTimeout(() => { window._popoverJustShown = false; }, 300);
+      showWordPopover(wordInfo.word, e.clientX, e.clientY + 12, {
+        format: 'pdf',
+        page: pdfCurrentPage,
+        surroundingContext: wordInfo.context
+      });
+    }
+  });
+
+  let pTouchX = 0, pTouchY = 0, pTouchTime = 0;
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length === 1) {
+      pTouchX = e.touches[0].clientX;
+      pTouchY = e.touches[0].clientY;
+      pTouchTime = Date.now();
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    const dt = Date.now() - pTouchTime;
+    const touch = e.changedTouches ? e.changedTouches[0] : null;
     setTimeout(() => {
       const sel = window.getSelection();
-      if (!sel || sel.isCollapsed || !sel.toString().trim() || !container.contains(sel.anchorNode)) return;
-      const rect = sel.getRangeAt(0).getBoundingClientRect();
-      showWordPopover(sel.toString().trim(), rect.left + rect.width / 2, rect.bottom, {
-        format: 'pdf', page: pdfCurrentPage,
-        surroundingContext: sel.getRangeAt(0).commonAncestorContainer?.textContent || ''
-      });
-    }, 80);
+      if (sel && !sel.isCollapsed && sel.toString().trim() && container.contains(sel.anchorNode)) {
+        const rect = sel.getRangeAt(0).getBoundingClientRect();
+        window._popoverJustShown = true;
+        setTimeout(() => { window._popoverJustShown = false; }, 300);
+        showWordPopover(sel.toString().trim(), rect.left + rect.width / 2, rect.bottom, {
+          format: 'pdf', page: pdfCurrentPage,
+          surroundingContext: sel.getRangeAt(0).commonAncestorContainer?.textContent || ''
+        });
+        return;
+      }
+      if (touch && dt < 450) {
+        const dx = Math.abs(touch.clientX - pTouchX);
+        const dy = Math.abs(touch.clientY - pTouchY);
+        if (dx < 14 && dy < 14) {
+          const wordInfo = getWordAtPoint(document, window, touch.clientX, touch.clientY);
+          if (wordInfo && wordInfo.word) {
+            window._popoverJustShown = true;
+            setTimeout(() => { window._popoverJustShown = false; }, 300);
+            showWordPopover(wordInfo.word, touch.clientX, touch.clientY + 12, {
+              format: 'pdf', page: pdfCurrentPage,
+              surroundingContext: wordInfo.context
+            });
+          }
+        }
+      }
+    }, 70);
   }, { passive: true });
 }
-

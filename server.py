@@ -47,6 +47,18 @@ class AthenaeumHandler(http.server.SimpleHTTPRequestHandler):
         super().end_headers()
 
     def do_POST(self):
+        if self.path == '/api/delete-book':
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length).decode('utf-8')
+            try:
+                data = json.loads(body)
+                book_id = data.get('id')
+                res = self.delete_book_from_backend(book_id)
+                self.send_json({'success': True, 'result': res})
+            except Exception as e:
+                self.send_json({'success': False, 'error': str(e)}, status=500)
+            return
+
         if self.path == '/api/save-override':
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length).decode('utf-8')
@@ -75,10 +87,37 @@ class AthenaeumHandler(http.server.SimpleHTTPRequestHandler):
 
         self.send_json({'error': 'Endpoint not found'}, status=404)
 
+    def delete_book_from_backend(self, book_id):
+        if not book_id:
+            raise ValueError('Missing book ID')
+
+        with open(DATA_FILE, 'r', encoding='utf-8') as f:
+            books = json.load(f)
+
+        before = len(books)
+        books = [b for b in books if b.get('id') != book_id and b.get('file') != book_id and b.get('file') != f'books/{book_id}.epub' and b.get('file') != f'books/{book_id}.pdf']
+        removed = before - len(books)
+
+        with open(DATA_FILE, 'w', encoding='utf-8') as f:
+            json.dump(books, f, indent=2, ensure_ascii=False)
+
+        try:
+            msg = f'feat: remove book {book_id} from library'
+            subprocess.run(['git', 'add', DATA_FILE], cwd=BASE_DIR, capture_output=True)
+            subprocess.run(['git', 'commit', '-m', msg], cwd=BASE_DIR, capture_output=True)
+            subprocess.Popen(['git', 'push', 'origin', 'main'], cwd=BASE_DIR)
+        except Exception as git_err:
+            print('Git auto-commit notice:', git_err)
+
+        return {'id': book_id, 'removed': removed}
+
     def save_override_to_backend(self, item):
         book_id = item.get('id')
         if not book_id:
             raise ValueError('Missing book ID')
+
+        if item.get('deleted'):
+            return self.delete_book_from_backend(book_id)
 
         # 1. Handle cover image persistence to disk
         cover_val = item.get('cover')

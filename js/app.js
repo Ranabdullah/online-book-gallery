@@ -869,6 +869,17 @@ async function deleteBook(bookId) {
       window.AthenaeumDB.hideBook(bookId);
     }
 
+    // Call backend API to delete from server books.json permanently
+    try {
+      await fetch('/api/delete-book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: bookId })
+      });
+    } catch (apiErr) {
+      console.warn('Backend delete notification non-fatal error:', apiErr);
+    }
+
     // Save override with deleted flag and sync
     await window.AthenaeumDB.saveBookOverride(bookId, { deleted: true });
 
@@ -876,6 +887,9 @@ async function deleteBook(bookId) {
       window.AthenaeumSync.broadcastBookOverride(bookId, { deleted: true });
       window.AthenaeumSync.performFullSync().catch(() => {});
     }
+
+    // Immediately remove from allBooks array in memory
+    allBooks = allBooks.filter(b => b.id !== bookId);
 
     // Close any open modals
     const editModal = document.getElementById('edit-modal');
