@@ -1,4 +1,5 @@
-import os, re, json, shutil
+import os, re, json, shutil, sys
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 BASE_DIR = r'F:\AntiGravity\Apps Data\online-book-gallery'
 DATA_FILE = os.path.join(BASE_DIR, 'data', 'books.json')
@@ -116,7 +117,10 @@ for root, dirs, files in os.walk(SOURCE_DIR):
         dest_filename = f"{new_id}{ext}"
         src_path = os.path.join(root, fname)
         dest_path = os.path.join(BOOKS_DIR, dest_filename)
+        if os.path.exists(dest_path):
+            os.chmod(dest_path, 0o666)
         shutil.copy2(src_path, dest_path)
+        os.chmod(dest_path, 0o666)
         size_mb = round(os.path.getsize(dest_path) / (1024 * 1024), 2)
 
         new_entries.append({
