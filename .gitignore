@@ -6,24 +6,18 @@ __pycache__/
 scripts/
 scratch/
 
-# Files exceeding GitHub 100MB limit (preserved locally in books/ for offline/local reading)
-books/book_0066.pdf
-books/book_0078.pdf
-books/book_0117.pdf
-books/book_0001.pdf
-books/book_0022.pdf
-books/book_0084.pdf
-books/book_0070.pdf
-books/book_0075.pdf
-books/book_0068.pdf
-books/book_0053.pdf
-books/book_0111.pdf
-books/book_0131.pdf
-books/book_0133.pdf
-books/book_0136.pdf
-books/book_0069.pdf
-books/book_0023.pdf
-books/book_0132.pdf
-books/book_0048.pdf
-books/book_0105.pdf
-books/book_0026.pdf
+# Book files & covers now live in Firebase Storage, not the repo.
+books/
+covers/
+
+# Firebase - never commit credentials
+admin-scripts/serviceAccountKey.json
+admin-scripts/node_modules/
+
+# Firebase Functions
+functions/node_modules/
+functions/.runtimeconfig.json
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+ui-debug.log

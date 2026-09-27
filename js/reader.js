@@ -121,9 +121,29 @@ function loadLocalSessionBook() {
   }
 }
 
-async function loadBufferAndInit(url, ext) {
+async function resolveBookUrl(url) {
+  // Already a full URL (e.g. a blob: URL) - use it as-is.
+  if (/^(https?:|blob:)/i.test(url)) return url;
+
+  // Otherwise it's an asset name stored in the private GitHub data repo
+  // (e.g. "books/book_0001.pdf"). Ask the Worker for a short-lived signed
+  // download URL - this only works once the visitor has passed the
+  // access-code gate (see auth-gate.js), which is what makes it private.
+  if (window.AthenaeumFirebase && window.AthenaeumFirebase.workerCall) {
+    try {
+      const res = await window.AthenaeumFirebase.workerCall('/getBookDownloadUrl', { assetName: url });
+      return res.url;
+    } catch (e) {
+      console.warn('Backend URL resolution failed, falling back to raw path:', e.message);
+    }
+  }
+  return url;
+}
+
+async function loadBufferAndInit(rawUrl, ext) {
   try {
     updateLoaderStatus('Preloading book into memory...');
+    const url = await resolveBookUrl(rawUrl);
     const response = await fetch(url);
     if (!response.ok) throw new Error(`HTTP ${response.status}: Failed to download book file`);
 
@@ -166,27 +186,159 @@ async function loadBufferAndInit(url, ext) {
   }
 }
 
+const TEXT_EXTENSIONS = ['txt'];
+const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png'];
+const COMIC_EXTENSIONS = ['cbz'];
+// Formats meant to be converted server-side (see admin-scripts) before ever
+// reaching the reader. If one lands here unconverted, we say so plainly
+// rather than silently failing.
+const NEEDS_CONVERSION_EXTENSIONS = ['mobi', 'azw', 'azw3', 'fb2', 'rtf', 'djvu', 'docx', 'cbr'];
+const UNSUPPORTED_EXTENSIONS = ['kfx', 'lit', 'ibooks'];
+
 function initReaderWithBuffer(buffer, ext, identifier) {
   currentBookIdentifier = identifier || currentBookIdentifier;
-  const isPdf = ext.includes('pdf');
+  ext = (ext || '').toLowerCase().replace('.', '');
   const stage = document.getElementById('book-stage');
   if (stage) {
     attachTouchAndTapNavigation(stage);
   }
 
-  if (isPdf) {
+  if (ext.includes('pdf')) {
     currentFormat = 'pdf';
     document.getElementById('pdf-controls').style.display = 'flex';
     document.getElementById('epub-viewer').style.display = 'none';
     document.getElementById('pdf-viewer-container').style.display = 'flex';
     initPdfReaderWithBuffer(buffer, currentBookIdentifier);
-  } else {
+  } else if (ext.includes('epub')) {
     currentFormat = 'epub';
     document.getElementById('pdf-controls').style.display = 'none';
     document.getElementById('epub-viewer').style.display = 'block';
     document.getElementById('pdf-viewer-container').style.display = 'none';
     initEpubReaderWithBuffer(buffer, currentBookIdentifier);
+  } else if (TEXT_EXTENSIONS.includes(ext)) {
+    currentFormat = 'txt';
+    showGenericViewerContainers();
+    initTextReaderWithBuffer(buffer, currentBookIdentifier);
+  } else if (IMAGE_EXTENSIONS.includes(ext)) {
+    currentFormat = 'image';
+    showGenericViewerContainers();
+    initImageReaderWithBuffer(buffer, ext, currentBookIdentifier);
+  } else if (COMIC_EXTENSIONS.includes(ext)) {
+    currentFormat = 'cbz';
+    showGenericViewerContainers();
+    initCbzReaderWithBuffer(buffer, currentBookIdentifier);
+  } else if (NEEDS_CONVERSION_EXTENSIONS.includes(ext)) {
+    showError(`This .${ext} file hasn't been converted yet. Run it through the ingest conversion step (see admin-scripts) before adding it to the library.`);
+  } else if (UNSUPPORTED_EXTENSIONS.includes(ext)) {
+    showError(`.${ext} files are typically DRM-protected and aren't supported by Athenaeum.`);
+  } else {
+    showError(`Unrecognized file type: .${ext}`);
   }
+}
+
+function showGenericViewerContainers() {
+  document.getElementById('pdf-controls').style.display = 'none';
+  document.getElementById('pdf-viewer-container').style.display = 'none';
+  document.getElementById('epub-viewer').style.display = 'block';
+}
+
+/**
+ * Plain text reader
+ */
+function initTextReaderWithBuffer(buffer, identifier) {
+  try {
+    const text = new TextDecoder('utf-8').decode(buffer);
+    const viewer = document.getElementById('epub-viewer');
+    viewer.innerHTML = `
+      <div id="text-reader-content" style="max-width: 720px; margin: 0 auto; padding: 32px 20px 80px;
+           white-space: pre-wrap; line-height: 1.7; font-family: ${readerPrefs.fontFamily};
+           font-size: ${readerPrefs.fontSize}%; overflow-y: auto; height: 100%;"></div>
+    `;
+    document.getElementById('text-reader-content').textContent = text;
+    hideLoader();
+    checkAndPromptCrossDeviceResume(identifier, 'txt');
+  } catch (err) {
+    showError('Error reading text file: ' + err.message);
+  }
+}
+
+/**
+ * Single-image reader (JPG/PNG)
+ */
+function initImageReaderWithBuffer(buffer, ext, identifier) {
+  try {
+    const mime = ext === 'png' ? 'image/png' : 'image/jpeg';
+    const blob = new Blob([buffer], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const viewer = document.getElementById('epub-viewer');
+    viewer.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:center;height:100%;padding:16px;overflow:auto;">
+        <img src="${url}" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;" />
+      </div>
+    `;
+    hideLoader();
+  } catch (err) {
+    showError('Error reading image file: ' + err.message);
+  }
+}
+
+/**
+ * CBZ comic reader (zipped page images, JSZip already loaded for cataloging)
+ */
+let cbzPages = [];
+let cbzCurrentPage = 0;
+
+async function initCbzReaderWithBuffer(buffer, identifier) {
+  try {
+    if (typeof JSZip === 'undefined') {
+      showError('Comic reader library (JSZip) is not loaded.');
+      return;
+    }
+    const zip = await JSZip.loadAsync(buffer);
+    const imageEntries = Object.values(zip.files)
+      .filter(f => !f.dir && /\.(jpe?g|png|gif|webp)$/i.test(f.name))
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+
+    if (imageEntries.length === 0) {
+      showError('No readable pages found in this comic archive.');
+      return;
+    }
+
+    cbzPages = await Promise.all(imageEntries.map(async (entry) => {
+      const data = await entry.async('blob');
+      return URL.createObjectURL(data);
+    }));
+
+    const savedPage = parseInt(localStorage.getItem(`athenaeum_pos_${identifier}`) || '0', 10);
+    cbzCurrentPage = (savedPage >= 0 && savedPage < cbzPages.length) ? savedPage : 0;
+
+    const viewer = document.getElementById('epub-viewer');
+    viewer.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:center;height:100%;padding:16px;overflow:auto;">
+        <img id="cbz-page-img" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;" />
+      </div>
+    `;
+    renderCbzPage(cbzCurrentPage);
+    hideLoader();
+  } catch (err) {
+    showError('Error reading comic archive: ' + err.message);
+  }
+}
+
+function renderCbzPage(index) {
+  if (index < 0 || index >= cbzPages.length) return;
+  cbzCurrentPage = index;
+  const img = document.getElementById('cbz-page-img');
+  if (img) img.src = cbzPages[index];
+  localStorage.setItem(`athenaeum_pos_${currentBookIdentifier}`, index);
+
+  const pct = Math.round(((index + 1) / cbzPages.length) * 100);
+  const pctEl = document.getElementById('reader-percentage');
+  const barEl = document.getElementById('progress-bar-fill');
+  const progressEl = document.getElementById('reader-progress-text');
+  if (pctEl) pctEl.textContent = `${pct}%`;
+  if (barEl) barEl.style.width = `${pct}%`;
+  if (progressEl) progressEl.textContent = `Page ${index + 1} of ${cbzPages.length}`;
 }
 
 /**
@@ -736,6 +888,12 @@ function advanceReaderPage(direction) {
     } else if (direction === 'prev' && pdfCurrentPage > 1) {
       pdfCurrentPage--;
       renderPdfPage(pdfCurrentPage);
+    }
+  } else if (currentFormat === 'cbz') {
+    if (direction === 'next' && cbzCurrentPage < cbzPages.length - 1) {
+      renderCbzPage(cbzCurrentPage + 1);
+    } else if (direction === 'prev' && cbzCurrentPage > 0) {
+      renderCbzPage(cbzCurrentPage - 1);
     }
   }
 }

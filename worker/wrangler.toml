@@ -1,0 +1,21 @@
+name = "athenaeum-backend"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Non-secret config - fine to keep here. Set the real value once you know
+# your Cloudflare Pages / custom domain.
+[vars]
+ALLOWED_ORIGIN = "https://your-project.pages.dev"
+GITHUB_OWNER = "your-github-username"
+GITHUB_DATA_REPO = "book-library-data"
+FIREBASE_PROJECT_ID = "your-firebase-project-id"
+
+# Secrets (never put these in this file) - set each with:
+#   wrangler secret put NAME
+#
+#   GOOGLE_SERVICE_ACCOUNT_JSON   the full JSON key file contents, as one string
+#   ACCESS_CODE                   the shared code your guests type in
+#   ADMIN_SETUP_KEY               one-time secret to grant yourself admin
+#   GEMINI_API_KEY                from aistudio.google.com
+#   GITHUB_TOKEN                  GitHub PAT (classic) with "repo" scope
+#   VIRUSTOTAL_API_KEY            from virustotal.com (free account)

@@ -1,0 +1,34 @@
+rules_version = '2';
+
+// Athenaeum - Storage security rules
+// Book files and covers are only readable by someone who has a valid
+// access-code session. Uploads/deletes are admin-only (done via the
+// admin panel / Cloud Functions), never directly from a visitor's browser.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    match /books/{fileName} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /covers/{fileName} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /books-originals/{fileName} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+  }
+}

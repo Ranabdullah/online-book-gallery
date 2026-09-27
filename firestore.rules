@@ -1,0 +1,42 @@
+rules_version = '2';
+
+// Athenaeum - Firestore security rules
+// Only people who came in through the access-code gate (see functions/index.js)
+// get a signed-in session at all. Everyone else gets nothing - not even the
+// book list, since reads require auth.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // Custom claim set only on YOUR account (see functions/index.js -> setAdminClaim)
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    // Book metadata (title, author, category, storage paths, cached summaries)
+    match /books/{bookId} {
+      allow read: if isSignedIn();
+      // Only the admin (you) can add/edit/delete book entries directly.
+      // Normal library visitors never write here.
+      allow write: if isAdmin();
+    }
+
+    // Cached AI summaries, keyed by bookId + length ("short" | "long")
+    match /summaries/{summaryId} {
+      allow read: if isSignedIn();
+      // Written only by the generateSummary Cloud Function (admin SDK bypasses rules),
+      // so no client write path needs to be open here.
+      allow write: if false;
+    }
+
+    // Simple category list so the admin panel and autocategorize stay in sync
+    match /categories/{categoryId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+  }
+}
