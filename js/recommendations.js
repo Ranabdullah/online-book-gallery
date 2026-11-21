@@ -7,7 +7,7 @@
 
 function athenaeumFindBook(query, exact = false) {
   const books = window.AthenaeumCatalog || [];
-  const normal = s => String(s || '').normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\\s+/g,' ').trim();
+  const normal = s => String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
   const q = normal(query);
   if (!q || q.length < 2) return [];
   return books.filter(b => {
