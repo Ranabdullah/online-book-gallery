@@ -1,6 +1,6 @@
 // Network-first navigation and catalog for safe, prompt library updates.
 // Book files and offline reader assets remain available through existing caching.
-const CACHE_NAME = 'athenaeum-reader-v7';
+const CACHE_NAME = 'athenaeum-reader-v8';
 const OFFLINE_FILES = [
   './',
   'reader.html',
