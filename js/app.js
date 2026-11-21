@@ -69,6 +69,30 @@ async function loadCatalog() {
           }
         }
       } catch(e){ console.warn('Free-source list unavailable',e); }
+      // Metadata-only A records; count as catalogued, never as readable files.
+      try {
+        const response = await fetch('data/abdurrehman-archive.json?v=2', {cache:'no-store'});
+        if (response.ok) {
+          const inventory = await response.json();
+          const titleKey = value => String(value || '').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, '');
+          const titles = new Set(baseBooks.map(b => titleKey(b.title)));
+          for (const item of (inventory.books || [])) {
+            const key = titleKey(item.title);
+            if (key.length < 3 || titles.has(key)) continue;
+            titles.add(key);
+            baseBooks.push({
+              id:item.id, title:item.title, author:'Not verified',
+              category:item.category, format:item.format, sizeMB:item.sizeMB,
+              cover:'', file:'', isHosted:false, needsFix:false,
+              isArchiveRecord:true, readingAvailable:false,
+              originMark:'A', originAttribution:'Abdurrehman (archive supplied)',
+              originArchive:item.archive, originArchiveEntry:item.path,
+              description:'Archive inventory only. Book file not hosted. Summary not verified from content.',
+              summaries:{everyday:null,inDepth:null}, summaryStatus:'awaiting_source_file'
+            });
+          }
+        }
+      } catch (err) {console.warn('Archive inventory not loaded:',err);}
     }
   } catch (err) {
     console.warn('Could not fetch base books.json:', err);
@@ -195,6 +219,7 @@ window.fallbackBookCover = fallbackBookCover;
 function initStats() {
   const hosted = allBooks.filter(b => b.isHosted && !b.needsFix && !b.isExternal);
   const available = allBooks.filter(b => b.isHosted && !b.needsFix);
+  const catalogued = allBooks.filter(b => !b.needsFix || b.isArchiveRecord);
   const needsFix = allBooks.filter(b => !b.isHosted || b.needsFix);
 
   const statBooks = document.getElementById('stat-total-books');
@@ -203,14 +228,14 @@ function initStats() {
   const countAll = document.getElementById('count-all');
   const countNeedsUpload = document.getElementById('count-needs-upload');
 
-  if (statBooks) statBooks.textContent = available.length;
-  if (countAll) countAll.textContent = available.length;
+  if (statBooks) statBooks.textContent = catalogued.length;
+  if (countAll) countAll.textContent = catalogued.length;
   if (countNeedsUpload) countNeedsUpload.textContent = needsFix.length;
 
-  const authorsSet = new Set(available.map(b => (b.author || '').trim()).filter(Boolean));
+  const authorsSet = new Set(catalogued.map(b => (b.author || '').trim()).filter(Boolean));
   if (statAuthors) statAuthors.textContent = authorsSet.size;
 
-  const catSet = new Set(available.map(b => b.category).filter(Boolean));
+  const catSet = new Set(catalogued.map(b => b.category).filter(Boolean));
   if (statCategories) statCategories.textContent = catSet.size;
 
   updateFavoritesBadge();
@@ -225,7 +250,7 @@ function filterAndSortBooks() {
       if (b.isHosted && !b.needsFix) return false;
     } else {
       // Normal reading library: hide unhosted books
-      if (!b.isHosted || b.needsFix) return false;
+      if ((!b.isHosted && !b.isArchiveRecord) || b.needsFix) return false;
       if (currentCategory !== 'all' && b.category !== currentCategory) {
         return false;
       }
@@ -294,8 +319,8 @@ function renderBooks() {
   grid.innerHTML = filtered.map(b => {
     const isFav = favs.includes(b.id);
     const external = Boolean(b.isExternal && /^https:\/\/www\.gutenberg\.org\/ebooks\/\d+$/.test(b.externalUrl||''));
-    const readUrl = external ? `external-book.html?id=${encodeURIComponent(b.id)}` : (b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#');
-    const isNeedsUpload = !b.isHosted || b.needsFix;
+    const readUrl = b.isArchiveRecord ? `archive-book.html?id=${encodeURIComponent(b.id)}` : external ? `external-book.html?id=${encodeURIComponent(b.id)}` : (b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#');
+    const isNeedsUpload = (!b.isHosted && !b.isArchiveRecord) || b.needsFix;
     const originMark=['R','A','N'].includes(b.originMark) ? b.originMark : 'R';
     const originInfo = originMark==='N'?'New free source (externally hosted)':originMark==='A'?'Abdurrehman contribution':'Existing original Athenaeum collection (attribution pending)';
     const contributorLabel = originMark==='A' ? 'Abdurrehman' : originMark==='N' ? 'Project Gutenberg' : 'Original collection · attribution pending';
@@ -304,9 +329,10 @@ function renderBooks() {
     return `
       <article class="book-card ${isNeedsUpload ? 'card-needs-upload' : ''}" data-id="${b.id}">
         <div class="cover-wrapper">
-          <img class="book-cover" src="${b.cover}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="fallbackBookCover(this)">
+          <img class="book-cover" src="${b.cover || 'data:,'}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="fallbackBookCover(this)">
           <span class="origin-marker" title="${escapeHtml(originInfo)}" aria-label="Book origin: ${escapeHtml(originInfo)}" style="position:absolute;top:8px;left:8px;z-index:5;background:${originColor};color:#fff;border:2px solid #fff6;border-radius:50%;width:29px;height:29px;display:flex;align-items:center;justify-content:center;font:800 15px system-ui;box-shadow:0 2px 8px #0008;">${originMark}</span>
           ${isNeedsUpload ? `<span class="format-badge" style="background: #ea580c; left: 8px; right: auto; font-size: 10px; font-weight: 700;">⚠️ NEEDS FILE</span>` : ''}
+          ${b.isArchiveRecord ? `<span class="format-badge" style="background:#704a8f;right:8px;top:37px">ARCHIVE ONLY</span>` : ''}
           ${b.isUserAdded ? `<span class="user-added-badge">NEW</span>` : ''}
           <span class="format-badge ${b.format.toLowerCase()}">${b.format}</span>
           <button class="bookmark-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${b.id}')" title="${isFav ? 'Remove favorite' : 'Add favorite'}">
@@ -325,9 +351,9 @@ function renderBooks() {
 
           <div class="card-actions">
             ${!isNeedsUpload ? `
-              <a href="${readUrl}" class="btn-read" title="${external?'Book details and Athenaeum local reader':'Read online in high-speed reader'}">
+              <a href="${readUrl}" class="btn-read" title="${b.isArchiveRecord?'View archive metadata and file availability':external?'Book details and Athenaeum local reader':'Read online in high-speed reader'}">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                <span>${external?'Details & reader':'Read'}</span>
+                <span>${b.isArchiveRecord?'Archive details':external?'Details & reader':'Read'}</span>
               </a>
             ` : `
               <button class="btn-read" style="background: #ea580c;" onclick="triggerDirectFileUpload('${b.id}')" title="Upload EPUB or PDF from PC to read">
@@ -336,7 +362,7 @@ function renderBooks() {
               </button>
             `}
             <a href="book-notes.html?book=${encodeURIComponent(b.id)}" class="btn-card-edit" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;" title="Read and write book notes (local drafts until shared accounts launch)">📝</a>
-            ${external ? `<a href="${b.externalUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="Open official Project Gutenberg book page">↗</a>` :
+            ${b.isArchiveRecord ? `<a href="${readUrl}" class="btn-card-edit" title="View archived book details">ⓘ</a>` : external ? `<a href="${b.externalUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="Open official Project Gutenberg book page">↗</a>` :
             `<a href="book-analysis.html?book=${encodeURIComponent(b.id || b.file)}" class="btn-card-edit" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; color: #9333ea;" title="AI Book Intelligence, Summary & Vocabulary">
               🧠
             </a>`}
