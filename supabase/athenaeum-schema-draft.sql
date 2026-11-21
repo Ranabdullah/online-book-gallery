@@ -36,6 +36,8 @@ create table if not exists public.athenaeum_books (
  unique (library_id,legacy_id)
 );
 
+create unique index if not exists athenaeum_books_id_library_idx on public.athenaeum_books(id,library_id);
+
 create table if not exists public.athenaeum_book_notes (
  id uuid primary key default gen_random_uuid(),
  library_id uuid not null references public.athenaeum_libraries(id) on delete cascade,
@@ -49,7 +51,6 @@ create table if not exists public.athenaeum_book_notes (
    references public.athenaeum_books(id,library_id)
 );
 -- Composite uniqueness for FK consistency.
-create unique index if not exists athenaeum_books_id_library_idx on public.athenaeum_books(id,library_id);
 create index if not exists athenaeum_notes_book_created_idx on public.athenaeum_book_notes(book_id,created_at desc);
 
 create table if not exists public.athenaeum_recommendations (
