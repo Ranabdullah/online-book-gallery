@@ -92,6 +92,8 @@ async function refreshAllBooks() {
     return b;
   });
 
+  window.AthenaeumCatalog = allBooks.filter(b => b.isHosted && !b.needsFix);
+  window.dispatchEvent(new Event("athenaeum:catalog-ready"));
   initStats();
   renderFeaturedBook();
   renderBooks();
@@ -113,6 +115,9 @@ function renderFeaturedBook(chooseAnother = false) {
   const pool = chooseAnother && eligible.length > 1 ? eligible.filter(b => b.id !== featuredBookId) : eligible;
   const book = selected || pool[Math.floor(Math.random() * pool.length)];
   featuredBookId = book.id;
+  const intel = document.getElementById("top-book-intel");
+  if (intel) intel.href = "book-analysis.html?book=" + encodeURIComponent(book.id);
+  panel.style.setProperty("--featured-cover", "url(" + JSON.stringify(book.cover) + ")");
   document.getElementById('featured-book-title').textContent = book.title || 'Untitled book';
   document.getElementById('featured-book-author').textContent = book.author ? 'By ' + book.author : 'Author unknown';
   document.getElementById('featured-book-category').textContent = book.category || 'From the library';
@@ -130,6 +135,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const next = document.getElementById('featured-book-next');
   if (next) next.addEventListener('click', () => renderFeaturedBook(true));
 });
+
+function fallbackBookCover(img) {
+  if (!img || img.dataset.fallbackApplied) return;
+  img.dataset.fallbackApplied = '1';
+  const raw = (img.alt || 'Untitled Book').replace(/^Cover of /, '');
+  const title = raw.length > 56 ? raw.substring(0, 53) + '…' : raw;
+  const words = title.split(/\s+/);
+  const lines = [];
+  let line = '';
+  for (const word of words) {
+    if ((line + ' ' + word).trim().length > 20 && line) { lines.push(line); line = word; }
+    else line = (line + ' ' + word).trim();
+  }
+  if (line) lines.push(line);
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const seed = [...raw].reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,7);
+  const palette = [['#14273c','#4b657c'],['#213b35','#67806a'],['#35293f','#856e9b'],['#503326','#ba7e4a']][seed % 4];
+  const spans = lines.slice(0,5).map((l,i)=>'<tspan x="50%" dy="'+(i?31:0)+'">'+esc(l)+'</tspan>').join('');
+  const y = 295 - (Math.min(lines.length,5)-1)*15;
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="'+palette[0]+'"/><stop offset="1" stop-color="'+palette[1]+'"/></linearGradient></defs><rect width="400" height="600" fill="url(#g)"/><rect x="23" y="22" width="354" height="556" rx="2" fill="none" stroke="#eacda1" stroke-opacity=".65" stroke-width="2"/><path d="M80 120H320M80 490H320" stroke="#eacda1" stroke-opacity=".72" stroke-width="2"/><circle cx="200" cy="172" r="29" fill="none" stroke="#eacda1"/><path d="M180 172h40M200 152v40" stroke="#eacda1"/><text x="50%" y="'+y+'" text-anchor="middle" fill="#fff8e9" font-family="Georgia,serif" font-size="25" font-weight="700">'+spans+'</text><text x="50%" y="530" text-anchor="middle" fill="#eacda1" font-family="Georgia,serif" font-size="15" letter-spacing="3">ATHENAEUM</text></svg>';
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+window.fallbackBookCover = fallbackBookCover;
 
 function initStats() {
   const hosted = allBooks.filter(b => b.isHosted && !b.needsFix);
@@ -236,7 +264,7 @@ function renderBooks() {
     return `
       <article class="book-card ${isNeedsUpload ? 'card-needs-upload' : ''}" data-id="${b.id}">
         <div class="cover-wrapper">
-          <img class="book-cover" src="${b.cover}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22 viewBox=%220 0 400 600%22><rect width=%22400%22 height=%22600%22 fill=%22%23f1f5f9%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22 font-family=%22sans-serif%22 font-size=%2216%22>No Cover</text></svg>'">
+          <img class="book-cover" src="${b.cover}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="fallbackBookCover(this)">
           ${isNeedsUpload ? `<span class="format-badge" style="background: #ea580c; left: 8px; right: auto; font-size: 10px; font-weight: 700;">⚠️ NEEDS FILE</span>` : ''}
           ${b.isUserAdded ? `<span class="user-added-badge">NEW</span>` : ''}
           <span class="format-badge ${b.format.toLowerCase()}">${b.format}</span>
