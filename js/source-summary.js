@@ -149,6 +149,7 @@
     const p=document.createElement('p');p.textContent='Everyday Summary explains the book in plain language. In-Depth Analysis gives advanced, evidence-grounded interpretation. Both require reading actual EPUB/PDF text first; AI gets excerpts only when you explicitly request a level. A partial sample cannot establish the full book.';p.style.cssText='font:13px/1.6 system-ui;color:#526478';
     const button=(id,label)=>{const b=document.createElement('button');b.id=id;b.textContent=label;b.type='button';b.style.cssText='border:0;border-radius:8px;background:#1b3048;color:white;padding:11px 15px;margin:6px 9px 6px 0;cursor:pointer';return b};
     const extractBtn=button('source-summary-extract','Read source excerpts');
+    const keyBtn=button('source-summary-key','Configure my Gemini API key');
     const everydayBtn=button('source-summary-everyday','Generate Everyday Summary');
     const inDepthBtn=button('source-summary-indepth','Generate In-Depth Analysis');
     everydayBtn.disabled=true;inDepthBtn.disabled=true;
@@ -161,11 +162,12 @@
     const everydayText=document.createElement('div');everydayText.id='source-summary-everyday-text';everydayText.style.cssText='white-space:pre-wrap;font:14px/1.7 system-ui;color:#26374a';
     const inDepthHeading=document.createElement('h3');inDepthHeading.textContent='In-Depth Analysis';inDepthHeading.style.cssText='font:700 19px Georgia,serif;margin:24px 0 7px';
     const inDepthText=document.createElement('div');inDepthText.id='source-summary-indepth-text';inDepthText.style.cssText='white-space:pre-wrap;font:14px/1.7 system-ui;color:#26374a';
-    wrap.append(h,p,extractBtn,everydayBtn,inDepthBtn,status,everydayHeading,everydayText,inDepthHeading,inDepthText,preview);
+    wrap.append(h,p,extractBtn,keyBtn,everydayBtn,inDepthBtn,status,everydayHeading,everydayText,inDepthHeading,inDepthText,preview);
     const anchor=byId('analysis-content')||document.querySelector('main')||document.body;
     anchor.parentNode.insertBefore(wrap,anchor);
     const id=new URLSearchParams(location.search).get('book') || new URLSearchParams(location.search).get('id');
     if(id){const cached=readCache(id);renderSummaries(cached);if(cached.everyday||cached.inDepth)explain('Saved excerpt-based analyses available on this browser.');}
+    keyBtn.onclick=()=>{if(typeof promptForApiKey==='function')promptForApiKey(()=>explain('Key saved in this browser. Select a summary level.'));else explain('Gemini configuration is unavailable.');};
     extractBtn.onclick=async()=>{extractBtn.disabled=true;try{
       await extract();
       byId('source-summary-sample').textContent=source.excerpt.slice(0,2600)+'\\n[Preview ends]';
