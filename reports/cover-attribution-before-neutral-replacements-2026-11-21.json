@@ -1,0 +1,114 @@
+[
+  {
+    "id": "book_0058",
+    "title": "The training of the imagination",
+    "author": "Various",
+    "oldCover": "covers/book_0058.jpg",
+    "sha": "488129eef1d1b1fffd6e38fc5cb736ce51c3ae96"
+  },
+  {
+    "id": "book_0384",
+    "title": "Don Quixote",
+    "author": "Miguel de Cervantes",
+    "oldCover": "covers/book_0384.jpg",
+    "sha": "488129eef1d1b1fffd6e38fc5cb736ce51c3ae96"
+  },
+  {
+    "id": "book_0237",
+    "title": "Ecce Homo",
+    "author": "Friedrich Nietzsche",
+    "oldCover": "covers/book_0237.jpg",
+    "sha": "0b7fa9292ef697d45b884e0ad7b06c662c26d733"
+  },
+  {
+    "id": "book_0246",
+    "title": "The Twilight of Idols",
+    "author": "Friedrich Nietzsche",
+    "oldCover": "covers/book_0246.jpg",
+    "sha": "0b7fa9292ef697d45b884e0ad7b06c662c26d733"
+  },
+  {
+    "id": "book_0267",
+    "title": "A Song of Ice and Fire 2 A Clash of Kings",
+    "author": "George R. R. Martin",
+    "oldCover": "covers/book_0267.jpg",
+    "sha": "5171b5725d770e05c70d0562f3421295cede48a6"
+  },
+  {
+    "id": "book_0268",
+    "title": "A Song of Ice and Fire 3 A Storm of Swords",
+    "author": "George R. R. Martin",
+    "oldCover": "covers/book_0268.jpg",
+    "sha": "5171b5725d770e05c70d0562f3421295cede48a6"
+  },
+  {
+    "id": "book_0270",
+    "title": "A Song of Ice and Fire 5 A Dance with Dragons",
+    "author": "George R. R. Martin",
+    "oldCover": "covers/book_0270.jpg",
+    "sha": "5171b5725d770e05c70d0562f3421295cede48a6"
+  },
+  {
+    "id": "book_0434",
+    "title": "Percy Jackson and the Olympians 1 The Lightning Thief",
+    "author": "Rick Riordan",
+    "oldCover": "covers/book_0434.jpg",
+    "sha": "2a93f2db643267b0f550fb80bb4a142432dd1c60"
+  },
+  {
+    "id": "book_0436",
+    "title": "Percy Jackson and the Olympians 3 The Titan's Curse",
+    "author": "Rick Riordan",
+    "oldCover": "covers/book_0436.jpg",
+    "sha": "2a93f2db643267b0f550fb80bb4a142432dd1c60"
+  },
+  {
+    "id": "book_0437",
+    "title": "Percy Jackson and the Olympians 4 The Battle of the Labyrinth",
+    "author": "Rick Riordan",
+    "oldCover": "covers/book_0437.jpg",
+    "sha": "2a93f2db643267b0f550fb80bb4a142432dd1c60"
+  },
+  {
+    "id": "book_0438",
+    "title": "Percy Jackson and the Olympians 5 The Last Olympian",
+    "author": "Rick Riordan",
+    "oldCover": "covers/book_0438.jpg",
+    "sha": "2a93f2db643267b0f550fb80bb4a142432dd1c60"
+  },
+  {
+    "id": "book_0478",
+    "title": "The Dark Tower 4 Wizard and Glass",
+    "author": "Stephen King",
+    "oldCover": "covers/book_0478.jpg",
+    "sha": "1e4cf63eedd30f0ef5f92ffc602b333430423ddc"
+  },
+  {
+    "id": "book_0479",
+    "title": "The Dark Tower 5 Wolves of the Calla",
+    "author": "Stephen King",
+    "oldCover": "covers/book_0479.jpg",
+    "sha": "1e4cf63eedd30f0ef5f92ffc602b333430423ddc"
+  },
+  {
+    "id": "book_0494",
+    "title": "The Hunger Games 1 The Hunger Games",
+    "author": "Suzanne Collins",
+    "oldCover": "covers/book_0494.jpg",
+    "sha": "73dc44b3d6b46c9c80ae03e110aa464881f9aa43"
+  },
+  {
+    "id": "book_0495",
+    "title": "The Hunger Games 2 Catching Fire",
+    "author": "Suzanne Collins",
+    "oldCover": "covers/book_0495.jpg",
+    "sha": "73dc44b3d6b46c9c80ae03e110aa464881f9aa43"
+  },
+  {
+    "id": "book_0496",
+    "title": "The Hunger Games 3 Mockingjay",
+    "author": "Suzanne Collins",
+    "oldCover": "covers/book_0496.jpg",
+    "sha": "73dc44b3d6b46c9c80ae03e110aa464881f9aa43"
+  }
+]
