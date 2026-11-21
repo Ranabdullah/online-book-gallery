@@ -24,7 +24,7 @@ Date: November 21, 2026
 - **No complete source-grounded everyday or in-depth summaries have been generated and editorially reviewed for the 790 catalog entries.** The new slots are null/pending. The per-user tool generates analyses on request.
 - **No ZIP archive content was published or imported** during this release. Archive bytes were not accessible through the working archive processor.
 - Missing book file contents and official edition covers remain missing. The visual title covers on the missing-books page are placeholders, not published official artwork.
-- The browser rendering service rate-limited the subsequent live Book Intelligence verification, so the entire multi-step reader/AI flow remains unverified end-to-end.
+- A later Cloudflare browser-rendering check successfully opened Book Intelligence for Brave New World and displayed the correct title and both summary controls. The actual AI generation call still remains untested without a configured API key.
 - Some uploaded PDFs/EPUBs may be copyrighted; verify redistribution permissions before publishing a new copy on the openly accessible GitHub repository.
 
 ## Tracking
@@ -37,3 +37,8 @@ Date: November 21, 2026
 2. **In-Depth Analysis**: 450–650 words, evidence from identifiable chapters/pages, narrative or argument structure, language, style, themes, plausible competing interpretations and limitations. "PhD-level" is a requested depth, not a scholarly qualification or peer review.
 3. Never invent quotes, page references, academic citations, ending details or full plot arcs from title-only metadata or insufficient excerpts.
 4. Mark research based on partial excerpts as **partial**, and use a full-edition reading plus independently checked academic sources before presenting a complete scholarly dossier.
+
+## Delivery constraints
+- Cloudflare's former GitHub Pages proxy served stale files. The production Worker was updated to fetch current app pages/scripts from GitHub `main`; the new missing-books page was subsequently verified live.
+- GitHub's regular Git repository enforces a 100 MiB maximum per file, and recommends keeping repositories small. Existing hosted books are approximately 3.3 GiB before additional ZIP imports. Large archives should be deduplicated and rights-checked before import.
+- New summary generation is an opt-in browser action with a user-provided Gemini API key. The old Gemini 2.0 Flash model was shut down June 2026; the client now targets Gemini 3.8 Flash.
