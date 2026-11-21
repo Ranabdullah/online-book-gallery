@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Free book | Athenaeum</title>
+<style>
+:root{color-scheme:light}body{margin:0;background:#faf6ee;color:#182c44;font:16px/1.6 system-ui,Arial,sans-serif}header{background:#12243b;color:#fff;padding:18px max(20px,5vw)}header a{color:#fff}main{max-width:1050px;margin:30px auto;padding:0 20px}.layout{display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:30px}img{width:100%;border-radius:8px;box-shadow:0 8px 25px #0002}.panel{background:#fff;border:1px solid #dfd1b9;border-radius:12px;padding:22px;margin:18px 0}h1,h2{font-family:Georgia,serif;line-height:1.25}h1{font-size:clamp(27px,4vw,42px);margin:0 0 7px}h2{font-size:22px}.kicker{font-weight:700;color:#12605d;font-size:13px;text-transform:uppercase;letter-spacing:.09em}.button{display:inline-block;padding:11px 18px;border-radius:9px;background:#18334e;color:#fff;border:0;font:600 15px system-ui;cursor:pointer;text-decoration:none;margin:4px 9px 4px 0}.button.secondary{background:#e8e1d5;color:#182c44}.note{background:#fff1d8;padding:13px;border-radius:8px;font-size:14px}#status{font-weight:600}input[type=file]{max-width:100%}@media(max-width:600px){.layout{grid-template-columns:1fr}img{max-width:220px}}</style></head>
+<body><header><a href="index.html">← Athenaeum library</a> <span style="float:right">N · External free-source book</span></header>
+<main><div class="layout"><div><img id="cover" alt="Book cover"></div><div><div class="kicker">Project Gutenberg · External source</div><h1 id="title">Loading title…</h1><p id="author"></p><p id="category"></p><a id="source" class="button" href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer">Visit official book page</a>
+<p class="note">Project Gutenberg hosts this edition. Its rules do not permit us to embed or hotlink its book files here. To read in Athenaeum, download the EPUB or PDF from the official book page and then select that file below. It stays in your browser on this device, not on GitHub.</p>
+<label for="book-file"><strong>Open downloaded EPUB or PDF in Athenaeum</strong></label><p><input id="book-file" type="file" accept=".epub,.pdf,application/epub+zip,application/pdf"></p><button type="button" id="open" class="button secondary">Import locally &amp; open reader</button><p id="status" role="status"></p></div></div>
+<section class="panel"><h2>Everyday Summary</h2><p id="everyday">No editorial overview available.</p></section>
+<section class="panel"><h2>In-Depth Analysis</h2><p id="indepth">No editorial overview available.</p><small>These are editorial introductions to well-known works, not an analysis verified against the complete text of a specific edition. You can use the source-based tools after importing a file locally.</small></section>
+</main><script src="js/vendor/jszip.min.js"></script><script src="js/vendor/pdf.min.js"></script><script src="js/db.js"></script><script src="js/book-manager.js"></script>
+<script>
+(async function(){
+const id=new URLSearchParams(location.search).get('id');const out=document.getElementById('status');const e=await fetch('data/free-books.json',{cache:'no-store'}).then(r=>r.json()).catch(()=>[]);
+const b=e.find(x=>x.id===id&&/^https:\/\/www\.gutenberg\.org\/ebooks\/\d+$/.test(x.externalUrl||''));
+if(!b){document.getElementById('title').textContent='Book not found';out.textContent='Return to the library and select a free-source title.';document.getElementById('open').disabled=true;return;}
+document.title=b.title+' | Athenaeum';document.getElementById('title').textContent=b.title;document.getElementById('author').textContent='By '+b.author;
+document.getElementById('category').textContent=b.category;document.getElementById('cover').src=b.cover;document.getElementById('cover').alt='Cover for '+b.title;document.getElementById('source').href=b.externalUrl;
+document.getElementById('everyday').textContent=b.summaries?.everyday||'No editorial overview available.';
+document.getElementById('indepth').textContent=b.summaries?.inDepth||'No editorial overview available.';
+document.getElementById('open').addEventListener('click',async()=>{
+const file=document.getElementById('book-file').files[0];if(!file){out.textContent='Select a downloaded EPUB or PDF first.';return;}
+if(!/\.(epub|pdf)$/i.test(file.name)){out.textContent='Only EPUB and PDF files are supported.';return;}
+try{out.textContent='Adding this book to browser storage…';const saved=await window.BookManager.processAndAddBook(file);out.textContent='Opening Athenaeum reader…';location.href='reader.html?book='+encodeURIComponent(saved.file);}
+catch(err){out.textContent='Could not open file: '+err.message;}
+});
+})();
+</script></body></html>
