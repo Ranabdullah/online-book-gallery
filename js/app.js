@@ -298,6 +298,7 @@ function renderBooks() {
     const isNeedsUpload = !b.isHosted || b.needsFix;
     const originMark=['R','A','N'].includes(b.originMark) ? b.originMark : 'R';
     const originInfo = originMark==='N'?'New free source (externally hosted)':originMark==='A'?'Abdurrehman contribution':'Existing original Athenaeum collection (attribution pending)';
+    const contributorLabel = originMark==='A' ? 'Abdurrehman' : originMark==='N' ? 'Project Gutenberg' : 'Original collection · attribution pending';
     const originColor = originMark==='N'?'#155f5e':originMark==='A'?'#704a8f':'#6c4839';
 
     return `
@@ -320,12 +321,13 @@ function renderBooks() {
           <span class="book-category">${escapeHtml(b.category)}</span>
           <h3 class="book-title" title="${escapeHtml(b.title)}">${escapeHtml(b.title)}</h3>
           <div class="book-author" title="${escapeHtml(b.author)}">${escapeHtml(b.author)}</div>
+          <div class="book-source" style="font-size:11px;color:#657287;margin:4px 0">Source: ${escapeHtml(contributorLabel)}</div>
 
           <div class="card-actions">
             ${!isNeedsUpload ? `
-              <a href="${readUrl}" ${''} class="btn-read" title="${external?'Open Project Gutenberg free source':'Read online in high-speed reader'}">
+              <a href="${readUrl}" class="btn-read" title="${external?'Book details and Athenaeum local reader':'Read online in high-speed reader'}">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                <span>${external?'Free source ↗':'Read'}</span>
+                <span>${external?'Details & reader':'Read'}</span>
               </a>
             ` : `
               <button class="btn-read" style="background: #ea580c;" onclick="triggerDirectFileUpload('${b.id}')" title="Upload EPUB or PDF from PC to read">
@@ -334,7 +336,7 @@ function renderBooks() {
               </button>
             `}
             <a href="book-notes.html?book=${encodeURIComponent(b.id)}" class="btn-card-edit" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;" title="Read and write book notes (local drafts until shared accounts launch)">📝</a>
-            ${external ? `<a href="${readUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="View the free source and its download options">↗</a>` :
+            ${external ? `<a href="${b.externalUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="Open official Project Gutenberg book page">↗</a>` :
             `<a href="book-analysis.html?book=${encodeURIComponent(b.id || b.file)}" class="btn-card-edit" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; color: #9333ea;" title="AI Book Intelligence, Summary & Vocabulary">
               🧠
             </a>`}
