@@ -294,7 +294,7 @@ function renderBooks() {
   grid.innerHTML = filtered.map(b => {
     const isFav = favs.includes(b.id);
     const external = Boolean(b.isExternal && /^https:\/\/www\.gutenberg\.org\/ebooks\/\d+$/.test(b.externalUrl||''));
-    const readUrl = external ? b.externalUrl : (b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#');
+    const readUrl = external ? `external-book.html?id=${encodeURIComponent(b.id)}` : (b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#');
     const isNeedsUpload = !b.isHosted || b.needsFix;
     const originMark=['R','A','N'].includes(b.originMark) ? b.originMark : 'R';
     const originInfo = originMark==='N'?'New free source (externally hosted)':originMark==='A'?'Abdurrehman contribution':'Existing original Athenaeum collection (attribution pending)';
@@ -323,7 +323,7 @@ function renderBooks() {
 
           <div class="card-actions">
             ${!isNeedsUpload ? `
-              <a href="${readUrl}" ${external?'target="_blank" rel="noopener noreferrer"':''} class="btn-read" title="${external?'Open Project Gutenberg free source':'Read online in high-speed reader'}">
+              <a href="${readUrl}" ${''} class="btn-read" title="${external?'Open Project Gutenberg free source':'Read online in high-speed reader'}">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                 <span>${external?'Free source ↗':'Read'}</span>
               </a>
