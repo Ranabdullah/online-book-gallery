@@ -388,70 +388,13 @@
 
   // 9. Full Sync Trigger
   async function performFullSync() {
-    const device = detectDevice();
-    notifySyncListeners('sync_status', { status: 'syncing', text: 'Syncing reading progress & covers...' });
-
-    try {
-      // 1. Pull cloud payload
-      const cloud = await fetchCloudPayload();
-      let importedCount = 0;
-
-      if (cloud) {
-        // Sync overrides to local DB
-        if (cloud.overrides && window.AthenaeumDB) {
-          for (const [id, item] of Object.entries(cloud.overrides)) {
-            await window.AthenaeumDB.saveBookOverride(id, item);
-            importedCount++;
-          }
-        }
-
-        // Sync hidden/deleted books
-        if (cloud.hidden && Array.isArray(cloud.hidden) && window.AthenaeumDB) {
-          cloud.hidden.forEach(id => window.AthenaeumDB.hideBook(id));
-        }
-
-        // Merge remote reading logs
-        if (cloud.logs && cloud.logs.length > 0) {
-          const localLogs = getReadingLogs();
-          const merged = [...cloud.logs, ...localLogs];
-          const uniqueLogs = [];
-          const seen = new Set();
-          for (const l of merged) {
-            const key = l.bookId + '_' + l.deviceId + '_' + Math.floor(l.updatedAt / 60000);
-            if (!seen.has(key)) {
-              seen.add(key);
-              uniqueLogs.push(l);
-            }
-          }
-          uniqueLogs.sort((a, b) => b.updatedAt - a.updatedAt);
-          localStorage.setItem(LOGS_STORAGE, JSON.stringify(uniqueLogs.slice(0, 60)));
-        }
-      }
-
-      // 2. Push local state to cloud
-      const localProgress = getAllLocalProgress();
-      const localOverrides = window.AthenaeumDB ? await window.AthenaeumDB.getAllBookOverrides() : {};
-      const localHidden = window.AthenaeumDB ? window.AthenaeumDB.getHiddenBooks() : [];
-      const localLogs = getReadingLogs();
-
-      await pushCloudPayload({
-        progress: localProgress,
-        overrides: localOverrides,
-        hidden: localHidden,
-        logs: localLogs,
-        syncedBy: device.label,
-        lastSync: Date.now()
-      });
-
-      notifySyncListeners('sync_status', { status: 'synced', text: `In sync with ${device.label}` });
-      return { success: true, importedCount };
-    } catch (err) {
-      notifySyncListeners('sync_status', { status: 'error', text: 'Sync offline (local storage active)' });
-      return { success: false, error: err.message };
-    }
+    // This release intentionally does not claim shared cloud synchronization.
+    // The legacy unauthenticated relay was disabled to protect user reading history.
+    notifySyncListeners('sync_status', { status: 'local', text: 'Private on this device — account sync pending' });
+    return { success: false, localOnly: true, importedCount: 0 };
   }
 
-  // Export to window
+    // Export to window
   window.AthenaeumSync = {
     detectDevice,
     getDeviceId,
