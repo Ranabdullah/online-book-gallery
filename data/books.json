@@ -7,10 +7,10 @@
     "format": "PDF",
     "sizeMB": 168.6,
     "cover": "covers/book_0001.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0001.pdf",
     "originalName": "(Lib-Ebooks.com)020320211902 (952).pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0002",
@@ -280,10 +280,10 @@
     "format": "PDF",
     "sizeMB": 168.6,
     "cover": "covers/book_0022.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0022.pdf",
     "originalName": "Dorling Kindersley. Smithsonian. Flora. Inside the Secret World of Plants - (DK Smithsonian) - 2018.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0023",
@@ -293,10 +293,10 @@
     "format": "PDF",
     "sizeMB": 103.19,
     "cover": "covers/book_0023.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0023.pdf",
     "originalName": "Dorling Kindersley. Zoology. Inside the Secret World of Animals - (DK Smithsonian) - 2019.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0024",
@@ -332,10 +332,10 @@
     "format": "PDF",
     "sizeMB": 97.15,
     "cover": "covers/book_0026.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0026.pdf",
     "originalName": "Foster R. Peach S. - Geography of the World - 2006.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0027",
@@ -618,10 +618,10 @@
     "format": "PDF",
     "sizeMB": 98.42,
     "cover": "covers/book_0048.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0048.pdf",
     "originalName": "Stephen Rogers Peck - Atlas of Human Anatomy for the Artist - 1982.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0049",
@@ -683,10 +683,10 @@
     "format": "PDF",
     "sizeMB": 125.76,
     "cover": "covers/book_0053.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0053.pdf",
     "originalName": "The DK Children's Encyclopedia. The Book that Explains Everything - 2017.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0054",
@@ -852,10 +852,10 @@
     "format": "PDF",
     "sizeMB": 511.64,
     "cover": "covers/book_0066.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0066.pdf",
     "originalName": "Wonderbook _ the illustrated guide to creating imaginative fiction ( PDFDrive ).pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0067",
@@ -930,10 +930,10 @@
     "format": "PDF",
     "sizeMB": 154.29,
     "cover": "covers/book_0075.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0075.pdf",
     "originalName": "Basic Perspective Drawing- A Visual Approach ( PDFDrive ).pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0076",
@@ -969,10 +969,10 @@
     "format": "PDF",
     "sizeMB": 484.42,
     "cover": "covers/book_0078.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0078.pdf",
     "originalName": "Color and Light- A Guide for the Realist Painter ( PDFDrive ).pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0079",
@@ -1047,10 +1047,10 @@
     "format": "PDF",
     "sizeMB": 163.75,
     "cover": "covers/book_0084.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0084.pdf",
     "originalName": "dokumen.tips_jack-hamm-drawing-the-head-and-figurepdf.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0085",
@@ -1346,10 +1346,10 @@
     "format": "PDF",
     "sizeMB": 123.39,
     "cover": "covers/book_0111.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0111.pdf",
     "originalName": "The Anatomy of Style_ Figure Drawing Techniques ( PDFDrive ).pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0113",
@@ -1411,10 +1411,10 @@
     "format": "PDF",
     "sizeMB": 290.64,
     "cover": "covers/book_0117.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0117.pdf",
     "originalName": "The illusion of life_ Disney animation   ( PDFDrive ).pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0118",
@@ -1580,10 +1580,10 @@
     "format": "PDF",
     "sizeMB": 111.8,
     "cover": "covers/book_0131.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0131.pdf",
     "originalName": "Australian Photography - July 2019.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0132",
@@ -1593,10 +1593,10 @@
     "format": "PDF",
     "sizeMB": 98.42,
     "cover": "covers/book_0132.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0132.pdf",
     "originalName": "Better Photography - July 2019.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0133",
@@ -1606,10 +1606,10 @@
     "format": "PDF",
     "sizeMB": 111.8,
     "cover": "covers/book_0133.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0133.pdf",
     "originalName": "D-Photo - July 08, 2019.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0134",
@@ -1645,10 +1645,10 @@
     "format": "PDF",
     "sizeMB": 111.8,
     "cover": "covers/book_0136.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0136.pdf",
     "originalName": "N-Photo UK - July 2019.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0137",
@@ -7256,7 +7256,7 @@
     "format": "PDF",
     "sizeMB": 49.32,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0568.pdf",
     "originalName": "(Lib-Ebooks.com)020320211902 (952).pdf",
     "needsFix": true
@@ -7269,7 +7269,7 @@
     "format": "PDF",
     "sizeMB": 32.81,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0569.pdf",
     "originalName": "1_Ziegler R. - Great Musicians (DK Eyewitness) - 2008.pdf",
     "needsFix": true
@@ -7282,7 +7282,7 @@
     "format": "PDF",
     "sizeMB": 1.88,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0570.pdf",
     "originalName": "8freebooks.net Mr. Mercedes by Stephen King.pdf",
     "needsFix": true
@@ -7295,7 +7295,7 @@
     "format": "PDF",
     "sizeMB": 4.46,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0571.pdf",
     "originalName": "a-general-introduction-to-psychoanalysis-sigmund-freud.pdf",
     "needsFix": true
@@ -7308,7 +7308,7 @@
     "format": "EPUB",
     "sizeMB": 0.95,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0572.epub",
     "originalName": "Abbie Farwell Brown - In the Days of Giants.epub",
     "needsFix": true
@@ -7321,10 +7321,10 @@
     "format": "PDF",
     "sizeMB": 40.76,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0574.pdf",
     "originalName": "Bridgman R. - Technology (DK Eyewitness) - 2000.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0575",
@@ -7334,10 +7334,10 @@
     "format": "PDF",
     "sizeMB": 48.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0575.pdf",
     "originalName": "Buller L. - Food (DK Eyewitness) - 2011.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0576",
@@ -7347,10 +7347,10 @@
     "format": "PDF",
     "sizeMB": 46.73,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0576.pdf",
     "originalName": "Burnie D. - Tree (DK Eyewitness) - 2011.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0577",
@@ -7360,10 +7360,10 @@
     "format": "PDF",
     "sizeMB": 21.15,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0577.pdf",
     "originalName": "Cotterell A. - Ancient China (DK Eyewitness) - 2005.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0578",
@@ -7373,7 +7373,7 @@
     "format": "PDF",
     "sizeMB": 8.84,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0578.pdf",
     "originalName": "Daly, Rengel - Norse Mythology (Mythology A to Z). 2010.pdf",
     "needsFix": true
@@ -7386,7 +7386,7 @@
     "format": "PDF",
     "sizeMB": 2.9,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0579.pdf",
     "originalName": "Digitz-DigitalTrendsReport-2019June.pdf",
     "needsFix": true
@@ -7399,7 +7399,7 @@
     "format": "PDF",
     "sizeMB": 77.04,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0580.pdf",
     "originalName": "DK. English for Everyone - Course Book. Level 4 Advanced - 2016.pdf",
     "needsFix": true
@@ -7412,7 +7412,7 @@
     "format": "PDF",
     "sizeMB": 91.08,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0581.pdf",
     "originalName": "Dorling Kindersley. DK Illustrated Family Bible (The New International Version, The Holy Bible NIV) - 2013.pdf",
     "needsFix": true
@@ -7425,7 +7425,7 @@
     "format": "PDF",
     "sizeMB": 168.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0582.pdf",
     "originalName": "Dorling Kindersley. Smithsonian. Flora. Inside the Secret World of Plants - (DK Smithsonian) - 2018.pdf",
     "needsFix": true
@@ -7438,7 +7438,7 @@
     "format": "PDF",
     "sizeMB": 103.19,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0583.pdf",
     "originalName": "Dorling Kindersley. Zoology. Inside the Secret World of Animals - (DK Smithsonian) - 2019.pdf",
     "needsFix": true
@@ -7451,7 +7451,7 @@
     "format": "PDF",
     "sizeMB": 97.15,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0584.pdf",
     "originalName": "Foster R. Peach S. - Geography of the World - 2006.pdf",
     "needsFix": true
@@ -7464,10 +7464,10 @@
     "format": "PDF",
     "sizeMB": 66.86,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0585.pdf",
     "originalName": "Gamlin L. - Evolution (DK Eyewitness) - 2000.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0586",
@@ -7477,10 +7477,10 @@
     "format": "PDF",
     "sizeMB": 17.16,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0586.pdf",
     "originalName": "Grau A. - Dance (DK Eyewitness) - 2005.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0587",
@@ -7490,10 +7490,10 @@
     "format": "PDF",
     "sizeMB": 30.08,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0587.pdf",
     "originalName": "Greenaway T. - Jungle (DK Eyewitness) - 2009.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0588",
@@ -7503,10 +7503,10 @@
     "format": "PDF",
     "sizeMB": 46.85,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0588.pdf",
     "originalName": "Halley N. - Farm (DK Eyewitness) - 2000.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0589",
@@ -7516,10 +7516,10 @@
     "format": "PDF",
     "sizeMB": 19.94,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0589.pdf",
     "originalName": "Langley M. - Religion (DK Eyewitness) - 2005.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0590",
@@ -7529,7 +7529,7 @@
     "format": "PDF",
     "sizeMB": 28.05,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0590.pdf",
     "originalName": "Murdoch D.S. - Cowboy (DK Eyewitness) - 2000.pdf",
     "needsFix": true
@@ -7542,7 +7542,7 @@
     "format": "PDF",
     "sizeMB": 39.69,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0591.pdf",
     "originalName": "Murdoch D.S. - North American Indian (DK Eyewitness) - 2005.pdf",
     "needsFix": true
@@ -7555,7 +7555,7 @@
     "format": "PDF",
     "sizeMB": 26.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0592.pdf",
     "originalName": "Mystical-dimensions-of-Islam.pdf",
     "needsFix": true
@@ -7568,7 +7568,7 @@
     "format": "PDF",
     "sizeMB": 34.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0593.pdf",
     "originalName": "Operations Management_ Sustainability and Supply Chain Management (12th Edition 2016) Jay Heizer.pdf",
     "needsFix": true
@@ -7581,10 +7581,10 @@
     "format": "PDF",
     "sizeMB": 22.58,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0594.pdf",
     "originalName": "Platt R. - Pirate (DK Eyewitness) - 2002.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0595",
@@ -7594,7 +7594,7 @@
     "format": "EPUB",
     "sizeMB": 2.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0595.epub",
     "originalName": "Sanshiro - Natsume Soseki.epub",
     "needsFix": true
@@ -7607,7 +7607,7 @@
     "format": "PDF",
     "sizeMB": 51.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0596.pdf",
     "originalName": "Symes R.F. - Rocks & Minerals (DK Eyewitness) - 2008.pdf",
     "needsFix": true
@@ -7620,10 +7620,10 @@
     "format": "PDF",
     "sizeMB": 21.45,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0597.pdf",
     "originalName": "Tambini M. - Future (DK Eyewitness) - 2004.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0598",
@@ -7633,7 +7633,7 @@
     "format": "PDF",
     "sizeMB": 0.49,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0598.pdf",
     "originalName": "The Immortal Life of Henrietta Lacks ( PDFDrive ).pdf",
     "needsFix": true
@@ -7646,7 +7646,7 @@
     "format": "PDF",
     "sizeMB": 7.43,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0599.pdf",
     "originalName": "The Power of Visual Storytelling- How to Use Visuals, Videos, and Social Media to Market Your Brand ( PDFDrive ).pdf",
     "needsFix": true
@@ -7659,7 +7659,7 @@
     "format": "PDF",
     "sizeMB": 1.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0600.pdf",
     "originalName": "The Widening Impact of Automation.pdf",
     "needsFix": true
@@ -7672,7 +7672,7 @@
     "format": "PDF",
     "sizeMB": 37.94,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0601.pdf",
     "originalName": "Wilkinson P. (ed.) - Early Humans (DK Eyewitness) - 2005.pdf",
     "needsFix": true
@@ -7685,10 +7685,10 @@
     "format": "PDF",
     "sizeMB": 32.97,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0602.pdf",
     "originalName": "Wilkinson P. - Building (DK Eyewitness) - 2000.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0603",
@@ -7698,10 +7698,10 @@
     "format": "PDF",
     "sizeMB": 32.81,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0603.pdf",
     "originalName": "Ziegler R. - Great Musicians (DK Eyewitness) - 2008.pdf",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0604",
@@ -7711,7 +7711,7 @@
     "format": "PDF",
     "sizeMB": 2.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0604.pdf",
     "originalName": "[Jean_Aitchison]-The Articulate Mammal.pdf",
     "needsFix": true
@@ -7724,7 +7724,7 @@
     "format": "PDF",
     "sizeMB": 5.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0611.pdf",
     "originalName": "A Companion to Archaeology - John Bintliff.pdf",
     "needsFix": true
@@ -7737,7 +7737,7 @@
     "format": "PDF",
     "sizeMB": 4.02,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0612.pdf",
     "originalName": "A Companion to the Anthropology of American Indians (Blackwell Companions to Anthropology).pdf",
     "needsFix": true
@@ -7750,7 +7750,7 @@
     "format": "PDF",
     "sizeMB": 8.33,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0613.pdf",
     "originalName": "A Dictionary of Archaeology.pdf",
     "needsFix": true
@@ -7763,7 +7763,7 @@
     "format": "PDF",
     "sizeMB": 23.55,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0614.pdf",
     "originalName": "A New History of Anthropology.pdf",
     "needsFix": true
@@ -7776,7 +7776,7 @@
     "format": "PDF",
     "sizeMB": 5.11,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0615.pdf",
     "originalName": "A.B.C.'s of Behavioral Forensic - Sridhar Ramamoorti.pdf",
     "needsFix": true
@@ -7789,7 +7789,7 @@
     "format": "PDF",
     "sizeMB": 6.14,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0616.pdf",
     "originalName": "A.Companion.to.Forensic.Anthropology.pdf",
     "needsFix": true
@@ -7802,7 +7802,7 @@
     "format": "PDF",
     "sizeMB": 7.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0617.pdf",
     "originalName": "Advances in Human Palaeopathology by Ron Pinhasi, Simon Mays.pdf",
     "needsFix": true
@@ -7815,7 +7815,7 @@
     "format": "PDF",
     "sizeMB": 6.75,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0618.pdf",
     "originalName": "Age Estimation of the Human Skeleton.pdf",
     "needsFix": true
@@ -7828,7 +7828,7 @@
     "format": "PDF",
     "sizeMB": 3.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0619.pdf",
     "originalName": "An Archaeology of the Immaterial.pdf",
     "needsFix": true
@@ -7841,7 +7841,7 @@
     "format": "PDF",
     "sizeMB": 28.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0620.pdf",
     "originalName": "An Introduction to the Archaeology of Ancient Egypt - 2nd Edition (2015).pdf",
     "needsFix": true
@@ -7854,7 +7854,7 @@
     "format": "PDF",
     "sizeMB": 33.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0621.pdf",
     "originalName": "An Introduction to the Archaeology of Ancient Egypt - Kathryn A Bard.pdf",
     "needsFix": true
@@ -7867,7 +7867,7 @@
     "format": "PDF",
     "sizeMB": 4.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0622.pdf",
     "originalName": "An Introduction to Tourism and Anthropology.pdf",
     "needsFix": true
@@ -7880,7 +7880,7 @@
     "format": "PDF",
     "sizeMB": 2.15,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0623.pdf",
     "originalName": "Anthropology and Archaeology A Changing Perspective.pdf",
     "needsFix": true
@@ -7893,7 +7893,7 @@
     "format": "PDF",
     "sizeMB": 1.74,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0624.pdf",
     "originalName": "Anthropology and the Bushman.pdf",
     "needsFix": true
@@ -7906,7 +7906,7 @@
     "format": "PDF",
     "sizeMB": 0.8,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0625.pdf",
     "originalName": "Anthropology and Theology.pdf",
     "needsFix": true
@@ -7919,7 +7919,7 @@
     "format": "PDF",
     "sizeMB": 1.81,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0626.pdf",
     "originalName": "Anthropology at War World War I and the Science of Race in Germany.pdf",
     "needsFix": true
@@ -7932,7 +7932,7 @@
     "format": "PDF",
     "sizeMB": 5.33,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0627.pdf",
     "originalName": "Anthropology for Dummies by Cameron M. Smith.pdf",
     "needsFix": true
@@ -7945,7 +7945,7 @@
     "format": "PDF",
     "sizeMB": 0.98,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0628.pdf",
     "originalName": "Anthropology The Basics.pdf",
     "needsFix": true
@@ -7958,7 +7958,7 @@
     "format": "PDF",
     "sizeMB": 2.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0629.pdf",
     "originalName": "Archaeological.Approaches.to.Cultural.Identity.Sep.1994.pdf",
     "needsFix": true
@@ -7971,7 +7971,7 @@
     "format": "PDF",
     "sizeMB": 5.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0630.pdf",
     "originalName": "Archaeological.Surveying.and.Mapping.Recording.and.Depicting.the.Landscape.Feb.2007.pdf",
     "needsFix": true
@@ -7984,7 +7984,7 @@
     "format": "PDF",
     "sizeMB": 1.31,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0631.pdf",
     "originalName": "Archaeological.Theory.and.the.Politics.of.Culture.Heritage.Sep.2004.pdf",
     "needsFix": true
@@ -7997,7 +7997,7 @@
     "format": "PDF",
     "sizeMB": 4.3,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0632.pdf",
     "originalName": "Archaeologies.of.Complexity.May.2003.pdf",
     "needsFix": true
@@ -8010,7 +8010,7 @@
     "format": "PDF",
     "sizeMB": 5.79,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0633.pdf",
     "originalName": "Archaeologies.of.Sexuality.Nov.2000.pdf",
     "needsFix": true
@@ -8023,7 +8023,7 @@
     "format": "PDF",
     "sizeMB": 3.64,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0634.pdf",
     "originalName": "Archaeologies.of.the.Contemporary.Past.Mar.2001.pdf",
     "needsFix": true
@@ -8036,7 +8036,7 @@
     "format": "PDF",
     "sizeMB": 2.97,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0635.pdf",
     "originalName": "Archaeology - The Basics.pdf",
     "needsFix": true
@@ -8049,7 +8049,7 @@
     "format": "PDF",
     "sizeMB": 11.8,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0636.pdf",
     "originalName": "Archaeology and Heritage - An Introduction.pdf",
     "needsFix": true
@@ -8062,7 +8062,7 @@
     "format": "PDF",
     "sizeMB": 0.64,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0637.pdf",
     "originalName": "Archaeology and the Iliad, The Trojan War in Homer and History - Eric H Cline.pdf",
     "needsFix": true
@@ -8075,7 +8075,7 @@
     "format": "PDF",
     "sizeMB": 5.73,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0638.pdf",
     "originalName": "Archaeology.An.Introduction.Jan.1996.pdf",
     "needsFix": true
@@ -8088,7 +8088,7 @@
     "format": "PDF",
     "sizeMB": 2.89,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0639.pdf",
     "originalName": "Archaeology.and.Ancient.History.Breaking.down.the.Boundaries.Mar.2004.pdf",
     "needsFix": true
@@ -8101,7 +8101,7 @@
     "format": "PDF",
     "sizeMB": 2.47,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0640.pdf",
     "originalName": "Archaeology.and.Biblical.Interpretation.Mar.1997.pdf",
     "needsFix": true
@@ -8114,7 +8114,7 @@
     "format": "PDF",
     "sizeMB": 8.88,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0641.pdf",
     "originalName": "Archaeology.and.Folklore.Nov.1999.pdf",
     "needsFix": true
@@ -8127,7 +8127,7 @@
     "format": "PDF",
     "sizeMB": 7.11,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0642.pdf",
     "originalName": "Archaeology.and.Language.III.Artefacts.Language.and.Texts.Jun.1999.pdf",
     "needsFix": true
@@ -8140,7 +8140,7 @@
     "format": "PDF",
     "sizeMB": 2.58,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0643.pdf",
     "originalName": "Archaeology.and.Language.IV.Language.Change.and.Cultural.Transformation.Aug.1999.pdf",
     "needsFix": true
@@ -8153,7 +8153,7 @@
     "format": "PDF",
     "sizeMB": 5.64,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0644.pdf",
     "originalName": "Archaeology.and.Modernity.Apr.2004.pdf",
     "needsFix": true
@@ -8166,7 +8166,7 @@
     "format": "PDF",
     "sizeMB": 1.76,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0645.pdf",
     "originalName": "Archaeology.and.the.Bible.Dec.1999.pdf",
     "needsFix": true
@@ -8179,7 +8179,7 @@
     "format": "PDF",
     "sizeMB": 6.67,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0646.pdf",
     "originalName": "Archaeology.and.World.Religion.Mar.2001.pdf",
     "needsFix": true
@@ -8192,7 +8192,7 @@
     "format": "PDF",
     "sizeMB": 34.78,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0647.pdf",
     "originalName": "Archaeology.Coursebook.An.Introduction.to.Themes.Sites.Methods.and.Skills.Aug.2008.pdf",
     "needsFix": true
@@ -8205,7 +8205,7 @@
     "format": "PDF",
     "sizeMB": 4.03,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0648.pdf",
     "originalName": "Archaeology.Economy.and.Society.England.From.the.Fifth.to.the.Fifteenth.Century.Nov.2005.pdf",
     "needsFix": true
@@ -8218,7 +8218,7 @@
     "format": "PDF",
     "sizeMB": 9.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0649.pdf",
     "originalName": "Archaeology.in.British.Towns.From.the.Emperor.Claudius.to.the.Black.Death.Jun.1996.pdf",
     "needsFix": true
@@ -8231,7 +8231,7 @@
     "format": "PDF",
     "sizeMB": 7.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0650.pdf",
     "originalName": "Archaeology.in.Latin.America.Jan.2000.pdf",
     "needsFix": true
@@ -8244,7 +8244,7 @@
     "format": "PDF",
     "sizeMB": 14.7,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0651.pdf",
     "originalName": "Archaeology.of.20th.Century.Conflict.May.2002.pdf",
     "needsFix": true
@@ -8257,7 +8257,7 @@
     "format": "PDF",
     "sizeMB": 3.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0652.pdf",
     "originalName": "Archaeology.of.Ancient.Australia.Dec.2007.pdf",
     "needsFix": true
@@ -8270,7 +8270,7 @@
     "format": "PDF",
     "sizeMB": 5.92,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0653.pdf",
     "originalName": "Archaeology.of.Ancient.Sicily.Aug.2000.pdf",
     "needsFix": true
@@ -8283,7 +8283,7 @@
     "format": "PDF",
     "sizeMB": 10.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0654.pdf",
     "originalName": "Archaeology.of.Britain.An.Introduction.Jun.1999.pdf",
     "needsFix": true
@@ -8296,7 +8296,7 @@
     "format": "PDF",
     "sizeMB": 13.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0655.pdf",
     "originalName": "Archaeology.of.Difference.Negotiating.Cross-Cultural.Engagements.in.Oceania.Nov.2000.pdf",
     "needsFix": true
@@ -8309,7 +8309,7 @@
     "format": "PDF",
     "sizeMB": 0.91,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0656.pdf",
     "originalName": "Archaeology.of.Ethnicity.Constructing.Identities.in.the.Past.and.Present.Apr.1997.pdf",
     "needsFix": true
@@ -8322,7 +8322,7 @@
     "format": "PDF",
     "sizeMB": 1.82,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0657.pdf",
     "originalName": "Archaeology.of.Household.Activities.May.1999.pdf",
     "needsFix": true
@@ -8335,7 +8335,7 @@
     "format": "PDF",
     "sizeMB": 18.73,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0658.pdf",
     "originalName": "Archaeology.of.Images.Iconology.and.Cosmology.in.Iron.Age.and.Roman.Europe.Jun.2004.pdf",
     "needsFix": true
@@ -8348,7 +8348,7 @@
     "format": "PDF",
     "sizeMB": 6.79,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0659.pdf",
     "originalName": "Archaeology.of.Military.Orders.Apr.2006.pdf",
     "needsFix": true
@@ -8361,7 +8361,7 @@
     "format": "PDF",
     "sizeMB": 2.68,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0660.pdf",
     "originalName": "Archaeology.of.Northeast.China.Beyond.the.Great.Wall.Mar.1995.pdf",
     "needsFix": true
@@ -8374,7 +8374,7 @@
     "format": "PDF",
     "sizeMB": 6.89,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0661.pdf",
     "originalName": "Archaeology.of.People.Dimensions.of.Neolithic.Life.Jul.2003.pdf",
     "needsFix": true
@@ -8387,7 +8387,7 @@
     "format": "PDF",
     "sizeMB": 1.92,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0662.pdf",
     "originalName": "Archaeology.of.Personhood.An.Anthropological.Approach.May.2004.pdf",
     "needsFix": true
@@ -8400,7 +8400,7 @@
     "format": "PDF",
     "sizeMB": 3.84,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0663.pdf",
     "originalName": "Archaeology.of.the.Colonized.Aug.2004.pdf",
     "needsFix": true
@@ -8413,7 +8413,7 @@
     "format": "PDF",
     "sizeMB": 2.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0664.pdf",
     "originalName": "Archaeology.of.Time.Jan.2005.pdf",
     "needsFix": true
@@ -8426,7 +8426,7 @@
     "format": "PDF",
     "sizeMB": 2.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0665.pdf",
     "originalName": "Archaeology.Ritual.Religion.May.2004.pdf",
     "needsFix": true
@@ -8439,7 +8439,7 @@
     "format": "PDF",
     "sizeMB": 2.21,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0666.pdf",
     "originalName": "Archaeology.The.Basics.Feb.2001.pdf",
     "needsFix": true
@@ -8452,7 +8452,7 @@
     "format": "PDF",
     "sizeMB": 1.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0667.pdf",
     "originalName": "Archaeology.the.Key.Concepts.Dec.2004.pdf",
     "needsFix": true
@@ -8465,7 +8465,7 @@
     "format": "PDF",
     "sizeMB": 4.14,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0668.pdf",
     "originalName": "Archaeology.Under.Fire.Nationalism.Politics.and.Heritage.in.the.Eastern.Mediterranean.and.Middle.East.Dec.1998.pdf",
     "needsFix": true
@@ -8478,7 +8478,7 @@
     "format": "PDF",
     "sizeMB": 1.79,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0669.pdf",
     "originalName": "Archaeology： A Very Short Introduction, Paul Bahn & Bill Tidy (2000, Oxford University Press) ISBN 9780192853790.pdf",
     "needsFix": true
@@ -8491,7 +8491,7 @@
     "format": "PDF",
     "sizeMB": 3.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0670.pdf",
     "originalName": "Arnold - An Archaeology of the Early Anglo-Saxon Kingdoms.pdf",
     "needsFix": true
@@ -8504,7 +8504,7 @@
     "format": "PDF",
     "sizeMB": 7.28,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0671.pdf",
     "originalName": "Atlantis.Destroyed.May.1998.pdf",
     "needsFix": true
@@ -8517,7 +8517,7 @@
     "format": "PDF",
     "sizeMB": 5.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0672.pdf",
     "originalName": "Balkan.Prehistory.Exclusion.Incorporation.and.Identity.Sep.2000.pdf",
     "needsFix": true
@@ -8530,7 +8530,7 @@
     "format": "PDF",
     "sizeMB": 3.4,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0673.pdf",
     "originalName": "Beyond.the.Natural.Body.An.Archaeology.of.Sex.Hormones.Nov.1994.pdf",
     "needsFix": true
@@ -8543,7 +8543,7 @@
     "format": "PDF",
     "sizeMB": 2.07,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0674.pdf",
     "originalName": "Biblical Archaeology： A Very Short Introduction, Eric H. Cline (2009, Oxford University Press) ISBN 9780195342635.pdf",
     "needsFix": true
@@ -8556,7 +8556,7 @@
     "format": "PDF",
     "sizeMB": 9.06,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0675.pdf",
     "originalName": "Biological Anthropology of the Human Skeleton.pdf",
     "needsFix": true
@@ -8569,7 +8569,7 @@
     "format": "PDF",
     "sizeMB": 2.98,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0676.pdf",
     "originalName": "Brodie&Walker Tubb (eds) - Illicit Antiquities ~ The theft of culture and the extinction of archaeology.pdf",
     "needsFix": true
@@ -8582,7 +8582,7 @@
     "format": "PDF",
     "sizeMB": 33.65,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0677.pdf",
     "originalName": "Classical Archaeology in Context - Theory and Practice in Excavation in the Greek World.pdf",
     "needsFix": true
@@ -8595,7 +8595,7 @@
     "format": "PDF",
     "sizeMB": 6.41,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0678.pdf",
     "originalName": "Classical Archaeology of Greece, Experiences of the discipline - Michael Shanks.pdf",
     "needsFix": true
@@ -8608,7 +8608,7 @@
     "format": "PDF",
     "sizeMB": 5.51,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0679.pdf",
     "originalName": "Companion Encyclopedia of Anthropology.pdf",
     "needsFix": true
@@ -8621,7 +8621,7 @@
     "format": "PDF",
     "sizeMB": 1.74,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0680.pdf",
     "originalName": "Conflict.in.the.Archaeology.of.Living.Traditions.Sep.1994.pdf",
     "needsFix": true
@@ -8634,7 +8634,7 @@
     "format": "PDF",
     "sizeMB": 3.15,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0681.pdf",
     "originalName": "Continuities.and.Changes.in.Maya.Archaeology.Perspectives.at.the.Millennium.Dec.2003.pdf",
     "needsFix": true
@@ -8647,7 +8647,7 @@
     "format": "PDF",
     "sizeMB": 0.63,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0682.pdf",
     "originalName": "Culinary Art and Anthropology.pdf",
     "needsFix": true
@@ -8660,7 +8660,7 @@
     "format": "PDF",
     "sizeMB": 39.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0683.pdf",
     "originalName": "Cultural Anthropology (Case Studies in Cultural Anthropology).pdf",
     "needsFix": true
@@ -8673,7 +8673,7 @@
     "format": "PDF",
     "sizeMB": 39.1,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0684.pdf",
     "originalName": "Cultural Anthropology, A Toolkit for a Global Age - Guest, Kenneth A. [SRG].pdf",
     "needsFix": true
@@ -8686,7 +8686,7 @@
     "format": "PDF",
     "sizeMB": 58.64,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0685.pdf",
     "originalName": "cultural_anthropology_tribes_states_and_the_global_system.pdf",
     "needsFix": true
@@ -8699,7 +8699,7 @@
     "format": "PDF",
     "sizeMB": 116.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0686.pdf",
     "originalName": "Davis - The Archaeology of Animals.pdf",
     "needsFix": true
@@ -8712,7 +8712,7 @@
     "format": "PDF",
     "sizeMB": 4.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0687.pdf",
     "originalName": "Digital.Archaeology.Bridging.Method.and.Theory.Dec.2005.pdf",
     "needsFix": true
@@ -8725,7 +8725,7 @@
     "format": "PDF",
     "sizeMB": 4.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0688.pdf",
     "originalName": "Eating People Is Wrong, and Other Essays on Famine.pdf",
     "needsFix": true
@@ -8738,7 +8738,7 @@
     "format": "PDF",
     "sizeMB": 2.1,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0689.pdf",
     "originalName": "Edwards et al (eds) - Sensible Objects ~ Colonialism, Museums and Material Culture.pdf",
     "needsFix": true
@@ -8751,7 +8751,7 @@
     "format": "PDF",
     "sizeMB": 19.74,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0690.pdf",
     "originalName": "Elements.of.Archaeological.Conservation.Apr.1990.pdf",
     "needsFix": true
@@ -8764,7 +8764,7 @@
     "format": "PDF",
     "sizeMB": 140.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0691.pdf",
     "originalName": "Encyclopedia of Anthropology Vol 1 - 5 - Sage Publications.pdf",
     "needsFix": true
@@ -8777,7 +8777,7 @@
     "format": "PDF",
     "sizeMB": 151.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0692.pdf",
     "originalName": "Encyclopedia of Archaeology (3 Volume Set) (2007).pdf",
     "needsFix": true
@@ -8790,7 +8790,7 @@
     "format": "PDF",
     "sizeMB": 14.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0693.pdf",
     "originalName": "Encyclopedia of Archaeology of Ancient Egypt.pdf",
     "needsFix": true
@@ -8803,7 +8803,7 @@
     "format": "PDF",
     "sizeMB": 28.04,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0694.pdf",
     "originalName": "Encyclopedia of Caribbean Archaeology.pdf",
     "needsFix": true
@@ -8816,7 +8816,7 @@
     "format": "PDF",
     "sizeMB": 12.87,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0695.pdf",
     "originalName": "Encyclopedia of Milestones in Archaeology.pdf",
     "needsFix": true
@@ -8829,7 +8829,7 @@
     "format": "PDF",
     "sizeMB": 5.66,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0696.pdf",
     "originalName": "Encyclopedia.of.Historical.Archaeology.May.2002.pdf",
     "needsFix": true
@@ -8842,7 +8842,7 @@
     "format": "PDF",
     "sizeMB": 14.65,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0697.pdf",
     "originalName": "Environmental.Archaeology.and.the.Social.Order.Oct.2003.pdf",
     "needsFix": true
@@ -8855,7 +8855,7 @@
     "format": "PDF",
     "sizeMB": 136.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0698.pdf",
     "originalName": "Essentials of Physical Anthropology. 9th Ed - Robert Jurmain, Lynn Kilgore.pdf",
     "needsFix": true
@@ -8868,7 +8868,7 @@
     "format": "PDF",
     "sizeMB": 9.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0699.pdf",
     "originalName": "Excavating.Women.Mar.1998.pdf",
     "needsFix": true
@@ -8881,7 +8881,7 @@
     "format": "PDF",
     "sizeMB": 2.93,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0700.pdf",
     "originalName": "Experiencing.the.Past.On.the.Character.of.Archaeology.Dec.1991.pdf",
     "needsFix": true
@@ -8894,7 +8894,7 @@
     "format": "PDF",
     "sizeMB": 2.33,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0701.pdf",
     "originalName": "Familiar.Past.Archaeologies.of.Late-Historical.Britain.Feb.1999.pdf",
     "needsFix": true
@@ -8907,7 +8907,7 @@
     "format": "PDF",
     "sizeMB": 15.63,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0702.pdf",
     "originalName": "Field Archaeology from Around the World - Ideas and Approaches (2015).pdf",
     "needsFix": true
@@ -8920,7 +8920,7 @@
     "format": "PDF",
     "sizeMB": 6.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0703.pdf",
     "originalName": "First.Jewish.Revolt.Archaeology.History.and.Ideology.May.2002.pdf",
     "needsFix": true
@@ -8933,7 +8933,7 @@
     "format": "PDF",
     "sizeMB": 25.13,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0704.pdf",
     "originalName": "Forbidden Archeology - The Hidden History of the Human Race.pdf",
     "needsFix": true
@@ -8946,7 +8946,7 @@
     "format": "PDF",
     "sizeMB": 4.76,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0705.pdf",
     "originalName": "Forensic Anthropology.pdf",
     "needsFix": true
@@ -8959,7 +8959,7 @@
     "format": "PDF",
     "sizeMB": 101.28,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0706.pdf",
     "originalName": "Forensic Anthropology_ An Introduction 1439816468 [Dr.Soc].pdf",
     "needsFix": true
@@ -8972,7 +8972,7 @@
     "format": "PDF",
     "sizeMB": 25.81,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0707.pdf",
     "originalName": "Forensic Archaeology - A Global Perspective.pdf",
     "needsFix": true
@@ -8985,7 +8985,7 @@
     "format": "PDF",
     "sizeMB": 14.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0708.pdf",
     "originalName": "Forgotten.Africa.An.Introduction.to.its.Archaeology.Oct.2004.pdf",
     "needsFix": true
@@ -8998,7 +8998,7 @@
     "format": "PDF",
     "sizeMB": 1.72,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0709.pdf",
     "originalName": "Future.of.Visual.Anthropology.Engaging.the.Senses.Feb.2006.pdf",
     "needsFix": true
@@ -9011,7 +9011,7 @@
     "format": "PDF",
     "sizeMB": 52.85,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0710.pdf",
     "originalName": "Gender.and.Archaeology.Contesting.the.Past.Dec.1999.pdf",
     "needsFix": true
@@ -9024,7 +9024,7 @@
     "format": "PDF",
     "sizeMB": 2.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0711.pdf",
     "originalName": "Greek.Mysteries.The.Archaeology.of.Ancient.Greek.Secret.Cults.Feb.2003.pdf",
     "needsFix": true
@@ -9037,7 +9037,7 @@
     "format": "PDF",
     "sizeMB": 28.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0712.pdf",
     "originalName": "Handbook of Methods in Cultural Anthropology.pdf",
     "needsFix": true
@@ -9050,7 +9050,7 @@
     "format": "PDF",
     "sizeMB": 9.47,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0713.pdf",
     "originalName": "Historical.Archaeology.Back.from.the.Edge.Feb.1999.pdf",
     "needsFix": true
@@ -9063,7 +9063,7 @@
     "format": "PDF",
     "sizeMB": 2.68,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0714.pdf",
     "originalName": "History and Theory in Anthropology.pdf",
     "needsFix": true
@@ -9076,7 +9076,7 @@
     "format": "PDF",
     "sizeMB": 84.46,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0715.pdf",
     "originalName": "Hodder (ed) - Archaeological Theory Today.pdf",
     "needsFix": true
@@ -9089,7 +9089,7 @@
     "format": "PDF",
     "sizeMB": 2.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0716.pdf",
     "originalName": "Hodder - Theory and Practice in Archaeology.pdf",
     "needsFix": true
@@ -9102,7 +9102,7 @@
     "format": "PDF",
     "sizeMB": 2.13,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0717.pdf",
     "originalName": "Hodder&Hutson - Reading the Past ~ Current approaches to interpretation in archaeology.pdf",
     "needsFix": true
@@ -9115,7 +9115,7 @@
     "format": "PDF",
     "sizeMB": 71.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0718.pdf",
     "originalName": "Human and Non-Human Bone Identification. A color atlas.pdf",
     "needsFix": true
@@ -9128,7 +9128,7 @@
     "format": "PDF",
     "sizeMB": 2.98,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0719.pdf",
     "originalName": "Illicit.Antiquities.The.Theft.of.Culture.and.the.Extinction.of.Archaeology.Dec.2001.pdf",
     "needsFix": true
@@ -9141,7 +9141,7 @@
     "format": "PDF",
     "sizeMB": 5.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0720.pdf",
     "originalName": "Industrial.Archaeology.Principles.and.Practice.Mar.1998.pdf",
     "needsFix": true
@@ -9154,7 +9154,7 @@
     "format": "PDF",
     "sizeMB": 11.55,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0721.pdf",
     "originalName": "International Handbook of Historical Archaeology.pdf",
     "needsFix": true
@@ -9167,7 +9167,7 @@
     "format": "PDF",
     "sizeMB": 17.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0722.pdf",
     "originalName": "Interpreting.the.Landscape.Landscape.Archaeology.and.Local.History.Jul.1997.pdf",
     "needsFix": true
@@ -9180,7 +9180,7 @@
     "format": "PDF",
     "sizeMB": 16.89,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0723.pdf",
     "originalName": "John Monaghan - Social and Cultural Anthropology; A Very Short Introduction .pdf",
     "needsFix": true
@@ -9193,7 +9193,7 @@
     "format": "PDF",
     "sizeMB": 4.8,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0724.pdf",
     "originalName": "Landscapes.of.Settlement.Prehistory.to.the.Present.Mar.1996.pdf",
     "needsFix": true
@@ -9206,7 +9206,7 @@
     "format": "PDF",
     "sizeMB": 1.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0725.pdf",
     "originalName": "Making.Places.in.the.Prehistoric.World.Themes.in.Settlement.Archaeology.Jun.1999.pdf",
     "needsFix": true
@@ -9219,7 +9219,7 @@
     "format": "PDF",
     "sizeMB": 1.83,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0726.pdf",
     "originalName": "Managing.Archaeology.Nov.1995.pdf",
     "needsFix": true
@@ -9232,7 +9232,7 @@
     "format": "PDF",
     "sizeMB": 2.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0727.pdf",
     "originalName": "Near.East.Archaeology.in.the.Cradle.of.Civilization.Apr.1993.pdf",
     "needsFix": true
@@ -9245,7 +9245,7 @@
     "format": "PDF",
     "sizeMB": 1.93,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0728.pdf",
     "originalName": "Neolithic.Farming.in.Central.Europe.An.Archaeobotanical.Study.of.Crop.Husbandry.Practices.Nov.2004.pdf",
     "needsFix": true
@@ -9258,7 +9258,7 @@
     "format": "PDF",
     "sizeMB": 6.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0729.pdf",
     "originalName": "Nubian.Past.An.Archaeology.of.Sudan.Sep.2004.pdf",
     "needsFix": true
@@ -9271,7 +9271,7 @@
     "format": "PDF",
     "sizeMB": 4.68,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0730.pdf",
     "originalName": "Objects.Reluctant.Witnesses.to.the.Past.Aug.2006.pdf",
     "needsFix": true
@@ -9284,7 +9284,7 @@
     "format": "PDF",
     "sizeMB": 5.31,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0731.pdf",
     "originalName": "On the Edge of the Bush Anthropology as Experience (Anthropology of Form & Meaning).pdf",
     "needsFix": true
@@ -9297,7 +9297,7 @@
     "format": "PDF",
     "sizeMB": 1.64,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0732.pdf",
     "originalName": "Peruvian Archaeology, A Critical History - Henry Tantaleán.pdf",
     "needsFix": true
@@ -9310,7 +9310,7 @@
     "format": "PDF",
     "sizeMB": 10.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0733.pdf",
     "originalName": "Philosophy of Anthropology and Sociology.pdf",
     "needsFix": true
@@ -9323,7 +9323,7 @@
     "format": "PDF",
     "sizeMB": 1.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0734.pdf",
     "originalName": "Places.in.Mind.Public.Archaeology.as.Applied.Anthropology.Feb.2004.pdf",
     "needsFix": true
@@ -9336,7 +9336,7 @@
     "format": "PDF",
     "sizeMB": 5.52,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0735.pdf",
     "originalName": "Responses.To.Colonization.In.The.Iron-Age.Mediterranean.Oct.2006.pdf",
     "needsFix": true
@@ -9349,7 +9349,7 @@
     "format": "PDF",
     "sizeMB": 4.93,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0736.pdf",
     "originalName": "Rock.Art.and.the.Prehistory.of.Atlantic.Europe.Signing.the.Land.Aug.1997.pdf",
     "needsFix": true
@@ -9362,7 +9362,7 @@
     "format": "PDF",
     "sizeMB": 10.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0737.pdf",
     "originalName": "Satellite remote sensing archaeology.pdf",
     "needsFix": true
@@ -9375,7 +9375,7 @@
     "format": "PDF",
     "sizeMB": 7.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0738.pdf",
     "originalName": "Social.Transformations.in.Archaeology.Global.and.Local.Perspectives.Oct.1998.pdf",
     "needsFix": true
@@ -9388,7 +9388,7 @@
     "format": "PDF",
     "sizeMB": 10.06,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0739.pdf",
     "originalName": "STONE.TOOLS.&.SOCIETY.PB.Jun.1997.pdf",
     "needsFix": true
@@ -9401,7 +9401,7 @@
     "format": "PDF",
     "sizeMB": 3.72,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0740.pdf",
     "originalName": "Technique and Application in Dental Anthropology (Cambridge Studies in Biological and Evolutionary Anthropology).pdf",
     "needsFix": true
@@ -9414,7 +9414,7 @@
     "format": "PDF",
     "sizeMB": 12.35,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0741.pdf",
     "originalName": "The Anthropology of Ireland.pdf",
     "needsFix": true
@@ -9427,7 +9427,7 @@
     "format": "PDF",
     "sizeMB": 3.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0742.pdf",
     "originalName": "The Anthropology of Magic.pdf",
     "needsFix": true
@@ -9440,7 +9440,7 @@
     "format": "PDF",
     "sizeMB": 27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0743.pdf",
     "originalName": "The Anthropology of Space and Place Locating Culture (Blackwell Readers in Anthropology).pdf",
     "needsFix": true
@@ -9453,7 +9453,7 @@
     "format": "PDF",
     "sizeMB": 34.46,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0744.pdf",
     "originalName": "The Archaeology Coursebook - An Introduction to Themes, Sites, Methods and Skills (3rd Ed).pdf",
     "needsFix": true
@@ -9466,7 +9466,7 @@
     "format": "PDF",
     "sizeMB": 15.92,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0745.pdf",
     "originalName": "The Archaeology of Disease (3rd Ed=.pdf",
     "needsFix": true
@@ -9479,7 +9479,7 @@
     "format": "PDF",
     "sizeMB": 4.89,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0746.pdf",
     "originalName": "The Arts and the Definition of the Human Toward a Philosophical Anthropology.pdf",
     "needsFix": true
@@ -9492,7 +9492,7 @@
     "format": "PDF",
     "sizeMB": 168.47,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0747.pdf",
     "originalName": "The Bioarchaeology of Individuals - Stodder, Ann L.W., Palkovich, Ann M.pdf",
     "needsFix": true
@@ -9505,7 +9505,7 @@
     "format": "PDF",
     "sizeMB": 104.85,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0748.pdf",
     "originalName": "The Golden Age of Chinese Archaeology.pdf",
     "needsFix": true
@@ -9518,7 +9518,7 @@
     "format": "PDF",
     "sizeMB": 44.01,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0749.pdf",
     "originalName": "The Human Animal A Personal View of the Human Species.pdf",
     "needsFix": true
@@ -9531,7 +9531,7 @@
     "format": "PDF",
     "sizeMB": 38.09,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0750.pdf",
     "originalName": "The Human Species An Introduction To Biological Anthropology.pdf",
     "needsFix": true
@@ -9544,7 +9544,7 @@
     "format": "PDF",
     "sizeMB": 250.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0751.pdf",
     "originalName": "The Oxford Encyclopedia of Archaeology in the Near East - 1st Edition (5 Volume Set) (1996).pdf",
     "needsFix": true
@@ -9557,7 +9557,7 @@
     "format": "PDF",
     "sizeMB": 12.98,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0752.pdf",
     "originalName": "The.Mosaics.of.Roman.Crete.Art.Archaeology.and.Social.Change.pdf",
     "needsFix": true
@@ -9570,7 +9570,7 @@
     "format": "PDF",
     "sizeMB": 2.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0753.pdf",
     "originalName": "Theory.and.Practice.in.Archaeology.Jun.1995.pdf",
     "needsFix": true
@@ -9583,7 +9583,7 @@
     "format": "PDF",
     "sizeMB": 0.93,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0754.pdf",
     "originalName": "Time.and.Archaeology.Nov.1999.pdf",
     "needsFix": true
@@ -9596,7 +9596,7 @@
     "format": "PDF",
     "sizeMB": 10.77,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0755.pdf",
     "originalName": "Tutu.Archaeological.Village.Site.A.Case.Study.in.Human.Adaptation.Dec.2002.pdf",
     "needsFix": true
@@ -9609,7 +9609,7 @@
     "format": "PDF",
     "sizeMB": 10.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0756.pdf",
     "originalName": "Understanding.the.Neolithic.Aug.1999.pdf",
     "needsFix": true
@@ -9622,7 +9622,7 @@
     "format": "PDF",
     "sizeMB": 6.84,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0757.pdf",
     "originalName": "Use of Forensic Anthropology.pdf",
     "needsFix": true
@@ -9635,7 +9635,7 @@
     "format": "PDF",
     "sizeMB": 15.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0758.pdf",
     "originalName": "Using.Computers.in.Archaeology.Towards.Virtual.Pasts.May.2003.pdf",
     "needsFix": true
@@ -9648,7 +9648,7 @@
     "format": "PDF",
     "sizeMB": 2.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0759.pdf",
     "originalName": "Weight of Evidence for Forensic DNA Profiles.pdf",
     "needsFix": true
@@ -9661,7 +9661,7 @@
     "format": "PDF",
     "sizeMB": 1.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0760.pdf",
     "originalName": "What Is Anthropology.pdf",
     "needsFix": true
@@ -9674,7 +9674,7 @@
     "format": "PDF",
     "sizeMB": 6.14,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0761.pdf",
     "originalName": "“Forbidden Archeology”.pdf",
     "needsFix": true
@@ -9687,10 +9687,10 @@
     "format": "EPUB",
     "sizeMB": 0.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0765.epub",
     "originalName": "Arthur Conan Doyle - Professor Challenger 1 The Lost World.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0766",
@@ -9700,10 +9700,10 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0766.epub",
     "originalName": "Arthur Conan Doyle - Sherlock Holmes 4 The Memoirs of Sherlock Holmes.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0767",
@@ -9713,10 +9713,10 @@
     "format": "EPUB",
     "sizeMB": 0.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0767.epub",
     "originalName": "Arthur Conan Doyle - Sherlock Holmes 6 The Return of Sherlock Holmes.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0768",
@@ -9726,10 +9726,10 @@
     "format": "EPUB",
     "sizeMB": 0.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0768.epub",
     "originalName": "Arthur Conan Doyle - Tales of Terror and Mystery.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0769",
@@ -9739,7 +9739,7 @@
     "format": "EPUB",
     "sizeMB": 0.55,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0769.epub",
     "originalName": "Arthur Golden - Memoirs of a Geisha.epub",
     "needsFix": true
@@ -9752,10 +9752,10 @@
     "format": "EPUB",
     "sizeMB": 0.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0770.epub",
     "originalName": "Arthur Schopenhauer - Counsels and Maxims.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0771",
@@ -9765,10 +9765,10 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0771.epub",
     "originalName": "Arthur Schopenhauer - Essays of Schopenhauer.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0772",
@@ -9778,10 +9778,10 @@
     "format": "EPUB",
     "sizeMB": 0.16,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0772.epub",
     "originalName": "Arthur Schopenhauer - On Human Nature.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0773",
@@ -9791,10 +9791,10 @@
     "format": "EPUB",
     "sizeMB": 0.15,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0773.epub",
     "originalName": "Arthur Schopenhauer - The Art of Controversy.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0774",
@@ -9804,10 +9804,10 @@
     "format": "EPUB",
     "sizeMB": 0.17,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0774.epub",
     "originalName": "Arthur Schopenhauer - The Art of Literature.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0775",
@@ -9817,10 +9817,10 @@
     "format": "EPUB",
     "sizeMB": 0.35,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0775.epub",
     "originalName": "Arthur Schopenhauer - The Basis of Morality.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0776",
@@ -9830,10 +9830,10 @@
     "format": "EPUB",
     "sizeMB": 0.52,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0776.epub",
     "originalName": "Arthur Schopenhauer - The World as Will and Idea Vol 2.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0777",
@@ -9843,10 +9843,10 @@
     "format": "EPUB",
     "sizeMB": 0.73,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0777.epub",
     "originalName": "Arthur Schopenhauer - The World as Will and Idea Vol 3.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0778",
@@ -9856,7 +9856,7 @@
     "format": "PDF",
     "sizeMB": 46.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0778.pdf",
     "originalName": "100 Things Every Artist Should Know.pdf",
     "needsFix": true
@@ -9869,7 +9869,7 @@
     "format": "EPUB",
     "sizeMB": 65.99,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0779.epub",
     "originalName": "100 Weekend Projects Anyone Can Do - Easy, practical projects using basic tools and standard materials.epub",
     "needsFix": true
@@ -9882,7 +9882,7 @@
     "format": "PDF",
     "sizeMB": 13.69,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0780.pdf",
     "originalName": "An Introduction to Pastels (DK Art Ebook).pdf",
     "needsFix": true
@@ -9895,7 +9895,7 @@
     "format": "PDF",
     "sizeMB": 93.99,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0781.pdf",
     "originalName": "Architecture (DK Eyewitness Art Ebook).pdf",
     "needsFix": true
@@ -9908,7 +9908,7 @@
     "format": "PDF",
     "sizeMB": 105.52,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0782.pdf",
     "originalName": "Art - Paintings, Sculpture, Artists, Schools (DK).pdf",
     "needsFix": true
@@ -9921,7 +9921,7 @@
     "format": "PDF",
     "sizeMB": 36.13,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0783.pdf",
     "originalName": "Build Your Own Free-to-Air (FTA) Satellite TV System - 1st Edition (2011).pdf",
     "needsFix": true
@@ -9934,7 +9934,7 @@
     "format": "PDF",
     "sizeMB": 12.98,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0784.pdf",
     "originalName": "Corot (Meridian Art Ebook).pdf",
     "needsFix": true
@@ -9947,7 +9947,7 @@
     "format": "PDF",
     "sizeMB": 7.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0785.pdf",
     "originalName": "DIY Box Set 12 Books_ 1. Jewelr - Chanel Lee.pdf",
     "needsFix": true
@@ -9960,7 +9960,7 @@
     "format": "PDF",
     "sizeMB": 101.07,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0786.pdf",
     "originalName": "Do It Yourself - DIY Ideas - Projects and Tips for Every Room (2012).pdf",
     "needsFix": true
@@ -9973,7 +9973,7 @@
     "format": "PDF",
     "sizeMB": 56.36,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0787.pdf",
     "originalName": "Dressmaking - The Complete Step-by-Step Guide to Making Your Own Clothes (DK Publishing) (2012).pdf",
     "needsFix": true
@@ -9986,7 +9986,7 @@
     "format": "PDF",
     "sizeMB": 48.73,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0788.pdf",
     "originalName": "Durer (DK Art Ebook).pdf",
     "needsFix": true
@@ -9999,7 +9999,7 @@
     "format": "PDF",
     "sizeMB": 46.88,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0789.pdf",
     "originalName": "Film Art_ An Introduction - David Bordwell.pdf",
     "needsFix": true
@@ -10012,7 +10012,7 @@
     "format": "EPUB",
     "sizeMB": 96.84,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0790.epub",
     "originalName": "How to Fix Absolutely Anything - eBookBB.com.epub",
     "needsFix": true
@@ -10025,7 +10025,7 @@
     "format": "PDF",
     "sizeMB": 20.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0791.pdf",
     "originalName": "Impressionist drawings (Art Ebook).pdf",
     "needsFix": true
@@ -10038,7 +10038,7 @@
     "format": "EPUB",
     "sizeMB": 25.94,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0792.epub",
     "originalName": "Learn Calligraphy - Margaret Shepherd.epub",
     "needsFix": true
@@ -10051,7 +10051,7 @@
     "format": "PDF",
     "sizeMB": 18.53,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0793.pdf",
     "originalName": "Painting in France 1895-1949 (Art Ebook).pdf",
     "needsFix": true
@@ -10064,7 +10064,7 @@
     "format": "PDF",
     "sizeMB": 46.58,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0794.pdf",
     "originalName": "See How It's Made.pdf",
     "needsFix": true
@@ -10077,7 +10077,7 @@
     "format": "PDF",
     "sizeMB": 58.98,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0795.pdf",
     "originalName": "The Architecture of Michelangelo (Chicago Press Art Book).pdf",
     "needsFix": true
@@ -10090,7 +10090,7 @@
     "format": "PDF",
     "sizeMB": 109.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0796.pdf",
     "originalName": "The Art of Photography.pdf",
     "needsFix": true
@@ -10103,7 +10103,7 @@
     "format": "PDF",
     "sizeMB": 6.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0797.pdf",
     "originalName": "The Book of Qt 4 - The Art of Building Qt Applications (No Starch Press, 2007).pdf",
     "needsFix": true
@@ -10116,7 +10116,7 @@
     "format": "PDF",
     "sizeMB": 172.88,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0798.pdf",
     "originalName": "The Movie Book (2016).pdf",
     "needsFix": true
@@ -10129,7 +10129,7 @@
     "format": "PDF",
     "sizeMB": 21.98,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0799.pdf",
     "originalName": "Velazquez (DK Adult Art Ebook).pdf",
     "needsFix": true
@@ -10142,7 +10142,7 @@
     "format": "PDF",
     "sizeMB": 24.49,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0800.pdf",
     "originalName": "Wonders of the World (DK History Ebook).pdf",
     "needsFix": true
@@ -10155,7 +10155,7 @@
     "format": "PDF",
     "sizeMB": 71.95,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0801.pdf",
     "originalName": "Woodwork - A Step-by-Step Photographic Guide (DK Publishing) (2010).pdf",
     "needsFix": true
@@ -10168,7 +10168,7 @@
     "format": "PDF",
     "sizeMB": 76.02,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0802.pdf",
     "originalName": "Writers on Artists (DK Modern Painters Art Ebook).pdf",
     "needsFix": true
@@ -10181,7 +10181,7 @@
     "format": "EPUB",
     "sizeMB": 0.66,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0803.epub",
     "originalName": "How To Open Locks Without Keys Or Picks  - Paladin Press.epub",
     "needsFix": true
@@ -10194,7 +10194,7 @@
     "format": "PDF",
     "sizeMB": 88.17,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0804.pdf",
     "originalName": "Art of India (2012).pdf",
     "needsFix": true
@@ -10207,7 +10207,7 @@
     "format": "PDF",
     "sizeMB": 25.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0805.pdf",
     "originalName": "Great Ages of Man - Historic India (History Arts Ebook).pdf",
     "needsFix": true
@@ -10220,7 +10220,7 @@
     "format": "PDF",
     "sizeMB": 32.66,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0806.pdf",
     "originalName": "Indian Court Painting, XVI-XIX Century (Art Ebook).pdf",
     "needsFix": true
@@ -10233,7 +10233,7 @@
     "format": "PDF",
     "sizeMB": 6.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0807.pdf",
     "originalName": "Indian Islamic Architecture - Forms and Typologies, Sites and Monuments (Art Ebook).pdf",
     "needsFix": true
@@ -10246,7 +10246,7 @@
     "format": "PDF",
     "sizeMB": 17.3,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0808.pdf",
     "originalName": "The Arts of India - from prehistoric to modern times (Art Ebook).pdf",
     "needsFix": true
@@ -10259,7 +10259,7 @@
     "format": "PDF",
     "sizeMB": 124.97,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0809.pdf",
     "originalName": "The wonder that was India (History Arts Ebook).pdf",
     "needsFix": true
@@ -10272,7 +10272,7 @@
     "format": "PDF",
     "sizeMB": 53.54,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0810.pdf",
     "originalName": "History of Indian and eastern architecture Vol. 1.pdf",
     "needsFix": true
@@ -10285,7 +10285,7 @@
     "format": "PDF",
     "sizeMB": 84.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0811.pdf",
     "originalName": "History of Indian and eastern architecture Vol. 2.pdf",
     "needsFix": true
@@ -10298,7 +10298,7 @@
     "format": "EPUB",
     "sizeMB": 2.05,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0812.epub",
     "originalName": "The Eureka Method - John Hershey.epub",
     "needsFix": true
@@ -10311,10 +10311,10 @@
     "format": "EPUB",
     "sizeMB": 1.16,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0813.epub",
     "originalName": "Bertrand Russell - History of Western Philosophy.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0814",
@@ -10324,7 +10324,7 @@
     "format": "EPUB",
     "sizeMB": 2.06,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0814.epub",
     "originalName": "Beth Kempton - Wabi Sabi.epub",
     "needsFix": true
@@ -10337,10 +10337,10 @@
     "format": "EPUB",
     "sizeMB": 0.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0815.epub",
     "originalName": "Bram Stoker - Dracula.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0816",
@@ -10350,10 +10350,10 @@
     "format": "EPUB",
     "sizeMB": 2.9,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0816.epub",
     "originalName": "Brothers Grimm - Grimms' Fairy Stories.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0817",
@@ -10363,10 +10363,10 @@
     "format": "EPUB",
     "sizeMB": 3.31,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0817.epub",
     "originalName": "C. S. Lewis - The Chronicles of Narnia 1 The Lion, the Witch and the Wardrobe.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0818",
@@ -10376,10 +10376,10 @@
     "format": "EPUB",
     "sizeMB": 8.81,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0818.epub",
     "originalName": "C. S. Lewis - The Chronicles of Narnia Complete Collection.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0819",
@@ -10389,10 +10389,10 @@
     "format": "EPUB",
     "sizeMB": 2.48,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0819.epub",
     "originalName": "Carl Jung - Psychology of the Unconscious.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0820",
@@ -10402,7 +10402,7 @@
     "format": "EPUB",
     "sizeMB": 4.03,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0820.epub",
     "originalName": "Carlo Collodi - The Adventures of Pinocchio.epub",
     "needsFix": true
@@ -10415,7 +10415,7 @@
     "format": "EPUB",
     "sizeMB": 0.83,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0821.epub",
     "originalName": "Carolyn Sherwin Bailey - Wonder Stories.epub",
     "needsFix": true
@@ -10428,10 +10428,10 @@
     "format": "EPUB",
     "sizeMB": 1.14,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0822.epub",
     "originalName": "Charles Dickens - A Christmas Carol.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0823",
@@ -10441,10 +10441,10 @@
     "format": "EPUB",
     "sizeMB": 0.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0823.epub",
     "originalName": "Charles Dickens - A Tale of Two Cities.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0824",
@@ -10454,10 +10454,10 @@
     "format": "EPUB",
     "sizeMB": 0.87,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0824.epub",
     "originalName": "Charles Dickens - David Copperfield.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0825",
@@ -10467,10 +10467,10 @@
     "format": "EPUB",
     "sizeMB": 0.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0825.epub",
     "originalName": "Charles Dickens - Great Expectations.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0826",
@@ -10480,10 +10480,10 @@
     "format": "EPUB",
     "sizeMB": 0.43,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0826.epub",
     "originalName": "Charles Dickens - Oliver Twist.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0827",
@@ -10493,7 +10493,7 @@
     "format": "EPUB",
     "sizeMB": 0.89,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0827.epub",
     "originalName": "Charles Kingsley - The Heroes.epub",
     "needsFix": true
@@ -10506,10 +10506,10 @@
     "format": "EPUB",
     "sizeMB": 2.5,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0828.epub",
     "originalName": "Charlotte Bronte - Jane Eyre.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0829",
@@ -10519,10 +10519,10 @@
     "format": "EPUB",
     "sizeMB": 1.7,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0829.epub",
     "originalName": "Christopher Paolini - Inheritance Cycle 4 Inheritance.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0830",
@@ -10532,7 +10532,7 @@
     "format": "EPUB",
     "sizeMB": 0.58,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0830.epub",
     "originalName": "Chuck Palahniuk - Fight Club.epub",
     "needsFix": true
@@ -10545,7 +10545,7 @@
     "format": "EPUB",
     "sizeMB": 1.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0831.epub",
     "originalName": "Colleen McCullough - The Thorn Birds.epub",
     "needsFix": true
@@ -10558,10 +10558,10 @@
     "format": "EPUB",
     "sizeMB": 2.02,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0832.epub",
     "originalName": "Cormac McCarthy - Blood Meridian.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0833",
@@ -10571,10 +10571,10 @@
     "format": "EPUB",
     "sizeMB": 0.3,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0833.epub",
     "originalName": "Cormac McCarthy - No Country for Old Men.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0834",
@@ -10584,10 +10584,10 @@
     "format": "EPUB",
     "sizeMB": 0.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0834.epub",
     "originalName": "Cormac McCarthy - The Road.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0835",
@@ -10597,7 +10597,7 @@
     "format": "EPUB",
     "sizeMB": 0.55,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0835.epub",
     "originalName": "Dan Brown - Robert Langdon 2 The Da Vinci Code.epub",
     "needsFix": true
@@ -10610,7 +10610,7 @@
     "format": "EPUB",
     "sizeMB": 0.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0836.epub",
     "originalName": "Daniel G. Brinton - American Hero-Myths.epub",
     "needsFix": true
@@ -10623,10 +10623,10 @@
     "format": "EPUB",
     "sizeMB": 0.57,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0837.epub",
     "originalName": "Dante Alighieri - The Divine Comedy.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0838",
@@ -10636,10 +10636,10 @@
     "format": "EPUB",
     "sizeMB": 0.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0838.epub",
     "originalName": "Daphne du Maurier - Rebecca.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0839",
@@ -10649,10 +10649,10 @@
     "format": "EPUB",
     "sizeMB": 1.53,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0839.epub",
     "originalName": "David Hume - A Treatise of Human Nature.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0840",
@@ -10662,10 +10662,10 @@
     "format": "EPUB",
     "sizeMB": 1.74,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0840.epub",
     "originalName": "David Hume - Dialogues Concerning Natural Religion.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0841",
@@ -10675,7 +10675,7 @@
     "format": "EPUB",
     "sizeMB": 3.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0841.epub",
     "originalName": "David Kalakaua - The Legends and Myths of Hawaii.epub",
     "needsFix": true
@@ -10688,10 +10688,10 @@
     "format": "EPUB",
     "sizeMB": 2.35,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0842.epub",
     "originalName": "Donald A. Mackenzie - Myths of Babylonia and Assyria.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0843",
@@ -10701,10 +10701,10 @@
     "format": "EPUB",
     "sizeMB": 0.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0843.epub",
     "originalName": "Douglas Adams - Dirk Gently 1 Dirk Gently's Holistic Detective Agency.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0844",
@@ -10714,10 +10714,10 @@
     "format": "EPUB",
     "sizeMB": 0.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0844.epub",
     "originalName": "Douglas Adams - Dirk Gently 2 The Long Dark Tea-Time of the Soul.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0845",
@@ -10727,10 +10727,10 @@
     "format": "EPUB",
     "sizeMB": 0.19,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0845.epub",
     "originalName": "Douglas Adams - The Hitchhiker's Guide to the Galaxy 1 The Hitchhiker's Guide to the Galaxy.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0846",
@@ -10740,10 +10740,10 @@
     "format": "EPUB",
     "sizeMB": 1.09,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0846.epub",
     "originalName": "E. M. Berens - Myths and Legends of Ancient Greece and Rome.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0847",
@@ -10753,10 +10753,10 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0847.epub",
     "originalName": "Eckhart Tolle - The Power of Now.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0848",
@@ -10766,7 +10766,7 @@
     "format": "EPUB",
     "sizeMB": 1.9,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0848.epub",
     "originalName": "Edgar Allan Poe - Great Tales and Poems of Edgar Allan Poe.epub",
     "needsFix": true
@@ -10779,7 +10779,7 @@
     "format": "EPUB",
     "sizeMB": 0.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0849.epub",
     "originalName": "Elias Owen - Welsh Folk-Lore.epub",
     "needsFix": true
@@ -10792,7 +10792,7 @@
     "format": "EPUB",
     "sizeMB": 2.68,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0850.epub",
     "originalName": "Ely Banister Soane - To Mesopotamia and Kurdistan in Disguise.epub",
     "needsFix": true
@@ -10805,10 +10805,10 @@
     "format": "EPUB",
     "sizeMB": 0.47,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0851.epub",
     "originalName": "Emily Bronte - Wuthering Heights.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0852",
@@ -10818,10 +10818,10 @@
     "format": "EPUB",
     "sizeMB": 1.09,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0852.epub",
     "originalName": "Eoin Colfer - Artemis Fowl 1 Artemis Fowl.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0853",
@@ -10831,10 +10831,10 @@
     "format": "EPUB",
     "sizeMB": 0.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0853.epub",
     "originalName": "Epictetus - The Enchiridion.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0854",
@@ -10844,7 +10844,7 @@
     "format": "EPUB",
     "sizeMB": 0.64,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0854.epub",
     "originalName": "Ernest Hemingway - For Whom the Bell Tolls.epub",
     "needsFix": true
@@ -10857,7 +10857,7 @@
     "format": "EPUB",
     "sizeMB": 0.35,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0855.epub",
     "originalName": "Ernest Hemingway - The Old Man and the Sea.epub",
     "needsFix": true
@@ -10870,7 +10870,7 @@
     "format": "EPUB",
     "sizeMB": 0.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0856.epub",
     "originalName": "Ernest Hemingway - The Sun Also Rises.epub",
     "needsFix": true
@@ -10883,10 +10883,10 @@
     "format": "EPUB",
     "sizeMB": 0.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0857.epub",
     "originalName": "Evelyn Waugh - Brideshead Revisited.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0858",
@@ -10896,7 +10896,7 @@
     "format": "EPUB",
     "sizeMB": 8.47,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0858.epub",
     "originalName": "F. Hadland Davis - Myths and Legends of Japan.epub",
     "needsFix": true
@@ -10909,10 +10909,10 @@
     "format": "EPUB",
     "sizeMB": 0.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0859.epub",
     "originalName": "F. Scott Fitzgerald - The Great Gatsby.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0860",
@@ -10922,7 +10922,7 @@
     "format": "EPUB",
     "sizeMB": 0.32,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0860.epub",
     "originalName": "Ferdinand Schmidt - Gods and Heroes.epub",
     "needsFix": true
@@ -10935,10 +10935,10 @@
     "format": "EPUB",
     "sizeMB": 0.64,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0861.epub",
     "originalName": "Frank Herbert - Dune 1 Dune.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0862",
@@ -10948,10 +10948,10 @@
     "format": "EPUB",
     "sizeMB": 0.85,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0862.epub",
     "originalName": "Franz Kafka - The Metamorphosis and Other Stories.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0863",
@@ -10961,10 +10961,10 @@
     "format": "EPUB",
     "sizeMB": 0.07,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0863.epub",
     "originalName": "Franz Kafka - The Metamorphosis.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0864",
@@ -10974,10 +10974,10 @@
     "format": "EPUB",
     "sizeMB": 0.3,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0864.epub",
     "originalName": "Franz Kafka - The Trial.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0865",
@@ -10987,7 +10987,7 @@
     "format": "EPUB",
     "sizeMB": 0.14,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0865.epub",
     "originalName": "Friedrich de la Motte Fouque - Undine.epub",
     "needsFix": true
@@ -11000,10 +11000,10 @@
     "format": "EPUB",
     "sizeMB": 2.51,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0866.epub",
     "originalName": "Friedrich Nietzsche - Basic Writings of Nietzsche.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0867",
@@ -11013,10 +11013,10 @@
     "format": "EPUB",
     "sizeMB": 2.03,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0867.epub",
     "originalName": "Friedrich Nietzsche - Beyond Good and Evil.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0868",
@@ -11026,10 +11026,10 @@
     "format": "EPUB",
     "sizeMB": 0.17,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0868.epub",
     "originalName": "Friedrich Nietzsche - Early Greek Philosophy & Other Essays.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0869",
@@ -11039,10 +11039,10 @@
     "format": "EPUB",
     "sizeMB": 0.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0869.epub",
     "originalName": "Friedrich Nietzsche - Ecce Homo.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0870",
@@ -11052,10 +11052,10 @@
     "format": "EPUB",
     "sizeMB": 0.28,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0870.epub",
     "originalName": "Friedrich Nietzsche - Human All Too Human Part 1.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0871",
@@ -11065,10 +11065,10 @@
     "format": "EPUB",
     "sizeMB": 0.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0871.epub",
     "originalName": "Friedrich Nietzsche - Human All Too Human Part 2.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0872",
@@ -11078,10 +11078,10 @@
     "format": "EPUB",
     "sizeMB": 0.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0872.epub",
     "originalName": "Friedrich Nietzsche - Index of the Project Gutenberg Works.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0873",
@@ -11091,10 +11091,10 @@
     "format": "EPUB",
     "sizeMB": 0.16,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0873.epub",
     "originalName": "Friedrich Nietzsche - The Antichrist.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0874",
@@ -11104,10 +11104,10 @@
     "format": "EPUB",
     "sizeMB": 0.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0874.epub",
     "originalName": "Friedrich Nietzsche - The Case of Wagner.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0875",
@@ -11117,10 +11117,10 @@
     "format": "EPUB",
     "sizeMB": 0.33,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0875.epub",
     "originalName": "Friedrich Nietzsche - The Dawn of Day.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0876",
@@ -11130,10 +11130,10 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0876.epub",
     "originalName": "Friedrich Nietzsche - The Genealogy of Morals.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0877",
@@ -11143,10 +11143,10 @@
     "format": "EPUB",
     "sizeMB": 0.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0877.epub",
     "originalName": "Friedrich Nietzsche - The Joyful Wisdom.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0878",
@@ -11156,10 +11156,10 @@
     "format": "EPUB",
     "sizeMB": 0.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0878.epub",
     "originalName": "Friedrich Nietzsche - The Twilight of Idols.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0879",
@@ -11169,10 +11169,10 @@
     "format": "EPUB",
     "sizeMB": 0.28,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0879.epub",
     "originalName": "Friedrich Nietzsche - The Will to Power Book 1 & 2.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0880",
@@ -11182,10 +11182,10 @@
     "format": "EPUB",
     "sizeMB": 0.33,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0880.epub",
     "originalName": "Friedrich Nietzsche - The Will to Power Book 3 & 4.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0881",
@@ -11195,10 +11195,10 @@
     "format": "EPUB",
     "sizeMB": 0.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0881.epub",
     "originalName": "Friedrich Nietzsche - Thoughts out of Season.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0882",
@@ -11208,10 +11208,10 @@
     "format": "EPUB",
     "sizeMB": 0.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0882.epub",
     "originalName": "Friedrich Nietzsche - Thus Spoke Zarathustra.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0883",
@@ -11221,10 +11221,10 @@
     "format": "EPUB",
     "sizeMB": 0.58,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0883.epub",
     "originalName": "Fyodor Dostoevsky - Crime and Punishment.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0884",
@@ -11234,10 +11234,10 @@
     "format": "EPUB",
     "sizeMB": 0.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0884.epub",
     "originalName": "Fyodor Dostoevsky - Notes from Underground.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0885",
@@ -11247,10 +11247,10 @@
     "format": "EPUB",
     "sizeMB": 0.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0885.epub",
     "originalName": "Fyodor Dostoevsky - Poor Folk.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0886",
@@ -11260,10 +11260,10 @@
     "format": "EPUB",
     "sizeMB": 0.89,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0886.epub",
     "originalName": "Fyodor Dostoevsky - The Brothers Karamazov.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0887",
@@ -11273,10 +11273,10 @@
     "format": "EPUB",
     "sizeMB": 0.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0887.epub",
     "originalName": "Fyodor Dostoevsky - The Gambler.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0888",
@@ -11286,10 +11286,10 @@
     "format": "EPUB",
     "sizeMB": 0.57,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0888.epub",
     "originalName": "Fyodor Dostoevsky - The Idiot.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0889",
@@ -11299,10 +11299,10 @@
     "format": "EPUB",
     "sizeMB": 0.57,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0889.epub",
     "originalName": "Fyodor Dostoevsky - The Possessed (Demons).epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0890",
@@ -11312,7 +11312,7 @@
     "format": "EPUB",
     "sizeMB": 0.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0890.epub",
     "originalName": "Gabriel Garcia Marquez - Love in the Time of Cholera.epub",
     "needsFix": true
@@ -11325,7 +11325,7 @@
     "format": "EPUB",
     "sizeMB": 0.4,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0891.epub",
     "originalName": "Gabriel Garcia Marquez - One Hundred Years of Solitude.epub",
     "needsFix": true
@@ -11338,7 +11338,7 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0892.epub",
     "originalName": "Gaston Leroux - The Phantom of the Opera.epub",
     "needsFix": true
@@ -11351,10 +11351,10 @@
     "format": "EPUB",
     "sizeMB": 0.82,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0893.epub",
     "originalName": "George Eliot - Middlemarch.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0894",
@@ -11364,7 +11364,7 @@
     "format": "EPUB",
     "sizeMB": 0.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0894.epub",
     "originalName": "George Orwell - Animal Farm.epub",
     "needsFix": true
@@ -11377,7 +11377,7 @@
     "format": "EPUB",
     "sizeMB": 0.66,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0895.epub",
     "originalName": "George Orwell - Down and Out in Paris and London.epub",
     "needsFix": true
@@ -11390,7 +11390,7 @@
     "format": "EPUB",
     "sizeMB": 0.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0896.epub",
     "originalName": "George Orwell - Homage to Catalonia.epub",
     "needsFix": true
@@ -11403,10 +11403,10 @@
     "format": "EPUB",
     "sizeMB": 1.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0897.epub",
     "originalName": "George R. R. Martin - A Song of Ice and Fire 1 A Game of Thrones.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0898",
@@ -11416,10 +11416,10 @@
     "format": "EPUB",
     "sizeMB": 1.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0898.epub",
     "originalName": "George R. R. Martin - A Song of Ice and Fire 2 A Clash of Kings.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0899",
@@ -11429,10 +11429,10 @@
     "format": "EPUB",
     "sizeMB": 1.8,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0899.epub",
     "originalName": "George R. R. Martin - A Song of Ice and Fire 3 A Storm of Swords.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0900",
@@ -11442,10 +11442,10 @@
     "format": "EPUB",
     "sizeMB": 1.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0900.epub",
     "originalName": "George R. R. Martin - A Song of Ice and Fire 4 A Feast for Crows.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0901",
@@ -11455,10 +11455,10 @@
     "format": "EPUB",
     "sizeMB": 1.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0901.epub",
     "originalName": "George R. R. Martin - A Song of Ice and Fire 5 A Dance with Dragons.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0902",
@@ -11468,10 +11468,10 @@
     "format": "EPUB",
     "sizeMB": 0.43,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0902.epub",
     "originalName": "George R. R. Martin - The Tales of Dunk and Egg.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0903",
@@ -11481,7 +11481,7 @@
     "format": "EPUB",
     "sizeMB": 0.43,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0903.epub",
     "originalName": "George W. Warder - The Universe a Vast Electric Organism.epub",
     "needsFix": true
@@ -11494,7 +11494,7 @@
     "format": "EPUB",
     "sizeMB": 5.09,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0904.epub",
     "originalName": "Gregory Maguire - Confessions of an Ugly Stepsister.epub",
     "needsFix": true
@@ -11507,10 +11507,10 @@
     "format": "EPUB",
     "sizeMB": 0.32,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0905.epub",
     "originalName": "Gustave Flaubert - Madame Bovary.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0906",
@@ -11520,7 +11520,7 @@
     "format": "EPUB",
     "sizeMB": 0.17,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0906.epub",
     "originalName": "H. G. Wells - The War of the Worlds.epub",
     "needsFix": true
@@ -11533,7 +11533,7 @@
     "format": "EPUB",
     "sizeMB": 0.32,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0907.epub",
     "originalName": "H. P. Lovecraft - At the Mountains of Madness.epub",
     "needsFix": true
@@ -11546,7 +11546,7 @@
     "format": "EPUB",
     "sizeMB": 0.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0908.epub",
     "originalName": "Hamilton Wright Mabie - Legends That Every Child Should Know.epub",
     "needsFix": true
@@ -11559,10 +11559,10 @@
     "format": "EPUB",
     "sizeMB": 0.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0909.epub",
     "originalName": "Harper Lee - To Kill a Mockingbird.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0910",
@@ -11572,7 +11572,7 @@
     "format": "EPUB",
     "sizeMB": 4.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0910.epub",
     "originalName": "Haruki Murakami - 1Q84.epub",
     "needsFix": true
@@ -11585,7 +11585,7 @@
     "format": "EPUB",
     "sizeMB": 0.66,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0911.epub",
     "originalName": "Haruki Murakami - Kafka on the Shore.epub",
     "needsFix": true
@@ -11598,7 +11598,7 @@
     "format": "EPUB",
     "sizeMB": 2.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0912.epub",
     "originalName": "Haruki Murakami - Norwegian Wood.epub",
     "needsFix": true
@@ -11611,7 +11611,7 @@
     "format": "EPUB",
     "sizeMB": 2.57,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0913.epub",
     "originalName": "Haruki Murakami - The Wind-Up Bird Chronicle.epub",
     "needsFix": true
@@ -11624,7 +11624,7 @@
     "format": "EPUB",
     "sizeMB": 1.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0914.epub",
     "originalName": "Hattie Greene Lockett - The Unwritten Literature of the Hopi.epub",
     "needsFix": true
@@ -11637,10 +11637,10 @@
     "format": "EPUB",
     "sizeMB": 4.32,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0915.epub",
     "originalName": "Hector Garcia & Francesc Miralles - Ikigai.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0916",
@@ -11650,7 +11650,7 @@
     "format": "EPUB",
     "sizeMB": 0.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0916.epub",
     "originalName": "Helen Fielding - Bridget Jones 1 Bridget Jones's Diary.epub",
     "needsFix": true
@@ -11663,7 +11663,7 @@
     "format": "EPUB",
     "sizeMB": 1.28,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0917.epub",
     "originalName": "Henry David Thoreau - Walden and Civil Disobedience.epub",
     "needsFix": true
@@ -11676,10 +11676,10 @@
     "format": "EPUB",
     "sizeMB": 0.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0918.epub",
     "originalName": "Henry James - The Turn of the Screw.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0919",
@@ -11689,7 +11689,7 @@
     "format": "EPUB",
     "sizeMB": 2.88,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0919.epub",
     "originalName": "Henry Rowe Schoolcraft - The Indian Fairy Book.epub",
     "needsFix": true
@@ -11702,7 +11702,7 @@
     "format": "EPUB",
     "sizeMB": 0.31,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0920.epub",
     "originalName": "Henry Rowe Schoolcraft - The Myth of Hiawatha.epub",
     "needsFix": true
@@ -11715,10 +11715,10 @@
     "format": "EPUB",
     "sizeMB": 1.01,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0921.epub",
     "originalName": "Herman Melville - Moby-Dick.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0922",
@@ -11728,10 +11728,10 @@
     "format": "EPUB",
     "sizeMB": 0.11,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0922.epub",
     "originalName": "Hermann Hesse - Siddhartha.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0923",
@@ -11741,10 +11741,10 @@
     "format": "EPUB",
     "sizeMB": 1.65,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0923.epub",
     "originalName": "Homer - The Iliad.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0924",
@@ -11754,10 +11754,10 @@
     "format": "EPUB",
     "sizeMB": 0.77,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0924.epub",
     "originalName": "Homer - The Odyssey.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0925",
@@ -11767,10 +11767,10 @@
     "format": "EPUB",
     "sizeMB": 0.19,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0925.epub",
     "originalName": "Honore de Balzac - Eugenie Grandet.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0926",
@@ -11780,10 +11780,10 @@
     "format": "EPUB",
     "sizeMB": 0.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0926.epub",
     "originalName": "Isaac Asimov - Foundation 1 Foundation.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0927",
@@ -11793,10 +11793,10 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0927.epub",
     "originalName": "Isaac Asimov - Foundation 2 Foundation and Empire.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0928",
@@ -11806,10 +11806,10 @@
     "format": "EPUB",
     "sizeMB": 0.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0928.epub",
     "originalName": "Isaac Asimov - Foundation 3 Second Foundation.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0929",
@@ -11819,7 +11819,7 @@
     "format": "EPUB",
     "sizeMB": 0.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0929.epub",
     "originalName": "J. D. Salinger - The Catcher in the Rye.epub",
     "needsFix": true
@@ -11832,10 +11832,10 @@
     "format": "EPUB",
     "sizeMB": 1.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0930.epub",
     "originalName": "J. K. Rowling - A Journey Through 1 Charms and Defence Against the Dark Arts.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0931",
@@ -11845,10 +11845,10 @@
     "format": "EPUB",
     "sizeMB": 3.04,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0931.epub",
     "originalName": "J. K. Rowling - A Journey Through 3 Divination and Astronomy.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0932",
@@ -11858,10 +11858,10 @@
     "format": "EPUB",
     "sizeMB": 8.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0932.epub",
     "originalName": "J. K. Rowling - A Journey Through 4 Care of Magical Creatures.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0933",
@@ -11871,10 +11871,10 @@
     "format": "EPUB",
     "sizeMB": 0.85,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0933.epub",
     "originalName": "J. K. Rowling - Harry Potter 1 Harry Potter and the Sorcerer's Stone.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0934",
@@ -11884,10 +11884,10 @@
     "format": "EPUB",
     "sizeMB": 1.93,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0934.epub",
     "originalName": "J. K. Rowling - Harry Potter 2 Harry Potter and the Chamber of Secrets.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0935",
@@ -11897,10 +11897,10 @@
     "format": "EPUB",
     "sizeMB": 2.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0935.epub",
     "originalName": "J. K. Rowling - Harry Potter 3 Harry Potter and the Prisoner of Azkaban.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0936",
@@ -11910,10 +11910,10 @@
     "format": "EPUB",
     "sizeMB": 1.51,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0936.epub",
     "originalName": "J. K. Rowling - Harry Potter 4 Harry Potter and the Goblet of Fire.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0937",
@@ -11923,10 +11923,10 @@
     "format": "EPUB",
     "sizeMB": 1.9,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0937.epub",
     "originalName": "J. K. Rowling - Harry Potter 5 Harry Potter and the Order of the Phoenix.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0938",
@@ -11936,10 +11936,10 @@
     "format": "EPUB",
     "sizeMB": 1.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0938.epub",
     "originalName": "J. K. Rowling - Harry Potter 6 Harry Potter and the Half-Blood Prince.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0939",
@@ -11949,10 +11949,10 @@
     "format": "EPUB",
     "sizeMB": 1.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0939.epub",
     "originalName": "J. K. Rowling - Harry Potter 7 Harry Potter and the Deathly Hallows.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0940",
@@ -11962,10 +11962,10 @@
     "format": "EPUB",
     "sizeMB": 7.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0940.epub",
     "originalName": "J. K. Rowling - Harry Potter Complete Collection 1-7.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0941",
@@ -11975,10 +11975,10 @@
     "format": "EPUB",
     "sizeMB": 0.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0941.epub",
     "originalName": "J. K. Rowling - Quidditch Through the Ages.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0942",
@@ -11988,10 +11988,10 @@
     "format": "EPUB",
     "sizeMB": 1.07,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0942.epub",
     "originalName": "J. K. Rowling - The Tales of Beedle the Bard.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0943",
@@ -12001,10 +12001,10 @@
     "format": "EPUB",
     "sizeMB": 6.94,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0943.epub",
     "originalName": "J. R. R. Tolkien - The Lord of the Rings.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0944",
@@ -12014,7 +12014,7 @@
     "format": "EPUB",
     "sizeMB": 0.15,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0944.epub",
     "originalName": "Jack London - The Call of the Wild.epub",
     "needsFix": true
@@ -12027,10 +12027,10 @@
     "format": "EPUB",
     "sizeMB": 4.55,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0945.epub",
     "originalName": "James Clear - Atomic Habits.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0946",
@@ -12040,7 +12040,7 @@
     "format": "EPUB",
     "sizeMB": 0.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0946.epub",
     "originalName": "James Fenimore Cooper - The Leatherstocking Tales 2 The Last of the Mohicans.epub",
     "needsFix": true
@@ -12053,10 +12053,10 @@
     "format": "EPUB",
     "sizeMB": 0.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0947.epub",
     "originalName": "James Joyce - Dubliners.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0948",
@@ -12066,10 +12066,10 @@
     "format": "EPUB",
     "sizeMB": 0.75,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0948.epub",
     "originalName": "James Joyce - Ulysses.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0949",
@@ -12079,7 +12079,7 @@
     "format": "EPUB",
     "sizeMB": 4.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0949.epub",
     "originalName": "James Mooney - Myths of the Cherokee.epub",
     "needsFix": true
@@ -12092,10 +12092,10 @@
     "format": "EPUB",
     "sizeMB": 0.4,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0950.epub",
     "originalName": "Jane Austen - Emma.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0951",
@@ -12105,10 +12105,10 @@
     "format": "EPUB",
     "sizeMB": 0.21,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0951.epub",
     "originalName": "Jane Austen - Northanger Abbey.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0952",
@@ -12118,10 +12118,10 @@
     "format": "EPUB",
     "sizeMB": 0.56,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0952.epub",
     "originalName": "Jane Austen - Pride and Prejudice.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0953",
@@ -12131,10 +12131,10 @@
     "format": "EPUB",
     "sizeMB": 7.76,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0953.epub",
     "originalName": "Jay Shetty - Think Like a Monk.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0954",
@@ -12144,7 +12144,7 @@
     "format": "EPUB",
     "sizeMB": 3.02,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0954.epub",
     "originalName": "Jean Lang - A Book of Myths.epub",
     "needsFix": true
@@ -12157,7 +12157,7 @@
     "format": "EPUB",
     "sizeMB": 0.57,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0955.epub",
     "originalName": "Jeffrey Archer - Kane and Abel 1 Kane and Abel.epub",
     "needsFix": true
@@ -12170,7 +12170,7 @@
     "format": "EPUB",
     "sizeMB": 0.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0956.epub",
     "originalName": "Jeremiah Curtin - Myths and Folk Tales of Ireland.epub",
     "needsFix": true
@@ -12183,7 +12183,7 @@
     "format": "EPUB",
     "sizeMB": 0.09,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0957.epub",
     "originalName": "Johann Wolfgang von Goethe - Erotica Romana.epub",
     "needsFix": true
@@ -12196,7 +12196,7 @@
     "format": "EPUB",
     "sizeMB": 7.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0958.epub",
     "originalName": "Johanna Spyri - Heidi.epub",
     "needsFix": true
@@ -12209,7 +12209,7 @@
     "format": "EPUB",
     "sizeMB": 0.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0959.epub",
     "originalName": "John Buchan - Richard Hannay 1 The Thirty-Nine Steps.epub",
     "needsFix": true
@@ -12222,7 +12222,7 @@
     "format": "EPUB",
     "sizeMB": 0.16,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0960.epub",
     "originalName": "John Bunyan - The Pilgrim's Progress.epub",
     "needsFix": true
@@ -12235,7 +12235,7 @@
     "format": "EPUB",
     "sizeMB": 0.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0961.epub",
     "originalName": "John Cleland - Memoirs of Fanny Hill.epub",
     "needsFix": true
@@ -12248,7 +12248,7 @@
     "format": "EPUB",
     "sizeMB": 0.15,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0962.epub",
     "originalName": "John Galt - The Provost.epub",
     "needsFix": true
@@ -12261,7 +12261,7 @@
     "format": "EPUB",
     "sizeMB": 0.76,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0963.epub",
     "originalName": "John Irving - A Prayer for Owen Meany.epub",
     "needsFix": true
@@ -12274,10 +12274,10 @@
     "format": "EPUB",
     "sizeMB": 1.8,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0964.epub",
     "originalName": "John Milton - Paradise Lost.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0965",
@@ -12287,10 +12287,10 @@
     "format": "EPUB",
     "sizeMB": 0.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0965.epub",
     "originalName": "John Steinbeck - East of Eden.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0966",
@@ -12300,10 +12300,10 @@
     "format": "EPUB",
     "sizeMB": 0.55,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0966.epub",
     "originalName": "John Steinbeck - Of Mice and Men.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0967",
@@ -12313,10 +12313,10 @@
     "format": "EPUB",
     "sizeMB": 2.01,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0967.epub",
     "originalName": "John Steinbeck - The Grapes of Wrath.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0968",
@@ -12326,7 +12326,7 @@
     "format": "EPUB",
     "sizeMB": 0.63,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0968.epub",
     "originalName": "John Taylor Gatto - The Underground History of American Education.epub",
     "needsFix": true
@@ -12339,10 +12339,10 @@
     "format": "EPUB",
     "sizeMB": 9.45,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0969.epub",
     "originalName": "Jonathan Swift - Gulliver's Travels.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0970",
@@ -12352,7 +12352,7 @@
     "format": "EPUB",
     "sizeMB": 0.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0970.epub",
     "originalName": "Jorge Luis Borges - Labyrinths.epub",
     "needsFix": true
@@ -12365,10 +12365,10 @@
     "format": "EPUB",
     "sizeMB": 0.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0971.epub",
     "originalName": "Joseph Conrad - Nostromo.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0972",
@@ -12378,7 +12378,7 @@
     "format": "EPUB",
     "sizeMB": 1.46,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0972.epub",
     "originalName": "Joseph Dunn - The Ancient Irish Epic Tale Tain Bo Cualnge.epub",
     "needsFix": true
@@ -12391,7 +12391,7 @@
     "format": "EPUB",
     "sizeMB": 0.45,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0973.epub",
     "originalName": "Joseph Heller - Catch-22.epub",
     "needsFix": true
@@ -12404,7 +12404,7 @@
     "format": "EPUB",
     "sizeMB": 3.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0974.epub",
     "originalName": "Joseph Jacobs - Celtic Folk and Fairy Tales.epub",
     "needsFix": true
@@ -12417,10 +12417,10 @@
     "format": "EPUB",
     "sizeMB": 0.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0975.epub",
     "originalName": "Joseph Murphy - The Power of Your Subconscious Mind.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0976",
@@ -12430,7 +12430,7 @@
     "format": "EPUB",
     "sizeMB": 0.46,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0976.epub",
     "originalName": "Jules Verne - Extraordinary Voyages 6 Twenty Thousand Leagues Under the Sea.epub",
     "needsFix": true
@@ -12443,7 +12443,7 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0977.epub",
     "originalName": "Kazuo Ishiguro - A Pale View of Hills.epub",
     "needsFix": true
@@ -12456,7 +12456,7 @@
     "format": "EPUB",
     "sizeMB": 1.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0978.epub",
     "originalName": "Kazuo Ishiguro - An Artist of the Floating World.epub",
     "needsFix": true
@@ -12469,7 +12469,7 @@
     "format": "EPUB",
     "sizeMB": 0.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0979.epub",
     "originalName": "Kazuo Ishiguro - The Remains of the Day.epub",
     "needsFix": true
@@ -12482,7 +12482,7 @@
     "format": "EPUB",
     "sizeMB": 0.45,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0980.epub",
     "originalName": "Kazuo Ishiguro - The Unconsoled.epub",
     "needsFix": true
@@ -12495,7 +12495,7 @@
     "format": "EPUB",
     "sizeMB": 0.31,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0981.epub",
     "originalName": "Kazuo Ishiguro - When We Were Orphans.epub",
     "needsFix": true
@@ -12508,7 +12508,7 @@
     "format": "EPUB",
     "sizeMB": 1.72,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0982.epub",
     "originalName": "Ken Follett - Kingsbridge 1 The Pillars of the Earth.epub",
     "needsFix": true
@@ -12521,7 +12521,7 @@
     "format": "EPUB",
     "sizeMB": 0.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0983.epub",
     "originalName": "Ken Grimwood - Replay.epub",
     "needsFix": true
@@ -12534,7 +12534,7 @@
     "format": "EPUB",
     "sizeMB": 0.17,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0984.epub",
     "originalName": "Kenneth Grahame - The Wind in the Willows.epub",
     "needsFix": true
@@ -12547,7 +12547,7 @@
     "format": "EPUB",
     "sizeMB": 0.81,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0985.epub",
     "originalName": "Klara Stroebe - The Norwegian Fairy Book.epub",
     "needsFix": true
@@ -12560,7 +12560,7 @@
     "format": "EPUB",
     "sizeMB": 0.17,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0986.epub",
     "originalName": "Kurt Vonnegut - Slaughterhouse-Five.epub",
     "needsFix": true
@@ -12573,10 +12573,10 @@
     "format": "EPUB",
     "sizeMB": 2.4,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0987.epub",
     "originalName": "L. Frank Baum - Little Wizard Stories of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0988",
@@ -12586,10 +12586,10 @@
     "format": "EPUB",
     "sizeMB": 0.13,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0988.epub",
     "originalName": "L. Frank Baum - Oz 1 The Wonderful Wizard of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0989",
@@ -12599,10 +12599,10 @@
     "format": "EPUB",
     "sizeMB": 0.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0989.epub",
     "originalName": "L. Frank Baum - Oz 10 Rinkitink in Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0990",
@@ -12612,10 +12612,10 @@
     "format": "EPUB",
     "sizeMB": 3.85,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0990.epub",
     "originalName": "L. Frank Baum - Oz 11 The Lost Princess of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0991",
@@ -12625,10 +12625,10 @@
     "format": "EPUB",
     "sizeMB": 2.45,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0991.epub",
     "originalName": "L. Frank Baum - Oz 12 The Tin Woodman of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0992",
@@ -12638,10 +12638,10 @@
     "format": "EPUB",
     "sizeMB": 0.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0992.epub",
     "originalName": "L. Frank Baum - Oz 13 The Magic of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0993",
@@ -12651,10 +12651,10 @@
     "format": "EPUB",
     "sizeMB": 0.11,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0993.epub",
     "originalName": "L. Frank Baum - Oz 14 Glinda of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0994",
@@ -12664,10 +12664,10 @@
     "format": "EPUB",
     "sizeMB": 0.19,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0994.epub",
     "originalName": "L. Frank Baum - Oz 7 The Patchwork Girl of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0995",
@@ -12677,10 +12677,10 @@
     "format": "EPUB",
     "sizeMB": 0.15,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0995.epub",
     "originalName": "L. Frank Baum - Oz 8 Tik-Tok of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0996",
@@ -12690,10 +12690,10 @@
     "format": "EPUB",
     "sizeMB": 0.18,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0996.epub",
     "originalName": "L. Frank Baum - Oz 9 The Scarecrow of Oz.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0997",
@@ -12703,10 +12703,10 @@
     "format": "EPUB",
     "sizeMB": 0.96,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0997.epub",
     "originalName": "Leo Tolstoy - Anna Karenina.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0998",
@@ -12716,10 +12716,10 @@
     "format": "EPUB",
     "sizeMB": 0.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0998.epub",
     "originalName": "Leo Tolstoy - The Death of Ivan Ilyich and Master and Man.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_0999",
@@ -12729,10 +12729,10 @@
     "format": "EPUB",
     "sizeMB": 1.45,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_0999.epub",
     "originalName": "Leo Tolstoy - War and Peace.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1000",
@@ -12742,10 +12742,10 @@
     "format": "EPUB",
     "sizeMB": 1.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1000.epub",
     "originalName": "Lewis Carroll - Alice's Adventures in Wonderland.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1001",
@@ -12755,7 +12755,7 @@
     "format": "EPUB",
     "sizeMB": 0.5,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1001.epub",
     "originalName": "Lewis Richard Farnell - Greece and Babylon.epub",
     "needsFix": true
@@ -12768,10 +12768,10 @@
     "format": "EPUB",
     "sizeMB": 6.41,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1002.epub",
     "originalName": "Lewis Spence - The Myths of Mexico and Peru.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1003",
@@ -12781,10 +12781,10 @@
     "format": "EPUB",
     "sizeMB": 13.4,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1003.epub",
     "originalName": "Lewis Spence - The Myths of the North American Indians.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1004",
@@ -12794,7 +12794,7 @@
     "format": "EPUB",
     "sizeMB": 0.55,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1004.epub",
     "originalName": "Louis de Bernieres - Captain Corelli's Mandolin.epub",
     "needsFix": true
@@ -12807,7 +12807,7 @@
     "format": "EPUB",
     "sizeMB": 0.53,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1005.epub",
     "originalName": "Louis Sachar - Holes 1 Holes.epub",
     "needsFix": true
@@ -12820,7 +12820,7 @@
     "format": "EPUB",
     "sizeMB": 0.48,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1006.epub",
     "originalName": "Louisa May Alcott - Little Women 1 Little Women.epub",
     "needsFix": true
@@ -12833,10 +12833,10 @@
     "format": "EPUB",
     "sizeMB": 0.43,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1007.epub",
     "originalName": "Marcus Aurelius - Meditations.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1008",
@@ -12846,10 +12846,10 @@
     "format": "EPUB",
     "sizeMB": 1.3,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1008.epub",
     "originalName": "Margaret Mitchell - Gone with the Wind.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1009",
@@ -12859,10 +12859,10 @@
     "format": "EPUB",
     "sizeMB": 23.53,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1009.epub",
     "originalName": "Mark Twain - Adventures of Huckleberry Finn.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1010",
@@ -12872,10 +12872,10 @@
     "format": "EPUB",
     "sizeMB": 23.47,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1010.epub",
     "originalName": "Mark Twain - The Adventures of Tom Sawyer.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1011",
@@ -12885,7 +12885,7 @@
     "format": "EPUB",
     "sizeMB": 0.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1011.epub",
     "originalName": "Mary Antin - Atlantic Narratives Modern Short Stories.epub",
     "needsFix": true
@@ -12898,10 +12898,10 @@
     "format": "EPUB",
     "sizeMB": 0.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1012.epub",
     "originalName": "Mary Shelley - Frankenstein.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1013",
@@ -12911,7 +12911,7 @@
     "format": "EPUB",
     "sizeMB": 2.17,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1013.epub",
     "originalName": "Max Barry - Machine Man.epub",
     "needsFix": true
@@ -12924,7 +12924,7 @@
     "format": "EPUB",
     "sizeMB": 0.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1014.epub",
     "originalName": "Michelle Magorian - Goodnight Mister Tom.epub",
     "needsFix": true
@@ -12937,10 +12937,10 @@
     "format": "EPUB",
     "sizeMB": 100.21,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1015.epub",
     "originalName": "Miguel de Cervantes - Don Quixote.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1016",
@@ -12950,7 +12950,7 @@
     "format": "EPUB",
     "sizeMB": 0.84,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1016.epub",
     "originalName": "Morris Jastrow & Albert T. Clay - An Old Babylonian Version of the Gilgamesh Epic.epub",
     "needsFix": true
@@ -12963,10 +12963,10 @@
     "format": "EPUB",
     "sizeMB": 0.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1017.epub",
     "originalName": "N. K. Jemisin - Inheritance 1 The Hundred Thousand Kingdoms.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1018",
@@ -12976,10 +12976,10 @@
     "format": "EPUB",
     "sizeMB": 0.91,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1018.epub",
     "originalName": "N. K. Jemisin - Inheritance 2 The Broken Kingdoms.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1019",
@@ -12989,10 +12989,10 @@
     "format": "EPUB",
     "sizeMB": 1.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1019.epub",
     "originalName": "N. K. Jemisin - Inheritance 3 The Kingdom of Gods.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1020",
@@ -13002,10 +13002,10 @@
     "format": "EPUB",
     "sizeMB": 0.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1020.epub",
     "originalName": "N. K. Jemisin - Inheritance 3.1-3.3 Shades in Shadow.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1021",
@@ -13015,10 +13015,10 @@
     "format": "EPUB",
     "sizeMB": 1.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1021.epub",
     "originalName": "N. K. Jemisin - Inheritance 3.5 The Awakened Kingdom.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1022",
@@ -13028,10 +13028,10 @@
     "format": "EPUB",
     "sizeMB": 0.67,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1022.epub",
     "originalName": "N. K. Jemisin - The Broken Earth 1 The Fifth Season.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1023",
@@ -13041,10 +13041,10 @@
     "format": "EPUB",
     "sizeMB": 3.05,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1023.epub",
     "originalName": "Nathaniel Hawthorne - The Scarlet Letter.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1024",
@@ -13054,10 +13054,10 @@
     "format": "EPUB",
     "sizeMB": 0.58,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1024.epub",
     "originalName": "Neal Stephenson - Snow Crash.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1025",
@@ -13067,10 +13067,10 @@
     "format": "EPUB",
     "sizeMB": 0.54,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1025.epub",
     "originalName": "Neil Gaiman - American Gods.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1026",
@@ -13080,10 +13080,10 @@
     "format": "EPUB",
     "sizeMB": 0.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1026.epub",
     "originalName": "Neil Gaiman - Neverwhere.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1027",
@@ -13093,10 +13093,10 @@
     "format": "EPUB",
     "sizeMB": 0.33,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1027.epub",
     "originalName": "Neil Gaiman & Terry Pratchett - Good Omens.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1028",
@@ -13106,7 +13106,7 @@
     "format": "EPUB",
     "sizeMB": 0.4,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1028.epub",
     "originalName": "Nevil Shute - A Town Like Alice.epub",
     "needsFix": true
@@ -13119,10 +13119,10 @@
     "format": "EPUB",
     "sizeMB": 0.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1029.epub",
     "originalName": "Orson Scott Card - Ender Saga 1 Ender's Game.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1030",
@@ -13132,10 +13132,10 @@
     "format": "EPUB",
     "sizeMB": 0.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1030.epub",
     "originalName": "Orson Scott Card - Ender Saga 1.1 A War of Gifts.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1031",
@@ -13145,10 +13145,10 @@
     "format": "EPUB",
     "sizeMB": 0.33,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1031.epub",
     "originalName": "Orson Scott Card - Ender Saga 1.5 Ender in Exile.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1032",
@@ -13158,10 +13158,10 @@
     "format": "EPUB",
     "sizeMB": 0.41,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1032.epub",
     "originalName": "Orson Scott Card - Ender Saga 2 Speaker for the Dead.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1033",
@@ -13171,10 +13171,10 @@
     "format": "EPUB",
     "sizeMB": 0.51,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1033.epub",
     "originalName": "Orson Scott Card - Ender Saga 3 Xenocide.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1034",
@@ -13184,10 +13184,10 @@
     "format": "EPUB",
     "sizeMB": 0.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1034.epub",
     "originalName": "Orson Scott Card - Ender Saga 4 Children of the Mind.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1035",
@@ -13197,10 +13197,10 @@
     "format": "EPUB",
     "sizeMB": 0.1,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1035.epub",
     "originalName": "Orson Scott Card - First Meetings in the Enderverse.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1036",
@@ -13210,10 +13210,10 @@
     "format": "EPUB",
     "sizeMB": 0.43,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1036.epub",
     "originalName": "Orson Scott Card - Shadow Saga 1 Ender's Shadow.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1037",
@@ -13223,10 +13223,10 @@
     "format": "EPUB",
     "sizeMB": 0.29,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1037.epub",
     "originalName": "Orson Scott Card - Shadow Saga 2 Shadow of the Hegemon.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1038",
@@ -13236,10 +13236,10 @@
     "format": "EPUB",
     "sizeMB": 0.28,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1038.epub",
     "originalName": "Orson Scott Card - Shadow Saga 3 Shadow Puppets.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1039",
@@ -13249,10 +13249,10 @@
     "format": "EPUB",
     "sizeMB": 1.73,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1039.epub",
     "originalName": "Orson Scott Card - Shadow Saga 5 Shadows in Flight.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1040",
@@ -13262,10 +13262,10 @@
     "format": "EPUB",
     "sizeMB": 0.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1040.epub",
     "originalName": "Orson Scott Card - The Ender's Shadow Series Box Set.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1041",
@@ -13275,10 +13275,10 @@
     "format": "EPUB",
     "sizeMB": 0.21,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1041.epub",
     "originalName": "Oscar Wilde - The Picture of Dorian Gray.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1042",
@@ -13288,7 +13288,7 @@
     "format": "EPUB",
     "sizeMB": 0.46,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1042.epub",
     "originalName": "Ovid - Metamorphoses.epub",
     "needsFix": true
@@ -13301,7 +13301,7 @@
     "format": "EPUB",
     "sizeMB": 2.76,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1043.epub",
     "originalName": "Padraic Colum - The Children of Odin.epub",
     "needsFix": true
@@ -13314,7 +13314,7 @@
     "format": "EPUB",
     "sizeMB": 1.96,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1044.epub",
     "originalName": "Padraic Colum - The Golden Fleece and The Heroes Who Lived Before Achilles.epub",
     "needsFix": true
@@ -13327,7 +13327,7 @@
     "format": "EPUB",
     "sizeMB": 0.54,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1045.epub",
     "originalName": "Philip Jose Farmer - Riverworld 1 To Your Scattered Bodies Go.epub",
     "needsFix": true
@@ -13340,7 +13340,7 @@
     "format": "EPUB",
     "sizeMB": 0.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1046.epub",
     "originalName": "Philip Jose Farmer - Riverworld 2 The Fabulous Riverboat.epub",
     "needsFix": true
@@ -13353,7 +13353,7 @@
     "format": "EPUB",
     "sizeMB": 0.83,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1047.epub",
     "originalName": "Philip Jose Farmer - Riverworld 3 The Dark Design.epub",
     "needsFix": true
@@ -13366,7 +13366,7 @@
     "format": "EPUB",
     "sizeMB": 0.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1048.epub",
     "originalName": "Philip Jose Farmer - Riverworld 4 The Magic Labyrinth.epub",
     "needsFix": true
@@ -13379,7 +13379,7 @@
     "format": "EPUB",
     "sizeMB": 0.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1049.epub",
     "originalName": "Philip Jose Farmer - Riverworld 5 Gods of Riverworld.epub",
     "needsFix": true
@@ -13392,10 +13392,10 @@
     "format": "EPUB",
     "sizeMB": 0.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1050.epub",
     "originalName": "Philip K. Dick - A Scanner Darkly.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1051",
@@ -13405,10 +13405,10 @@
     "format": "EPUB",
     "sizeMB": 0.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1051.epub",
     "originalName": "Philip K. Dick - Do Androids Dream of Electric Sheep.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1052",
@@ -13418,10 +13418,10 @@
     "format": "EPUB",
     "sizeMB": 0.52,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1052.epub",
     "originalName": "Philip K. Dick - Selected Stories of Philip K. Dick.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1053",
@@ -13431,10 +13431,10 @@
     "format": "EPUB",
     "sizeMB": 0.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1053.epub",
     "originalName": "Philip K. Dick - The Man in the High Castle.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1054",
@@ -13444,10 +13444,10 @@
     "format": "EPUB",
     "sizeMB": 0.08,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1054.epub",
     "originalName": "Philip K. Dick - The Minority Report.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1055",
@@ -13457,10 +13457,10 @@
     "format": "EPUB",
     "sizeMB": 0.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1055.epub",
     "originalName": "Philip K. Dick - Ubik.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1056",
@@ -13470,10 +13470,10 @@
     "format": "EPUB",
     "sizeMB": 0.09,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1056.epub",
     "originalName": "Plato - Apology.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1057",
@@ -13483,10 +13483,10 @@
     "format": "EPUB",
     "sizeMB": 1.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1057.epub",
     "originalName": "Plato - Great Dialogues of Plato.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1058",
@@ -13496,10 +13496,10 @@
     "format": "EPUB",
     "sizeMB": 0.12,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1058.epub",
     "originalName": "Plato - Phaedrus.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1059",
@@ -13509,10 +13509,10 @@
     "format": "EPUB",
     "sizeMB": 0.11,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1059.epub",
     "originalName": "Plato - Symposium.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1060",
@@ -13522,10 +13522,10 @@
     "format": "EPUB",
     "sizeMB": 0.67,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1060.epub",
     "originalName": "Plato - The Republic.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1061",
@@ -13535,10 +13535,10 @@
     "format": "EPUB",
     "sizeMB": 0.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1061.epub",
     "originalName": "Ray Bradbury - Fahrenheit 451.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1062",
@@ -13548,10 +13548,10 @@
     "format": "EPUB",
     "sizeMB": 0.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1062.epub",
     "originalName": "Ray Bradbury - The Martian Chronicles.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1063",
@@ -13561,7 +13561,7 @@
     "format": "EPUB",
     "sizeMB": 0.4,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1063.epub",
     "originalName": "Richard Adams - Watership Down.epub",
     "needsFix": true
@@ -13574,7 +13574,7 @@
     "format": "EPUB",
     "sizeMB": 4.65,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1064.epub",
     "originalName": "Richard Folkard - Plant Lore, Legends, and Lyrics.epub",
     "needsFix": true
@@ -13587,10 +13587,10 @@
     "format": "EPUB",
     "sizeMB": 0.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1065.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 1 The Lightning Thief.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1066",
@@ -13600,10 +13600,10 @@
     "format": "EPUB",
     "sizeMB": 0.78,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1066.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 2 The Sea of Monsters.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1067",
@@ -13613,10 +13613,10 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1067.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 3 The Titan's Curse.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1068",
@@ -13626,10 +13626,10 @@
     "format": "EPUB",
     "sizeMB": 0.24,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1068.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 4 The Battle of the Labyrinth.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1069",
@@ -13639,10 +13639,10 @@
     "format": "EPUB",
     "sizeMB": 0.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1069.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 5 The Last Olympian.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1070",
@@ -13652,10 +13652,10 @@
     "format": "EPUB",
     "sizeMB": 5.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1070.epub",
     "originalName": "Rick Riordan - The Heroes of Olympus 1 The Lost Hero.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1071",
@@ -13665,10 +13665,10 @@
     "format": "EPUB",
     "sizeMB": 1.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1071.epub",
     "originalName": "Rick Riordan - The Heroes of Olympus 2 The Son of Neptune.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1072",
@@ -13678,7 +13678,7 @@
     "format": "EPUB",
     "sizeMB": 0.13,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1072.epub",
     "originalName": "Roald Dahl - Charlie Bucket 1 Charlie and the Chocolate Factory.epub",
     "needsFix": true
@@ -13691,10 +13691,10 @@
     "format": "EPUB",
     "sizeMB": 1.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1073.epub",
     "originalName": "Robert Jordan - The Wheel of Time 13 Towers of Midnight.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1074",
@@ -13704,10 +13704,10 @@
     "format": "EPUB",
     "sizeMB": 2.88,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1074.epub",
     "originalName": "Robert Jordan - The Wheel of Time 14 A Memory of Light.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1075",
@@ -13717,10 +13717,10 @@
     "format": "EPUB",
     "sizeMB": 5.77,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1075.epub",
     "originalName": "Robert Kiyosaki - Rich Dad Poor Dad.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1076",
@@ -13730,7 +13730,7 @@
     "format": "EPUB",
     "sizeMB": 0.21,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1076.epub",
     "originalName": "Robert Louis Stevenson - The Strange Case of Dr Jekyll and Mr Hyde.epub",
     "needsFix": true
@@ -13743,7 +13743,7 @@
     "format": "EPUB",
     "sizeMB": 0.56,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1077.epub",
     "originalName": "Robert Louis Stevenson - Treasure Island.epub",
     "needsFix": true
@@ -13756,7 +13756,7 @@
     "format": "EPUB",
     "sizeMB": 0.88,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1078.epub",
     "originalName": "Robert Tressell - The Ragged-Trousered Philanthropists.epub",
     "needsFix": true
@@ -13769,10 +13769,10 @@
     "format": "EPUB",
     "sizeMB": 2.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1079.epub",
     "originalName": "Robin Sharma - The 5 AM Club.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1080",
@@ -13782,7 +13782,7 @@
     "format": "EPUB",
     "sizeMB": 0.33,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1080.epub",
     "originalName": "Rudyard Kipling - The Jungle Book.epub",
     "needsFix": true
@@ -13795,7 +13795,7 @@
     "format": "EPUB",
     "sizeMB": 0.97,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1081.epub",
     "originalName": "Salman Rushdie - Midnight's Children.epub",
     "needsFix": true
@@ -13808,10 +13808,10 @@
     "format": "EPUB",
     "sizeMB": 0.5,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1082.epub",
     "originalName": "Sigmund Freud - A Young Girl's Diary.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1083",
@@ -13821,10 +13821,10 @@
     "format": "EPUB",
     "sizeMB": 0.47,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1083.epub",
     "originalName": "Sigmund Freud - Beyond the Pleasure Principle.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1084",
@@ -13834,10 +13834,10 @@
     "format": "EPUB",
     "sizeMB": 0.42,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1084.epub",
     "originalName": "Sigmund Freud - Civilization and Its Discontents.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1085",
@@ -13847,10 +13847,10 @@
     "format": "EPUB",
     "sizeMB": 0.3,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1085.epub",
     "originalName": "Sigmund Freud - Delusion and Dream.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1086",
@@ -13860,10 +13860,10 @@
     "format": "EPUB",
     "sizeMB": 0.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1086.epub",
     "originalName": "Sigmund Freud - Dream Psychology.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1087",
@@ -13873,10 +13873,10 @@
     "format": "EPUB",
     "sizeMB": 0.14,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1087.epub",
     "originalName": "Sigmund Freud - Group Psychology and the Analysis of the Ego.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1088",
@@ -13886,10 +13886,10 @@
     "format": "EPUB",
     "sizeMB": 1.27,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1088.epub",
     "originalName": "Sigmund Freud - Introductory Lectures on Psycho-Analysis.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1089",
@@ -13899,10 +13899,10 @@
     "format": "EPUB",
     "sizeMB": 0.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1089.epub",
     "originalName": "Sigmund Freud - Leonardo da Vinci.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1090",
@@ -13912,10 +13912,10 @@
     "format": "EPUB",
     "sizeMB": 0.71,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1090.epub",
     "originalName": "Sigmund Freud - On Dreams.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1091",
@@ -13925,10 +13925,10 @@
     "format": "EPUB",
     "sizeMB": 0.54,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1091.epub",
     "originalName": "Sigmund Freud - Psychopathology of Everyday Life.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1092",
@@ -13938,10 +13938,10 @@
     "format": "EPUB",
     "sizeMB": 0.08,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1092.epub",
     "originalName": "Sigmund Freud - Reflections on War and Death.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1093",
@@ -13951,10 +13951,10 @@
     "format": "EPUB",
     "sizeMB": 0.43,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1093.epub",
     "originalName": "Sigmund Freud - The Future of an Illusion.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1094",
@@ -13964,10 +13964,10 @@
     "format": "EPUB",
     "sizeMB": 0.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1094.epub",
     "originalName": "Sigmund Freud - The History of the Psychoanalytic Movement.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1095",
@@ -13977,10 +13977,10 @@
     "format": "EPUB",
     "sizeMB": 0.56,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1095.epub",
     "originalName": "Sigmund Freud - The Problem of Lay-Analyses.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1096",
@@ -13990,10 +13990,10 @@
     "format": "EPUB",
     "sizeMB": 0.35,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1096.epub",
     "originalName": "Sigmund Freud - Totem and Taboo.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1097",
@@ -14003,10 +14003,10 @@
     "format": "EPUB",
     "sizeMB": 0.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1097.epub",
     "originalName": "Sigmund Freud - Wit and Its Relation to the Unconscious.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1098",
@@ -14016,10 +14016,10 @@
     "format": "EPUB",
     "sizeMB": 0.19,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1098.epub",
     "originalName": "Sophocles - Plays of Sophocles.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1099",
@@ -14029,10 +14029,10 @@
     "format": "EPUB",
     "sizeMB": 0.73,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1099.epub",
     "originalName": "Soren Kierkegaard - Selections from the Writings of Kierkegaard.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1100",
@@ -14042,10 +14042,10 @@
     "format": "EPUB",
     "sizeMB": 0.26,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1100.epub",
     "originalName": "St. Augustine - Confessions.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1101",
@@ -14055,7 +14055,7 @@
     "format": "EPUB",
     "sizeMB": 1.1,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1101.epub",
     "originalName": "Stephen Crisp - A Short History of a Long Travel from Babylon to Bethel.epub",
     "needsFix": true
@@ -14068,7 +14068,7 @@
     "format": "EPUB",
     "sizeMB": 2.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1102.epub",
     "originalName": "Stephen Graham - Through Russian Central Asia.epub",
     "needsFix": true
@@ -14081,7 +14081,7 @@
     "format": "EPUB",
     "sizeMB": 0.9,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1103.epub",
     "originalName": "Stephen King - Apt Pupil.epub",
     "needsFix": true
@@ -14094,7 +14094,7 @@
     "format": "EPUB",
     "sizeMB": 0.94,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1104.epub",
     "originalName": "Stephen King - Insomnia.epub",
     "needsFix": true
@@ -14107,7 +14107,7 @@
     "format": "EPUB",
     "sizeMB": 0.73,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1105.epub",
     "originalName": "Stephen King - Salem's Lot.epub",
     "needsFix": true
@@ -14120,7 +14120,7 @@
     "format": "EPUB",
     "sizeMB": 0.58,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1106.epub",
     "originalName": "Stephen King - The Dark Tower 1 The Gunslinger.epub",
     "needsFix": true
@@ -14133,7 +14133,7 @@
     "format": "EPUB",
     "sizeMB": 1.31,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1107.epub",
     "originalName": "Stephen King - The Dark Tower 2 The Drawing of the Three.epub",
     "needsFix": true
@@ -14146,7 +14146,7 @@
     "format": "EPUB",
     "sizeMB": 1.54,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1108.epub",
     "originalName": "Stephen King - The Dark Tower 3 The Waste Lands.epub",
     "needsFix": true
@@ -14159,7 +14159,7 @@
     "format": "EPUB",
     "sizeMB": 1.43,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1109.epub",
     "originalName": "Stephen King - The Dark Tower 4 Wizard and Glass.epub",
     "needsFix": true
@@ -14172,7 +14172,7 @@
     "format": "EPUB",
     "sizeMB": 1.45,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1110.epub",
     "originalName": "Stephen King - The Dark Tower 5 Wolves of the Calla.epub",
     "needsFix": true
@@ -14185,7 +14185,7 @@
     "format": "EPUB",
     "sizeMB": 1.05,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1111.epub",
     "originalName": "Stephen King - The Dark Tower 6 Song of Susannah.epub",
     "needsFix": true
@@ -14198,7 +14198,7 @@
     "format": "EPUB",
     "sizeMB": 1.93,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1112.epub",
     "originalName": "Stephen King - The Dark Tower 7 The Dark Tower.epub",
     "needsFix": true
@@ -14211,7 +14211,7 @@
     "format": "EPUB",
     "sizeMB": 0.74,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1113.epub",
     "originalName": "Stephen King - The Mist.epub",
     "needsFix": true
@@ -14224,7 +14224,7 @@
     "format": "EPUB",
     "sizeMB": 1.63,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1114.epub",
     "originalName": "Stephen King - The Stand.epub",
     "needsFix": true
@@ -14237,10 +14237,10 @@
     "format": "EPUB",
     "sizeMB": 1.41,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1115.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 1 Gardens of the Moon.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1116",
@@ -14250,10 +14250,10 @@
     "format": "EPUB",
     "sizeMB": 1.1,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1116.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 10 The Crippled God.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1117",
@@ -14263,10 +14263,10 @@
     "format": "EPUB",
     "sizeMB": 1.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1117.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 2 Deadhouse Gates.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1118",
@@ -14276,10 +14276,10 @@
     "format": "EPUB",
     "sizeMB": 1.08,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1118.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 3 Memories of Ice.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1119",
@@ -14289,10 +14289,10 @@
     "format": "EPUB",
     "sizeMB": 2.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1119.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 4 House of Chains.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1120",
@@ -14302,10 +14302,10 @@
     "format": "EPUB",
     "sizeMB": 1.14,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1120.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 5 Midnight Tides.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1121",
@@ -14315,10 +14315,10 @@
     "format": "EPUB",
     "sizeMB": 1.56,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1121.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 6 The Bonehunters.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1122",
@@ -14328,10 +14328,10 @@
     "format": "EPUB",
     "sizeMB": 1.08,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1122.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 7 Reaper's Gale.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1123",
@@ -14341,10 +14341,10 @@
     "format": "EPUB",
     "sizeMB": 2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1123.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 8 Toll the Hounds.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1124",
@@ -14354,10 +14354,10 @@
     "format": "EPUB",
     "sizeMB": 1,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1124.epub",
     "originalName": "Steven Erikson - Malazan Book of the Fallen 9 Dust of Dreams.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1125",
@@ -14367,10 +14367,10 @@
     "format": "EPUB",
     "sizeMB": 0.46,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1125.epub",
     "originalName": "Suzanne Collins - The Hunger Games 1 The Hunger Games.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1126",
@@ -14380,10 +14380,10 @@
     "format": "EPUB",
     "sizeMB": 0.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1126.epub",
     "originalName": "Suzanne Collins - The Hunger Games 2 Catching Fire.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1127",
@@ -14393,10 +14393,10 @@
     "format": "EPUB",
     "sizeMB": 0.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1127.epub",
     "originalName": "Suzanne Collins - The Hunger Games 3 Mockingjay.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1128",
@@ -14406,10 +14406,10 @@
     "format": "EPUB",
     "sizeMB": 0.65,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1128.epub",
     "originalName": "Terry Pratchett - Discworld 1 The Colour of Magic.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1129",
@@ -14419,10 +14419,10 @@
     "format": "EPUB",
     "sizeMB": 1.07,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1129.epub",
     "originalName": "Terry Pratchett - Discworld 2 The Light Fantastic.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1130",
@@ -14432,10 +14432,10 @@
     "format": "EPUB",
     "sizeMB": 0.7,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1130.epub",
     "originalName": "Terry Pratchett - Discworld 3 Equal Rites.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1131",
@@ -14445,10 +14445,10 @@
     "format": "EPUB",
     "sizeMB": 0.84,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1131.epub",
     "originalName": "Terry Pratchett - Discworld 4 Mort.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1132",
@@ -14458,10 +14458,10 @@
     "format": "EPUB",
     "sizeMB": 0.74,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1132.epub",
     "originalName": "Terry Pratchett - Discworld 5 Sourcery.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1133",
@@ -14471,10 +14471,10 @@
     "format": "EPUB",
     "sizeMB": 0.63,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1133.epub",
     "originalName": "Terry Pratchett - Discworld 6 Wyrd Sisters.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1134",
@@ -14484,10 +14484,10 @@
     "format": "EPUB",
     "sizeMB": 0.89,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1134.epub",
     "originalName": "Terry Pratchett - Discworld 7 Pyramids.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1135",
@@ -14497,10 +14497,10 @@
     "format": "EPUB",
     "sizeMB": 0.98,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1135.epub",
     "originalName": "Terry Pratchett - Discworld 8 Guards! Guards!.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1136",
@@ -14510,10 +14510,10 @@
     "format": "EPUB",
     "sizeMB": 0.72,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1136.epub",
     "originalName": "Terry Pratchett - Discworld 9 Eric.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1137",
@@ -14523,10 +14523,10 @@
     "format": "EPUB",
     "sizeMB": 0.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1137.epub",
     "originalName": "Thomas Bulfinch - The Age of Fable.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1138",
@@ -14536,10 +14536,10 @@
     "format": "EPUB",
     "sizeMB": 0.56,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1138.epub",
     "originalName": "Thomas Hardy - Tess of the d'Urbervilles.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1139",
@@ -14549,10 +14549,10 @@
     "format": "EPUB",
     "sizeMB": 0.78,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1139.epub",
     "originalName": "Thomas Hobbes - Leviathan.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1140",
@@ -14562,10 +14562,10 @@
     "format": "EPUB",
     "sizeMB": 4.87,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1140.epub",
     "originalName": "Thomas J. Stanley - The Millionaire Next Door.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1141",
@@ -14575,7 +14575,7 @@
     "format": "EPUB",
     "sizeMB": 0.25,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1141.epub",
     "originalName": "Thomas Whittaker - Schopenhauer.epub",
     "needsFix": true
@@ -14588,7 +14588,7 @@
     "format": "EPUB",
     "sizeMB": 0.52,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1142.epub",
     "originalName": "Upton Sinclair - The Jungle.epub",
     "needsFix": true
@@ -14601,10 +14601,10 @@
     "format": "EPUB",
     "sizeMB": 0.53,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1143.epub",
     "originalName": "Ursula K. Le Guin - Earthsea 1 A Wizard of Earthsea.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1144",
@@ -14614,7 +14614,7 @@
     "format": "EPUB",
     "sizeMB": 9.03,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1144.epub",
     "originalName": "V. M. Hillyer - A Child's History of the World.epub",
     "needsFix": true
@@ -14627,7 +14627,7 @@
     "format": "EPUB",
     "sizeMB": 0.19,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1145.epub",
     "originalName": "Vatsyayana - The Kama Sutra.epub",
     "needsFix": true
@@ -14640,10 +14640,10 @@
     "format": "EPUB",
     "sizeMB": 8.83,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1146.epub",
     "originalName": "Victor Hugo - Les Miserables.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1147",
@@ -14653,7 +14653,7 @@
     "format": "EPUB",
     "sizeMB": 0.31,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1147.epub",
     "originalName": "Virgil - The Aeneid.epub",
     "needsFix": true
@@ -14666,10 +14666,10 @@
     "format": "EPUB",
     "sizeMB": 1.83,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1148.epub",
     "originalName": "Virginia Woolf - Mrs Dalloway.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1149",
@@ -14679,10 +14679,10 @@
     "format": "EPUB",
     "sizeMB": 1.85,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1149.epub",
     "originalName": "Virginia Woolf - To the Lighthouse.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1150",
@@ -14692,10 +14692,10 @@
     "format": "EPUB",
     "sizeMB": 3.99,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1150.epub",
     "originalName": "Voltaire - Candide.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1151",
@@ -14705,7 +14705,7 @@
     "format": "EPUB",
     "sizeMB": 0.83,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1151.epub",
     "originalName": "W. R. S. Ralston - Russian Fairy Tales.epub",
     "needsFix": true
@@ -14718,10 +14718,10 @@
     "format": "EPUB",
     "sizeMB": 0.09,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1152.epub",
     "originalName": "Washington Irving - The Legend of Sleepy Hollow.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1153",
@@ -14731,10 +14731,10 @@
     "format": "EPUB",
     "sizeMB": 0.48,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1153.epub",
     "originalName": "Wilkie Collins - The Moonstone.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1154",
@@ -14744,7 +14744,7 @@
     "format": "EPUB",
     "sizeMB": 0.23,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1154.epub",
     "originalName": "Will Durant - Philosophy and the Social Problem.epub",
     "needsFix": true
@@ -14757,7 +14757,7 @@
     "format": "EPUB",
     "sizeMB": 0.53,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1155.epub",
     "originalName": "William Golding - Lord of the Flies.epub",
     "needsFix": true
@@ -14770,10 +14770,10 @@
     "format": "EPUB",
     "sizeMB": 1.13,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1156.epub",
     "originalName": "William Makepeace Thackeray - Vanity Fair.epub",
-    "needsFix": false
+    "needsFix": true
   },
   {
     "id": "book_1157",
@@ -14783,7 +14783,7 @@
     "format": "EPUB",
     "sizeMB": 0.47,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1157.epub",
     "originalName": "William Shakespeare - A Midsummer Night's Dream.epub",
     "needsFix": true
@@ -14796,7 +14796,7 @@
     "format": "EPUB",
     "sizeMB": 0.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1158.epub",
     "originalName": "William Shakespeare - All's Well That Ends Well.epub",
     "needsFix": true
@@ -14809,7 +14809,7 @@
     "format": "EPUB",
     "sizeMB": 0.63,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1159.epub",
     "originalName": "William Shakespeare - Antony and Cleopatra.epub",
     "needsFix": true
@@ -14822,7 +14822,7 @@
     "format": "EPUB",
     "sizeMB": 0.08,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1160.epub",
     "originalName": "William Shakespeare - As You Like It.epub",
     "needsFix": true
@@ -14835,7 +14835,7 @@
     "format": "EPUB",
     "sizeMB": 0.3,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1161.epub",
     "originalName": "William Shakespeare - Coriolanus.epub",
     "needsFix": true
@@ -14848,7 +14848,7 @@
     "format": "EPUB",
     "sizeMB": 0.59,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1162.epub",
     "originalName": "William Shakespeare - Cymbeline.epub",
     "needsFix": true
@@ -14861,7 +14861,7 @@
     "format": "EPUB",
     "sizeMB": 0.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1163.epub",
     "originalName": "William Shakespeare - Henry IV Part 1.epub",
     "needsFix": true
@@ -14874,7 +14874,7 @@
     "format": "EPUB",
     "sizeMB": 0.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1164.epub",
     "originalName": "William Shakespeare - Henry IV Part 2.epub",
     "needsFix": true
@@ -14887,7 +14887,7 @@
     "format": "EPUB",
     "sizeMB": 0.69,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1165.epub",
     "originalName": "William Shakespeare - Henry V.epub",
     "needsFix": true
@@ -14900,7 +14900,7 @@
     "format": "EPUB",
     "sizeMB": 0.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1166.epub",
     "originalName": "William Shakespeare - Henry VI Part 1.epub",
     "needsFix": true
@@ -14913,7 +14913,7 @@
     "format": "EPUB",
     "sizeMB": 0.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1167.epub",
     "originalName": "William Shakespeare - Henry VI Part 2.epub",
     "needsFix": true
@@ -14926,7 +14926,7 @@
     "format": "EPUB",
     "sizeMB": 0.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1168.epub",
     "originalName": "William Shakespeare - Henry VI Part 3.epub",
     "needsFix": true
@@ -14939,7 +14939,7 @@
     "format": "EPUB",
     "sizeMB": 0.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1169.epub",
     "originalName": "William Shakespeare - Henry VIII.epub",
     "needsFix": true
@@ -14952,7 +14952,7 @@
     "format": "EPUB",
     "sizeMB": 0.6,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1170.epub",
     "originalName": "William Shakespeare - Julius Caesar.epub",
     "needsFix": true
@@ -14965,7 +14965,7 @@
     "format": "EPUB",
     "sizeMB": 0.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1171.epub",
     "originalName": "William Shakespeare - King John.epub",
     "needsFix": true
@@ -14978,7 +14978,7 @@
     "format": "EPUB",
     "sizeMB": 0.34,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1172.epub",
     "originalName": "William Shakespeare - King Lear.epub",
     "needsFix": true
@@ -14991,7 +14991,7 @@
     "format": "EPUB",
     "sizeMB": 0.13,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1173.epub",
     "originalName": "William Shakespeare - Love's Labour's Lost.epub",
     "needsFix": true
@@ -15004,7 +15004,7 @@
     "format": "EPUB",
     "sizeMB": 0.44,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1174.epub",
     "originalName": "William Shakespeare - Macbeth.epub",
     "needsFix": true
@@ -15017,7 +15017,7 @@
     "format": "EPUB",
     "sizeMB": 0.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1175.epub",
     "originalName": "William Shakespeare - Measure for Measure.epub",
     "needsFix": true
@@ -15030,7 +15030,7 @@
     "format": "EPUB",
     "sizeMB": 0.08,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1176.epub",
     "originalName": "William Shakespeare - Much Ado About Nothing.epub",
     "needsFix": true
@@ -15043,7 +15043,7 @@
     "format": "EPUB",
     "sizeMB": 0.61,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1177.epub",
     "originalName": "William Shakespeare - Othello.epub",
     "needsFix": true
@@ -15056,7 +15056,7 @@
     "format": "EPUB",
     "sizeMB": 0.07,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1178.epub",
     "originalName": "William Shakespeare - Pericles.epub",
     "needsFix": true
@@ -15069,7 +15069,7 @@
     "format": "EPUB",
     "sizeMB": 0.37,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1179.epub",
     "originalName": "William Shakespeare - Richard II.epub",
     "needsFix": true
@@ -15082,7 +15082,7 @@
     "format": "EPUB",
     "sizeMB": 0.38,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1180.epub",
     "originalName": "William Shakespeare - Richard III.epub",
     "needsFix": true
@@ -15095,7 +15095,7 @@
     "format": "EPUB",
     "sizeMB": 1.2,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1181.epub",
     "originalName": "William Shakespeare - Romeo and Juliet.epub",
     "needsFix": true
@@ -15108,7 +15108,7 @@
     "format": "EPUB",
     "sizeMB": 0.65,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1182.epub",
     "originalName": "William Shakespeare - The Comedy of Errors.epub",
     "needsFix": true
@@ -15121,7 +15121,7 @@
     "format": "EPUB",
     "sizeMB": 0.63,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1183.epub",
     "originalName": "William Shakespeare - The Merchant of Venice.epub",
     "needsFix": true
@@ -15134,7 +15134,7 @@
     "format": "EPUB",
     "sizeMB": 0.62,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1184.epub",
     "originalName": "William Shakespeare - The Merry Wives of Windsor.epub",
     "needsFix": true
@@ -15147,7 +15147,7 @@
     "format": "EPUB",
     "sizeMB": 0.46,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1185.epub",
     "originalName": "William Shakespeare - The Taming of the Shrew.epub",
     "needsFix": true
@@ -15160,7 +15160,7 @@
     "format": "EPUB",
     "sizeMB": 0.54,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1186.epub",
     "originalName": "William Shakespeare - The Tempest.epub",
     "needsFix": true
@@ -15173,7 +15173,7 @@
     "format": "EPUB",
     "sizeMB": 0.07,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1187.epub",
     "originalName": "William Shakespeare - The Two Gentlemen of Verona.epub",
     "needsFix": true
@@ -15186,7 +15186,7 @@
     "format": "EPUB",
     "sizeMB": 0.7,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1188.epub",
     "originalName": "William Shakespeare - The Winter's Tale.epub",
     "needsFix": true
@@ -15199,7 +15199,7 @@
     "format": "EPUB",
     "sizeMB": 1.22,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1189.epub",
     "originalName": "William Shakespeare - The Works of William Shakespeare Vol 8.epub",
     "needsFix": true
@@ -15212,7 +15212,7 @@
     "format": "EPUB",
     "sizeMB": 0.07,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1190.epub",
     "originalName": "William Shakespeare - Timon of Athens.epub",
     "needsFix": true
@@ -15225,7 +15225,7 @@
     "format": "EPUB",
     "sizeMB": 0.93,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1191.epub",
     "originalName": "William Shakespeare - Troilus and Cressida.epub",
     "needsFix": true
@@ -15238,7 +15238,7 @@
     "format": "EPUB",
     "sizeMB": 0.39,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1192.epub",
     "originalName": "William Shakespeare - Twelfth Night.epub",
     "needsFix": true
@@ -15251,7 +15251,7 @@
     "format": "EPUB",
     "sizeMB": 1.13,
     "cover": "covers/default.jpg",
-    "isHosted": true,
+    "isHosted": false,
     "file": "books/book_1193.epub",
     "originalName": "Wirt Sikes - British Goblins.epub",
     "needsFix": true
