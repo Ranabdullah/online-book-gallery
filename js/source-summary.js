@@ -78,18 +78,25 @@
     const resp=await fetch('data/books.json',{cache:'no-store'});
     if(!resp.ok)throw new Error('Cannot load book catalog.');
     const books=await resp.json();
-    const b=books.find(x=>x.id===id||x.file===id);
-    if(!b)throw new Error('Book not found in catalog.');
-    if(!b.isHosted||b.needsFix||!b.file)throw new Error('This book file is missing from the hosted library.');
+    const base=books.find(x=>x.id===id||x.file===id);
+    const local = window.AthenaeumDB ? await window.AthenaeumDB.getUserBookById(id).catch(()=>null) : null;
+    const b=local || base;
+    if(!b)throw new Error('Book not found in the catalog or this browser.');
+    if(!b.isHosted||b.needsFix||!b.file)throw new Error('This book file is not available on this device.');
     return b;
   }
   let source=null;
   async function extract() {
     explain('Opening the book and sampling its actual pages/chapters…');
     const book=await getBookMeta();
-    const r=await fetch(book.file,{cache:'no-store'});
-    if(!r.ok)throw new Error('Cannot open book file (HTTP '+r.status+').');
-    const buffer=await r.arrayBuffer();
+    let buffer;
+    if(book.file.startsWith('idb://')&&book.fileData) {
+      buffer=book.fileData instanceof Blob ? await book.fileData.arrayBuffer() : book.fileData;
+    } else {
+      const r=await fetch(book.file,{cache:'no-store'});
+      if(!r.ok)throw new Error('Cannot open book file (HTTP '+r.status+').');
+      buffer=await r.arrayBuffer();
+    }
     const result = book.format?.toLowerCase()==='pdf' ? await extractPdf(buffer) :
       book.format?.toLowerCase()==='epub' ? await extractEpub(buffer) : null;
     if(!result)throw new Error('Source summarization currently supports PDF and EPUB.');
