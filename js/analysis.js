@@ -95,12 +95,15 @@ async function loadBookAndDossier(bookId) {
     // Render Dossier into DOM
     renderDossier(dossier, currentBookMeta);
     // Mark metadata-only placeholders clearly; do not present template prose as verified book summary.
-    const isPlaceholder = !dossier || dossier.isPlaceholder === true || (dossier.comprehensiveSummary && /placeholder analysis|refresh ai dossier/i.test(dossier.comprehensiveSummary.elevatorPitch || ''));
+    const isPlaceholder = !dossier || dossier.isPlaceholder === true || dossier.sourceStatus !== 'verified_from_book' ||
+      (dossier.comprehensiveSummary && /placeholder analysis|refresh ai dossier/i.test(dossier.comprehensiveSummary.elevatorPitch || ''));
     if (isPlaceholder) {
       const notice = document.createElement('div');
       notice.setAttribute('role', 'status');
       notice.style.cssText = 'margin:16px auto;padding:13px 16px;max-width:900px;background:#fff5df;border:1px solid #e6c883;color:#65471d;border-radius:8px;font:14px/1.5 system-ui';
-      notice.textContent = 'Verified book analysis is not yet available for this title. Use Everyday Summary or In-Depth Analysis to read source excerpts and generate labelled, source-based commentary. This is not a full-book research dossier.';
+      notice.textContent = dossier?.isPlaceholder
+        ? 'No verified book analysis exists yet. Use Everyday Summary or In-Depth Analysis based on actual EPUB/PDF excerpts.'
+        : 'This legacy dossier has not been independently verified against the book. Treat its detailed claims as unverified study material. Use the source-based Everyday and In-Depth tools for text-grounded commentary.';
       const target = document.getElementById('analysis-content') || document.getElementById('analysis-hero');
       if (target) target.prepend(notice);
     }
