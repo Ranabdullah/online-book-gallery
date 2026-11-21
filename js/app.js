@@ -52,6 +52,22 @@ async function loadCatalog() {
     const resp = await fetch(`data/books.json?v=3.6.1&t=${Date.now()}`, { cache: 'no-cache' });
     if (resp.ok) {
       baseBooks = await resp.json();
+      try {
+        const external = await fetch('data/free-books.json?v=1', {cache:'no-store'});
+        if(external.ok) {
+          const suggestions = await external.json();
+          const canonical = text => String(text||'').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'');
+          const existing = new Set(baseBooks.map(b => canonical(b.title)));
+          for(const b of suggestions){
+            if(!b.externalUrl || !/^https:\/\/www\.gutenberg\.org\/ebooks\/\d+$/.test(b.externalUrl)) continue;
+            if(existing.has(canonical(b.title)))continue;
+            b.originMark='N';
+            b.isExternal=true;
+            baseBooks.push(b);
+            existing.add(canonical(b.title));
+          }
+        }
+      } catch(e){ console.warn('Free-source list unavailable',e); }
     }
   } catch (err) {
     console.warn('Could not fetch base books.json:', err);
@@ -108,7 +124,7 @@ let featuredBookId = null;
 function renderFeaturedBook(chooseAnother = false) {
   const panel = document.getElementById('featured-book-section');
   if (!panel) return;
-  const eligible = allBooks.filter(b => b.isHosted && !b.needsFix && b.file && b.cover);
+  const eligible = allBooks.filter(b => b.isHosted && !b.needsFix && b.file && b.cover && !b.isExternal);
   if (!eligible.length) {
     panel.hidden = true;
     return;
@@ -176,7 +192,7 @@ function fallbackBookCover(img) {
 window.fallbackBookCover = fallbackBookCover;
 
 function initStats() {
-  const hosted = allBooks.filter(b => b.isHosted && !b.needsFix);
+  const hosted = allBooks.filter(b => b.isHosted && !b.needsFix && !b.isExternal);
   const needsFix = allBooks.filter(b => !b.isHosted || b.needsFix);
 
   const statBooks = document.getElementById('stat-total-books');
@@ -274,13 +290,18 @@ function renderBooks() {
 
   grid.innerHTML = filtered.map(b => {
     const isFav = favs.includes(b.id);
-    const readUrl = b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#';
+    const external = Boolean(b.isExternal && /^https:\/\/www\.gutenberg\.org\/ebooks\/\d+$/.test(b.externalUrl||''));
+    const readUrl = external ? b.externalUrl : (b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#');
     const isNeedsUpload = !b.isHosted || b.needsFix;
+    const originMark=['R','A','N'].includes(b.originMark) ? b.originMark : 'R';
+    const originInfo = originMark==='N'?'New free source (externally hosted)':originMark==='A'?'Abdurrehman contribution':'Existing original Athenaeum collection (attribution pending)';
+    const originColor = originMark==='N'?'#155f5e':originMark==='A'?'#704a8f':'#6c4839';
 
     return `
       <article class="book-card ${isNeedsUpload ? 'card-needs-upload' : ''}" data-id="${b.id}">
         <div class="cover-wrapper">
           <img class="book-cover" src="${b.cover}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="fallbackBookCover(this)">
+          <span class="origin-marker" title="${escapeHtml(originInfo)}" aria-label="Book origin: ${escapeHtml(originInfo)}" style="position:absolute;top:8px;left:8px;z-index:5;background:${originColor};color:#fff;border:2px solid #fff6;border-radius:50%;width:29px;height:29px;display:flex;align-items:center;justify-content:center;font:800 15px system-ui;box-shadow:0 2px 8px #0008;">${originMark}</span>
           ${isNeedsUpload ? `<span class="format-badge" style="background: #ea580c; left: 8px; right: auto; font-size: 10px; font-weight: 700;">⚠️ NEEDS FILE</span>` : ''}
           ${b.isUserAdded ? `<span class="user-added-badge">NEW</span>` : ''}
           <span class="format-badge ${b.format.toLowerCase()}">${b.format}</span>
@@ -299,9 +320,9 @@ function renderBooks() {
 
           <div class="card-actions">
             ${!isNeedsUpload ? `
-              <a href="${readUrl}" class="btn-read" title="Read online in high-speed reader">
+              <a href="${readUrl}" ${external?'target="_blank" rel="noopener noreferrer"':''} class="btn-read" title="${external?'Open Project Gutenberg free source':'Read online in high-speed reader'}">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                <span>Read</span>
+                <span>${external?'Free source ↗':'Read'}</span>
               </a>
             ` : `
               <button class="btn-read" style="background: #ea580c;" onclick="triggerDirectFileUpload('${b.id}')" title="Upload EPUB or PDF from PC to read">
@@ -309,9 +330,10 @@ function renderBooks() {
                 <span>Upload</span>
               </button>
             `}
-            <a href="book-notes.html?book=${encodeURIComponent(b.id)}" class="btn-card-edit" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;" title="Read and write book notes (local drafts until shared accounts launch)">📝</a>\n            <a href="book-analysis.html?book=${encodeURIComponent(b.id || b.file)}" class="btn-card-edit" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; color: #9333ea;" title="AI Book Intelligence, Summary & Vocabulary">
+            <a href="book-notes.html?book=${encodeURIComponent(b.id)}" class="btn-card-edit" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;" title="Read and write book notes (local drafts until shared accounts launch)">📝</a>\n            ${external ? `<a href="${readUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="View the free source and its download options">↗</a>` :
+            `<a href="book-analysis.html?book=${encodeURIComponent(b.id || b.file)}" class="btn-card-edit" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; color: #9333ea;" title="AI Book Intelligence, Summary & Vocabulary">
               🧠
-            </a>
+            </a>`}
             <button class="btn-card-edit" onclick="openEditModal('${b.id}')" title="Edit book name, author, category or cover">
               ✏️
             </button>
