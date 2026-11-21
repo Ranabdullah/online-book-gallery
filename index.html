@@ -52,8 +52,9 @@
 
       <!-- Action Buttons -->
       <div class="header-actions">
-        <a href="my-hub.html" class="btn btn-outline btn-sync-pill" title="Personal reading history and bookshelf">📚 My Hub</a>\n        <a href="zip-import.html" class="btn btn-outline btn-sync-pill" title="Inspect ZIP archives and import books on this device">📦 ZIP Import</a>
-        \n        <a href="profiles.html" class="btn btn-outline btn-sync-pill" title="Browse public reading profiles; no sign in required">👥 Public Profiles</a>
+        <a href="my-hub.html" class="btn btn-outline btn-sync-pill" title="Personal reading history and bookshelf">📚 My Hub</a>
+        <a href="zip-import.html" class="btn btn-outline btn-sync-pill" title="Inspect ZIP archives and import books on this device">📦 ZIP Import</a>
+        <a href="profiles.html" class="btn btn-outline btn-sync-pill" title="Browse public reading profiles; no sign in required">👥 Public Profiles</a>
         <!-- AI Book Intelligence Page -->
         <a href="#books-grid" id="top-book-intel" class="btn btn-outline btn-sync-pill" style="border-color: #c084fc; color: #9333ea; background: rgba(147, 51, 234, 0.06);" title="AI Book Intelligence, Literary Analysis & Vocabulary Bank">
           <span>🧠 Book Intel</span>
@@ -89,6 +90,14 @@
     <small style="color:#c7bfaf">Existing R ownership is provisional until individual contributors are identified.</small>
   </div>
 
+  <nav id="origin-tabs" aria-label="Browse books by contributor" style="display:flex;gap:9px;align-items:center;justify-content:center;flex-wrap:wrap;padding:12px 16px;background:#fffaf2;border-bottom:1px solid #d9c8ab">
+    <strong style="font:600 13px system-ui;color:#273c52;margin-right:5px">Browse by contributor:</strong>
+    <button type="button" data-origin="all" aria-pressed="true" style="border:1px solid #b5a48c;border-radius:20px;padding:7px 14px;cursor:pointer">All books</button>
+    <button type="button" data-origin="R" aria-pressed="false" style="border:1px solid #b5a48c;border-radius:20px;padding:7px 14px;cursor:pointer">R · Original collection</button>
+    <button type="button" data-origin="A" aria-pressed="false" style="border:1px solid #b5a48c;border-radius:20px;padding:7px 14px;cursor:pointer">A · Abdurrehman</button>
+    <button type="button" data-origin="N" aria-pressed="false" style="border:1px solid #b5a48c;border-radius:20px;padding:7px 14px;cursor:pointer">N · Free sources</button>
+  </nav>
+
   <!-- Featured book: randomly selected from available catalog titles -->
   <section class="featured-book-section" id="featured-book-section" aria-label="Featured book">
     <div class="container">
@@ -100,7 +109,8 @@
           <p class="featured-book-byline" id="featured-book-author">Explore books from your collection.</p>
           <p class="featured-book-description" id="featured-book-description">A different book will be selected each time you visit.</p>
           <div class="featured-book-actions">
-            <a class="featured-book-read" id="featured-book-read" href="#books-grid">Browse books</a>\n            <a class="featured-book-next" id="featured-book-summary" href="#books-grid">Book summary →</a>
+            <a class="featured-book-read" id="featured-book-read" href="#books-grid">Browse books</a>
+            <a class="featured-book-next" id="featured-book-summary" href="#books-grid">Book summary →</a>
             <button class="featured-book-next" id="featured-book-next" type="button" aria-label="Show another featured book">Another book →</button>
           </div>
         </div>
