@@ -15,12 +15,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "A Victorian inventor travels far into the future and encounters the Eloi and Morlocks. What begins as an adventure becomes a disturbing vision of what social divisions might produce over time.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "A Victorian inventor travels far into the future and encounters the Eloi and Morlocks. What begins as an adventure becomes a disturbing vision of what social divisions might produce over time.",
+      "inDepth": "Wells uses the future as a thought experiment about evolution, industrial class hierarchy and the fragility of the assumption that progress always improves human life. The contrast between Eloi and Morlocks makes comfort and exploitation inseparable in the traveller's imagined society."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_1952",
@@ -38,12 +39,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "A woman recovering in an upstairs room becomes increasingly obsessed with the yellow wallpaper around her. Her isolation and the dismissal of her concerns contribute to a frightening psychological crisis.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "A woman recovering in an upstairs room becomes increasingly obsessed with the yellow wallpaper around her. Her isolation and the dismissal of her concerns contribute to a frightening psychological crisis.",
+      "inDepth": "Gilman's first-person narration links domestic confinement with medical and social authority. The wallpaper becomes a shifting symbol of the narrator's restricted agency; the story invites scrutiny of whose experiences are accepted as evidence and who is allowed to define recovery."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_97",
@@ -61,12 +63,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "A resident of a two-dimensional world tries to understand dimensions beyond his own after encountering a sphere. The experience challenges the laws and assumptions that govern his society.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "A resident of a two-dimensional world tries to understand dimensions beyond his own after encountering a sphere. The experience challenges the laws and assumptions that govern his society.",
+      "inDepth": "Abbott combines a geometrical thought experiment with satire of rigid class and gender systems. The narrator's inability to communicate higher-dimensional experience examines the boundaries of perception, the social punishment of heterodoxy and the relationship between mathematical models and imagination."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_1232",
@@ -84,12 +87,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "Machiavelli examines how rulers acquire, preserve and lose political power, considering force, reputation, alliances and circumstances rather than presenting a simple ideal of virtue.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "Machiavelli examines how rulers acquire, preserve and lose political power, considering force, reputation, alliances and circumstances rather than presenting a simple ideal of virtue.",
+      "inDepth": "The treatise tests the distance between moral ideals and political survival. Its concepts of virtù and fortuna frame leadership as adaptive judgment under uncertainty; its enduring controversy arises from the tension between effective rule and conventional ethical expectations."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_408",
@@ -107,12 +111,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "Du Bois explores Black American life after emancipation through history, personal reflection and social criticism. He describes how racism shapes education, opportunity, identity and political freedom.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "Du Bois explores Black American life after emancipation through history, personal reflection and social criticism. He describes how racism shapes education, opportunity, identity and political freedom.",
+      "inDepth": "The book's ideas of the color line, the veil and double consciousness provide a framework for examining social recognition and divided self-perception under racial oppression. Du Bois blends sociology, historical argument, spirituals and autobiographical writing to challenge narrow measures of progress."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_14264",
@@ -130,12 +135,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "Artist and teacher Harold Speed explains the principles of drawing, including line, mass, rhythm, observation and the relationship between accurate representation and expression.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "Artist and teacher Harold Speed explains the principles of drawing, including line, mass, rhythm, observation and the relationship between accurate representation and expression.",
+      "inDepth": "Speed treats drawing as both trained perception and deliberate design. His distinction between linear and mass-based approaches illuminates how artists organize visual attention, while his discussion of rhythm and unity connects technical practice with compositional judgment."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_37134",
@@ -153,12 +159,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "A concise guide to making English prose clearer and more effective. It offers rules of usage, principles of composition and reminders to avoid needless words.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "A concise guide to making English prose clearer and more effective. It offers rules of usage, principles of composition and reminders to avoid needless words.",
+      "inDepth": "Strunk's handbook promotes economy, coherence and a writer's responsibility to readers. Its prescriptive rules can be useful editing heuristics, though they should be read in context rather than treated as universal linguistic laws across genres and dialects."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_1228",
@@ -176,12 +183,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "Darwin sets out the case that species change over generations and that natural selection helps explain adaptations and the diversity of living things.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "Darwin sets out the case that species change over generations and that natural selection helps explain adaptations and the diversity of living things.",
+      "inDepth": "Darwin builds a cumulative scientific argument from variation, inheritance, competition, domestication, biogeography and the fossil record. Its significance lies not only in the proposed mechanism of natural selection but also in the method of drawing explanatory connections across diverse observations."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_17405",
@@ -199,12 +207,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "A classic military treatise setting out principles of planning, intelligence, leadership, deception, positioning and adapting to changing circumstances.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "A classic military treatise setting out principles of planning, intelligence, leadership, deception, positioning and adapting to changing circumstances.",
+      "inDepth": "The text presents strategic success as a function of information, timing and the efficient use of resources rather than force alone. Readers often apply its maxims outside warfare, but those analogies should not obscure its original military context or the interpretive differences among translations."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_4928",
@@ -222,12 +231,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "Bulfinch retells major stories from classical mythology and other traditions, explaining gods, heroes and legends for readers of literature and art.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "Bulfinch retells major stories from classical mythology and other traditions, explaining gods, heroes and legends for readers of literature and art.",
+      "inDepth": "Bulfinch's compilation demonstrates how mythological narratives circulate through later cultural works. It is valuable as a popular literary guide, but its retellings reflect the editorial interests and assumptions of its period rather than representing a complete or culturally neutral account of the source traditions."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_1661",
@@ -245,12 +255,13 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "Sherlock Holmes and Dr Watson investigate a collection of puzzling cases in which careful observation and reasoning uncover motives, disguises and hidden events.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "Sherlock Holmes and Dr Watson investigate a collection of puzzling cases in which careful observation and reasoning uncover motives, disguises and hidden events.",
+      "inDepth": "Doyle's stories turn the detective's process into a narrative spectacle: Watson's limited perspective delays understanding while Holmes's revelations reorganize earlier evidence. Their appeal also rests on Victorian concerns about urban anonymity, professional expertise and social respectability."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   },
   {
     "id": "new_pg_769",
@@ -268,11 +279,12 @@
     "sourceName": "Project Gutenberg",
     "originMark": "N",
     "isExternal": true,
-    "description": "Free reading edition on Project Gutenberg. Open the external source page to read or download; file is not stored in Athenaeum.",
+    "description": "Okakura explores tea as an aesthetic and philosophical tradition, connecting the tea ceremony with art, architecture, simplicity and ways of attending to everyday life.",
     "summaries": {
-      "everyday": null,
-      "inDepth": null
+      "everyday": "Okakura explores tea as an aesthetic and philosophical tradition, connecting the tea ceremony with art, architecture, simplicity and ways of attending to everyday life.",
+      "inDepth": "The work presents tea culture as a meeting point for aesthetic restraint, religious and philosophical ideas, and social practice. Addressed partly to Western readers, it also reflects a cross-cultural effort to argue that everyday rituals can embody a coherent philosophy of beauty."
     },
-    "summaryStatus": "external_source_only"
+    "summaryStatus": "editorial_overview_not_fulltext_verified",
+    "summarySource": "Editorial overview of a well-known public-domain work; not a full-text or edition-specific analysis"
   }
 ]
