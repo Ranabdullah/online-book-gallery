@@ -1,4 +1,4 @@
-author,title,book_id,expected_file,format,category,original_filename,recorded_status
+author_field,title,book_id,expected_file,format,category,original_filename,recorded_status
 "Archaeology and Anthropology","“Forbidden Archeology”","book_0761","books/book_0761.pdf","PDF","Uncategorized","“Forbidden Archeology”.pdf","file_missing"
 "Archaeology and Anthropology","A Companion to Archaeology - John Bintliff","book_0611","books/book_0611.pdf","PDF","Uncategorized","A Companion to Archaeology - John Bintliff.pdf","file_missing"
 "Archaeology and Anthropology","A Companion to the Anthropology of American Indians (Blackwell Companions to Anthropology)","book_0612","books/book_0612.pdf","PDF","Uncategorized","A Companion to the Anthropology of American Indians (Blackwell Companions to Anthropology).pdf","file_missing"
