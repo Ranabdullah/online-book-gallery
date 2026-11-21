@@ -72,14 +72,15 @@ const INITIAL_RECOMMENDATIONS = [
 
 function getRecommendations() {
   const stored = localStorage.getItem(STORAGE_KEY_RECS);
-  if (!stored) {
-    localStorage.setItem(STORAGE_KEY_RECS, JSON.stringify(INITIAL_RECOMMENDATIONS));
-    return INITIAL_RECOMMENDATIONS;
-  }
+  if (!stored) return []; // No invented recommendations in a new user's history
   try {
-    return JSON.parse(stored);
+    const records = JSON.parse(stored);
+    // Old versions seeded these three examples; preserve storage but hide the examples.
+    return (Array.isArray(records) ? records : []).filter(r =>
+      !INITIAL_RECOMMENDATIONS.some(ex => ex.id === r.id && ex.title === r.title && ex.author === r.author)
+    );
   } catch (e) {
-    return INITIAL_RECOMMENDATIONS;
+    return [];
   }
 }
 
@@ -191,7 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
         author,
         category,
         notes,
-        recommender: 'Reader',
+        recommender: localStorage.getItem('athenaeum_local_name') || 'Reader on this device',
+        creatorDeviceId: window.AthenaeumSync?.getDeviceId?.() || null,
         date: new Date().toISOString().split('T')[0]
       };
 
