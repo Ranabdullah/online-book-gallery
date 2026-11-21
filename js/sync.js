@@ -18,7 +18,7 @@
   const LOGS_STORAGE = 'athenaeum_reading_logs_v2';
 
   // Default Sync Room Key (shared across user's devices)
-  const DEFAULT_SYNC_KEY = 'ranabdullah_athenaeum_sync';
+  const DEFAULT_SYNC_KEY = ''; // Legacy shared relay disabled pending authenticated, per-user sync
 
   // Cloud KV endpoint (Free, fast public sync relay)
   const CLOUD_RELAY_BASE = 'https://kvdb.io/AnCj8Y9wUfQf8X7q8xH7w1/';
@@ -72,9 +72,9 @@
     }
     // Default to shared profile that syncs between Phone and PC
     return {
-      id: 'shared',
-      name: 'Shared (Phone & PC)',
-      isShared: true
+      id: 'pc_independent',
+      name: 'Private on this device',
+      isShared: false
     };
   }
 
@@ -85,7 +85,7 @@
 
   function getAvailableProfiles() {
     return [
-      { id: 'shared', name: 'Shared Sync (Phone & PC)', isShared: true, desc: 'Progress syncs across all your devices' },
+      { id: 'shared', name: 'Local until account sync is ready', isShared: false, desc: 'Secure account sync pending; reading remains stored on this device' },
       { id: 'pc_independent', name: 'Independent PC Log', isShared: false, desc: 'Separate reading log for this specific PC' },
       { id: 'personal_study', name: 'Study / Research Log', isShared: false, desc: 'Dedicated log for research & notes' }
     ];
@@ -135,6 +135,7 @@
 
   // 4. Cloud Relay Synchronization
   async function fetchCloudPayload() {
+    return null; // Disabled: old relay has no per-user authentication
     const key = getSyncKey();
     try {
       const resp = await fetch(CLOUD_RELAY_BASE + encodeURIComponent(key) + '?_t=' + Date.now());
@@ -151,6 +152,7 @@
   }
 
   async function pushCloudPayload(payload) {
+    return false; // Disabled: prevent untrusted cross-account data writes
     const key = getSyncKey();
     try {
       const resp = await fetch(CLOUD_RELAY_BASE + encodeURIComponent(key), {
@@ -188,9 +190,8 @@
     saveLocalProgress(bookId, progressEntry);
 
     // 2. If active profile is shared, broadcast to cloud relay
-    if (profile.isShared) {
-      broadcastProgressToCloud(progressEntry);
-    }
+    // Account-backed sync replaces the legacy shared relay. Always preserve local progress.
+    // Do not transmit progress to a common public endpoint.
 
     notifySyncListeners('progress_saved', progressEntry);
     return progressEntry;
