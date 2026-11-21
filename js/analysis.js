@@ -85,9 +85,7 @@ async function loadBookAndDossier(bookId) {
     // If still no dossier, generate dynamic intelligent analysis
     if (!dossier) {
       dossier = generateDynamicDossier(currentBookMeta);
-      if (window.AthenaeumDB) {
-        window.AthenaeumDB.saveBookAnalysis(bookId, dossier);
-      }
+      // Do not cache a metadata-only placeholder as if it were scholarly research.
     }
 
     currentDossier = dossier;
@@ -95,12 +93,12 @@ async function loadBookAndDossier(bookId) {
     // Render Dossier into DOM
     renderDossier(dossier, currentBookMeta);
     // Mark metadata-only placeholders clearly; do not present template prose as verified book summary.
-    const isPlaceholder = !dossier || (dossier.comprehensiveSummary && /placeholder analysis|refresh ai dossier/i.test(dossier.comprehensiveSummary.elevatorPitch || ''));
+    const isPlaceholder = !dossier || dossier.isPlaceholder === true || (dossier.comprehensiveSummary && /placeholder analysis|refresh ai dossier/i.test(dossier.comprehensiveSummary.elevatorPitch || ''));
     if (isPlaceholder) {
       const notice = document.createElement('div');
       notice.setAttribute('role', 'status');
       notice.style.cssText = 'margin:16px auto;padding:13px 16px;max-width:900px;background:#fff5df;border:1px solid #e6c883;color:#65471d;border-radius:8px;font:14px/1.5 system-ui';
-      notice.textContent = 'Summary not yet verified: this page currently has catalog metadata and template study prompts, not an analysis extracted from the actual book. Upload an accessible text edition and run a source-grounded analysis before relying on it.';
+      notice.textContent = 'Verified book analysis is not yet available for this title. Use Everyday Summary or In-Depth Analysis to read source excerpts and generate labelled, source-based commentary. This is not a full-book research dossier.';
       const target = document.getElementById('analysis-content') || document.getElementById('analysis-hero');
       if (target) target.prepend(notice);
     }
@@ -154,7 +152,7 @@ function renderDossier(dossier, meta) {
   if (badgeTime) {
     const mins = dossier.readingTimeMinutes || 300;
     const hrs = Math.round(mins / 60);
-    badgeTime.textContent = `~${hrs} hrs read`;
+    badgeTime.textContent = dossier.readingTimeMinutes ? `~${hrs} hrs read` : 'Time not assessed';
   }
 
   const heroThesis = document.getElementById('hero-thesis');
@@ -693,14 +691,14 @@ async function callGemini(prompt, systemInstruction) {
   }
 }
 
-async function callGeminiText(prompt, systemInstruction) {
+async function callGeminiText(prompt, systemInstruction, tokenLimit) {
   const apiKey = getGeminiApiKey();
   if (!apiKey) throw new Error('NO_KEY');
 
   const body = {
     system_instruction: { parts: [{ text: systemInstruction }] },
     contents: [{ role: 'user', parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.75, maxOutputTokens: 1024 }
+    generationConfig: { temperature: 0.35, maxOutputTokens: Math.max(512, Math.min(6000, tokenLimit || 1024)) }
   };
 
   const resp = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
@@ -983,88 +981,28 @@ function setupRefreshDossierButton() {
  * Dynamic On-Demand Dossier Generator — rich fallback if no API key
  */
 function generateDynamicDossier(meta) {
-  const title = meta.title || 'This Book';
-  const author = meta.author || 'the Author';
-  const category = meta.category || 'Literature';
-
+  // An absent dossier is NOT evidence that the book has any particular plot, symbol,
+  // character, style, or moral. Never populate fictitious academic observations.
+  const missing = 'Not yet analyzed from the book text. Choose Everyday Summary or In-Depth Analysis above to review real source excerpts.';
   return {
-    bookId: meta.id || 'book_generic',
-    title,
-    author,
-    publishedYear: null,
-    genre: category,
-    readingTimeMinutes: 300,
-    difficultyLevel: 'Literary',
-    whatTheBookSays: {
-      coreThesis: `"${title}" by ${author} is a work that demands close scholarly engagement. Click "✨ Refresh AI Dossier" above (free Gemini API key required) to generate a complete PhD-level literary analysis — covering the book's central thesis, narrative architecture, symbolic vocabulary, and intellectual argument specific to this text.`,
-      premise: `${author}'s "${title}" belongs to the ${category} tradition. To unlock a fully tailored dossier with character analysis, thematic dissection, writing style breakdown, and a custom vocabulary glossary, use the Refresh AI Dossier feature.`
-    },
-    comprehensiveSummary: {
-      elevatorPitch: `This is a placeholder analysis for "${title}". For a rigorous, book-specific literary dossier — complete with a structured narrative arc, moral conclusions, and scholarly thematic insights — tap "✨ Refresh AI Dossier". The AI will generate analysis specifically calibrated to ${author}'s actual text, not generic templates.`,
-      acts: [
-        {
-          act: 'Act I: Establishment',
-          chapters: 'Opening section',
-          summary: `In the opening movement of "${title}", ${author} establishes the world, introduces the central consciousness, and plants the seeds of the conflicts that will define the work.`,
-          keyThemes: ['Introduction', 'World-Building', 'Initial Conflict']
-        },
-        {
-          act: 'Act II: Development & Crisis',
-          chapters: 'Middle section',
-          summary: `The narrative deepens as ${author} develops the central tensions, tests the characters' convictions, and moves toward an inevitable confrontation with the work's core questions.`,
-          keyThemes: ['Conflict', 'Character Development', 'Thematic Pressure']
-        },
-        {
-          act: 'Act III: Resolution & Aftermath',
-          chapters: 'Concluding section',
-          summary: `${author} brings the central conflicts to their reckoning, with consequences that illuminate the thematic argument the work has been building toward throughout its entirety.`,
-          keyThemes: ['Resolution', 'Consequence', 'Meaning']
-        }
-      ],
-      moralConclusions: [
-        `The moral architecture of "${title}" rewards patient, close reading — its conclusions emerge from the texture of the prose rather than explicit statement.`,
-        `${author} consistently resists easy resolution, leaving the reader to construct meaning from the work's carefully arranged ambiguities.`,
-        `Use the AI Dossier feature for specific, textually grounded moral and philosophical conclusions drawn from "${title}".`
-      ]
-    },
-    writingStyle: {
-      voice: `${author}'s voice in "${title}" is distinctive and carefully calibrated to the work's thematic demands. For a precise stylistic breakdown — including narrative distance, tonal register, and rhetorical strategies specific to this text — generate the full AI Dossier.`,
-      tonalSpectrum: `The tonal range of "${title}" spans multiple registers across its narrative arc. Refresh the AI Dossier for a detailed scholarly analysis of ${author}'s tonal architecture.`,
-      cinematicMontage: `${author}'s compositional and structural techniques in "${title}" merit detailed scholarly attention. The AI Dossier will analyze scene construction, pacing, temporal manipulation, and formal experimentation specific to this work.`,
-      symbolism: {
-        'Symbolic Register': `"${title}" operates through a rich system of symbols and motifs. Generate the AI Dossier to see a detailed breakdown of the specific symbols ${author} deploys and their thematic functions.`,
-        'Recurring Imagery': `${author}'s imagery patterns in "${title}" are worth careful examination. The full AI analysis will map these patterns across the text.`
-      }
-    },
+    bookId: meta.id || 'not-found',
+    title: meta.title || 'Untitled book',
+    author: meta.author || 'Author not verified',
+    genre: meta.category || 'Uncategorized',
+    difficultyLevel: 'Not assessed',
+    readingTimeMinutes: null,
+    isPlaceholder: true,
+    whatTheBookSays: {coreThesis: missing, premise: missing},
+    comprehensiveSummary: {elevatorPitch: missing, acts: [], moralConclusions: []},
+    writingStyle: {voice: missing, tonalSpectrum: missing, cinematicMontage: missing, symbolism: {}},
     grammarAndLinguisticCharacteristics: {
-      syntaxArchitecture: `${author}'s sentence-level craft in "${title}" is a subject worthy of close stylistic analysis. For a detailed account of syntax, clause structures, rhythmic patterns, and grammatical idiosyncrasies specific to this work, generate the full AI Dossier.`,
-      dictionProfile: `The lexical register of "${title}" reflects ${author}'s careful calibration of word choice. The AI analysis will characterize the diction profile precisely, identifying register shifts, specialized vocabulary, and period-specific language.`,
-      neologismsAndPortmanteaus: `Any linguistic innovations or distinctive idiomatic patterns in "${title}" will be identified and analyzed in the full AI-generated dossier.`,
-      grammaticalComplexityScore: '— / 10 (Awaiting AI Analysis)'
+      syntaxArchitecture: missing, dictionProfile: missing,
+      neologismsAndPortmanteaus: missing, grammaticalComplexityScore: 'Not assessed'
     },
-    topicsDiscussed: [
-      { topic: 'Core Thematic Territory', insight: `"${title}" engages with themes that define its literary category. Click "✨ Refresh AI Dossier" to see five specific, deeply analyzed topics with textual evidence from ${author}'s actual text.` },
-      { topic: 'Human Psychology & Motivation', insight: `${author} constructs a rich psychological landscape in "${title}". The full dossier will analyze specific characters' interior lives and what they reveal about human nature.` },
-      { topic: 'Social & Historical Context', insight: `"${title}" is embedded in a specific historical and cultural context that shapes its meaning. The AI analysis will locate the work within its broader intellectual tradition.` }
-    ],
-    coreConcepts: [
-      { concept: 'Intellectual Architecture', description: `"${title}" operates through a set of specific philosophical and conceptual commitments. Generate the AI Dossier to see four deeply analyzed core concepts — each defined academically and traced through the specific text of ${author}'s work.` },
-      { concept: 'Critical Reception & Tradition', description: `Understanding where "${title}" sits within its critical tradition enriches the reading experience. The full AI analysis will position the work within relevant scholarly conversations.` }
-    ],
-    difficultWordsGlossary: [
-      { word: 'Mellifluous', phonetics: '/meˈlɪf.lu.əs/', partOfSpeech: 'adjective', definition: 'Pleasingly smooth and musical to hear; having a sweet or musical pleasant sound.', quote: `The prose of "${title}" carries a mellifluous quality that belies its thematic severity.`, modernEquivalent: 'Sweetly musical / harmonious' },
-      { word: 'Perspicacious', phonetics: '/ˌpɜː.spɪˈkeɪ.ʃəs/', partOfSpeech: 'adjective', definition: 'Having a ready insight into and understanding of things; showing a clever, accurate, and deep understanding.', quote: 'A perspicacious reader will detect the irony embedded in every apparent declaration of certainty.', modernEquivalent: 'Perceptive / insightful' },
-      { word: 'Solipsism', phonetics: '/ˈsɒl.ɪp.sɪ.z(ə)m/', partOfSpeech: 'noun', definition: 'The view or theory that the self is all that can be known to exist; self-absorption to the exclusion of the external world.', quote: 'The narrator\'s solipsism gradually becomes the novel\'s most devastating structural device.', modernEquivalent: 'Self-absorbed worldview' },
-      { word: 'Laconic', phonetics: '/ləˈkɒn.ɪk/', partOfSpeech: 'adjective', definition: 'Using very few words; brief and concise in speech or expression; terse.', quote: 'His laconic responses conveyed more existential weight than paragraphs of explanation could achieve.', modernEquivalent: 'Brief / terse' },
-      { word: 'Verisimilitude', phonetics: '/ˌver.ɪ.sɪˈmɪl.ɪ.tjuːd/', partOfSpeech: 'noun', definition: 'The appearance of being true or real; the quality of seeming probable or lifelike.', quote: 'The author achieves verisimilitude not through documentary detail but through emotional precision.', modernEquivalent: 'Lifelikeness / realism' }
-    ],
-    discussionQuestions: [
-      `What is the central ethical dilemma at the heart of "${title}", and how does ${author} position the reader in relation to it?`,
-      `Analyze the narrative voice in "${title}". How does the choice of perspective shape our understanding of the events described?`,
-      `How does "${title}" engage with its historical and cultural moment, and what does it reveal about the period in which it was written?`,
-      `Trace the development of the work's central symbol or motif from opening to close. What does this arc suggest about ${author}'s thematic argument?`,
-      `Where do you locate "${title}" in the tradition of ${category}? What does it affirm, challenge, or transform in that tradition?`
-    ]
+    topicsDiscussed: [],
+    coreConcepts: [],
+    difficultWordsGlossary: [],
+    discussionQuestions: []
   };
 }
 
