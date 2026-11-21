@@ -26,7 +26,7 @@ a{color:inherit;text-decoration:none}header{background:#132238;border-bottom:1px
 <section id="recommendations" role="tabpanel"><h2 class="section-title">Recommendations on this device</h2><p>Suggestions you or other users have saved in this browser. New suggestions can be submitted in the library's sidebar.</p><div id="recommendations-list"></div><p><a class="go" href="index.html#recommendations-sidebar">Go to recommendations →</a></p></section>
 <section id="notes" role="tabpanel"><h2 class="section-title">Notes and highlights</h2><p>Choose a book below to open its notes window. Notes saved here are not shared with other accounts yet.</p><div class="list" id="notes-list"></div></section>
 </div>
-<div class="recbox" style="margin-top:28px"><h2 class="section-title">Back up this browser</h2><p>Save a copy of your favorites, reading progress and recommendations before changing devices. This export does not contain your EPUB/PDF files or personal notes.</p><button class="export" id="backup" type="button">Export reading data (.json)</button></div>
+<div class="recbox" style="margin-top:28px"><h2 class="section-title">Display name on this device</h2><p>This name appears on recommendations you submit here. It is not a verified online account.</p><div class="settings"><input id="local-name" maxlength="80" placeholder="Your name" aria-label="Local display name"><button type="button" id="save-name">Save display name</button><span id="name-status" class="meta"></span></div></div>\n<div class="recbox"><h2 class="section-title">Back up this browser</h2><p>Save a copy of your favorites, reading progress and recommendations before changing devices. This export does not contain your EPUB/PDF files or personal notes.</p><button class="export" id="backup" type="button">Export reading data (.json)</button></div>
 </main>
 <script src="js/db.js?v=3.8.0"></script><script>
 (async()=>{
@@ -34,7 +34,9 @@ a{color:inherit;text-decoration:none}header{background:#132238;border-bottom:1px
  const safeParse=(key,def)=>{try{return JSON.parse(localStorage.getItem(key)||'null')??def}catch(e){return def}};
  const favorites=safeParse('athenaeum_favorites',[]);
  const progress=safeParse('athenaeum_reading_progress_v2',{});
- const recs=safeParse('athenaeum_recommendations',[]);
+ const recs=safeParse('athenaeum_recommendations',[]).filter(r=>!(['rec_01','rec_02','rec_03'].includes(r.id)&&['Kafka on the Shore','Atomic Habits','Meditations'].includes(r.title)));
+ $('local-name').value=localStorage.getItem('athenaeum_local_name')||'';
+ $('save-name').onclick=()=>{const name=$('local-name').value.trim().slice(0,80);localStorage.setItem('athenaeum_local_name',name);$('name-status').textContent='Saved on this device';};
  let catalog=[];try{const r=await fetch('data/books.json',{cache:'no-store'});if(r.ok)catalog=await r.json()}catch(e){}
  try{const local=await window.AthenaeumDB.getAllUserBooks();for(const b of local)if(!catalog.some(x=>x.id===b.id))catalog.push(b)}catch(e){}
  const lookup=new Map(catalog.map(x=>[x.id,x]));
