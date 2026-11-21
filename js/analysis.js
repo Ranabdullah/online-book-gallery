@@ -94,6 +94,16 @@ async function loadBookAndDossier(bookId) {
 
     // Render Dossier into DOM
     renderDossier(dossier, currentBookMeta);
+    // Mark metadata-only placeholders clearly; do not present template prose as verified book summary.
+    const isPlaceholder = !dossier || (dossier.comprehensiveSummary && /placeholder analysis|refresh ai dossier/i.test(dossier.comprehensiveSummary.elevatorPitch || ''));
+    if (isPlaceholder) {
+      const notice = document.createElement('div');
+      notice.setAttribute('role', 'status');
+      notice.style.cssText = 'margin:16px auto;padding:13px 16px;max-width:900px;background:#fff5df;border:1px solid #e6c883;color:#65471d;border-radius:8px;font:14px/1.5 system-ui';
+      notice.textContent = 'Summary not yet verified: this page currently has catalog metadata and template study prompts, not an analysis extracted from the actual book. Upload an accessible text edition and run a source-grounded analysis before relying on it.';
+      const target = document.getElementById('analysis-content') || document.getElementById('analysis-hero');
+      if (target) target.prepend(notice);
+    }
 
     if (loader) loader.style.display = 'none';
     if (hero) hero.style.display = 'flex';
