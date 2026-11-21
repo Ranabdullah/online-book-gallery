@@ -94,7 +94,7 @@
       book.format?.toLowerCase()==='epub' ? await extractEpub(buffer) : null;
     if(!result)throw new Error('Source summarization currently supports PDF and EPUB.');
     source={book,...result};
-    byId('source-summary-excerpt').textContent=result.excerpt.slice(0,2600)+'\n\n[Preview excerpt ends]';
+    byId('source-summary-sample').textContent=result.excerpt.slice(0,2600)+'\n\n[Preview excerpt ends]';
     explain('Extracted '+result.sampledSections+' sections'+(result.partial?' (partial sample)':'')+'. Review the preview below.');
     byId('source-summary-ai').disabled=false;
   }
