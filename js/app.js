@@ -13,6 +13,7 @@ let baseBooks = [];
 let allBooks = [];
 let bookOverrides = {};
 let currentCategory = 'all';
+let currentOrigin = 'all';
 let currentFormat = 'all';
 let currentSort = 'author-asc';
 let searchQuery = '';
@@ -193,6 +194,7 @@ window.fallbackBookCover = fallbackBookCover;
 
 function initStats() {
   const hosted = allBooks.filter(b => b.isHosted && !b.needsFix && !b.isExternal);
+  const available = allBooks.filter(b => b.isHosted && !b.needsFix);
   const needsFix = allBooks.filter(b => !b.isHosted || b.needsFix);
 
   const statBooks = document.getElementById('stat-total-books');
@@ -201,14 +203,14 @@ function initStats() {
   const countAll = document.getElementById('count-all');
   const countNeedsUpload = document.getElementById('count-needs-upload');
 
-  if (statBooks) statBooks.textContent = hosted.length;
-  if (countAll) countAll.textContent = hosted.length;
+  if (statBooks) statBooks.textContent = available.length;
+  if (countAll) countAll.textContent = available.length;
   if (countNeedsUpload) countNeedsUpload.textContent = needsFix.length;
 
-  const authorsSet = new Set(hosted.map(b => (b.author || '').trim()).filter(Boolean));
+  const authorsSet = new Set(available.map(b => (b.author || '').trim()).filter(Boolean));
   if (statAuthors) statAuthors.textContent = authorsSet.size;
 
-  const catSet = new Set(hosted.map(b => b.category).filter(Boolean));
+  const catSet = new Set(available.map(b => b.category).filter(Boolean));
   if (statCategories) statCategories.textContent = catSet.size;
 
   updateFavoritesBadge();
@@ -218,6 +220,7 @@ function filterAndSortBooks() {
   const favs = getFavorites();
 
   return allBooks.filter(b => {
+    if (currentOrigin !== 'all' && (['R','A','N'].includes(b.originMark) ? b.originMark : 'R') !== currentOrigin) return false;
     if (currentCategory === '__needs_upload__') {
       if (b.isHosted && !b.needsFix) return false;
     } else {
@@ -330,7 +333,8 @@ function renderBooks() {
                 <span>Upload</span>
               </button>
             `}
-            <a href="book-notes.html?book=${encodeURIComponent(b.id)}" class="btn-card-edit" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;" title="Read and write book notes (local drafts until shared accounts launch)">📝</a>\n            ${external ? `<a href="${readUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="View the free source and its download options">↗</a>` :
+            <a href="book-notes.html?book=${encodeURIComponent(b.id)}" class="btn-card-edit" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;" title="Read and write book notes (local drafts until shared accounts launch)">📝</a>
+            ${external ? `<a href="${readUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="View the free source and its download options">↗</a>` :
             `<a href="book-analysis.html?book=${encodeURIComponent(b.id || b.file)}" class="btn-card-edit" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; color: #9333ea;" title="AI Book Intelligence, Summary & Vocabulary">
               🧠
             </a>`}
@@ -1365,3 +1369,23 @@ window.setupDuplicateManager = setupDuplicateManager;
 window.detectLibraryDuplicates = detectLibraryDuplicates;
 
 
+
+/** Contributor filters use recorded catalog provenance; absent attribution remains provisional R. */
+function initOriginTabs() {
+  const nav = document.getElementById('origin-tabs');
+  if (!nav) return;
+  nav.addEventListener('click', event => {
+    const button = event.target.closest('button[data-origin]');
+    if (!button || !nav.contains(button)) return;
+    currentOrigin = button.dataset.origin;
+    nav.querySelectorAll('button[data-origin]').forEach(b => {
+      const active = b.dataset.origin === currentOrigin;
+      b.setAttribute('aria-pressed', String(active));
+      b.style.background = active ? '#1b3048' : '#fff';
+      b.style.color = active ? '#fff' : '#1b3048';
+    });
+    renderBooks();
+  });
+  nav.querySelector('button[data-origin="all"]')?.click();
+}
+document.addEventListener('DOMContentLoaded', initOriginTabs);
