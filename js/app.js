@@ -69,7 +69,10 @@ async function refreshAllBooks() {
 
   // 3. Combine: user books first, then catalog books, filtering out deleted/hidden books
   const hiddenIds = new Set(window.AthenaeumDB ? window.AthenaeumDB.getHiddenBooks() : []);
+  const seenBookIds = new Set();
   const combined = [...userBooks, ...baseBooks].filter(b => {
+    if (seenBookIds.has(b.id)) return false; // Local restored missing file takes priority over its catalog stub
+    seenBookIds.add(b.id);
     if (hiddenIds.has(b.id)) return false;
     const ov = bookOverrides[b.id];
     if (ov && ov.deleted === true) return false;
