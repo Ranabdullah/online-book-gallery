@@ -93,10 +93,20 @@ export default {async fetch(request,env){
  const url=new URL(request.url);
  if(url.pathname.startsWith('/api/'))try{return await api(request,env,url)}catch(e){return j({error:'Server error'},500)}
  if(request.method!=='GET'&&request.method!=='HEAD')return new Response('Method not allowed',{status:405});
- const target=new URL(ORIGIN+(url.pathname==='/'?'/':url.pathname)+url.search);
+ const assetPath = url.pathname === '/' ? '/index.html' : url.pathname;
+ const rawOrigin='https://raw.githubusercontent.com/Ranabdullah/online-book-gallery/main';
+ const bookBinary=assetPath.startsWith('/books/');
+ const primary=(bookBinary?ORIGIN:rawOrigin)+assetPath+url.search;
+ const alternate=(bookBinary?rawOrigin:ORIGIN)+assetPath+url.search;
  let upstream;
- try{upstream=await fetch(target.toString(),{method:request.method,redirect:'follow'})}catch(e){return new Response('Upstream library unavailable',{status:502})}
- const headers=new Headers(upstream.headers);headers.delete('content-security-policy');headers.delete('content-length');headers.set('x-athenaeum-edge','public-profiles-v1');
+ try{upstream=await fetch(primary,{method:request.method,redirect:'follow'});}catch(e){}
+ if(!upstream?.ok){try{const second=await fetch(alternate,{method:request.method,redirect:'follow'});if(second.ok||!upstream)upstream=second}catch(e){}}
+ if(!upstream)return new Response('Upstream library unavailable',{status:502});
+ const headers=new Headers(upstream.headers);headers.delete('content-security-policy');headers.delete('content-length');headers.delete('content-disposition');headers.set('x-athenaeum-edge','public-profiles-v2');
+ const ext=assetPath.split('.').pop().toLowerCase();
+ const mime={html:'text/html; charset=utf-8',js:'application/javascript; charset=utf-8',css:'text/css; charset=utf-8',json:'application/json; charset=utf-8',svg:'image/svg+xml',pdf:'application/pdf',epub:'application/epub+zip',jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png'};
+ if(mime[ext])headers.set('content-type',mime[ext]);
+ if(['html','js','css','json','svg'].includes(ext))headers.set('cache-control','no-store');
  if(url.pathname.endsWith('/js/auth-gate.js')||url.pathname==='/js/auth-gate.js')
   return new Response('/* Legacy access code disabled */',{headers:{'content-type':'application/javascript','cache-control':'no-store'}});
  if((headers.get('content-type')||'').includes('text/html')&&request.method==='GET'&&upstream.ok){
