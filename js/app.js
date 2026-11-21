@@ -247,7 +247,7 @@ function filterAndSortBooks() {
   return allBooks.filter(b => {
     if (currentOrigin !== 'all' && (['R','A','N'].includes(b.originMark) ? b.originMark : 'R') !== currentOrigin) return false;
     if (currentCategory === '__needs_upload__') {
-      if (b.isHosted && !b.needsFix) return false;
+      if (b.isArchiveRecord || (b.isHosted && !b.needsFix)) return false;
     } else {
       // Normal reading library: hide unhosted books
       if ((!b.isHosted && !b.isArchiveRecord) || b.needsFix) return false;
