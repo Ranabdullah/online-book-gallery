@@ -1026,7 +1026,7 @@
     "category": "Classics & Literature",
     "format": "PDF",
     "sizeMB": 1.21,
-    "cover": "covers/book_0058.jpg",
+    "cover": "covers/neutral_book_0058.svg",
     "isHosted": true,
     "file": "books/book_0058.pdf",
     "originalName": "The training of the imagination.pdf",
@@ -1037,7 +1037,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0059",
@@ -4226,7 +4227,7 @@
     "category": "Philosophy & Psychology",
     "format": "EPUB",
     "sizeMB": 0.62,
-    "cover": "covers/book_0237.jpg",
+    "cover": "covers/neutral_book_0237.svg",
     "isHosted": true,
     "file": "books/book_0237.epub",
     "originalName": "Friedrich Nietzsche - Ecce Homo.epub",
@@ -4237,7 +4238,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0238",
@@ -4406,7 +4408,7 @@
     "category": "Philosophy & Psychology",
     "format": "EPUB",
     "sizeMB": 0.23,
-    "cover": "covers/book_0246.jpg",
+    "cover": "covers/neutral_book_0246.svg",
     "isHosted": true,
     "file": "books/book_0246.epub",
     "originalName": "Friedrich Nietzsche - The Twilight of Idols.epub",
@@ -4417,7 +4419,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0247",
@@ -4826,7 +4829,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 1.6,
-    "cover": "covers/book_0267.jpg",
+    "cover": "covers/neutral_book_0267.svg",
     "isHosted": true,
     "file": "books/book_0267.epub",
     "originalName": "George R. R. Martin - A Song of Ice and Fire 2 A Clash of Kings.epub",
@@ -4837,7 +4840,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0268",
@@ -4846,7 +4850,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 1.8,
-    "cover": "covers/book_0268.jpg",
+    "cover": "covers/neutral_book_0268.svg",
     "isHosted": true,
     "file": "books/book_0268.epub",
     "originalName": "George R. R. Martin - A Song of Ice and Fire 3 A Storm of Swords.epub",
@@ -4857,7 +4861,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0269",
@@ -4886,7 +4891,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 1.39,
-    "cover": "covers/book_0270.jpg",
+    "cover": "covers/neutral_book_0270.svg",
     "isHosted": true,
     "file": "books/book_0270.epub",
     "originalName": "George R. R. Martin - A Song of Ice and Fire 5 A Dance with Dragons.epub",
@@ -4897,7 +4902,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0271",
@@ -7166,7 +7172,7 @@
     "category": "Classics & Literature",
     "format": "EPUB",
     "sizeMB": 18.53,
-    "cover": "covers/book_0384.jpg",
+    "cover": "covers/neutral_book_0384.svg",
     "isHosted": true,
     "file": "books/book_0384.epub",
     "originalName": "Miguel de Cervantes - Don Quixote.epub",
@@ -7177,7 +7183,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0385",
@@ -8166,7 +8173,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 0.23,
-    "cover": "covers/book_0434.jpg",
+    "cover": "covers/neutral_book_0434.svg",
     "isHosted": true,
     "file": "books/book_0434.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 1 The Lightning Thief.epub",
@@ -8177,7 +8184,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0435",
@@ -8206,7 +8214,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 0.24,
-    "cover": "covers/book_0436.jpg",
+    "cover": "covers/neutral_book_0436.svg",
     "isHosted": true,
     "file": "books/book_0436.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 3 The Titan's Curse.epub",
@@ -8217,7 +8225,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0437",
@@ -8226,7 +8235,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 0.24,
-    "cover": "covers/book_0437.jpg",
+    "cover": "covers/neutral_book_0437.svg",
     "isHosted": true,
     "file": "books/book_0437.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 4 The Battle of the Labyrinth.epub",
@@ -8237,7 +8246,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0438",
@@ -8246,7 +8256,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 0.23,
-    "cover": "covers/book_0438.jpg",
+    "cover": "covers/neutral_book_0438.svg",
     "isHosted": true,
     "file": "books/book_0438.epub",
     "originalName": "Rick Riordan - Percy Jackson and the Olympians 5 The Last Olympian.epub",
@@ -8257,7 +8267,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0439",
@@ -9046,7 +9057,7 @@
     "category": "Fiction & Modern Novels",
     "format": "EPUB",
     "sizeMB": 1.43,
-    "cover": "covers/book_0478.jpg",
+    "cover": "covers/neutral_book_0478.svg",
     "isHosted": true,
     "file": "books/book_0478.epub",
     "originalName": "Stephen King - The Dark Tower 4 Wizard and Glass.epub",
@@ -9057,7 +9068,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0479",
@@ -9066,7 +9078,7 @@
     "category": "Fiction & Modern Novels",
     "format": "EPUB",
     "sizeMB": 1.45,
-    "cover": "covers/book_0479.jpg",
+    "cover": "covers/neutral_book_0479.svg",
     "isHosted": true,
     "file": "books/book_0479.epub",
     "originalName": "Stephen King - The Dark Tower 5 Wolves of the Calla.epub",
@@ -9077,7 +9089,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0480",
@@ -9366,7 +9379,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 0.46,
-    "cover": "covers/book_0494.jpg",
+    "cover": "covers/neutral_book_0494.svg",
     "isHosted": true,
     "file": "books/book_0494.epub",
     "originalName": "Suzanne Collins - The Hunger Games 1 The Hunger Games.epub",
@@ -9377,7 +9390,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0495",
@@ -9386,7 +9400,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 0.44,
-    "cover": "covers/book_0495.jpg",
+    "cover": "covers/neutral_book_0495.svg",
     "isHosted": true,
     "file": "books/book_0495.epub",
     "originalName": "Suzanne Collins - The Hunger Games 2 Catching Fire.epub",
@@ -9397,7 +9411,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0496",
@@ -9406,7 +9421,7 @@
     "category": "Fantasy & Adventure",
     "format": "EPUB",
     "sizeMB": 0.34,
-    "cover": "covers/book_0496.jpg",
+    "cover": "covers/neutral_book_0496.svg",
     "isHosted": true,
     "file": "books/book_0496.epub",
     "originalName": "Suzanne Collins - The Hunger Games 3 Mockingjay.epub",
@@ -9417,7 +9432,8 @@
     },
     "summaryStatus": "awaiting_source_analysis",
     "originMark": "R",
-    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified"
+    "originAttribution": "Existing Athenaeum collection; individual contributor not independently verified",
+    "coverAttribution": "Neutral custom artwork due to identical artwork shared by multiple catalog entries"
   },
   {
     "id": "book_0497",
