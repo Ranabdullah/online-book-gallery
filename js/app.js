@@ -93,9 +93,43 @@ async function refreshAllBooks() {
   });
 
   initStats();
+  renderFeaturedBook();
   renderBooks();
   updateDuplicateBadge();
 }
+
+let featuredBookId = null;
+
+function renderFeaturedBook(chooseAnother = false) {
+  const panel = document.getElementById('featured-book-section');
+  if (!panel) return;
+  const eligible = allBooks.filter(b => b.isHosted && !b.needsFix && b.file && b.cover);
+  if (!eligible.length) {
+    panel.hidden = true;
+    return;
+  }
+  panel.hidden = false;
+  const selected = !chooseAnother && eligible.find(b => b.id === featuredBookId);
+  const pool = chooseAnother && eligible.length > 1 ? eligible.filter(b => b.id !== featuredBookId) : eligible;
+  const book = selected || pool[Math.floor(Math.random() * pool.length)];
+  featuredBookId = book.id;
+  document.getElementById('featured-book-title').textContent = book.title || 'Untitled book';
+  document.getElementById('featured-book-author').textContent = book.author ? 'By ' + book.author : 'Author unknown';
+  document.getElementById('featured-book-category').textContent = book.category || 'From the library';
+  // Prefer a real catalog description. Never invent a plot summary when absent.
+  document.getElementById('featured-book-description').textContent = book.description ||
+    'Discover this ' + (book.format || 'digital') + ' title in ' + (book.category || 'the library') + '. Open it to begin reading.';
+  const cover = document.getElementById('featured-book-cover');
+  cover.src = book.cover;
+  cover.alt = 'Cover of ' + (book.title || 'featured book');
+  document.getElementById('featured-book-read').href = 'reader.html?book=' + encodeURIComponent(book.file);
+  document.getElementById('featured-book-read').textContent = 'Read book →';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const next = document.getElementById('featured-book-next');
+  if (next) next.addEventListener('click', () => renderFeaturedBook(true));
+});
 
 function initStats() {
   const hosted = allBooks.filter(b => b.isHosted && !b.needsFix);
