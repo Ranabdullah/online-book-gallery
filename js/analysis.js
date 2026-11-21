@@ -53,6 +53,12 @@ async function loadBookAndDossier(bookId) {
     } catch (e) {}
 
     currentBookMeta = books.find(b => b.id === bookId || b.file === bookId || b.file === `books/${bookId}.epub`);
+    if (!currentBookMeta && bookId.startsWith('new_pg_')) {
+      try {
+        const freeResponse = await fetch('data/free-books.json', {cache:'no-store'});
+        if (freeResponse.ok) currentBookMeta = (await freeResponse.json()).find(b => b.id === bookId) || null;
+      } catch (e) { console.warn('Free source metadata unavailable', e); }
+    }
     if (!currentBookMeta && window.AthenaeumDB) {
       currentBookMeta = await window.AthenaeumDB.getUserBookById(bookId);
     }
@@ -128,7 +134,7 @@ function renderDossier(dossier, meta) {
   if (topbarTitle) topbarTitle.textContent = `${meta.title} - AI Intelligence`;
   document.title = `${meta.title} - AI Book Intelligence | Athenaeum`;
 
-  const readUrl = meta.file ? `reader.html?book=${encodeURIComponent(meta.file)}&title=${encodeURIComponent(meta.title)}` : '#';
+  const readUrl = meta.isExternal ? `external-book.html?id=${encodeURIComponent(meta.id)}` : meta.file ? `reader.html?book=${encodeURIComponent(meta.file)}&title=${encodeURIComponent(meta.title)}` : '#';
   const readBtnTop = document.getElementById('btn-read-now-top');
   const readBtnHero = document.getElementById('btn-read-hero');
   if (readBtnTop) readBtnTop.href = readUrl;
