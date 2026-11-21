@@ -52,6 +52,11 @@ async function api(request,env,url){
   const length=Number(request.headers.get('content-length')||0);if(length>2048)return j({error:'Request too large'},413);
   let data;try{const raw=await request.text();if(raw.length>2048)return j({error:'Request too large'},413);data=JSON.parse(raw)}catch(e){return j({error:'Invalid JSON'},400)}
   const name=String(data.name||'').trim().slice(0,70);if(name.length<2)return j({error:'Enter a name with at least two characters'},400);
+  // Limit anonymous creations per visitor and UTC day to avoid unrestricted database spam.
+  const visitor=String(request.headers.get('CF-Connecting-IP')||'unknown').slice(0,64);
+  const bucket=await sha(visitor+'|'+new Date().toISOString().slice(0,10)+'|athenaeum');
+  const rate=await db.prepare("INSERT INTO profile_create_limits(key_hash,attempts) VALUES(?,1) ON CONFLICT(key_hash) DO UPDATE SET attempts=attempts+1 WHERE attempts<5").bind(bucket).run();
+  if(!rate.meta?.changes)return j({error:'Daily profile creation limit reached'},429);
   const id=crypto.randomUUID(),secret=newSecret(),digest=await sha(secret);
   try{await db.batch([
    db.prepare('INSERT INTO profiles(id,name,secret_hash) VALUES(?,?,?)').bind(id,name,digest),
@@ -63,6 +68,10 @@ async function api(request,env,url){
  if(!match||!rid.test(match[1]))return j({error:'Not found'},404);
  const id=match[1];
  if(method==='GET'){
+  if(url.searchParams.get('verify')==='1'){
+    if(!await auth(request,db,id))return j({error:'Invalid editing key'},401);
+    return j({ok:true});
+  }
   const r=await db.prepare('SELECT p.id,p.name,p.created_at,s.version,s.state_json FROM profiles p JOIN profile_state s ON s.profile_id=p.id WHERE p.id=?').bind(id).first();
   if(!r)return j({error:'Profile not found'},404);
   let state;try{state=normalize(JSON.parse(r.state_json))}catch(e){state=empty()}
