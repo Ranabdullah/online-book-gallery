@@ -6,7 +6,7 @@
  */
 (() => {
   const MAX_CHARS = 25000;
-  const keyName = id => 'athenaeum_source_summary_' + id;
+  const keyName = id => 'athenaeum_summaries_v2_' + id;
   const byId = id => document.getElementById(id);
   const loadScript = (src, key) => new Promise((resolve, reject) => {
     if (window[key]) return resolve();
@@ -103,43 +103,76 @@
     source={book,...result};
     byId('source-summary-sample').textContent=result.excerpt.slice(0,2600)+'\n\n[Preview excerpt ends]';
     explain('Extracted '+result.sampledSections+' sections'+(result.partial?' (partial sample)':'')+'. Review the preview below.');
-    byId('source-summary-ai').disabled=false;
+    // Enable the two summary levels only after real source text is available.
   }
-  async function runAI() {
-    if(!source)throw new Error('Extract the text first.');
-    if(typeof getGeminiApiKey!=='function'||typeof callGeminiText!=='function')throw new Error('Gemini analysis component is not loaded.');
-    if(!getGeminiApiKey())throw new Error('Configure your Gemini API key using the Book Intelligence controls.');
-    explain('Summarizing the selected excerpts using Gemini…');
-    const prompt='Book: '+source.book.title+'\nAuthor: '+source.book.author+'\n\nSource excerpts from '+source.sampledSections+' sections:\n'+source.excerpt+
-      '\n\nWrite a 160–240 word concise summary of what these EXCERPTS establish, followed by 3–5 bullet themes grounded in the excerpts. '+
-      'Distinguish direct evidence from interpretation, and explicitly state what cannot be verified because this is a partial sample. '+
-      'Do not hallucinate scenes, characters or ending details not in the excerpts. No long verbatim quotations.';
-    const out=await callGeminiText(prompt,'You are a careful literary research assistant. Summarize only what the supplied source excerpts actually support. Admit limits.');
-    if(!out.trim())throw new Error('AI returned an empty summary.');
-    byId('source-summary-text').textContent=out;
-    byId('source-summary-excerpt').hidden=true;
-    try{localStorage.setItem(keyName(source.book.id),JSON.stringify({summary:out,sampledSections:source.sampledSections,partial:source.partial,createdAt:Date.now()}));}catch(e){}
-    explain('Saved this excerpt-based summary in your browser. Not a verified complete-book synopsis.');
+  async function runAI(level) {
+    if(!source) throw new Error('Extract the actual book text first.');
+    if(typeof getGeminiApiKey!=='function' || typeof callGeminiText!=='function') throw new Error('AI analysis component is not available.');
+    if(!getGeminiApiKey()) throw new Error('Configure a Gemini API key through the Book Intelligence controls first.');
+    const everyday = level === 'everyday';
+    explain('Preparing '+(everyday?'Everyday Summary':'In-Depth Analysis')+' from verified source excerpts…');
+    const guidelines = everyday
+      ? 'Write 180–250 words in plain English accessible to a general reader. Identify the subjects, setting or ideas actually present in the sample. Distinguish known facts from interpretations. Include 3–5 clear takeaways, and end with a brief scope warning.'
+      : 'Write 450–650 words of rigorous close reading suitable for advanced study. Sections: precise account of sampled argument/narrative; narrative or expository structure; language and rhetorical features evident in the sample; themes and competing interpretations; limits and unanswered questions. Every concrete textual claim should cite a sampled page/chapter identifier from the supplied excerpts. Do not claim external research or quote academic scholarship unless supplied. Explain the text-dependent limits.';
+    const prompt = 'BOOK TITLE: '+source.book.title+'\\nAUTHOR FIELD: '+source.book.author+
+      '\\nEXCERPT STATUS: '+(source.partial?'PARTIAL SAMPLE':'SAMPLED SOURCE')+
+      '\\nACTUAL TEXT EXCERPTS FROM '+source.sampledSections+' SECTIONS:\\n'+source.excerpt+
+      '\\nTASK: '+guidelines+
+      '\\nNever invent events, characters, quotations, page numbers, context, academic citations, publication facts or conclusions outside the excerpts. Explicitly say this is an excerpt-based analysis, not a verified full-book synopsis.';
+    const output = await callGeminiText(prompt,
+      'You are a careful literary and academic researcher. The user asks for evidence-based interpretations from the provided source excerpts, NOT fabricated scholarship. Acknowledge uncertainty.', everyday ? 2300 : 5200);
+    if(!output.trim()) throw new Error('The AI returned an empty analysis.');
+    const key = everyday ? 'everyday' : 'inDepth';
+    const record = {text:output,source:'actual-book-excerpts',partial:source.partial,sections:source.sampledSections,createdAt:Date.now(),model:'user-configured-Gemini'};
+    const existing=readCache(source.book.id);
+    existing[key]=record;
+    try{localStorage.setItem(keyName(source.book.id),JSON.stringify(existing));}
+    catch(e){explain('Generated, but browser storage is full: copy this analysis before leaving.');}
+    renderSummaries(existing);
+    explain('Saved '+(everyday?'Everyday Summary':'In-Depth Analysis')+' in this browser. This is based only on sampled source text; full-book verification is still required.');
+  }
+  function readCache(id){
+    try{const cached=JSON.parse(localStorage.getItem(keyName(id))||'{}');if(cached && typeof cached==='object')return cached;}
+    catch(e){}
+    return {};
+  }
+  function renderSummaries(data){
+    for(const [key,target] of [['everyday','source-summary-everyday-text'],['inDepth','source-summary-indepth-text']]){
+      const elem=byId(target), entry=data[key];
+      if(elem)elem.textContent=entry?.text||'Not yet generated. Extract book text and select the matching summary level.';
+    }
   }
   function init() {
     const wrap=document.createElement('section'); wrap.id='source-summary-panel';
     wrap.style.cssText='max-width:1020px;margin:20px auto;padding:20px 24px;border-radius:13px;background:#f5f0e5;color:#1d3044;border:1px solid #d9c8ab';
-    const h=document.createElement('h2');h.textContent='Source-based Book Summary';h.style.cssText='font:700 23px Georgia,serif;margin:0 0 8px';
-    const p=document.createElement('p');p.textContent='Check real text from the selected EPUB/PDF. Summaries only use sampled sections and are labelled as partial. AI requests send those excerpts to Gemini only if you click Analyze.';p.style.cssText='font:13px/1.6 system-ui;color:#526478';
+    const h=document.createElement('h2');h.textContent='Book Summaries — Two Reading Levels';h.style.cssText='font:700 23px Georgia,serif;margin:0 0 8px';
+    const p=document.createElement('p');p.textContent='Everyday Summary explains the book in plain language. In-Depth Analysis gives advanced, evidence-grounded interpretation. Both require reading actual EPUB/PDF text first; AI gets excerpts only when you explicitly request a level. A partial sample cannot establish the full book.';p.style.cssText='font:13px/1.6 system-ui;color:#526478';
     const button=(id,label)=>{const b=document.createElement('button');b.id=id;b.textContent=label;b.type='button';b.style.cssText='border:0;border-radius:8px;background:#1b3048;color:white;padding:11px 15px;margin:6px 9px 6px 0;cursor:pointer';return b};
-    const extractBtn=button('source-summary-extract','Read source excerpts');const aiBtn=button('source-summary-ai','Analyze excerpts with AI');aiBtn.disabled=true;
+    const extractBtn=button('source-summary-extract','Read source excerpts');
+    const everydayBtn=button('source-summary-everyday','Generate Everyday Summary');
+    const inDepthBtn=button('source-summary-indepth','Generate In-Depth Analysis');
+    everydayBtn.disabled=true;inDepthBtn.disabled=true;
     const status=document.createElement('p');status.id='source-summary-status';status.setAttribute('role','status');status.style.color='#526478';
-    const summary=document.createElement('div');summary.id='source-summary-text';summary.style.cssText='white-space:pre-wrap;font:14px/1.7 system-ui;color:#26374a;margin-top:14px';
+
     const preview=document.createElement('details');preview.id='source-summary-excerpt';preview.style.cssText='white-space:pre-wrap;font:12px/1.5 system-ui;color:#45576b;max-height:240px;overflow:auto';preview.open=false;
     const pretitle=document.createElement('summary');pretitle.textContent='View extracted source sample';const pre=document.createElement('pre');pre.style.whiteSpace='pre-wrap';pre.style.fontFamily='inherit';pre.id='source-summary-sample';
     preview.append(pretitle,pre);
-    wrap.append(h,p,extractBtn,aiBtn,status,summary,preview);
+    const everydayHeading=document.createElement('h3');everydayHeading.textContent='Everyday Summary';everydayHeading.style.cssText='font:700 19px Georgia,serif;margin:22px 0 7px';
+    const everydayText=document.createElement('div');everydayText.id='source-summary-everyday-text';everydayText.style.cssText='white-space:pre-wrap;font:14px/1.7 system-ui;color:#26374a';
+    const inDepthHeading=document.createElement('h3');inDepthHeading.textContent='In-Depth Analysis';inDepthHeading.style.cssText='font:700 19px Georgia,serif;margin:24px 0 7px';
+    const inDepthText=document.createElement('div');inDepthText.id='source-summary-indepth-text';inDepthText.style.cssText='white-space:pre-wrap;font:14px/1.7 system-ui;color:#26374a';
+    wrap.append(h,p,extractBtn,everydayBtn,inDepthBtn,status,everydayHeading,everydayText,inDepthHeading,inDepthText,preview);
     const anchor=byId('analysis-content')||document.querySelector('main')||document.body;
     anchor.parentNode.insertBefore(wrap,anchor);
     const id=new URLSearchParams(location.search).get('book') || new URLSearchParams(location.search).get('id');
-    if(id){try{const cached=JSON.parse(localStorage.getItem(keyName(id))||'null');if(cached?.summary){summary.textContent=cached.summary;status.textContent='Previously generated local summary based on '+cached.sampledSections+' sampled sections.'}}catch(e){}}
-    extractBtn.onclick=async()=>{extractBtn.disabled=true;try{await extract();byId('source-summary-sample').textContent=source.excerpt.slice(0,2600)+'\n[Preview ends]';}catch(e){explain(e.message)}finally{extractBtn.disabled=false}};
-    aiBtn.onclick=async()=>{aiBtn.disabled=true;try{await runAI()}catch(e){explain(e.message)}finally{aiBtn.disabled=false}};
+    if(id){const cached=readCache(id);renderSummaries(cached);if(cached.everyday||cached.inDepth)explain('Saved excerpt-based analyses available on this browser.');}
+    extractBtn.onclick=async()=>{extractBtn.disabled=true;try{
+      await extract();
+      byId('source-summary-sample').textContent=source.excerpt.slice(0,2600)+'\\n[Preview ends]';
+      everydayBtn.disabled=false;inDepthBtn.disabled=false;
+    }catch(e){explain(e.message)}finally{extractBtn.disabled=false}};
+    everydayBtn.onclick=async()=>{everydayBtn.disabled=true;try{await runAI('everyday')}catch(e){explain(e.message)}finally{everydayBtn.disabled=false}};
+    inDepthBtn.onclick=async()=>{inDepthBtn.disabled=true;try{await runAI('inDepth')}catch(e){explain(e.message)}finally{inDepthBtn.disabled=false}};
   }
   document.addEventListener('DOMContentLoaded',init);
 })();
