@@ -61,6 +61,7 @@ async function loadFromCatalogOrDB(url) {
       updateLoaderStatus('Loading book from local storage...');
       const userBook = await window.AthenaeumDB.getUserBookById(bookId);
       if (userBook && userBook.fileData) {
+        currentBookIdentifier = userBook.id || bookId;
         document.getElementById('reader-book-title').textContent = userBook.title;
         document.getElementById('reader-book-author').textContent = `by ${userBook.author}`;
         document.title = `${userBook.title} - Athenaeum Reader`;
