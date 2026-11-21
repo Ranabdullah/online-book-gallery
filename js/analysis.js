@@ -71,6 +71,8 @@ async function loadBookAndDossier(bookId) {
     let dossier = null;
     if (window.AthenaeumDB) {
       dossier = await window.AthenaeumDB.getBookAnalysis(bookId);
+      // Do not reuse fake 'complete dossiers' generated from titles by earlier releases.
+      if (dossier?.isPlaceholder || /placeholder analysis|refresh ai dossier/i.test(dossier?.comprehensiveSummary?.elevatorPitch || '')) dossier = null;
     }
 
     if (!dossier) {
@@ -934,45 +936,17 @@ Provide a thorough, PhD-level scholarly response to this question about "${title
 function setupRefreshDossierButton() {
   const btn = document.getElementById('btn-regenerate-ai');
   if (!btn) return;
-
-  btn.addEventListener('click', async () => {
-    if (!currentBookMeta) return;
-
-    const triggerGeneration = async () => {
-      btn.disabled = true;
-      btn.innerHTML = '<span class="loader-dot">✨</span> Analysing with AI...';
-
-      try {
-        const dossier = await generateAIDossier(currentBookMeta);
-        dossier.bookId = currentBookId;
-        currentDossier = dossier;
-
-        if (window.AthenaeumDB) {
-          await window.AthenaeumDB.saveBookAnalysis(currentBookId, dossier);
-        }
-
-        renderDossier(dossier, currentBookMeta);
-        btn.innerHTML = '<span>✅</span> Dossier Updated!';
-        setTimeout(() => {
-          btn.innerHTML = '<span>✨</span> Refresh AI Dossier';
-          btn.disabled = false;
-        }, 2500);
-
-      } catch (err) {
-        btn.disabled = false;
-        btn.innerHTML = '<span>✨</span> Refresh AI Dossier';
-        if (err.message === 'NO_KEY') {
-          promptForApiKey(triggerGeneration);
-        } else {
-          showToast('AI Analysis failed: ' + err.message);
-        }
-      }
-    };
-
-    if (!getGeminiApiKey()) {
-      promptForApiKey(triggerGeneration);
+  // Previous behaviour prompted a model with only title and author, which could
+  // fabricate book details. Direct visitors to the source-verified workflow.
+  btn.textContent = '📚 Everyday / In-Depth summaries';
+  btn.addEventListener('click', () => {
+    const sourcePanel=document.getElementById('source-summary-panel');
+    if(sourcePanel){
+      sourcePanel.scrollIntoView({behavior:'smooth',block:'start'});
+      const status=document.getElementById('source-summary-status');
+      if(status)status.textContent='Extract the real EPUB/PDF text, then select Everyday Summary or In-Depth Analysis. No book facts are generated from the title alone.';
     } else {
-      await triggerGeneration();
+      showToast('Source-based summary tool unavailable: reload the page.');
     }
   });
 }
