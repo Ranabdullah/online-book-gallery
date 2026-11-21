@@ -8,7 +8,7 @@
   <meta http-equiv="Expires" content="0">
   <title>The Cloud Library & Reader</title>
   <meta name="description" content="A pristine, high-speed online book gallery and reader for EPUB, PDF, and digital literature. Access your entire library anywhere.">
-  <link rel="stylesheet" href="css/style.css?v=3.6.1">
+  <link rel="stylesheet" href="css/style.css?v=3.6.2">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
@@ -79,6 +79,26 @@
       </div>
     </div>
   </header>
+
+  <!-- Featured book: randomly selected from available catalog titles -->
+  <section class="featured-book-section" id="featured-book-section" aria-label="Featured book">
+    <div class="container">
+      <div class="featured-book-panel">
+        <div class="featured-book-copy">
+          <span class="featured-book-eyebrow">✦ DISCOVER A BOOK</span>
+          <span class="featured-book-category" id="featured-book-category">Featured from your library</span>
+          <h2 id="featured-book-title">Find your next read</h2>
+          <p class="featured-book-byline" id="featured-book-author">Explore books from your collection.</p>
+          <p class="featured-book-description" id="featured-book-description">A different book will be selected each time you visit.</p>
+          <div class="featured-book-actions">
+            <a class="featured-book-read" id="featured-book-read" href="#books-grid">Browse books</a>
+            <button class="featured-book-next" id="featured-book-next" type="button" aria-label="Show another featured book">Another book →</button>
+          </div>
+        </div>
+        <div class="featured-book-art"><img id="featured-book-cover" alt="" src="" loading="eager"></div>
+      </div>
+    </div>
+  </section>
 
   <!-- Hero & Library Stats -->
   <section class="hero-section">
@@ -506,6 +526,6 @@
   <script src="js/sync.js?v=3.6.1"></script>
   <script src="js/book-manager.js?v=3.6.1"></script>
   <script src="js/recommendations.js?v=3.6.1"></script>
-  <script src="js/app.js?v=3.6.1"></script>
+  <script src="js/app.js?v=3.6.2"></script>
 </body>
 </html>
