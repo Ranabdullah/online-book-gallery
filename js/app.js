@@ -125,8 +125,13 @@ function renderFeaturedBook(chooseAnother = false) {
   document.getElementById('featured-book-author').textContent = book.author ? 'By ' + book.author : 'Author unknown';
   document.getElementById('featured-book-category').textContent = book.category || 'From the library';
   // Prefer a real catalog description. Never invent a plot summary when absent.
+  let savedSummary = null;
+  try { savedSummary = JSON.parse(localStorage.getItem('athenaeum_source_summary_' + book.id) || 'null'); } catch(e) {}
   document.getElementById('featured-book-description').textContent = book.description ||
-    'Discover this ' + (book.format || 'digital') + ' title in ' + (book.category || 'the library') + '. Open it to begin reading.';
+    (savedSummary?.summary ? 'Excerpt-based summary: ' + savedSummary.summary.slice(0, 360) + (savedSummary.summary.length > 360 ? '…' : '') :
+    'A verified summary is not available yet. Open Book Intelligence to extract text from this book and analyze it.');
+  const summaryLink = document.getElementById('featured-book-summary');
+  if(summaryLink) summaryLink.href = 'book-analysis.html?book=' + encodeURIComponent(book.id);
   const cover = document.getElementById('featured-book-cover');
   cover.src = book.cover;
   cover.alt = 'Cover of ' + (book.title || 'featured book');
