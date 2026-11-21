@@ -4,6 +4,40 @@
  * Permanently rendered in the right sidebar with clipboard export.
  */
 
+
+function athenaeumFindBook(query, exact = false) {
+  const books = window.AthenaeumCatalog || [];
+  const normal = s => String(s || '').normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\\s+/g,' ').trim();
+  const q = normal(query);
+  if (!q || q.length < 2) return [];
+  return books.filter(b => {
+    const name = normal(b.title);
+    return exact ? name === q : (name.includes(q) || normal(b.author).includes(q));
+  }).slice(0,5);
+}
+function showRecommendationMatches() {
+  const q = document.getElementById('rec-title')?.value || '';
+  const target = document.getElementById('rec-live-match');
+  if (!target) return;
+  const matches = athenaeumFindBook(q);
+  if (!matches.length) { target.replaceChildren(); return; }
+  const title = document.createElement('p');
+  title.textContent = 'Already in the library — open instead of recommending again';
+  title.className = 'rec-match-label';
+  target.replaceChildren(title);
+  for (const b of matches) {
+    const link = document.createElement('a');
+    link.className = 'rec-match-item';
+    link.href = 'reader.html?book=' + encodeURIComponent(b.file);
+    const name = document.createElement('strong');
+    name.textContent = b.title || 'Untitled';
+    const author = document.createElement('span');
+    author.textContent = b.author || 'Unknown author';
+    link.append(name, author);
+    target.append(link);
+  }
+}
+
 const STORAGE_KEY_RECS = 'athenaeum_recommendations';
 
 const INITIAL_RECOMMENDATIONS = [
@@ -105,6 +139,8 @@ function escapeHtml(str) {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderRecommendations();
+  document.getElementById('rec-title')?.addEventListener('input', showRecommendationMatches);
+  window.addEventListener('athenaeum:catalog-ready', showRecommendationMatches);
 
   const recForm = document.getElementById('rec-form');
   const btnCopy = document.getElementById('btn-copy-recs');
@@ -140,6 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!title || !author) {
         alert('Please provide both book title and writer name.');
+        return;
+      }
+
+      const alreadyHere = athenaeumFindBook(title, true).find(b => !author || (b.author||'').toLowerCase().includes(author.toLowerCase()) || author.toLowerCase().includes((b.author||'').toLowerCase()));
+      if (alreadyHere) {
+        window.location.href = 'reader.html?book=' + encodeURIComponent(alreadyHere.file);
         return;
       }
 
