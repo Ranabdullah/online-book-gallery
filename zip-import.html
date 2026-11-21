@@ -6,7 +6,7 @@
 <div class="panel"><h2>Detected books <span id="count"></span></h2><p><small>Matched and already hosted entries are skipped. Missing entries can be repaired locally; new titles can be added locally. Ambiguous matches require manual review.</small></p><div id="list" class="rows"></div></div>
 <div class="panel"><h2>Import log</h2><div id="log"></div></div>
 </main>
-<script src="js/vendor/jszip.min.js"></script><script src="js/vendor/pdf.min.js"></script><script src="js/db.js?v=3.8.0"></script><script src="js/book-manager.js?v=3.8.0"></script>
+<script src="js/vendor/jszip.min.js"></script><script src="js/vendor/pdf.min.js"></script><script>if(window.pdfjsLib)window.pdfjsLib.GlobalWorkerOptions.workerSrc="js/vendor/pdf.worker.min.js";</script><script src="js/db.js?v=3.8.0"></script><script src="js/book-manager.js?v=3.8.0"></script>
 <script>
 (()=>{const $=x=>document.getElementById(x);const norm=x=>String(x||'').normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g,'').replace(/\.(pdf|epub)$/,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 let zip=null,entries=[],catalog=[],busy=false;
