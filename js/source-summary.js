@@ -167,6 +167,23 @@
     anchor.parentNode.insertBefore(wrap,anchor);
     const id=new URLSearchParams(location.search).get('book') || new URLSearchParams(location.search).get('id');
     if(id){const cached=readCache(id);renderSummaries(cached);if(cached.everyday||cached.inDepth)explain('Saved excerpt-based analyses available on this browser.');}
+    // Gutenberg entries have no locally hosted source bytes. Show clearly attributed
+    // editorial introductions instead of offering extraction that must fail.
+    if (id && id.startsWith('new_pg_')) {
+      fetch('data/free-books.json', {cache:'no-store'}).then(r=>r.ok?r.json():[]).then(books=>{
+        const b=books.find(item=>item.id===id);
+        if(!b)return;
+        renderSummaries({
+          everyday:{text:b.summaries?.everyday||'No editorial overview is available.'},
+          inDepth:{text:b.summaries?.inDepth||'No editorial overview is available.'}
+        });
+        p.textContent='Editorial introductions to this public-domain work; not verified against a complete EPUB/PDF edition. Visit the official source page or import a downloaded file to use the text-based reader.';
+        extractBtn.textContent='Official source and local reader';
+        extractBtn.onclick=()=>{location.href='external-book.html?id='+encodeURIComponent(b.id)};
+        keyBtn.hidden=true;everydayBtn.hidden=true;inDepthBtn.hidden=true;
+        explain('Two editorial overviews available. Full-text source analysis requires an actual book file.');
+      }).catch(()=>explain('Could not load editorial overviews.'));
+    }
     keyBtn.onclick=()=>{if(typeof promptForApiKey==='function')promptForApiKey(()=>explain('Key saved in this browser. Select a summary level.'));else explain('Gemini configuration is unavailable.');};
     extractBtn.onclick=async()=>{extractBtn.disabled=true;try{
       await extract();
