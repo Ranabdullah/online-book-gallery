@@ -18,7 +18,7 @@
   });
   const explain = (value) => { const out=byId('source-summary-status'); if(out)out.textContent=value };
   async function extractEpub(buffer) {
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js', 'JSZip');
+    await loadScript('js/vendor/jszip.min.js', 'JSZip');
     const zip = await window.JSZip.loadAsync(buffer);
     const container = zip.file('META-INF/container.xml');
     if (!container) throw new Error('The EPUB has no container.xml');
@@ -57,8 +57,8 @@
     return {excerpt:samples.join('\n\n'),sampledSections:samples.length,partial:ids.length>selected.length};
   }
   async function extractPdf(buffer) {
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js', 'pdfjsLib');
-    window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    await loadScript('js/vendor/pdf.min.js', 'pdfjsLib');
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc='js/vendor/pdf.worker.min.js';
     const pdf=await window.pdfjsLib.getDocument({data:buffer}).promise;
     const chosen=new Set([1,2,3,4,5,6,Math.floor(pdf.numPages/2),pdf.numPages-1,pdf.numPages].filter(x=>x>=1&&x<=pdf.numPages));
     const samples=[];let total=0;
