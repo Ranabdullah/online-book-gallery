@@ -23,6 +23,7 @@ from pypdf import PdfReader
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "generated-summaries"
 REPORT = ROOT / "data" / "generated-summaries-status.json"
+FAILURES = ROOT / "data" / "generated-summaries-failures.json"
 MAX_FILE = 80 * 1024 * 1024
 MAX_EXCERPT = 26000
 SESSION = requests.Session()
@@ -88,7 +89,8 @@ def private_book_candidates():
                             "author": "Author not verified",
                             "category": item.get("category") or "Uncategorized",
                             "isHosted": True, "needsFix": False, "isExternal": False,
-                            "file": "private:" + key, "format": match.group(2).upper()})
+                            "file": "private:" + key, "format": match.group(2).upper(),
+                            "addedAt": item.get("uploaded")})
         cursor = body.get("cursor")
         if not cursor:
             return entries
@@ -241,9 +243,15 @@ def main():
         print(f"Private cloud books discovered: {len(private_books)}", flush=True)
     except Exception as ex:
         print(f"Private cloud discovery unavailable: {str(ex)[:180]}", flush=True)
-    # Process newly appended entries first, but eventually work through old books.
-    # Each successful book is skipped on all future scheduled runs.
-    candidates.sort(key=lambda b: (b.get("addedAt") is None, str(b.get("id", ""))))
+    # New private uploads take priority; then process repository books newest-first.
+    # Completed files are skipped permanently; temporarily failed files cool down.
+    candidates = sorted([b for b in candidates if str(b["file"]).startswith("private:")],
+                        key=lambda b: str(b.get("addedAt") or ""), reverse=True) + list(reversed(
+                        [b for b in candidates if not str(b["file"]).startswith("private:")]))
+    try:
+        failures = json.loads(FAILURES.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        failures = {}
     attempted = 0
     for book in candidates:
         destination = OUTPUT / (str(book.get("id") or "") + ".json")
@@ -258,6 +266,16 @@ def main():
                     continue
             except (ValueError, OSError):
                 pass
+        failure = failures.get(book["id"]) or {}
+        try:
+            last = dt.datetime.fromisoformat(str(failure.get("lastAttempt") or ""))
+            if last.tzinfo is None:
+                last = last.replace(tzinfo=dt.timezone.utc)
+            if dt.datetime.now(dt.timezone.utc) - last < dt.timedelta(days=7):
+                results["skipped"] += 1
+                continue
+        except ValueError:
+            pass
         if attempted >= limit:
             break
         attempted += 1
@@ -278,10 +296,14 @@ def main():
                                     "inDepth": {**common, "text": in_depth}}}
             destination.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             results["successful"].append(book["id"])
+            failures.pop(book["id"], None)
             print(f"SAVED {book['id']}: {book.get('title', '')[:90]}", flush=True)
         except Exception as ex:
             message = str(ex)[:220]
             results["failed"].append({"bookId": book.get("id"), "title": book.get("title"), "error": message})
+            if not message.startswith("FATAL_API_"):
+                failures[book["id"]] = {"lastAttempt": dt.datetime.now(dt.timezone.utc).isoformat(),
+                                        "error": message, "attempts": int(failures.get(book["id"], {}).get("attempts", 0)) + 1}
             print(f"SKIP {book.get('id')}: {message}", flush=True)
             if message.startswith("FATAL_API_"):
                 break
@@ -289,6 +311,7 @@ def main():
     results["eligible"] = len(candidates)
     results["publishedTotal"] = len(list(OUTPUT.glob("*.json")))
     REPORT.write_text(json.dumps(results, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    FAILURES.write_text(json.dumps(failures, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in results.items() if k not in ("failed", "successful")}, indent=2))
     # An API authentication failure should make the workflow visibly fail rather than
     # misleading the user that all summaries were generated.
