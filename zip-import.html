@@ -12,7 +12,7 @@
 <div class="panel"><h2>Detected books <span id="count"></span></h2><p><small>Matched and already hosted entries are skipped. Missing entries can be repaired locally; new titles can be added locally. Ambiguous matches require manual review.</small></p><div id="list" class="rows"></div></div>
 <div class="panel"><h2>Import log</h2><div id="log"></div></div>
 </main>
-<script src="js/vendor/jszip.min.js"></script><script src="js/vendor/pdf.min.js"></script><script>if(window.pdfjsLib)window.pdfjsLib.GlobalWorkerOptions.workerSrc="js/vendor/pdf.worker.min.js";</script><script src="js/db.js?v=3.8.0"></script><script src="js/book-manager.js?v=4.9.0"></script>
+<script src="js/vendor/jszip.min.js"></script><script src="js/vendor/pdf.min.js"></script><script>if(window.pdfjsLib)window.pdfjsLib.GlobalWorkerOptions.workerSrc="js/vendor/pdf.worker.min.js";</script><script src="js/db.js?v=3.8.0"></script><script src="js/book-manager.js?v=5.0.0"></script>
 <script>
 (()=>{const $=x=>document.getElementById(x);const norm=x=>String(x||'').normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g,'').replace(/\.(pdf|epub)$/,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 let zip=null,entries=[],catalog=[],busy=false;
@@ -23,7 +23,7 @@ const status=t=>$('status').textContent=t;
 const filename=path=>path.split('/').pop();
 function matches(name,path){
   const n=norm(name);
-  const archiveHit=catalog.find(b=>b.isArchiveRecord && b.originArchive===archiveName && b.originArchiveEntry===path);
+  const archiveHit=catalog.find(b=>b.originArchive===archiveName && b.originArchiveEntry===path);
   if(archiveHit)return [archiveHit];
   return catalog.filter(b=>{
     if (b.isArchiveRecord) return b.originArchive===archiveName && b.originArchiveEntry===path;
@@ -48,7 +48,14 @@ async function inspect(){
     const ar=await fetch('data/abdurrehman-archive.json',{cache:'no-store'});
     if(ar.ok) for(const b of (await ar.json()).books || []) catalog.push({id:b.id,title:b.displayTitle||b.title,originalName:b.path.split('/').pop(),author:'Author not confirmed',category:b.category,originArchive:b.archive,originArchiveEntry:b.path,isArchiveRecord:true,isHosted:false,needsFix:false,originMark:'A'});
   } catch(e){log('Archive inventory matching unavailable: '+e.message)}
-  const local=await window.AthenaeumDB.getAllUserBooks();for(const x of local)if(!catalog.some(b=>b.id===x.id))catalog.push(x);
+  const local=await window.AthenaeumDB.getAllUserBooks();
+  // Merge locally connected copies by stable ID so a previously imported ZIP
+  // does not keep appearing as "missing" on subsequent scans.
+  for(const x of local){
+    const pos=catalog.findIndex(b=>b.id===x.id);
+    if(pos>=0)catalog[pos]={...catalog[pos],...x,isHosted:Boolean(x.fileData),isArchiveRecord:false,needsFix:!x.fileData};
+    else catalog.push(x);
+  }
   zip=await JSZip.loadAsync(file);entries=[];
   for(const [path,item] of Object.entries(zip.files)){if(item.dir)continue;const base=filename(path);if(!/\.(epub|pdf)$/i.test(base))continue;const match=classify(base,path);entries.push({path,base,item,...match,checked:match.kind==='missing'||match.kind==='new'});}
   entries.sort((a,b)=>({missing:0,new:1,exist:2,review:3}[a.kind]-{missing:0,new:1,exist:2,review:3}[b.kind])||a.base.localeCompare(b.base));
