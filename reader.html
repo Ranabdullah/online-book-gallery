@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Reading - Athenaeum</title>
-  <link rel="stylesheet" href="css/reader.css?v=3.6.0">
+  <link rel="stylesheet" href="css/reader.css?v=4.7.0">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
@@ -154,8 +154,8 @@
       </div>
 
       <!-- Navigation Arrows -->
-      <button class="nav-arrow prev" id="btn-nav-prev" title="Previous page (Left Arrow)">&#10094;</button>
-      <button class="nav-arrow next" id="btn-nav-next" title="Next page (Right Arrow)">&#10095;</button>
+      <button class="nav-arrow prev" id="btn-nav-prev" aria-label="Previous page or scroll upward" title="Previous page / scroll up (Left Arrow)">&#10094;</button>
+      <button class="nav-arrow next" id="btn-nav-next" aria-label="Next page or scroll downward" title="Next page / scroll down (Right Arrow)">&#10095;</button>
 
       <!-- Book Page 3D Wrapper -->
       <div class="book-page-wrapper" id="book-page-wrapper">
@@ -297,7 +297,7 @@
   <script src="js/sync.js?v=3.4.0"></script>
 
   <!-- Reader Script -->
-  <script src="js/reader.js?v=3.6.0"></script>
+  <script src="js/reader.js?v=4.7.0"></script>
   <script src="js/summary.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
