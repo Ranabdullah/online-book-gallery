@@ -5,9 +5,9 @@
  * - Manages book additions and metadata/cover edits
  */
 
-async function processAndAddBook(file) {
+async function processAndAddBook(file, options = {}) {
   const ext = file.name.split('.').pop().toLowerCase();
-  const bookId = 'user_book_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+  const bookId = options.catalogRecord?.id || ('user_book_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8));
   const arrayBuffer = await file.arrayBuffer();
 
   let title = cleanFileName(file.name);
@@ -148,6 +148,22 @@ async function processAndAddBook(file) {
     addedAt: Date.now()
   };
 
+  // Import directly under the existing catalog ID. Do not write a temporary
+  // duplicate and then re-save a second giant ArrayBuffer.
+  if (options.catalogRecord) {
+    const record = options.catalogRecord;
+    if (record.title) newBook.title = record.title;
+    if (record.category) newBook.category = record.category;
+    if (record.author && !/^(unknown|author not confirmed|not verified)/i.test(record.author)) newBook.author = record.author;
+    newBook.isArchiveRecord = false;
+    newBook.needsFix = false;
+    newBook.isHosted = true;
+    newBook.isLocalRepair = true;
+    newBook.summaryStatus = 'awaiting_source_analysis';
+  }
+  for (const key of ['originMark','originAttribution','originArchive','originArchiveEntry','originKind']) {
+    if (typeof options[key] === 'string' && options[key]) newBook[key] = options[key];
+  }
   await window.AthenaeumDB.saveUserBook(newBook);
   window.dispatchEvent(new CustomEvent('athenaeum:book-added', { detail: newBook }));
   return newBook;
