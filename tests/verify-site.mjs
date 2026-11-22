@@ -5,11 +5,11 @@ import assert from 'node:assert/strict';
 const read = path => fs.readFileSync(path, 'utf8');
 let checks = 0;
 const pass = (condition, description) => { assert.ok(condition,description);checks++;console.log('✓ '+description); };
-for (const file of ['js/app.js','js/book-manager.js','js/reader.js','js/db.js','sw.js','js/shared-library-config.js']) {
+for (const file of ['js/app.js','js/bulk-summaries.js','js/source-summary.js','js/book-manager.js','js/reader.js','js/db.js','sw.js','js/shared-library-config.js']) {
   new vm.Script(read(file), {filename:file});
   pass(true,'JavaScript syntax: '+file);
 }
-for (const file of ['index.html','shared-library.html','zip-import.html','reader.html','my-hub.html','archive-book.html','external-book.html']) {
+for (const file of ['index.html','bulk-summaries.html','shared-library.html','zip-import.html','reader.html','my-hub.html','archive-book.html','external-book.html']) {
   const html=read(file);
   for(const [_,source] of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) new vm.Script(source,{filename:file});
   pass(true,'Inline JavaScript syntax: '+file);
@@ -41,4 +41,10 @@ const normal=s=>String(s||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]
 const titles=new Set(R.map(b=>normal(b.title))); for(const b of N)titles.add(normal(b.title));
 let included=0;for(const b of A){const key=normal(b.title);if(key.length>=3&&!titles.has(key)){included++;titles.add(key)}}
 pass(included>400,'Archive records safely deduplicate by normalized title');
+const bulk=read('js/bulk-summaries.js');
+pass(bulk.includes('AthenaeumSourceEngine.extractForBook'),'Bulk processing uses real PDF/EPUB source extraction');
+pass(bulk.includes("athenaeum_summaries_v2_"),'Bulk output shares the individual analysis cache');
+pass(bulk.includes('if(halt)break'),'Bulk processing can be interrupted');
+pass(bulk.includes('saved(b.id).everyday?.text'),'Existing summaries are skipped by default');
+pass(read('bulk-summaries.html').includes('consent'),'Gemini source sharing requires explicit user consent');
 console.log('PASSED '+checks+' static checks; cloud integration and real EPUB/PDF opening still require live testing.');
