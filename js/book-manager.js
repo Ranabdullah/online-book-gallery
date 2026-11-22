@@ -165,6 +165,13 @@ async function processAndAddBook(file, options = {}) {
     if (typeof options[key] === 'string' && options[key]) newBook[key] = options[key];
   }
   await window.AthenaeumDB.saveUserBook(newBook);
+  // A successful IndexedDB write alone is not enough: verify the bytes can be
+  // retrieved before the catalog declares this book ready to read.
+  const verified = await window.AthenaeumDB.getUserBookById(newBook.id);
+  const savedBytes = verified?.fileData?.byteLength || verified?.fileData?.size || 0;
+  if (!verified || savedBytes !== file.size || !savedBytes) {
+    throw new Error('The book file could not be verified in local storage. Keep the original ZIP and retry.');
+  }
   window.dispatchEvent(new CustomEvent('athenaeum:book-added', { detail: newBook }));
   return newBook;
 }
