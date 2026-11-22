@@ -7,7 +7,7 @@
 
 async function processAndAddBook(file) {
   const ext = file.name.split('.').pop().toLowerCase();
-  const bookId = 'user_book_' + Date.now();
+  const bookId = 'user_book_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
   const arrayBuffer = await file.arrayBuffer();
 
   let title = cleanFileName(file.name);
@@ -96,7 +96,8 @@ async function processAndAddBook(file) {
   } else if (ext === 'pdf') {
     try {
       if (typeof pdfjsLib !== 'undefined') {
-        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+        // PDF.js transfers/detaches its input buffer; keep the original for IndexedDB.
+        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer.slice(0) });
         const pdfDoc = await loadingTask.promise;
         
         // Render 1st page to canvas for cover
