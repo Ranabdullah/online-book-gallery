@@ -84,10 +84,10 @@ async function loadCatalog() {
               id:item.id, title:item.displayTitle || item.title, author:item.authorVerified ? item.author : 'Author not confirmed',
               category:item.category, format:item.format, sizeMB:item.sizeMB,
               cover:'', file:'', isHosted:false, needsFix:false,
-              isArchiveRecord:true, readingAvailable:false,
+              isArchiveRecord:true, recordType:item.recordType || 'book-format archive entry', readingAvailable:false,
               originMark:'A', originAttribution:'Abdurrehman (archive supplied)',
               originArchive:item.archive, originArchiveEntry:item.path,
-              description:'Listed in Abdurrehman’s '+item.category+' ZIP archive ('+item.format+'). The book text has not been imported or analysed, so a content summary cannot yet be provided.',
+              description:item.description || ('Archive entry in the '+item.category+' collection; source text not yet verified.'),
               summaries:{everyday:null,inDepth:null}, summaryStatus:'awaiting_source_file'
             });
           }
@@ -348,7 +348,7 @@ function renderBooks() {
           <img class="book-cover" src="${b.cover || 'data:,'}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="fallbackBookCover(this)">
           <span class="origin-marker" title="${escapeHtml(originInfo)}" aria-label="Book origin: ${escapeHtml(originInfo)}" style="position:absolute;top:8px;left:8px;z-index:5;background:${originColor};color:#fff;border:2px solid #fff6;border-radius:50%;width:29px;height:29px;display:flex;align-items:center;justify-content:center;font:800 15px system-ui;box-shadow:0 2px 8px #0008;">${originMark}</span>
           ${isNeedsUpload ? `<span class="format-badge" style="background: #ea580c; left: 8px; right: auto; font-size: 10px; font-weight: 700;">⚠️ NEEDS FILE</span>` : ''}
-          ${b.isArchiveRecord ? `<span class="format-badge" style="background:#704a8f;right:8px;top:37px">ARCHIVE ONLY</span>` : ''}
+          ${b.isArchiveRecord ? `<span class="format-badge" style="background:#704a8f;right:8px;top:37px">${b.recordType === 'book-format archive entry' ? 'ARCHIVE ONLY' : 'DOCUMENT'}</span>` : ''}
           ${b.isUserAdded ? `<span class="user-added-badge">NEW</span>` : ''}
           <span class="format-badge ${b.format.toLowerCase()}">${b.format}</span>
           <button class="bookmark-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${b.id}')" title="${isFav ? 'Remove favorite' : 'Add favorite'}">
