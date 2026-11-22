@@ -325,6 +325,8 @@ function filterAndSortBooks() {
   });
 }
 
+let visibleBookLimit = 72;
+let previousFilterSignature = '';
 function renderBooks() {
   const grid = document.getElementById('books-grid');
   const emptyState = document.getElementById('empty-state');
@@ -332,6 +334,13 @@ function renderBooks() {
   if (!grid) return;
 
   const filtered = filterAndSortBooks();
+  const signature = [currentCategory,currentOrigin,currentFormat,currentSort,searchQuery,showFavoritesOnly].join('|');
+  if (signature !== previousFilterSignature) {visibleBookLimit = 72;previousFilterSignature = signature;}
+  const loadMore = document.getElementById('btn-load-more-books');
+  if (loadMore) {
+    loadMore.hidden = filtered.length <= visibleBookLimit;
+    loadMore.textContent = 'Show more (' + Math.max(0,filtered.length-visibleBookLimit) + ' remaining)';
+  }
   if (visibleCount) visibleCount.textContent = filtered.length;
 
   if (filtered.length === 0) {
@@ -345,7 +354,7 @@ function renderBooks() {
 
   const favs = getFavorites();
 
-  grid.innerHTML = filtered.map(b => {
+  grid.innerHTML = filtered.slice(0, visibleBookLimit).map(b => {
     const isFav = favs.includes(b.id);
     const external = Boolean(b.isExternal && /^https:\/\/www\.gutenberg\.org\/ebooks\/\d+$/.test(b.externalUrl||''));
     const readUrl = b.isArchiveRecord ? `archive-book.html?id=${encodeURIComponent(b.id)}` : external ? `external-book.html?id=${encodeURIComponent(b.id)}` : (b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#');
@@ -957,6 +966,12 @@ document.addEventListener('DOMContentLoaded', () => {
       renderBooks();
     });
   }
+
+  const moreButton = document.getElementById('btn-load-more-books');
+  if (moreButton) moreButton.addEventListener('click', () => {
+    visibleBookLimit += 72;
+    renderBooks();
+  });
 
   // Missing files is a utility, not a book genre.
   const missingFilesButton = document.getElementById('pill-needs-upload');
