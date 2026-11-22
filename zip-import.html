@@ -8,7 +8,7 @@
 <option value="A" selected>A — Abdurrehman's ZIP collection</option>
 <option value="R">R — My original collection</option>
 </select>
-<p><small>All newly imported entries from this ZIP receive the selected source marker and archive filename. Already hosted books retain their existing provenance.</small></p><p><small>Supports .pdf and .epub entries. Other file types will be listed as unsupported. Files are processed on your device.</small></p><div class="flex"><button type="button" id="inspect">Inspect ZIP and match books</button><button type="button" id="import" disabled>Import selected books to this device</button></div><p id="status" role="status"></p></div>
+<p><small>All newly imported entries from this ZIP receive the selected source marker and archive filename. Already hosted books retain their existing provenance.</small></p><p><small>Supports .pdf and .epub entries. Other file types will be listed as unsupported. Files are processed on your device.</small></p><label style="display:flex;align-items:center;gap:10px;font-size:13px"><input id="auto-connect" type="checkbox" checked> Automatically connect matching books after inspection</label><div class="flex"><button type="button" id="inspect">Inspect ZIP and connect matches</button><button type="button" id="import" disabled>Import selected books to this device</button></div><p id="status" role="status"></p></div>
 <div class="panel"><h2>Detected books <span id="count"></span></h2><p><small>Matched and already hosted entries are skipped. Matched archive entries can be connected with one click. A match is not an error: the file is connected only after importing. Already available files are skipped. Ambiguous matches require review.</small></p><div id="list" class="rows"></div></div>
 <div class="panel"><h2>Import log</h2><div id="log"></div></div>
 </main>
@@ -20,7 +20,7 @@ let archiveName='';
 const label=x=>{const e=document.createElement('span');e.className='pill '+x;return e};
 const lines=[];const log=t=>{lines.push(t);$('log').textContent=lines.join('\n');$('log').scrollTop=$('log').scrollHeight};
 const status=t=>$('status').textContent=t;
-const updateButton=()=>{ $('import').disabled=busy||!zip||!entries.some(x=>x.checked&&(x.kind==='missing'||x.kind==='new')); $('import').textContent='Connect '+entries.filter(x=>x.checked&&(x.kind==='missing'||x.kind==='new')).length+' selected files locally'; };
+const updateButton=()=>{ $('import').disabled=busy||!zip||!entries.some(x=>x.checked&&(x.kind==='missing'||x.kind==='new')); $('import').textContent='Import '+entries.filter(x=>x.checked&&(x.kind==='missing'||x.kind==='new')).length+' selected files'; };
 const filename=path=>path.split('/').pop();
 function matches(name,path){
   const n=norm(name);
@@ -42,6 +42,7 @@ function classify(name,path) {
 async function inspect(){
  if(busy)return;const file=$('zip').files[0];if(!file){status('Choose a ZIP file first.');return}if(file.size>650*1024*1024){status('This ZIP is too large for the browser importer. Split it into smaller archives first.');return}
  busy=true;$('inspect').disabled=true;$('import').disabled=true;status('Opening archive and reading its directory…');
+ let autoStart=false;
  try{
   const r=await fetch('data/books.json',{cache:'no-store'});if(!r.ok)throw new Error('Unable to load the library catalog.');
   catalog=await r.json();archiveName=file.name;
@@ -60,17 +61,20 @@ async function inspect(){
   zip=await JSZip.loadAsync(file);entries=[];
   for(const [path,item] of Object.entries(zip.files)){if(item.dir)continue;const base=filename(path);if(!/\.(epub|pdf)$/i.test(base))continue;const match=classify(base,path);entries.push({path,base,item,...match,checked:match.kind==='missing'||match.kind==='new'});}
   entries.sort((a,b)=>({missing:0,new:1,exist:2,review:3}[a.kind]-{missing:0,new:1,exist:2,review:3}[b.kind])||a.base.localeCompare(b.base));
-  render();status('Found '+entries.length+' EPUB/PDF files: '+entries.filter(x=>x.kind==='missing').length+' ready to connect, '+entries.filter(x=>x.kind==='new').length+' new titles, '+entries.filter(x=>x.kind==='exist').length+' already available. Select Import to save matching files locally.');
- }catch(e){status('ZIP inspection failed: '+e.message);zip=null}finally{busy=false;$('inspect').disabled=false;updateButton();}
+  render();const matchesCount=entries.filter(x=>x.kind==='missing').length;
+  autoStart=matchesCount>0 && $('auto-connect').checked;
+  status('Found '+entries.length+' EPUB/PDF files: '+matchesCount+' matching titles, '+entries.filter(x=>x.kind==='new').length+' new titles, '+entries.filter(x=>x.kind==='exist').length+' already available. '+(autoStart?'Connecting the matching books now…':'Select Import to save selected files locally.'));
+ }catch(e){status('ZIP inspection failed: '+e.message);zip=null;autoStart=false}finally{busy=false;$('inspect').disabled=false;updateButton();}
+ if(autoStart)await importSelected(true);
 }
 function render(){const list=$('list');list.replaceChildren();$('count').textContent='('+entries.length+')';if(!entries.length){list.textContent='No supported EPUB/PDF files were found.';return}
  entries.forEach((e,i)=>{const row=document.createElement('div');row.className='item';const chk=document.createElement('input');chk.type='checkbox';chk.checked=e.checked;chk.disabled=e.kind==='exist'||e.kind==='review';chk.setAttribute('aria-label','Import '+e.base);chk.onchange=()=>{e.checked=chk.checked;updateButton()};
  const text=document.createElement('div'),name=document.createElement('strong');name.textContent=e.base;const sub=document.createElement('div');sub.className='sub';sub.textContent=e.path+(e.record?' → '+e.record.title:'');text.append(name,sub);const tag=label(e.kind);tag.textContent=e.title;tag.title=e.kind==='missing'?'This file matches a catalog record. Click Import to save a readable local copy.':e.kind==='exist'?'Already in the hosted or local library. It will be skipped.':e.title;row.append(chk,text,tag);list.append(row);});
 }
-async function importSelected(){
+async function importSelected(onlyMatched=false){
  if(busy||!zip)return;
  busy=true;$('import').disabled=true;$('inspect').disabled=true;
- const chosen=entries.filter(x=>x.checked&&!['exist','review'].includes(x.kind));
+ const chosen=entries.filter(x=>x.checked&&(onlyMatched?x.kind==='missing':(x.kind==='missing'||x.kind==='new')));
  let done=0,errors=0;
  for(const e of chosen){
    status('Importing '+(done+errors+1)+' of '+chosen.length+': '+e.base);
@@ -94,9 +98,9 @@ async function importSelected(){
      render();
    } catch(err){errors++;e.title='Failed — retry';log('FAILED: '+e.base+' — '+(err.message||err));}
  }
- status('Completed: '+done+' locally imported; '+errors+' failed. Files stay in browser storage on this device. Original ZIP remains unchanged.');
+ status('Connected '+done+' book files locally; '+errors+' failed. '+entries.filter(x=>x.kind==='new').length+' unmatched titles are not automatically added. These files are NOT uploaded to the shared cloud.');
  busy=false;$('inspect').disabled=false;updateButton();render();
 }
- $('inspect').onclick=inspect;$('import').onclick=importSelected;
+ $('inspect').onclick=inspect;$('import').onclick=()=>importSelected(false);
 })();
 </script></body></html>
