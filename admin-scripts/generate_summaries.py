@@ -137,13 +137,22 @@ def gemini(book, excerpt, scope, model, api_key):
         "CATALOG AUTHOR (not verified): " + str(book.get("author") or "") + "\n"
         "SOURCE SCOPE: " + scope + "\n\n"
         "ACTUAL SOURCE EXCERPTS:\n" + excerpt + "\n\n"
-        "Return exactly JSON with keys everyday, inDepth. "
+        "Return JSON with three keys: everyday, inDepth, dossier. "
+        "dossier must be an object with: coreThesis (plain text), executiveOverview (plain text), "
+        "sampledSectionBreakdown (array up to 4 objects with section, summary, themes [strings]), "
+        "moralConclusions (array up to 5 evidenced interpretations), "
+        "writingStyle (object with voice, tone, technique), "
+        "grammar (object with syntax, diction), "
+        "topics (array of up to 5 objects with topic and insight), "
+        "concepts (array of up to 5 objects with concept and description). "
+        "Keep those fields concise; omit unsupported topics instead of guessing. "
+        "The breakdown must describe ONLY sampled sections, NEVER assert a complete chapter/act map. "
         "Everyday: about 180–250 words, plain language, 3–5 concrete takeaways. "
         "InDepth: about 400–650 words of advanced but readable analysis of themes, "
         "structure and style only if evidenced by excerpts, using actual provided "
         "PDF page or EPUB spine section markers. For non-narrative documents or forms, "
         "explain their actual content rather than inventing literary plots. "
-        "Both must state explicitly that this is based on EXCERPTS ONLY, "
+        "Both analyses, executive overview and section descriptions must state explicitly that this is based on EXCERPTS ONLY, "
         "not a verified full-book analysis. Never fabricate quotations, scholarship, "
         "events, characters, chapter names, external research or page references."
     )
@@ -167,7 +176,8 @@ def gemini(book, excerpt, scope, model, api_key):
     a, b = parsed.get("everyday"), parsed.get("inDepth")
     if not isinstance(a, str) or len(a.strip()) < 160 or not isinstance(b, str) or len(b.strip()) < 320:
         raise ValueError("Gemini returned incomplete summaries")
-    return a.strip(), b.strip()
+    dossier = parsed.get("dossier") if isinstance(parsed.get("dossier"), dict) else {}
+    return a.strip(), b.strip(), dossier
 
 
 def main():
@@ -224,11 +234,76 @@ def main():
             path = safe_source_file(book)
             payload = fetch_book(path)
             excerpt, scope, sections = extract_pdf(payload) if path.lower().endswith(".pdf") else extract_epub(payload)
-            everyday, in_depth = gemini(book, excerpt, scope, args.model, key)
+            everyday, in_depth, raw_dossier = gemini(book, excerpt, scope, args.model, key)
             now = dt.datetime.now(dt.timezone.utc).isoformat()
             common = {"source": "actual-book-excerpts", "partial": True, "sections": sections,
                       "sourceScope": scope, "model": args.model, "createdAt": now}
+            sections = raw_dossier.get("sampledSectionBreakdown") or []
+            if not isinstance(sections, list):
+                sections = []
+            moral = raw_dossier.get("moralConclusions") or []
+            if not isinstance(moral, list):
+                moral = []
+            style = raw_dossier.get("writingStyle") or {}
+            grammar = raw_dossier.get("grammar") or {}
+            topics = raw_dossier.get("topics") or []
+            concepts = raw_dossier.get("concepts") or []
+            if not isinstance(style, dict):
+                style = {}
+            if not isinstance(grammar, dict):
+                grammar = {}
+            if not isinstance(topics, list):
+                topics = []
+            if not isinstance(concepts, list):
+                concepts = []
+            overview = str(raw_dossier.get("executiveOverview") or "").strip()
+            core = str(raw_dossier.get("coreThesis") or "").strip()
+            dossier = {
+                "sourceStatus": "excerpt_based",
+                "isPlaceholder": False,
+                "genre": book.get("category", "Uncategorized"),
+                "difficultyLevel": "Not assessed",
+                "readingTimeMinutes": None,
+                "whatTheBookSays": {"coreThesis": core or overview or everyday[:250],
+                                    "premise": "Summary based on sampled source excerpts only."},
+                "comprehensiveSummary": {
+                    "elevatorPitch": overview or everyday,
+                    "acts": [
+                        {"act": str(row.get("section") or "Sampled source section")[:200],
+                         "chapters": "Sampled pages/sections only — not a complete breakdown",
+                         "summary": str(row.get("summary") or "")[:1200],
+                         "keyThemes": [str(x)[:100] for x in (row.get("themes") or [])[:5]]}
+                        for row in sections[:4] if isinstance(row, dict) and row.get("summary")
+                    ],
+                    "moralConclusions": [str(x)[:500] for x in moral[:5] if isinstance(x, str)]
+                },
+                "writingStyle": {
+                    "voice": str(style.get("voice") or "Not assessed from available excerpts"),
+                    "tonalSpectrum": str(style.get("tone") or "Not assessed from available excerpts"),
+                    "cinematicMontage": str(style.get("technique") or "Not assessed from available excerpts"),
+                    "symbolism": {}
+                },
+                "grammarAndLinguisticCharacteristics": {
+                    "grammaticalComplexityScore": "Not numerically assessed",
+                    "syntaxArchitecture": str(grammar.get("syntax") or "Not assessed"),
+                    "dictionProfile": str(grammar.get("diction") or "Not assessed"),
+                    "neologismsAndPortmanteaus": "Not assessed"
+                },
+                "topicsDiscussed": [
+                    {"topic": str(row.get("topic") or "")[:160],
+                     "insight": str(row.get("insight") or "")[:600]}
+                    for row in topics[:5] if isinstance(row, dict)
+                ],
+                "coreConcepts": [
+                    {"concept": str(row.get("concept") or "")[:160],
+                     "description": str(row.get("description") or "")[:600]}
+                    for row in concepts[:5] if isinstance(row, dict)
+                ],
+                "difficultWordsGlossary": [],
+                "discussionQuestions": []
+            }
             result = {"bookId": book["id"], "title": book.get("title"), "author": book.get("author"),
+                      "sourceScope": scope, "dossier": dossier,
                       "summaries": {"everyday": {**common, "text": everyday},
                                     "inDepth": {**common, "text": in_depth}}}
             destination.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
