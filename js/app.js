@@ -197,21 +197,27 @@ function fallbackBookCover(img) {
   if (!img || img.dataset.fallbackApplied) return;
   img.dataset.fallbackApplied = '1';
   const raw = (img.alt || 'Untitled Book').replace(/^Cover of /, '');
-  const title = raw.length > 56 ? raw.substring(0, 53) + '…' : raw;
-  const words = title.split(/\s+/);
-  const lines = [];
-  let line = '';
-  for (const word of words) {
-    if ((line + ' ' + word).trim().length > 20 && line) { lines.push(line); line = word; }
-    else line = (line + ' ' + word).trim();
+  // Break both ordinary words and old filename fragments without allowing
+  // oversized strings to overflow the cover's book-frame.
+  const title = raw.length > 78 ? raw.substring(0, 75) + '…' : raw;
+  const words = title.split(/\s+/).flatMap(word => {
+    const chunks=[];
+    for (let i=0;i<word.length;i+=16) chunks.push(word.slice(i,i+16));
+    return chunks;
+  });
+  const lines=[];
+  let line='';
+  for(const word of words){
+    if ((line+' '+word).trim().length > 18 && line) {lines.push(line);line=word;}
+    else line=(line+' '+word).trim();
   }
-  if (line) lines.push(line);
+  if(line)lines.push(line);
   const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const seed = [...raw].reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,7);
   const palette = [['#14273c','#4b657c'],['#213b35','#67806a'],['#35293f','#856e9b'],['#503326','#ba7e4a']][seed % 4];
-  const spans = lines.slice(0,5).map((l,i)=>'<tspan x="50%" dy="'+(i?31:0)+'">'+esc(l)+'</tspan>').join('');
-  const y = 295 - (Math.min(lines.length,5)-1)*15;
-  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="'+palette[0]+'"/><stop offset="1" stop-color="'+palette[1]+'"/></linearGradient></defs><rect width="400" height="600" fill="url(#g)"/><rect x="23" y="22" width="354" height="556" rx="2" fill="none" stroke="#eacda1" stroke-opacity=".65" stroke-width="2"/><path d="M80 120H320M80 490H320" stroke="#eacda1" stroke-opacity=".72" stroke-width="2"/><circle cx="200" cy="172" r="29" fill="none" stroke="#eacda1"/><path d="M180 172h40M200 152v40" stroke="#eacda1"/><text x="50%" y="'+y+'" text-anchor="middle" fill="#fff8e9" font-family="Georgia,serif" font-size="25" font-weight="700">'+spans+'</text><text x="50%" y="530" text-anchor="middle" fill="#eacda1" font-family="Georgia,serif" font-size="15" letter-spacing="3">ATHENAEUM</text></svg>';
+  const spans = lines.slice(0,6).map((l,i)=>'<tspan x="50%" dy="'+(i?30:0)+'">'+esc(l)+'</tspan>').join('');
+  const y = 310 - (Math.min(lines.length,6)-1)*15;
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="'+palette[0]+'"/><stop offset="1" stop-color="'+palette[1]+'"/></linearGradient></defs><rect width="400" height="600" fill="url(#g)"/><rect x="23" y="22" width="354" height="556" rx="2" fill="none" stroke="#eacda1" stroke-opacity=".65" stroke-width="2"/><path d="M80 120H320M80 490H320" stroke="#eacda1" stroke-opacity=".72" stroke-width="2"/><circle cx="200" cy="172" r="29" fill="none" stroke="#eacda1"/><path d="M180 172h40M200 152v40" stroke="#eacda1"/><text x="50%" y="'+y+'" text-anchor="middle" fill="#fff8e9" font-family="Georgia,serif" font-size="24" font-weight="700">'+spans+'</text><text x="50%" y="530" text-anchor="middle" fill="#eacda1" font-family="Georgia,serif" font-size="15" letter-spacing="3">ATHENAEUM</text></svg>';
   img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 window.fallbackBookCover = fallbackBookCover;
