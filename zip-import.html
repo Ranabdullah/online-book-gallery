@@ -12,7 +12,7 @@
 <div class="panel"><h2>Detected books <span id="count"></span></h2><p><small>Matched and already hosted entries are skipped. Missing entries can be repaired locally; new titles can be added locally. Ambiguous matches require manual review.</small></p><div id="list" class="rows"></div></div>
 <div class="panel"><h2>Import log</h2><div id="log"></div></div>
 </main>
-<script src="js/vendor/jszip.min.js"></script><script src="js/vendor/pdf.min.js"></script><script>if(window.pdfjsLib)window.pdfjsLib.GlobalWorkerOptions.workerSrc="js/vendor/pdf.worker.min.js";</script><script src="js/db.js?v=3.8.0"></script><script src="js/book-manager.js?v=3.8.0"></script>
+<script src="js/vendor/jszip.min.js"></script><script src="js/vendor/pdf.min.js"></script><script>if(window.pdfjsLib)window.pdfjsLib.GlobalWorkerOptions.workerSrc="js/vendor/pdf.worker.min.js";</script><script src="js/db.js?v=3.8.0"></script><script src="js/book-manager.js?v=4.6.0"></script>
 <script>
 (()=>{const $=x=>document.getElementById(x);const norm=x=>String(x||'').normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g,'').replace(/\.(pdf|epub)$/,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 let zip=null,entries=[],catalog=[],busy=false;
@@ -65,7 +65,7 @@ const sourceName=source==='A'?'Abdurrehman':'Original Athenaeum collection';
 const provenance={originMark:source,originAttribution:sourceName,originArchive:$('zip').files[0]?.name||'',originArchiveEntry:e.path,originKind:'user-identified-zip'};
 if(e.kind==='missing'&&e.record){const old=b.id;const author=String(e.record.author||'').match(/^(Archaeology and Anthropology|Arts|Unknown)$/i)&&b.author!=='Unknown Author'?b.author:e.record.author;const restored={...b,id:e.record.id,title:e.record.title,author:author||b.author,category:e.record.category==='Uncategorized'?b.category:e.record.category,file:'idb://'+e.record.id,isHosted:true,needsFix:false,isArchiveRecord:false,isLocalRepair:true,...provenance};await window.AthenaeumDB.saveUserBook(restored);await window.AthenaeumDB.deleteUserBook(old);log('REPAIRED locally: '+e.record.title+' (catalog ID '+e.record.id+')');}else{await window.AthenaeumDB.saveUserBook({...b,...provenance});log('ADDED locally ['+source+']: '+b.title);}done++;}
  catch(err){errors++;log('FAILED: '+e.base+' — '+err.message)}}
- status('Completed: '+done+' locally imported; '+errors+' failed. Original ZIP remains unchanged.');busy=false;$('import').disabled=false;$('inspect').disabled=false;}
+ status('Completed: '+done+' locally imported; '+errors+' failed. Files stay in browser storage on this device. Original ZIP remains unchanged.');busy=false;$('import').disabled=false;$('inspect').disabled=false;}
  $('inspect').onclick=inspect;$('import').onclick=importSelected;
 })();
 </script></body></html>
