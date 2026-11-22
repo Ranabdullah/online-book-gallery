@@ -11,8 +11,8 @@
 <label for="limit">Books per batch (1–1000)</label><input id="limit" type="number" value="10" min="1" max="1000" style="width:125px">
 <label class="check"><input id="overwrite" type="checkbox">Regenerate books that already have two summaries</label>
 <label class="check"><input id="consent" type="checkbox">I authorize sending sampled source text to Gemini and understand limits or charges may apply.</label>
-<div class="row"><button id="count">Count pending</button><button id="start">Generate both levels</button><button id="stop" disabled>Stop after current</button><button id="export">Export saved summaries (JSON)</button></div>
+<div class="row"><button id="count">Count pending</button><button id="start">Generate both levels</button><button id="stop" disabled>Stop after current</button><button id="export">Export saved summaries (JSON)</button><label for="import" style="margin:0">Import backed-up summaries (.json)</label><input id="import" type="file" accept=".json,application/json" style="max-width:240px"></div>
 <progress id="progress" value="0" max="100"></progress><p id="status" role="status">Loading…</p>
-<p class="small">Each successful book saves to the same browser-local summary records used by Book Intelligence. Restart the batch to resume. To share summaries across devices, export the JSON and publish it through an authorized deployment process; this page does not silently upload data.</p>
+<p class="small">Each successful book saves to the same browser-local summary records used by Book Intelligence. Restart the batch to resume. To transfer generated summaries to another device, export JSON here and import it on that device. This page does not silently upload data to shared cloud storage.</p>
 </section><section class="box"><h2>Generation log</h2><div id="log"></div></section></main>
 <script src="js/db.js?v=3.8.0"></script><script src="js/source-summary.js?v=6"></script><script src="js/bulk-summaries.js?v=1"></script></body></html>
