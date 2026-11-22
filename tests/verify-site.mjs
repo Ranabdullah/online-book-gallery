@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 const read = path => fs.readFileSync(path, 'utf8');
 let checks = 0;
 const pass = (condition, description) => { assert.ok(condition,description);checks++;console.log('✓ '+description); };
-for (const file of ['js/app.js','js/bulk-summaries.js','js/source-summary.js','js/book-manager.js','js/reader.js','js/db.js','sw.js','js/shared-library-config.js']) {
+for (const file of ['js/app.js','js/analysis.js','js/bulk-summaries.js','js/source-summary.js','js/book-manager.js','js/reader.js','js/db.js','sw.js','js/shared-library-config.js']) {
   new vm.Script(read(file), {filename:file});
   pass(true,'JavaScript syntax: '+file);
 }
@@ -47,4 +47,10 @@ pass(bulk.includes("athenaeum_summaries_v2_"),'Bulk output shares the individual
 pass(bulk.includes('if(halt)break'),'Bulk processing can be interrupted');
 pass(bulk.includes('saved(b.id).everyday?.text'),'Existing summaries are skipped by default');
 pass(read('bulk-summaries.html').includes('consent'),'Gemini source sharing requires explicit user consent');
+const analyzer=read('js/analysis.js');
+pass(analyzer.includes("published.dossier?.sourceStatus === 'excerpt_based'"),'Excerpt-based published dossier is rendered on Book Intelligence');
+pass(analyzer.includes('sampled pages/sections only'),'Published excerpt notes carry explicit scope warnings');
+const generator=read('admin-scripts/generate_summaries.py');
+pass(generator.includes('sampledSectionBreakdown')&&generator.includes('moralConclusions'),'Auto-generation includes sampled chapter breakdown and conclusions');
+pass(generator.includes('Private R2 book contents')&& !generator.includes('private_book_candidates()'),'Private cloud books are excluded from public publishing');
 console.log('PASSED '+checks+' static checks; cloud integration and real EPUB/PDF opening still require live testing.');
