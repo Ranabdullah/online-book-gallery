@@ -1531,3 +1531,24 @@ body.immersive-mode .reader-footer {
     z-index: 10000 !important;
   }
 }
+
+/* v4.7: accessible navigation and stable reader canvas dimensions */
+.book-stage, .book-page-wrapper, #epub-viewer { min-height: 0; }
+#epub-viewer { min-width:0; width:100%;height:100%;display:block; }
+#epub-viewer iframe { max-width:100%; }
+.book-page-wrapper { display:flex; flex-direction:column; }
+.book-page-wrapper > #epub-viewer, .book-page-wrapper > #pdf-viewer-container { flex:1; min-height:0; }
+.nav-arrow { width:44px; height:54px; opacity:.85; color:#243b55; background:rgba(255,255,255,.9); box-shadow:0 2px 12px rgba(0,0,0,.15); border:1px solid rgba(70,88,112,.2); z-index:70; }
+.nav-arrow.prev {left:max(3px,env(safe-area-inset-left,0px));}
+.nav-arrow.next {right:max(3px,env(safe-area-inset-right,0px));}
+.nav-arrow:focus-visible {outline:3px solid #2563eb;outline-offset:2px;}
+body.mode-scroll .nav-arrow {display:flex !important;}
+@media(max-width:768px){
+  .nav-arrow {display:flex;width:35px;height:47px;font-size:21px;top:53%;opacity:.7;}
+  .nav-arrow.prev {left:2px;}
+  .nav-arrow.next {right:2px;}
+  .book-page-wrapper {width:100%;max-width:100%;min-width:0;}
+}
+@media(prefers-reduced-motion:reduce){
+  .book-page-wrapper, .book-page-wrapper iframe {animation:none!important;transition:none!important;}
+}
