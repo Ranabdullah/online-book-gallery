@@ -23,6 +23,8 @@ const status=t=>$('status').textContent=t;
 const filename=path=>path.split('/').pop();
 function matches(name,path){
   const n=norm(name);
+  const archiveHit=catalog.find(b=>b.isArchiveRecord && b.originArchive===archiveName && b.originArchiveEntry===path);
+  if(archiveHit)return [archiveHit];
   return catalog.filter(b=>{
     if (b.isArchiveRecord) return b.originArchive===archiveName && b.originArchiveEntry===path;
     const orig=norm(b.originalName);
