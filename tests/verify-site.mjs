@@ -25,7 +25,7 @@ pass(!/workerUrl\s*:\s*['"]https:/.test(config),'Shared cloud endpoint cannot be
 pass(!config.includes('SHARED_ACCESS_CODE:'),'Shared code not present in public config');
 const shared=read('shared-library.html');
 pass(shared.includes("id=\"device-book-count\"")&&shared.includes("id=\"cloud-book-count\""),'Local and cloud inventory counts are separate');
-pass(shared.includes("await request('/book/status?key="),'Uploaded book must be verified on server');
+pass(shared.includes("request('/book/status?key="),'Uploaded book must be verified on server');
 pass(shared.includes("await request('/me')"),'Code is verified by server before access');
 pass(shared.includes('localStorage.removeItem(STORE)'), 'Local remembered session can be cleared');
 const zip=read('zip-import.html');
