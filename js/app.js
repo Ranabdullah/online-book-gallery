@@ -447,16 +447,11 @@ window.openArchiveBook = async function (id) {
       return;
     }
     try {
-      const imported = await window.BookManager.processAndAddBook(chosen);
-      await window.AthenaeumDB.saveUserBook({
-        ...imported, id:record.id, file:'idb://' + record.id,
-        title:record.title, author:record.author, category:record.category,
-        originMark:'A', originAttribution:record.originAttribution,
-        originArchive:record.originArchive, originArchiveEntry:record.originArchiveEntry,
-        isArchiveRecord:false, isHosted:true, needsFix:false,
-        isUserAdded:true, summaryStatus:'awaiting_source_analysis'
+      await window.BookManager.processAndAddBook(chosen, {
+        catalogRecord:record,originMark:'A',originAttribution:record.originAttribution,
+        originArchive:record.originArchive,originArchiveEntry:record.originArchiveEntry,
+        originKind:'matched-local-file'
       });
-      await window.AthenaeumDB.deleteUserBook(imported.id);
       location.href = 'reader.html?book=' + encodeURIComponent('idb://' + record.id);
     } catch (err) {
       alert('Unable to save book locally: ' + (err.message || err));
