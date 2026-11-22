@@ -29,3 +29,4 @@ jobs:
         with:
           node-version: '22'
       - run: node tests/verify-site.mjs
+      - run: node tests/verify-private-worker.mjs
