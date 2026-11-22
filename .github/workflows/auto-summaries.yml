@@ -31,8 +31,6 @@ jobs:
     timeout-minutes: 90
     env:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      ATHENAEUM_WORKER_URL: ${{ secrets.ATHENAEUM_WORKER_URL }}
-      ATHENAEUM_LIBRARY_CODE: ${{ secrets.ATHENAEUM_LIBRARY_CODE }}
       GEMINI_MODEL: ${{ inputs.model || 'gemini-3.8-flash' }}
       MAX_BOOKS: ${{ inputs.max_books || '20' }}
     steps:
