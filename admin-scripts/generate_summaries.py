@@ -62,57 +62,6 @@ def fetch_book(path):
         return out.getvalue()
 
 
-def private_book_candidates():
-    """Optional private R2 source: never put code, URLs or book bytes in GitHub."""
-    worker = os.getenv("ATHENAEUM_WORKER_URL", "").strip().rstrip("/")
-    code = os.getenv("ATHENAEUM_LIBRARY_CODE", "").strip()
-    if not worker or not code:
-        return []
-    if not re.fullmatch(r"https://athenaeum-private-library\.[a-z0-9-]+\.workers\.dev", worker, re.I):
-        raise ValueError("Private library URL is not an approved Athenaeum Worker URL")
-    if len(code) < 24:
-        raise ValueError("Private library access code missing or too short")
-    entries = []
-    cursor = None
-    for _ in range(200):
-        response = SESSION.get(worker + "/books", headers={"X-Library-Code": code},
-                               params={"cursor": cursor} if cursor else {}, timeout=45)
-        response.raise_for_status()
-        body = response.json()
-        for item in body.get("books", []):
-            key = str(item.get("key") or "")
-            match = re.fullmatch(r"books/([0-9a-f]{64})\.(pdf|epub)", key)
-            if not match:
-                continue
-            entries.append({"id": "shared_" + match.group(1),
-                            "title": item.get("title") or "Untitled private book",
-                            "author": "Author not verified",
-                            "category": item.get("category") or "Uncategorized",
-                            "isHosted": True, "needsFix": False, "isExternal": False,
-                            "file": "private:" + key, "format": match.group(2).upper(),
-                            "addedAt": item.get("uploaded")})
-        cursor = body.get("cursor")
-        if not cursor:
-            return entries
-    raise ValueError("Private cloud inventory pagination exceeded 200 pages")
-
-
-def fetch_private_book(key):
-    worker = os.getenv("ATHENAEUM_WORKER_URL", "").strip().rstrip("/")
-    code = os.getenv("ATHENAEUM_LIBRARY_CODE", "").strip()
-    if not re.fullmatch(r"books/[0-9a-f]{64}\.(pdf|epub)", key):
-        raise ValueError("Invalid private book key")
-    with SESSION.get(worker + "/book", params={"key": key},
-                     headers={"X-Library-Code": code}, timeout=(20, 120), stream=True) as res:
-        res.raise_for_status()
-        result = io.BytesIO()
-        for chunk in res.iter_content(1024 * 1024):
-            result.write(chunk)
-            if result.tell() > MAX_FILE:
-                raise ValueError("Private book exceeds scheduled extraction limit")
-        return result.getvalue()
-
-
 def extract_pdf(data):
     pdf = PdfReader(io.BytesIO(data), strict=False)
     count = len(pdf.pages)
@@ -237,17 +186,9 @@ def main():
     candidates = [b for b in books if b.get("isHosted") and not b.get("needsFix") and
                   not b.get("isExternal") and b.get("file") and
                   str(b["file"]).lower().endswith((".pdf", ".epub"))]
-    try:
-        private_books = private_book_candidates()
-        candidates.extend(private_books)
-        print(f"Private cloud books discovered: {len(private_books)}", flush=True)
-    except Exception as ex:
-        print(f"Private cloud discovery unavailable: {str(ex)[:180]}", flush=True)
-    # New private uploads take priority; then process repository books newest-first.
-    # Completed files are skipped permanently; temporarily failed files cool down.
-    candidates = sorted([b for b in candidates if str(b["file"]).startswith("private:")],
-                        key=lambda b: str(b.get("addedAt") or ""), reverse=True) + list(reversed(
-                        [b for b in candidates if not str(b["file"]).startswith("private:")]))
+    # Work through newest GitHub catalog entries first. Private R2 book contents
+    # must never be written to the publicly accessible summaries directory.
+    candidates = list(reversed(candidates))
     try:
         failures = json.loads(FAILURES.read_text(encoding="utf-8"))
     except (OSError, ValueError):
@@ -280,12 +221,8 @@ def main():
             break
         attempted += 1
         try:
-            if str(book["file"]).startswith("private:"):
-                path = str(book["file"])[len("private:"):]
-                payload = fetch_private_book(path)
-            else:
-                path = safe_source_file(book)
-                payload = fetch_book(path)
+            path = safe_source_file(book)
+            payload = fetch_book(path)
             excerpt, scope, sections = extract_pdf(payload) if path.lower().endswith(".pdf") else extract_epub(payload)
             everyday, in_depth = gemini(book, excerpt, scope, args.model, key)
             now = dt.datetime.now(dt.timezone.utc).isoformat()
