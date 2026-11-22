@@ -958,6 +958,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Missing files is a utility, not a book genre.
+  const missingFilesButton = document.getElementById('pill-needs-upload');
+  if (missingFilesButton) missingFilesButton.addEventListener('click', () => {
+    currentCategory = currentCategory === '__needs_upload__' ? 'all' : '__needs_upload__';
+    document.querySelectorAll('#category-pills .cat-pill').forEach(p => p.classList.toggle('active',p.dataset.category === currentCategory));
+    missingFilesButton.setAttribute('aria-pressed',String(currentCategory === '__needs_upload__'));
+    renderBooks();
+  });
+
   // Category pills
   const pillsContainer = document.getElementById('category-pills');
   if (pillsContainer) {
