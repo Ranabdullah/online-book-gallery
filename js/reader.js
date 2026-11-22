@@ -65,7 +65,7 @@ async function loadFromCatalogOrDB(url) {
         document.getElementById('reader-book-title').textContent = userBook.title;
         document.getElementById('reader-book-author').textContent = `by ${userBook.author}`;
         document.title = `${userBook.title} - Athenaeum Reader`;
-        initReaderWithBuffer(userBook.fileData, userBook.format.toLowerCase(), userBook.title);
+        initReaderWithBuffer(userBook.fileData, userBook.format.toLowerCase(), userBook.id || bookId);
         return;
       }
     } catch (e) {
@@ -180,7 +180,7 @@ async function loadBufferAndInit(rawUrl, ext) {
     }
 
     updateLoaderStatus('Rendering pages...');
-    initReaderWithBuffer(buffer, ext, url);
+    initReaderWithBuffer(buffer, ext, currentBookIdentifier || url);
 
   } catch (err) {
     showError(`Error loading book: ${err.message}. Please check your connection.`);
@@ -428,8 +428,8 @@ function setupEpubRendition() {
 
   // epub.js MUST get pixel height for paginated mode — '100%' resolves to 0 in some flex layouts
   const stageEl = document.getElementById('book-stage') || document.querySelector('.book-page-wrapper');
-  const pixelH = stageEl ? stageEl.clientHeight : window.innerHeight - 100;
-  const renderHeight = isScroll ? '100%' : Math.max(400, pixelH);
+  const pixelH = stageEl && stageEl.clientHeight > 100 ? stageEl.clientHeight : Math.max(420,window.innerHeight - 125);
+  const renderHeight = Math.max(420, pixelH);
 
   currentRendition = currentBook.renderTo('epub-viewer', {
     width: '100%',
@@ -464,8 +464,8 @@ function setupEpubRendition() {
 
   // Safety timer: under NO circumstances should the reader stay locked on "Opening Book..."
   const loaderSafetyTimer = setTimeout(() => {
-    hideLoader();
-  }, 3500);
+    showError('This book is taking too long to render. Try Page Turn mode or reopen it from the library.');
+  }, 18000);
 
   const onDisplaySuccess = () => {
     clearTimeout(loaderSafetyTimer);
@@ -1187,8 +1187,8 @@ function setupNavControls() {
 
   document.addEventListener('keydown', (e) => {
     if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
-    if (e.key === 'ArrowLeft') turnPage('prev');
-    if (e.key === 'ArrowRight') turnPage('next');
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); turnPage('prev'); }
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); turnPage('next'); }
   });
 
   // Zoom
