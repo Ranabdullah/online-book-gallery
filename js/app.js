@@ -366,6 +366,7 @@ function renderBooks() {
     const external = Boolean(b.isExternal && /^https:\/\/www\.gutenberg\.org\/ebooks\/\d+$/.test(b.externalUrl||''));
     const readUrl = b.isArchiveRecord ? `archive-book.html?id=${encodeURIComponent(b.id)}` : external ? `external-book.html?id=${encodeURIComponent(b.id)}` : (b.isHosted ? `reader.html?book=${encodeURIComponent(b.file)}` : '#');
     const isNeedsUpload = (!b.isHosted && !b.isArchiveRecord) || b.needsFix;
+    const locallyReady = Boolean(b.isHosted && b.file && b.file.startsWith('idb://') && b.fileData);
     const originMark=['R','A','N'].includes(b.originMark) ? b.originMark : 'R';
     const originInfo = originMark==='N'?'New free source (externally hosted)':originMark==='A'?'Abdurrehman contribution':'Existing original Athenaeum collection (attribution pending)';
     const contributorLabel = originMark==='A' ? 'Abdurrehman' : originMark==='N' ? 'Project Gutenberg' : 'Original collection · attribution pending';
@@ -377,8 +378,9 @@ function renderBooks() {
           <img class="book-cover" src="${b.cover || 'data:,'}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="fallbackBookCover(this)">
           <span class="origin-marker" title="${escapeHtml(originInfo)}" aria-label="Book origin: ${escapeHtml(originInfo)}" style="position:absolute;top:8px;left:8px;z-index:5;background:${originColor};color:#fff;border:2px solid #fff6;border-radius:50%;width:29px;height:29px;display:flex;align-items:center;justify-content:center;font:800 15px system-ui;box-shadow:0 2px 8px #0008;">${originMark}</span>
           ${isNeedsUpload ? `<span class="format-badge" style="background: #ea580c; left: 8px; right: auto; font-size: 10px; font-weight: 700;">⚠️ NEEDS FILE</span>` : ''}
-          ${b.isArchiveRecord ? `<span class="format-badge" style="background:#704a8f;right:8px;top:37px" title="File is in Abdurrehman's supplied ZIP. Select the matching EPUB/PDF to read on this device">${b.recordType === 'book-format archive entry' ? 'FILE NEEDED' : 'DOCUMENT'}</span>` : ''}
-          ${b.isUserAdded ? `<span class="user-added-badge">NEW</span>` : ''}
+          ${b.isArchiveRecord ? `<span class="format-badge" style="background:#704a8f;right:8px;top:37px" title="This file is listed in Abdurrehman's ZIP inventory but is not on the website. Use the book icon or ZIP importer to connect it privately on your device">${b.recordType === 'book-format archive entry' ? 'CONNECT FILE' : 'DOCUMENT'}</span>` : ''}
+          ${locallyReady && b.originMark === 'A' ? `<span class="format-badge" style="background:#187359;right:8px;top:37px" title="This file is saved locally and ready to open on this device">READY HERE</span>` : ''}
+          ${b.isUserAdded && b.originMark !== 'A' ? `<span class="user-added-badge">NEW</span>` : ''}
           <span class="format-badge ${b.format.toLowerCase()}">${b.format}</span>
           <button class="bookmark-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${b.id}')" title="${isFav ? 'Remove favorite' : 'Add favorite'}">
             ♥
