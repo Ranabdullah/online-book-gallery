@@ -7,7 +7,7 @@
 <body><header><a href="index.html">← Athenaeum main gallery</a> &nbsp; / &nbsp; Private shared library</header>
 <main><h1>Shared Library</h1><p>One shared private bookshelf. You and your friend enter the same access code to upload and read books from different devices.</p>
 <div class="note"><strong>Code protected:</strong> Storage and downloads require your shared code. The existing public GitHub Pages books are still public; this new cloud bookshelf does not make those existing files private.</div>
-<div id="configuration" class="panel hidden" role="alert"><strong>Cloud backend offline.</strong> The access code is not being rejected. Athenaeum has no deployed private-storage API to verify it against. Local ZIP imports are not shared. Cloud uploading and unlocking are unavailable until R2 and the Worker are configured. See <a href="https://github.com/Ranabdullah/online-book-gallery/blob/main/cloudflare/PRIVATE_LIBRARY_SETUP.md">setup instructions</a>.</div>
+<div id="configuration" class="panel hidden" role="alert"><strong>Cloud backend offline.</strong> The access code is not being rejected. Athenaeum has no deployed private-storage API to verify it against. Local ZIP imports are not shared. Cloud uploading and unlocking are unavailable until R2 and the Worker are configured. <p>Deploy the backend with <a href="https://github.com/Ranabdullah/online-book-gallery/actions/workflows/deploy-private-library.yml">GitHub Actions</a>, then paste the publicly visible Worker URL here (not your access code).</p><label for="worker-url">Private library API URL</label><div class="row"><input id="worker-url" inputType="url" type="url" placeholder="https://athenaeum-private-library.SUBDOMAIN.workers.dev" style="width:min(100%,520px)"><button id="connect-worker" type="button">Connect server</button></div><p id="worker-url-status" class="small muted"></p></div>
 <section id="signin" class="panel">
 <h2>Enter your private library code</h2>
 <p>Only those with the code can access the shared book storage. The code is hidden as you type.</p>
@@ -60,9 +60,24 @@
 (async()=>{
 const $=id=>document.getElementById(id);
 const cfg=window.ATHENAEUM_SHARED_CONFIG||{};
-const ready=/^https:\/\//i.test(cfg.workerUrl||'') && Boolean(window.JSZip);
-if(!ready){$('configuration').classList.remove('hidden');$('unlock').disabled=true;}
-else {$('configuration').classList.add('hidden');$('unlock').disabled=false;}
+const URL_KEY='athenaeum_private_worker_url_v1';
+const validWorkerUrl=value=>/^https:\/\/athenaeum-private-library\.[a-z0-9-]+\.workers\.dev\/?$/i.test(value||'');
+let workerUrl=validWorkerUrl(cfg.workerUrl)?cfg.workerUrl:(localStorage.getItem(URL_KEY)||'');
+let ready=validWorkerUrl(workerUrl) && Boolean(window.JSZip);
+function updateServerState(){
+  $('configuration').classList.toggle('hidden',ready);
+  $('unlock').disabled=!ready;
+  if(ready) $('worker-url-status').textContent='Backend URL saved on this device. Enter your access code to verify.';
+}
+updateServerState();
+$('connect-worker').onclick=()=>{
+  const value=$('worker-url').value.trim().replace(/\/$/,'');
+  if(!validWorkerUrl(value)){$('worker-url-status').textContent='Use the exact athenaeum-private-library.<your-subdomain>.workers.dev URL shown by GitHub deployment.';return;}
+  workerUrl=value;
+  localStorage.setItem(URL_KEY,value);
+  ready=Boolean(window.JSZip);
+  updateServerState();
+};
 let accessCode='',generated='',books=[],next=null,loading=false;
 async function updateLocalCount(){try{const b=await window.AthenaeumDB.getAllUserBooks();$('device-book-count').textContent=b.filter(x=>x.fileData&&x.fileData.byteLength>0).length+' local books';}catch(e){$('device-book-count').textContent='Local storage unavailable';}}
 updateLocalCount();
@@ -112,7 +127,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function status(t){$('status').textContent=t;}
 async function request(path,options={}){
   if(!accessCode)throw Error('Enter the library code first.');
-  const response=await fetch(cfg.workerUrl.replace(/\/$/,'')+path,{
+  const response=await fetch(workerUrl.replace(/\/$/,'')+path,{
     ...options,headers:{'X-Library-Code':accessCode,...options.headers},cache:'no-store'});
   if(!response.ok){let msg='HTTP '+response.status;try{msg=(await response.json()).error||msg}catch{}throw Error(msg)}
   return response;
