@@ -11,23 +11,28 @@ function cors(response,origin){
   const h = new Headers(response.headers);
   if(origin===ORIGIN){h.set('Access-Control-Allow-Origin',ORIGIN);h.set('Vary','Origin');}
   h.set('Access-Control-Allow-Methods','GET,POST,OPTIONS');
-  h.set('Access-Control-Allow-Headers','Authorization,Content-Type');
+  h.set('Access-Control-Allow-Headers','Content-Type,X-Library-Code');
   h.set('Access-Control-Max-Age','600');
   return new Response(response.body,{status:response.status,headers:h});
 }
 async function userFor(request,env){
-  if(!env.SUPABASE_URL||!env.SUPABASE_ANON_KEY||!env.MEMBER_EMAILS||!env.BOOKS)throw new Error('storage-not-configured');
-  const token=request.headers.get('authorization')||'';
-  if(!/^Bearer [A-Za-z0-9._~-]+$/i.test(token))throw new Error('sign-in-required');
-  const res=await fetch(env.SUPABASE_URL.replace(/\/$/,'')+'/auth/v1/user',{
-    headers:{'Authorization':token,'apikey':env.SUPABASE_ANON_KEY},cf:{cacheTtl:0}
-  });
-  if(!res.ok)throw new Error('sign-in-expired');
-  const user=await res.json();
-  const allowed=env.MEMBER_EMAILS.split(',').map(x=>x.trim().toLowerCase()).filter(Boolean);
-  if(allowed.length!==2||!user.id||!user.email||!allowed.includes(user.email.toLowerCase())||!user.email_confirmed_at)throw new Error('not-a-library-member');
-  return {id:user.id,email:user.email.toLowerCase()};
+  if(!env.SHARED_ACCESS_CODE || !env.BOOKS)throw new Error('storage-not-configured');
+  const provided=request.headers.get('x-library-code')||'';
+  const expected=env.SHARED_ACCESS_CODE;
+  if(provided.length<24 || provided.length>256 || expected.length<24)throw new Error('access-denied');
+  // Equal-length SHA-256 comparisons avoid timing leaks and never place the code
+  // in a URL, a public repository file, R2 object metadata or browser localStorage.
+  const encoder=new TextEncoder();
+  const [a,b]=await Promise.all([
+    crypto.subtle.digest('SHA-256',encoder.encode(provided)),
+    crypto.subtle.digest('SHA-256',encoder.encode(expected))
+  ]);
+  const x=new Uint8Array(a),y=new Uint8Array(b);let mismatch=0;
+  for(let i=0;i<x.length;i++)mismatch|=x[i]^y[i];
+  if(mismatch)throw new Error('access-denied');
+  return {id:'shared',email:'Access-code member'};
 }
+
 function safeInfo(v,max=180){return String(v||'').slice(0,max).replace(/[\u0000-\u001f\u007f]/g,' ').trim();}
 function validateKey(v){return KEY_RE.test(v||'');}
 export default {async fetch(request,env){
@@ -38,7 +43,7 @@ export default {async fetch(request,env){
   try{
     const member=await userFor(request,env);
     let result;
-    if(path==='/me'&&request.method==='GET')result=reply({email:member.email,private:true});
+    if(path==='/me'&&request.method==='GET')result=reply({member:'Authorized',private:true});
     else if(path==='/books'&&request.method==='GET'){
       const opts={prefix:'books/',limit:100,include:['customMetadata']};
       const cursor=url.searchParams.get('cursor');
@@ -66,7 +71,7 @@ export default {async fetch(request,env){
             httpMetadata:{contentType:ext==='pdf'?'application/pdf':'application/epub+zip'},
             customMetadata:{
               title:safeInfo(b.title,200),category:safeInfo(b.category,80),
-              contributedBy:member.email,archive:safeInfo(b.archive,240),
+              contributedBy:safeInfo(b.contributor||'Shared library member',80),archive:safeInfo(b.archive,240),
               originalPath:safeInfo(b.originalPath,450),
               expectedSize:String(size)
             }
@@ -117,7 +122,7 @@ export default {async fetch(request,env){
     return cors(result,origin);
   }catch(e){
     const m=e?.message||'unknown';
-    const status=['sign-in-required','sign-in-expired'].includes(m)?401:m==='not-a-library-member'?403:m==='storage-not-configured'?503:500;
+    const status=m==='access-denied'?403:m==='storage-not-configured'?503:500;
     return cors(error(status===500?'storage-operation-failed':m,status),origin);
   }
 }};
