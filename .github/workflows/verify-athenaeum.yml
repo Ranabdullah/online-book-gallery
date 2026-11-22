@@ -1,0 +1,31 @@
+name: Verify Athenaeum
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tests
+            js
+            data
+            cloudflare
+            index.html
+            zip-import.html
+            shared-library.html
+            reader.html
+            my-hub.html
+            archive-book.html
+            external-book.html
+            sw.js
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/verify-site.mjs
