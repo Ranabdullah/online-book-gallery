@@ -77,8 +77,30 @@ function exportJson(){
  const link=document.createElement('a');link.href=url;link.download='athenaeum-source-summaries.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
  say('Exported '+records.length+' records. This is a file on your device, not an automatic cloud upload.');
 }
+async function importJson(file){
+ if(!file)return;
+ if(file.size>15*1024*1024){say('Import exceeds 15 MB.');return}
+ let payload;try{payload=JSON.parse(await file.text())}catch{say('Invalid JSON export file.');return}
+ if(payload?.schema!=='athenaeum-excerpt-summaries-v1'||!Array.isArray(payload.records)){say('This is not a supported Athenaeum source-summary export.');return}
+ const validIds=new Set(books.map(b=>b.id));
+ let imported=0,ignored=0;
+ for(const row of payload.records){
+  if(!validIds.has(row.id)||!row.summary||typeof row.summary!=='object'){ignored++;continue}
+  const input=row.summary,existing=saved(row.id),result={...existing};
+  for(const level of ['everyday','inDepth']){
+   const record=input[level];
+   if(record?.source==='actual-book-excerpts'&&typeof record.text==='string'&&record.text.length>=160&&record.text.length<=25000){
+     if(!result[level]?.text||el('overwrite').checked)result[level]={text:record.text,source:'actual-book-excerpts',partial:true,sections:Number(record.sections)||0,createdAt:Number(record.createdAt)||Date.now(),model:String(record.model||'imported').slice(0,80)};
+   }
+  }
+  if(result.everyday?.text!==existing.everyday?.text||result.inDepth?.text!==existing.inDepth?.text){
+    try{localStorage.setItem(prefix+row.id,JSON.stringify(result));imported++}catch(e){say('Browser storage full while importing. '+e.message);break}
+  }else ignored++;
+ }
+ counts();say('Imported '+imported+' book summary records; ignored '+ignored+' unmatched or existing records.');
+}
 el('start').onclick=start;el('stop').onclick=()=>{halt=true;say('Stopping after the current file or request…')};
-el('export').onclick=exportJson;el('count').onclick=()=>{counts();say(pending().length+' eligible books pending in this batch.')};
+el('export').onclick=exportJson;el('import').onchange=()=>importJson(el('import').files?.[0]);el('count').onclick=()=>{counts();say(pending().length+' eligible books pending in this batch.')};
 for(const id of ['query','limit','overwrite'])el(id).addEventListener('change',counts);
 el('api-key').value=localStorage.getItem('athenaeum_gemini_key')||'';
 el('remember').checked=!!localStorage.getItem('athenaeum_gemini_key');
