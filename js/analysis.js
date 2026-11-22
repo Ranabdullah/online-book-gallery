@@ -90,6 +90,22 @@ async function loadBookAndDossier(bookId) {
       } catch (e) {}
     }
 
+    // Published excerpt-grounded study dossier (shared with visitors).
+    // Never override an existing full-source or otherwise verified dossier.
+    if (!dossier && /^[a-zA-Z0-9_-]{3,80}$/.test(bookId)) {
+      try {
+        const resp = await fetch('data/generated-summaries/' + encodeURIComponent(bookId) + '.json', {cache:'no-store'});
+        if (resp.ok) {
+          const published = await resp.json();
+          if (published.bookId === bookId && published.dossier?.sourceStatus === 'excerpt_based') {
+            dossier = published.dossier;
+          }
+        }
+      } catch (e) {
+        console.warn('Published excerpt dossier unavailable:', e.message);
+      }
+    }
+
     // If still no dossier, generate dynamic intelligent analysis
     if (!dossier) {
       dossier = generateDynamicDossier(currentBookMeta);
@@ -101,8 +117,18 @@ async function loadBookAndDossier(bookId) {
     // Render Dossier into DOM
     renderDossier(dossier, currentBookMeta);
     // Mark metadata-only placeholders clearly; do not present template prose as verified book summary.
-    const isPlaceholder = !dossier || dossier.isPlaceholder === true || dossier.sourceStatus !== 'verified_from_book' ||
+    const isExcerpt = dossier?.sourceStatus === 'excerpt_based';
+    const isPlaceholder = !dossier || dossier.isPlaceholder === true ||
+      (dossier.sourceStatus !== 'verified_from_book' && !isExcerpt) ||
       (dossier.comprehensiveSummary && /placeholder analysis|refresh ai dossier/i.test(dossier.comprehensiveSummary.elevatorPitch || ''));
+    if (isExcerpt) {
+      const notice = document.createElement('div');
+      notice.setAttribute('role','status');
+      notice.style.cssText='margin:16px auto;padding:13px 16px;max-width:900px;background:#f3f6eb;border:1px solid #a8ba94;color:#344f2b;border-radius:8px;font:14px/1.5 system-ui';
+      notice.textContent='Source-based AI study notes: sampled pages/sections only. Chapter breakdowns cover sampled sections, not the full book. Check the original PDF/EPUB for complete coverage.';
+      const target = document.getElementById('analysis-content') || document.getElementById('analysis-hero');
+      if (target) target.prepend(notice);
+    }
     if (isPlaceholder) {
       const notice = document.createElement('div');
       notice.setAttribute('role', 'status');
