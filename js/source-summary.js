@@ -142,6 +142,27 @@
       if(elem)elem.textContent=entry?.text||'Not yet generated. Extract book text and select the matching summary level.';
     }
   }
+  async function loadPublishedSummary(id, local) {
+    if(!/^[a-zA-Z0-9_-]{3,80}$/.test(id))return;
+    try {
+      const response=await fetch('data/generated-summaries/'+encodeURIComponent(id)+'.json',{cache:'no-store'});
+      if(!response.ok)return;
+      const data=await response.json();
+      if(data.bookId!==id||!data.summaries)return;
+      const published=data.summaries,merged={...local};
+      for(const level of ['everyday','inDepth']){
+        const item=published[level];
+        if(item?.source==='actual-book-excerpts'&&typeof item.text==='string'&&item.text.length>=160){
+          const old=merged[level],publishedTime=Date.parse(item.createdAt||'')||0;
+          if(!old?.text||publishedTime>(Number(old.createdAt)||0)) merged[level]={...item,published:true};
+        }
+      }
+      if(merged.everyday?.text||merged.inDepth?.text){
+        renderSummaries(merged);
+        explain('Published source-based summaries available for this book. These describe sampled excerpts, not a verified full-book reading.');
+      }
+    }catch(e){console.warn('Could not fetch published summary',e)}
+  }
   function init() {
     const wrap=document.createElement('section'); wrap.id='source-summary-panel';
     wrap.style.cssText='max-width:1020px;margin:20px auto;padding:20px 24px;border-radius:13px;background:#f5f0e5;color:#1d3044;border:1px solid #d9c8ab';
@@ -166,7 +187,7 @@
     const anchor=byId('analysis-content')||document.querySelector('main')||document.body;
     anchor.parentNode.insertBefore(wrap,anchor);
     const id=new URLSearchParams(location.search).get('book') || new URLSearchParams(location.search).get('id');
-    if(id){const cached=readCache(id);renderSummaries(cached);if(cached.everyday||cached.inDepth)explain('Saved excerpt-based analyses available on this browser.');}
+    if(id){const cached=readCache(id);renderSummaries(cached);if(cached.everyday||cached.inDepth)explain('Saved excerpt-based analyses available on this browser.');loadPublishedSummary(id,cached);}
     // Gutenberg entries have no locally hosted source bytes. Show clearly attributed
     // editorial introductions instead of offering extraction that must fail.
     if (id && id.startsWith('new_pg_')) {
