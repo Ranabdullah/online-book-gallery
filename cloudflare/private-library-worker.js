@@ -103,6 +103,14 @@ export default {async fetch(request,env){
         else result=reply({stored:true,key,size:object.size});
       }
     }
+    else if(path==='/book/status'&&request.method==='GET'){
+      const key=url.searchParams.get('key');
+      if(!validateKey(key)) result=error('invalid-book-key');
+      else {
+        const object=await env.BOOKS.head(key);
+        result=reply({stored:Boolean(object),key,size:object?.size||0,uploaded:object?.uploaded||null});
+      }
+    }
     else if(path==='/book'&&request.method==='GET'){
       const key=url.searchParams.get('key');
       if(!validateKey(key))result=error('invalid-book-key');
