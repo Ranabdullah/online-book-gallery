@@ -361,7 +361,7 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "[kalbaba] MCAT The Berkley Review Physics Book II(BookFi)",
+      "displayTitle": "MCAT: The Berkeley Review — Physics, Book II",
       "description": "An archived PDF file listed in Abdurrehman's Physics collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
       "summaryStatus": "not_verified_from_full_text"
     },
@@ -2964,9 +2964,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "Freud, Sigmund - Totem and Taboo (Routledge, 2001)",
+      "displayTitle": "Totem and Taboo",
       "description": "An archived PDF file listed in Abdurrehman's Psychology collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Sigmund Freud",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_337",
@@ -3762,9 +3764,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "Manual of Zen Buddhism - DT Susuki",
+      "displayTitle": "Manual of Zen Buddhism",
       "description": "An archived PDF file listed in Abdurrehman's Psychology collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "D. T. Suzuki",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_387",
@@ -3859,7 +3863,9 @@
       "recordType": "book-format archive entry",
       "displayTitle": "El anillo del rey Salomón",
       "description": "An archived PDF file listed in Abdurrehman's Psychology collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Konrad Lorenz",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_392",
@@ -4125,7 +4131,9 @@
       "recordType": "book-format archive entry",
       "displayTitle": "Walden Two",
       "description": "An archived PDF file listed in Abdurrehman's Psychology collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "B. F. Skinner",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_406",
@@ -4256,9 +4264,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "Sobre el Conductismo - Skinner",
+      "displayTitle": "Sobre el conductismo",
       "description": "An archived PDF file listed in Abdurrehman's Psychology collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "B. F. Skinner",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_414",
@@ -6251,9 +6261,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "[philosophy] Soren Kierkegaard - Preparation for a Christian Life",
+      "displayTitle": "Preparation for a Christian Life",
       "description": "An archived PDF file listed in Abdurrehman's Philosophy collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Søren Kierkegaard",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_704",
@@ -6270,9 +6282,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "Søren Kierkegaard - The Present Moment",
+      "displayTitle": "The Present Moment",
       "description": "An archived PDF file listed in Abdurrehman's Philosophy collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Søren Kierkegaard",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_707",
@@ -6536,9 +6550,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "(german) Heidegger, Martin - Zur Sache des Denkens",
+      "displayTitle": "Zur Sache des Denkens",
       "description": "An archived PDF file listed in Abdurrehman's Philosophy collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Martin Heidegger",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_737",
@@ -6916,9 +6932,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "Kierkegaard Sören - The Sickness Unto Death philosophy",
+      "displayTitle": "The Sickness Unto Death",
       "description": "An archived PDF file listed in Abdurrehman's Philosophy collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Søren Kierkegaard",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_760",
@@ -6935,9 +6953,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "(german) Heidegger, Martin - Was ist Philosophie",
+      "displayTitle": "Was ist Philosophie?",
       "description": "An archived PDF file listed in Abdurrehman's Philosophy collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Martin Heidegger",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_761",
@@ -7524,9 +7544,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "Martin Heidegger - What Is Metaphysics + On The Essence Of Truth + The End Of Philosophy And The Task Of Thinking",
+      "displayTitle": "What Is Metaphysics?; On the Essence of Truth; The End of Philosophy and the Task of Thinking",
       "description": "An archived PDF file listed in Abdurrehman's Philosophy collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Martin Heidegger",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_792",
@@ -7676,9 +7698,11 @@
       "readingAvailable": false,
       "metadataVerified": false,
       "recordType": "book-format archive entry",
-      "displayTitle": "Fear and Trembling - Kierkegaard",
+      "displayTitle": "Fear and Trembling",
       "description": "An archived PDF file listed in Abdurrehman's Philosophy collection. The original filename is preserved in the provenance record; content, authorship, and full-text summary have not been independently verified.",
-      "summaryStatus": "not_verified_from_full_text"
+      "summaryStatus": "not_verified_from_full_text",
+      "author": "Søren Kierkegaard",
+      "authorSource": "attributed by archive filename (unverified full text)"
     },
     {
       "id": "a_archive_800",
