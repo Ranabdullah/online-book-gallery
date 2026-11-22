@@ -19,6 +19,7 @@ jobs:
             index.html
             zip-import.html
             shared-library.html
+            bulk-summaries.html
             reader.html
             my-hub.html
             archive-book.html
