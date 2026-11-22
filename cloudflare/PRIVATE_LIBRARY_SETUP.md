@@ -1,34 +1,24 @@
-# Athenaeum — two-member private cloud bookshelf
+# Athenaeum private shared library — code-only setup
 
-**Status: implementation staged, NOT deployed.** The connected Cloudflare account returned HTTP 403 for R2 and Workers operations. Do not claim uploads are live until the Worker and bucket are deployed and tested.
+**Status: code staged in GitHub; cloud backend not deployed.** The connected Cloudflare account currently returns HTTP 403 for Workers and R2. Reconnect the correct Cloudflare account with **Workers R2 Storage Write** and **Workers Scripts Write/Edit** permissions to finish deployment.
 
-## What this feature does
-- A dedicated `shared-library.html` page supports two approved members, each with their own passwordless email sign-in.
-- Client-side ZIP extraction handles PDF/EPUB only and uploads the individual books in sequential chunks to private Cloudflare R2.
-- A server-side two-email allowlist is enforced on **every** upload, list, and download API request. A browser-visible name or URL is not authentication.
-- SHA-256 file keys reduce repeated uploads; the cloud book list is shared by both accounts.
-- Reading downloads the selected private file to the current device's browser and opens the existing Athenaeum reader. Cloud copies persist in R2.
-- Existing books in `books/` on GitHub Pages remain publicly accessible. This feature does not make the current public GitHub repository private.
+This feature provides private **book API and R2 files** protected by one shared code. Anyone possessing the code can read and upload. Do not publish the code or commit it to GitHub. Sharing the code with only one trusted friend is a practical convenience, but individual accounts, auditing, and revocation per person are not available.
 
-## Provisioning, once Cloudflare permissions are granted
-1. Reconnect the Cloudflare app granting **Workers R2 Storage Write** and **Workers Scripts Write/Edit** access to the account that owns Athenaeum. The current connection is missing these permissions.
-2. Create a private R2 bucket named `athenaeum-private-books`. Do not enable the public r2.dev domain or a public custom domain.
-3. Use a **dedicated Supabase Auth project** for Athenaeum. In Auth settings, configure email sign-in and the redirect URL `https://ranabdullah.github.io/online-book-gallery/shared-library.html`. Set up the two intended members; consider disabling public sign-ups after invitations.
-4. Fill `SUPABASE_URL` and `SUPABASE_ANON_KEY` in `cloudflare/shared-library-wrangler.toml` and the matching safe public values in `js/shared-library-config.js`. Set its `workerUrl` to the deployed Worker URL.
-5. From the repo root, deploy using the existing project's Wrangler tooling:
-   `npx wrangler deploy --config cloudflare/shared-library-wrangler.toml`
-6. Set the **private Worker secret** `MEMBER_EMAILS` using:
-   `npx wrangler secret put MEMBER_EMAILS --config cloudflare/shared-library-wrangler.toml`
-   Enter exactly two approved addresses, comma separated. Do not store these addresses in the public repository.
-7. Test email sign-in for each approved member. Confirm unapproved accounts get 403, then upload one small ZIP and test listing and reading from both accounts. Confirm R2 bucket is private and no unauthenticated read works.
-8. After this test, upload larger ZIPs one at a time. Archives of several hundred MB may require substantial browser memory because JSZip extracts them client-side.
+## Minimal setup
 
-## Notes
-- Only two email addresses are allowed at a time. Both have upload and read permissions.
-- The Worker checks Supabase's authenticated identity via its `/auth/v1/user` endpoint. Never accept an email supplied by the browser as proof of identity.
-- The Worker requires `MEMBER_EMAILS`, `BOOKS`, `SUPABASE_URL`, and `SUPABASE_ANON_KEY`; without them, operations fail closed.
-- Uploads are chunked at 8 MiB, per-object max 350 MiB. Unsupported MOBI is skipped. A single ZIP over 350 MiB is allowed but may exhaust browser memory.
-- The R2 filenames use client-reported SHA-256, and byte size is checked on multipart completion. For a security-sensitive public service, add server-side content-signature and hash verification plus virus scanning before broader membership.
-- An existing object with the same hash is skipped. Duplicate titles with different editions are preserved unless file bytes match.
-- Publisher/copyright permissions still matter even when sharing with a small private audience.
-- For the **whole Athenaeum website** to be truly private, migrate the static gallery and existing book assets to authenticated hosting. GitHub Pages cannot enforce login-based access to its directly served files.
+1. Reconnect Cloudflare with Workers and R2 write permissions.
+2. Create **private** R2 bucket `athenaeum-private-books`; leave the public r2.dev and public custom-domain access disabled.
+3. Run `npx wrangler deploy --config cloudflare/shared-library-wrangler.toml`.
+4. Open the website's `shared-library.html` page and click **Generate secure code**. Keep the code private. In Cloudflare, configure the **SHARED_ACCESS_CODE** Worker secret with that exact generated code. CLI: `npx wrangler secret put SHARED_ACCESS_CODE --config cloudflare/shared-library-wrangler.toml`. Do NOT put the code in chat, GitHub, a URL, or a plain config file.
+5. Set `workerUrl` in `js/shared-library-config.js` to the deployed Worker URL. This is a public URL, not a secret.
+6. Test with one small ZIP: unlock with the code, upload, then open the file from a second device using that code. Test wrong/no codes return HTTP 403.
+7. Upload the other ZIPs from each member's device through the website. Uploads run client-side; PDF and EPUB only. Long archives can exhaust browser memory. Retain original ZIPs for backup.
+
+## Security and scope
+
+- The access code is masked in the form and held in page memory, not in localStorage or the URL. The Worker validates it on every file operation.
+- The static GitHub Pages website and the historical `books/` files remain publicly accessible. Protecting *the entire gallery* requires moving all those files to authenticated hosting; this feature only protects newly uploaded shared-library books.
+- A shared code grants identical permission to anyone who has it. To revoke access, rotate the secret and send the replacement to your friend.
+- Uploads use SHA-256 keys and multipart storage; same-file duplicates are skipped.
+- The cloud backend is not activated until Cloudflare is configured. The website will show a clear setup notice, not a false upload success.
+- Copyright and other distribution rights may still apply to sharing book files even in a two-person collection.
