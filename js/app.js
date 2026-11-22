@@ -81,13 +81,13 @@ async function loadCatalog() {
             if (key.length < 3 || titles.has(key)) continue;
             titles.add(key);
             baseBooks.push({
-              id:item.id, title:item.title, author:'Not verified',
+              id:item.id, title:item.displayTitle || item.title, author:item.authorVerified ? item.author : 'Author not confirmed',
               category:item.category, format:item.format, sizeMB:item.sizeMB,
               cover:'', file:'', isHosted:false, needsFix:false,
               isArchiveRecord:true, readingAvailable:false,
               originMark:'A', originAttribution:'Abdurrehman (archive supplied)',
               originArchive:item.archive, originArchiveEntry:item.path,
-              description:'Archive inventory only. Book file not hosted. Summary not verified from content.',
+              description:'Listed in Abdurrehman’s '+item.category+' ZIP archive ('+item.format+'). The book text has not been imported or analysed, so a content summary cannot yet be provided.',
               summaries:{everyday:null,inDepth:null}, summaryStatus:'awaiting_source_file'
             });
           }
@@ -178,7 +178,7 @@ function renderFeaturedBook(chooseAnother = false) {
   document.getElementById('featured-book-description').textContent =
     book.summaries?.everyday || book.description ||
     (savedSummary ? 'Excerpt-based Everyday Summary: ' + savedSummary.slice(0, 360) + (savedSummary.length > 360 ? '…' : '') :
-    'Everyday and In-Depth summaries are awaiting source-based analysis. Open Book Intelligence to begin.');
+    'A '+(book.format || 'digital')+' edition from the '+(book.category || 'general')+' collection, credited to '+(book.author || 'an unverified author')+'. Read the book or open Book Intelligence to examine its contents and prepare a source-grounded summary.');
   const summaryLink = document.getElementById('featured-book-summary');
   if(summaryLink) summaryLink.href = 'book-analysis.html?book=' + encodeURIComponent(book.id);
   const cover = document.getElementById('featured-book-cover');
@@ -220,7 +220,7 @@ function initStats() {
   const hosted = allBooks.filter(b => b.isHosted && !b.needsFix && !b.isExternal);
   const available = allBooks.filter(b => b.isHosted && !b.needsFix);
   const catalogued = allBooks.filter(b => !b.needsFix || b.isArchiveRecord);
-  const needsFix = allBooks.filter(b => !b.isHosted || b.needsFix);
+  const needsFix = allBooks.filter(b => !b.isArchiveRecord && (!b.isHosted || b.needsFix));
 
   const statBooks = document.getElementById('stat-total-books');
   const statAuthors = document.getElementById('stat-total-authors');
@@ -232,11 +232,26 @@ function initStats() {
   if (countAll) countAll.textContent = catalogued.length;
   if (countNeedsUpload) countNeedsUpload.textContent = needsFix.length;
 
-  const authorsSet = new Set(catalogued.map(b => (b.author || '').trim()).filter(Boolean));
+  const authorsSet = new Set(catalogued.map(b => (b.author || '').trim()).filter(a => a && a !== 'Author not confirmed' && a !== 'Not verified'));
   if (statAuthors) statAuthors.textContent = authorsSet.size;
 
   const catSet = new Set(catalogued.map(b => b.category).filter(Boolean));
   if (statCategories) statCategories.textContent = catSet.size;
+  const pills = document.getElementById('category-pills');
+  if (pills) {
+    const present = new Set([...pills.querySelectorAll('button[data-category]')].map(b => b.dataset.category));
+    for (const category of [...catSet].sort()) {
+      if (!present.has(category)) {
+        const pill = document.createElement('button');
+        pill.type = 'button';
+        pill.className = 'cat-pill';
+        pill.dataset.category = category;
+        pill.textContent = category;
+        pills.appendChild(pill);
+        present.add(category);
+      }
+    }
+  }
 
   updateFavoritesBadge();
 }
@@ -269,7 +284,8 @@ function filterAndSortBooks() {
       const matchTitle = (b.title || '').toLowerCase().includes(q);
       const matchAuthor = (b.author || '').toLowerCase().includes(q);
       const matchCat = (b.category || '').toLowerCase().includes(q);
-      if (!matchTitle && !matchAuthor && !matchCat) {
+      const matchArchive = b.isArchiveRecord && (b.originArchiveEntry || '').toLowerCase().includes(q);
+      if (!matchTitle && !matchAuthor && !matchCat && !matchArchive) {
         return false;
       }
     }
@@ -348,6 +364,7 @@ function renderBooks() {
           <h3 class="book-title" title="${escapeHtml(b.title)}">${escapeHtml(b.title)}</h3>
           <div class="book-author" title="${escapeHtml(b.author)}">${escapeHtml(b.author)}</div>
           <div class="book-source" style="font-size:11px;color:#657287;margin:4px 0">Source: ${escapeHtml(contributorLabel)}</div>
+          ${b.isArchiveRecord ? `<p style="font-size:11px;line-height:1.4;color:#785d85;margin:5px 0">${escapeHtml(b.description)}</p>` : ''}
 
           <div class="card-actions">
             ${!isNeedsUpload ? `
@@ -764,7 +781,7 @@ function openBookModal(bookId) {
   if (!book) return;
 
   const modal = document.getElementById('info-modal');
-  document.getElementById('info-cover').src = book.cover;
+  document.getElementById('info-cover').src = book.cover || 'data:,';
   document.getElementById('info-title').textContent = book.title;
   document.getElementById('info-author').textContent = `By ${book.author}`;
   document.getElementById('info-category').textContent = book.category;
@@ -788,7 +805,18 @@ function openBookModal(bookId) {
     };
   }
 
-  if (book.isHosted) {
+  if (book.isArchiveRecord) {
+    readBtn.href = 'archive-book.html?id=' + encodeURIComponent(book.id);
+    readBtn.textContent = 'Archive details';
+    readBtn.onclick = null;
+    readBtn.style.display = 'inline-flex';
+  } else if (book.isExternal) {
+    readBtn.href = 'external-book.html?id=' + encodeURIComponent(book.id);
+    readBtn.textContent = 'Free book details';
+    readBtn.onclick = null;
+    readBtn.style.display = 'inline-flex';
+  } else if (book.isHosted) {
+    readBtn.onclick = null;
     readBtn.href = `reader.html?book=${encodeURIComponent(book.file)}`;
     readBtn.style.display = 'inline-flex';
   } else {
@@ -801,7 +829,7 @@ function openBookModal(bookId) {
 
   const analysisBtn = document.getElementById('info-analysis-link');
   if (analysisBtn) {
-    analysisBtn.href = `book-analysis.html?book=${encodeURIComponent(book.id || book.file)}`;
+    analysisBtn.href = book.isArchiveRecord ? `archive-book.html?id=${encodeURIComponent(book.id)}` : `book-analysis.html?book=${encodeURIComponent(book.id || book.file)}`;
   }
 
   if (editBtn) {
