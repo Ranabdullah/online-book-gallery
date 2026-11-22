@@ -3,6 +3,13 @@
 <body><header><a href="index.html">← Book Gallery</a> · <a href="shared-library.html">Shared Library</a></header><main><h1>Generate summaries for all books</h1>
 <p>Create <strong>Everyday Summaries</strong> and <strong>In-Depth Analyses</strong> together, from readable source PDFs and EPUBs.</p>
 <p class="note"><strong>Source-based, not invented:</strong> This tool samples pages/chapters from the actual book. Its results describe <em>those excerpts</em>, not the complete book. Catalog-only entries and scanned PDFs without selectable text are skipped or flagged. Gemini may apply API quotas or charges. Keep this tab open during a batch.</p>
+<section class="box">
+<h2>Automatic summaries for the whole catalog</h2>
+<p>Enable the repository's scheduled Gemini summarizer once, and it will work through the existing hosted books and pick up newly added GitHub-hosted titles. Completed source-based analyses are published for every visitor, rather than being saved only in this browser.</p>
+<p><strong>One-time setup:</strong> Add a <code>GEMINI_API_KEY</code> GitHub Actions repository secret using a <em>new</em> Gemini key, then select <strong>Run workflow</strong> in the automation.</p>
+<p><a href="https://github.com/Ranabdullah/online-book-gallery/settings/secrets/actions">Set the private Gemini key</a> · <a href="https://github.com/Ranabdullah/online-book-gallery/actions/workflows/auto-summaries.yml">Start automatic summaries</a> · <a href="https://github.com/Ranabdullah/online-book-gallery/blob/main/admin-scripts/AUTO_SUMMARIES_SETUP.md">Setup and coverage details</a></p>
+<p class="small">The automation runs daily with a 20-book attempt cap. Each manual run can process up to 150 more. It skips completed books, retries failed files later and never invents content for unreadable sources. It does not publish private R2 book data to this public repository.</p>
+</section>
 <section class="box"><h2>Collection status</h2><div class="row"><p><strong id="eligible">—</strong> readable books</p><p><strong id="ready">—</strong> completed on this device</p><p><strong id="pending">—</strong> in selected batch</p></div>
 <label for="api-key">Gemini API key</label><input type="password" id="api-key" autocomplete="off" placeholder="Your own Gemini API key">
 <label class="check"><input type="checkbox" id="remember">Remember key on this device (only for your own browser)</label>
