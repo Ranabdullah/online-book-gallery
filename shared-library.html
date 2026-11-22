@@ -5,13 +5,26 @@
 *{box-sizing:border-box}body{margin:0;background:#faf6ef;color:#152a40;font:15px/1.55 system-ui,Arial,sans-serif}header{background:#14283f;color:white;padding:17px max(18px,calc((100vw - 1100px)/2))}header a{color:#fff}main{max-width:1060px;margin:28px auto;padding:0 18px 60px}h1,h2{font-family:Georgia,serif}h1{font-size:clamp(28px,4vw,40px);margin-bottom:2px}.panel{border:1px solid #d9c9b3;border-radius:12px;background:#fff;padding:22px;margin:18px 0}.note{padding:14px;background:#fff0d5;border-radius:9px;color:#644720}button,.button{background:#1a3552;color:white;border:0;padding:10px 17px;border-radius:8px;font-weight:650;cursor:pointer;text-decoration:none}button:disabled{opacity:.45;cursor:not-allowed}input,select{border:1px solid #b7ad9e;padding:10px;border-radius:7px;font:inherit;max-width:100%}input[type=email]{width:min(100%,420px)}input[type=file]{width:100%}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.muted{color:#617183}.small{font-size:12px}progress{width:100%;height:13px}#books{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.book{background:#fff;border:1px solid #ded4c5;border-radius:10px;padding:13px;min-width:0}.book strong{display:block;overflow-wrap:anywhere;margin-bottom:6px}#status{white-space:pre-wrap;font-weight:600;color:#173d4b}.hidden{display:none!important}.pill{background:#ede4d7;border-radius:20px;font-size:12px;padding:4px 8px}.right{margin-left:auto}details{margin:12px 0}label{display:block;margin:10px 0 6px;font-weight:650}.books-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between}@media(max-width:600px){.panel{padding:15px}}
 </style></head>
 <body><header><a href="index.html">← Athenaeum main gallery</a> &nbsp; / &nbsp; Private shared library</header>
-<main><h1>Shared Library</h1><p>One private bookshelf for two authorized members. Upload ZIPs once; both members can browse and read the uploaded EPUBs/PDFs from their devices.</p>
-<div class="note"><strong>Members only:</strong> Storage and downloads are authenticated. The existing public GitHub Pages books are still public; this new cloud bookshelf does not make those existing files private.</div>
+<main><h1>Shared Library</h1><p>One shared private bookshelf. You and your friend enter the same access code to upload and read books from different devices.</p>
+<div class="note"><strong>Code protected:</strong> Storage and downloads require your shared code. The existing public GitHub Pages books are still public; this new cloud bookshelf does not make those existing files private.</div>
 <div id="configuration" class="panel hidden" role="alert"><strong>Cloud setup required.</strong> The private storage service and two-member authentication are not configured. No cloud upload is possible yet. See <a href="https://github.com/Ranabdullah/online-book-gallery/blob/main/cloudflare/PRIVATE_LIBRARY_SETUP.md">setup instructions</a>.</div>
-<section id="signin" class="panel hidden"><h2>Sign in with email</h2><p>Only the two approved email addresses can access private cloud books. You'll receive a sign-in link.</p>
-<label for="email">Your member email</label><div class="row"><input id="email" type="email" placeholder="you@example.com" autocomplete="email"><button id="send-link" type="button">Send sign-in link</button></div><p class="small muted">If no email arrives, check the spam folder and the Supabase Auth configuration.</p></section>
+<section id="signin" class="panel hidden">
+<h2>Enter your private library code</h2>
+<p>Only those with the code can access the shared book storage. The code is hidden as you type.</p>
+<label for="access-code">Private access code</label><div class="row">
+<input id="access-code" type="password" minlength="24" maxlength="256" placeholder="Enter your access code" autocomplete="off" style="width:min(100%,430px)">
+<button id="unlock" type="button">Unlock library</button>
+</div>
+<details><summary>Create a strong shared code</summary>
+<button type="button" id="generate-code">Generate secure code</button>
+<button type="button" id="copy-code" disabled>Copy generated code</button>
+<p id="generated-code" style="font:600 12px/1.6 ui-monospace,monospace;overflow-wrap:anywhere"></p>
+<p class="small muted">Generating a code does not activate it on the server. The same code must be saved privately as the Cloudflare Worker secret <code>SHARED_ACCESS_CODE</code>. Do not commit it to GitHub or post it in chat.</p>
+</details>
+<p class="small muted">The access code is kept in this tab's memory and cleared when you close it. Anyone with the code can upload and read.</p>
+</section>
 <section id="library" class="hidden">
-<div class="panel"><div class="row"><span id="who" style="font-weight:650"></span><span class="pill">Private cloud storage</span><button class="right" id="signout" type="button">Sign out</button></div></div>
+<div class="panel"><div class="row"><span id="who" style="font-weight:650"></span><span class="pill">Private cloud storage</span><button class="right" id="signout" type="button">Lock library</button></div></div>
 <section class="panel"><h2>Upload ZIP files</h2><p>Select one ZIP at a time. Athenaeum extracts the supported PDFs and EPUBs on this device and sends individual books to private cloud storage. The ZIP itself is not shared publicly.</p>
 <label for="zip">Choose a ZIP archive</label><input type="file" id="zip" accept=".zip,application/zip">
 <label for="category">Category</label><select id="category"><option value="Uncategorized">Uncategorized</option><option>Philosophy</option><option>Psychology</option><option>Physics</option><option>Mathematics</option><option>Science</option><option>Management</option><option>Mechanical Engineering</option><option>Religion</option><option>Classics & Literature</option><option>Other</option></select>
@@ -27,44 +40,62 @@
 <script src="js/vendor/pdf.min.js"></script>
 <script>if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='js/vendor/pdf.worker.min.js';</script>
 <script src="js/db.js?v=5.0.0"></script><script src="js/book-manager.js?v=5.0.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
 <script>
 (async()=>{
 const $=id=>document.getElementById(id);
 const cfg=window.ATHENAEUM_SHARED_CONFIG||{};
-const ready=/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(cfg.supabaseUrl||'')&&
-  typeof cfg.supabasePublishableKey==='string'&&cfg.supabasePublishableKey.length>15&&
-  /^https:\/\//i.test(cfg.workerUrl||'')&&window.supabase&&window.JSZip;
+const ready=/^https:\/\//i.test(cfg.workerUrl||'') && Boolean(window.JSZip);
 if(!ready){$('configuration').classList.remove('hidden');return;}
-const auth=window.supabase.createClient(cfg.supabaseUrl,cfg.supabasePublishableKey,{auth:{flowType:'implicit',detectSessionInUrl:true,persistSession:true}});
-let session=null,books=[],next=null,loading=false;
+let accessCode='',generated='',books=[],next=null,loading=false;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function status(t){$('status').textContent=t;}
 async function request(path,options={}){
-  const {data:{session:current}}=await auth.auth.getSession();
-  if(!current?.access_token)throw Error('Sign in again before accessing shared books.');
+  if(!accessCode)throw Error('Enter the library code first.');
   const response=await fetch(cfg.workerUrl.replace(/\/$/,'')+path,{
-    ...options,headers:{'Authorization':'Bearer '+current.access_token,...options.headers},cache:'no-store'});
+    ...options,headers:{'X-Library-Code':accessCode,...options.headers},cache:'no-store'});
   if(!response.ok){let msg='HTTP '+response.status;try{msg=(await response.json()).error||msg}catch{}throw Error(msg)}
   return response;
 }
-async function identity(){
-  const {data}=await auth.auth.getSession();session=data.session;
-  if(!session){$('signin').classList.remove('hidden');$('library').classList.add('hidden');return}
+async function unlock(){
+  const code=$('access-code').value.trim();
+  if(code.length<24){$('access-code').setCustomValidity('Enter a code of at least 24 characters');$('access-code').reportValidity();return;}
+  $('access-code').setCustomValidity('');
+  accessCode=code;
+  $('unlock').disabled=true;
   try{
-    const me=await (await request('/me')).json();
-    $('signin').classList.add('hidden');$('library').classList.remove('hidden');
-    $('who').textContent='Signed in: '+me.email;await refresh();
-  }catch(e){$('signin').classList.remove('hidden');$('library').classList.add('hidden');$('configuration').classList.remove('hidden');$('configuration').textContent='Private member access unavailable: '+e.message}
+    await request('/me');
+    $('access-code').value='';
+    $('signin').classList.add('hidden');
+    $('library').classList.remove('hidden');
+    $('who').textContent='🔒 Shared library unlocked';
+    await refresh();
+  }catch(e){
+    accessCode='';
+    $('signin').classList.remove('hidden');
+    $('library').classList.add('hidden');
+    alert('Could not unlock library: '+e.message);
+  }finally{$('unlock').disabled=false;}
 }
-$('send-link').onclick=async()=>{
-  const email=$('email').value.trim();if(!email){$('email').focus();return}
-  $('send-link').disabled=true;
-  try{const {error}=await auth.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});if(error)throw error;alert('If this email is enabled, a sign-in link has been sent.');}
-  catch(e){alert('Cannot send link: '+e.message)}finally{$('send-link').disabled=false;}
+$('unlock').onclick=unlock;
+$('access-code').addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
+$('signout').onclick=()=>{
+  accessCode='';books=[];next=null;
+  $('library').classList.add('hidden');$('signin').classList.remove('hidden');
+  $('access-code').value='';
 };
-$('signout').onclick=async()=>{await auth.auth.signOut();session=null;identity()};
-auth.auth.onAuthStateChange((_event,updated)=>{session=updated;});
+$('generate-code').onclick=()=>{
+  const bytes=new Uint8Array(32);crypto.getRandomValues(bytes);
+  generated=Array.from(bytes,v=>v.toString(16).padStart(2,'0')).join('');
+  $('generated-code').textContent=generated;
+  $('copy-code').disabled=false;
+};
+$('copy-code').onclick=async()=>{
+  if(!generated)return;
+  try{await navigator.clipboard.writeText(generated);$('copy-code').textContent='Copied';}
+  catch(e){$('generated-code').textContent=generated+' (select and copy manually)';}
+};
+$('signin').classList.remove('hidden');
 function render(){
  const q=$('search').value.toLowerCase().trim();
  const filtered=books.filter(b=>[b.title,b.category,b.contributedBy,b.archive].some(v=>String(v||'').toLowerCase().includes(q)));
@@ -147,6 +178,6 @@ $('upload').onclick=async()=>{
  }catch(e){status('Could not process ZIP: '+e.message)}
  finally{loading=false;$('upload').disabled=false;}
 };
-await identity();
+// Unlock occurs only after the user types their private code.
 })();
 </script></body></html>
