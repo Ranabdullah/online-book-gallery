@@ -13,6 +13,7 @@ jobs:
         with:
           sparse-checkout: |
             tests
+            admin-scripts/generate_summaries.py
             js
             data
             cloudflare
@@ -29,5 +30,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: python -m py_compile admin-scripts/generate_summaries.py
       - run: node tests/verify-site.mjs
       - run: node tests/verify-private-worker.mjs
