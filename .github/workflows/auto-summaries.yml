@@ -31,6 +31,8 @@ jobs:
     timeout-minutes: 90
     env:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      ATHENAEUM_WORKER_URL: ${{ secrets.ATHENAEUM_WORKER_URL }}
+      ATHENAEUM_LIBRARY_CODE: ${{ secrets.ATHENAEUM_LIBRARY_CODE }}
       GEMINI_MODEL: ${{ inputs.model || 'gemini-3.8-flash' }}
       MAX_BOOKS: ${{ inputs.max_books || '20' }}
     steps:
@@ -61,7 +63,8 @@ jobs:
           if ! test -f data/generated-summaries-status.json; then exit 0; fi
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add data/generated-summaries data/generated-summaries-status.json
+          git add data/generated-summaries-status.json
+          if test -d data/generated-summaries; then git add -A data/generated-summaries; fi
           if git diff --cached --quiet; then echo "No summary changes."; exit 0; fi
           git commit -m "Publish verified excerpt-based book summaries [skip ci]"
           git push origin HEAD:main
