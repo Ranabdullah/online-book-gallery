@@ -1,6 +1,6 @@
 // Network-first navigation and catalog for safe, prompt library updates.
 // Book files and offline reader assets remain available through existing caching.
-const CACHE_NAME = 'athenaeum-reader-v8';
+const CACHE_NAME = 'athenaeum-reader-v9';
 const OFFLINE_FILES = [
   './',
   'reader.html',
@@ -25,7 +25,7 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
-  const shouldRefresh = req.mode === 'navigate' || url.pathname.endsWith('/data/books.json');
+  const shouldRefresh = req.mode === 'navigate' || /\/data\/[^/]+\.json$/.test(url.pathname) || /\/(?:js|css)\/(?:app|book-manager|reader|style)\.(?:js|css)$/.test(url.pathname);
   if (shouldRefresh) {
     event.respondWith((async () => {
       const cache = await caches.open(CACHE_NAME);
