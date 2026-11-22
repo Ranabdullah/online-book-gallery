@@ -164,12 +164,16 @@
         <button class="cat-pill" data-category="Mythology & Folklore">Mythology & Folklore</button>
         <button class="cat-pill" data-category="Personal Growth & Finance">Personal Growth & Finance</button>
         <button class="cat-pill" data-category="Writing, Language & Reference">Writing & Style</button>
-        <button class="cat-pill alert-pill" id="pill-needs-upload" data-category="__needs_upload__" style="background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; font-weight: 600;">
-          ⚠️ Needs Upload <span class="cat-count" id="count-needs-upload" style="background: #ea580c; color: white;">0</span>
-        </button>
+        
       </div>
     </div>
   </nav>
+
+<div id="library-utilities" style="display:flex;justify-content:flex-end;gap:9px;align-items:center;flex-wrap:wrap;margin:8px auto;padding:0 16px;max-width:1500px">
+<button type="button" class="btn btn-outline" id="pill-needs-upload" data-category="__needs_upload__" title="Show books missing a file" style="background:#fff7ed;color:#b45309;border:1px solid #fed7aa">📂 Missing files <span id="count-needs-upload" class="cat-count">0</span></button>
+<a href="zip-import.html" class="btn btn-outline" title="Import your ZIP files on this device">📦 Import ZIP</a>
+</div>
+<section id="contributor-category-counts" aria-label="Books by contributor and category" style="padding:5px 22px;max-width:1450px;margin:auto;color:#263c53"></section>
 
   <!-- Main 2-Column Layout (Gallery on Left, Permanent Recommendations on Right) -->
   <div class="container layout-2col">
@@ -549,8 +553,8 @@
   <script src="js/vendor/pdf.min.js"></script>
   <script src="js/db.js?v=3.8.0"></script>
   <script src="js/sync.js?v=3.9.0"></script>
-  <script src="js/book-manager.js?v=3.6.1"></script>
+  <script src="js/book-manager.js?v=4.6.0"></script>
   <script src="js/recommendations.js?v=3.8.0"></script>
-  <script src="js/app.js?v=4.5.0"></script>
+  <script src="js/app.js?v=4.6.0"></script>
 </body>
 </html>
