@@ -7,13 +7,13 @@
 <body><header><a href="index.html">← Athenaeum main gallery</a> &nbsp; / &nbsp; Private shared library</header>
 <main><h1>Shared Library</h1><p>One shared private bookshelf. You and your friend enter the same access code to upload and read books from different devices.</p>
 <div class="note"><strong>Code protected:</strong> Storage and downloads require your shared code. The existing public GitHub Pages books are still public; this new cloud bookshelf does not make those existing files private.</div>
-<div id="configuration" class="panel hidden" role="alert"><strong>Cloud setup required.</strong> The private storage service and two-member authentication are not configured. No cloud upload is possible yet. See <a href="https://github.com/Ranabdullah/online-book-gallery/blob/main/cloudflare/PRIVATE_LIBRARY_SETUP.md">setup instructions</a>.</div>
-<section id="signin" class="panel hidden">
+<div id="configuration" class="panel hidden" role="alert"><strong>Cloud setup required.</strong> The private storage service is not configured. You can generate or enter a hidden code below, but unlocking and cloud uploads are disabled until storage is connected. See <a href="https://github.com/Ranabdullah/online-book-gallery/blob/main/cloudflare/PRIVATE_LIBRARY_SETUP.md">setup instructions</a>.</div>
+<section id="signin" class="panel">
 <h2>Enter your private library code</h2>
 <p>Only those with the code can access the shared book storage. The code is hidden as you type.</p>
 <label for="access-code">Private access code</label><div class="row">
 <input id="access-code" type="password" minlength="24" maxlength="256" placeholder="Enter your access code" autocomplete="off" style="width:min(100%,430px)">
-<button id="unlock" type="button">Unlock library</button>
+<button id="unlock" type="button" disabled title="Cloud storage must be configured before unlocking">Unlock library</button>
 </div>
 <details><summary>Create a strong shared code</summary>
 <button type="button" id="generate-code">Generate secure code</button>
@@ -46,7 +46,7 @@
 const $=id=>document.getElementById(id);
 const cfg=window.ATHENAEUM_SHARED_CONFIG||{};
 const ready=/^https:\/\//i.test(cfg.workerUrl||'') && Boolean(window.JSZip);
-if(!ready){$('configuration').classList.remove('hidden');return;}
+if(!ready){$('configuration').classList.remove('hidden');$('unlock').disabled=true;}
 let accessCode='',generated='',books=[],next=null,loading=false;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function status(t){$('status').textContent=t;}
@@ -58,6 +58,7 @@ async function request(path,options={}){
   return response;
 }
 async function unlock(){
+  if(!ready){alert('Cloud storage is not configured yet. You can generate and copy a code now, but it cannot unlock the library until the server secret and Worker URL are set.');return;}
   const code=$('access-code').value.trim();
   if(code.length<24){$('access-code').setCustomValidity('Enter a code of at least 24 characters');$('access-code').reportValidity();return;}
   $('access-code').setCustomValidity('');
@@ -89,6 +90,7 @@ $('generate-code').onclick=()=>{
   generated=Array.from(bytes,v=>v.toString(16).padStart(2,'0')).join('');
   $('generated-code').textContent=generated;
   $('copy-code').disabled=false;
+  $('access-code').value=generated;
 };
 $('copy-code').onclick=async()=>{
   if(!generated)return;
