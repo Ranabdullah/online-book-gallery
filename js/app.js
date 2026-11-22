@@ -253,6 +253,19 @@ function initStats() {
     }
   }
 
+  const originSummary = document.getElementById('contributor-category-counts');
+  if (originSummary) {
+    const sources = [['R','Original collection'],['A','Abdurrehman'],['N','Free sources']];
+    const htmlEscape = value => String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+    originSummary.innerHTML = sources.map(([mark,label]) => {
+      const items = catalogued.filter(b => (b.originMark || 'R') === mark);
+      const counts = new Map();
+      for (const b of items) counts.set(b.category || 'Uncategorized',(counts.get(b.category || 'Uncategorized') || 0)+1);
+      const chips = [...counts].sort((a,b)=>a[0].localeCompare(b[0])).map(([cat,n]) =>
+        '<span style="white-space:nowrap;border:1px solid #ddd1bf;border-radius:16px;padding:3px 9px;font-size:11px;background:white">' + htmlEscape(cat) + ' · <b>' + n + '</b></span>').join('');
+      return '<details style="margin:5px 0"><summary style="cursor:pointer;font-weight:600">' + mark + ' · ' + label + ': ' + items.length + ' records</summary><div style="display:flex;gap:5px;flex-wrap:wrap;padding:8px 0">' + chips + '</div></details>';
+    }).join('');
+  }
   updateFavoritesBadge();
 }
 
@@ -1103,38 +1116,31 @@ async function deleteBook(bookId) {
   }
 }
 
-function normalizeTitleForDupe(t) {
-  if (!t) return '';
-  let clean = t.toLowerCase();
-  clean = clean.replace(/\(pdfdrive\)/g, '');
-  clean = clean.replace(/\(.*?\)/g, '');
-  clean = clean.replace(/\[.*?\]/g, '');
-  clean = clean.replace(/[_]/g, ' ');
-  clean = clean.replace(/[-]/g, ' ');
-  clean = clean.replace(/[^a-z0-9\s]/g, '');
-  return clean.trim().replace(/\s+/g, ' ');
+function normalizeTitleForDupe(value) {
+  // Preserve parentheses and edition/language markers. Never conflate distinct
+  // translations or versions just because the generic work title is shared.
+  return String(value || '').normalize('NFKD').toLowerCase()
+    .replace(/[\u0300-\u036f]/g, '').replace(/\(pdfdrive\)/g, '')
+    .replace(/[_]+/g,' ').replace(/[^a-z0-9\s()\-]/g,' ')
+    .replace(/\s+/g,' ').trim();
 }
 
 function detectLibraryDuplicates() {
-  const groups = {};
+  const groups = new Map();
   for (const b of allBooks) {
-    const key = normalizeTitleForDupe(b.title);
-    if (!key || key.length < 3) continue;
-    if (!groups[key]) groups[key] = [];
-    groups[key].push(b);
+    // Archive file identity is stronger than filename/title; separate language,
+    // format, edition and individual file provenance when available.
+    const titleKey = normalizeTitleForDupe(b.title);
+    if (!titleKey || titleKey.length < 3) continue;
+    const translation = b.originArchiveEntry?.match(/UDHR_Translations\/([^/]+)\.pdf$/i);
+    const identity = translation ? 'udhr:' + translation[1].toLowerCase()
+      : b.isArchiveRecord && b.originArchiveEntry ? 'archive-title:' + titleKey + ':' + b.format
+      : 'book-title:' + titleKey + ':' + (b.author || '').toLowerCase().trim();
+    if (!groups.has(identity)) groups.set(identity, []);
+    groups.get(identity).push(b);
   }
-
-  const duplicateGroups = [];
-  for (const [key, items] of Object.entries(groups)) {
-    if (items.length > 1) {
-      duplicateGroups.push({
-        key,
-        title: items[0].title,
-        items
-      });
-    }
-  }
-  return duplicateGroups;
+  return [...groups.entries()].filter(([,items]) => items.length > 1)
+    .map(([key,items]) => ({key,title:items[0].title,items}));
 }
 
 function updateDuplicateBadge() {
