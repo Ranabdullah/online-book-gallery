@@ -348,7 +348,7 @@ function renderBooks() {
           <img class="book-cover" src="${b.cover || 'data:,'}" alt="${escapeHtml(b.title)}" loading="lazy" onerror="fallbackBookCover(this)">
           <span class="origin-marker" title="${escapeHtml(originInfo)}" aria-label="Book origin: ${escapeHtml(originInfo)}" style="position:absolute;top:8px;left:8px;z-index:5;background:${originColor};color:#fff;border:2px solid #fff6;border-radius:50%;width:29px;height:29px;display:flex;align-items:center;justify-content:center;font:800 15px system-ui;box-shadow:0 2px 8px #0008;">${originMark}</span>
           ${isNeedsUpload ? `<span class="format-badge" style="background: #ea580c; left: 8px; right: auto; font-size: 10px; font-weight: 700;">⚠️ NEEDS FILE</span>` : ''}
-          ${b.isArchiveRecord ? `<span class="format-badge" style="background:#704a8f;right:8px;top:37px">${b.recordType === 'book-format archive entry' ? 'ARCHIVE ONLY' : 'DOCUMENT'}</span>` : ''}
+          ${b.isArchiveRecord ? `<span class="format-badge" style="background:#704a8f;right:8px;top:37px" title="File is in Abdurrehman's supplied ZIP. Select the matching EPUB/PDF to read on this device">${b.recordType === 'book-format archive entry' ? 'FILE NEEDED' : 'DOCUMENT'}</span>` : ''}
           ${b.isUserAdded ? `<span class="user-added-badge">NEW</span>` : ''}
           <span class="format-badge ${b.format.toLowerCase()}">${b.format}</span>
           <button class="bookmark-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${b.id}')" title="${isFav ? 'Remove favorite' : 'Add favorite'}">
@@ -363,32 +363,24 @@ function renderBooks() {
           <span class="book-category">${escapeHtml(b.category)}</span>
           <h3 class="book-title" title="${escapeHtml(b.title)}">${escapeHtml(b.title)}</h3>
           <div class="book-author" title="${escapeHtml(b.author)}">${escapeHtml(b.author)}</div>
-          <div class="book-source" style="font-size:11px;color:#657287;margin:4px 0">Source: ${escapeHtml(contributorLabel)}</div>
-          ${b.isArchiveRecord ? `<p style="font-size:11px;line-height:1.4;color:#785d85;margin:5px 0">${escapeHtml(b.description)}</p>` : ''}
+          <div class="book-source" style="font-size:11px;color:#657287;margin:4px 0">
+            <span title="${escapeHtml(b.isArchiveRecord ? ('Contributed by Abdurrehman · ' + b.originArchive) : contributorLabel)}" aria-label="Contributor: ${escapeHtml(contributorLabel)}">👤 ${escapeHtml(contributorLabel)}</span>
+            ${b.isArchiveRecord ? `<span role="img" tabindex="0" title="${escapeHtml(b.description)}" aria-label="File details: ${escapeHtml(b.description)}" style="cursor:help;padding:3px 7px;border-radius:6px;border:1px solid #d7c8dc;color:#704a8f">ⓘ</span>` : ''}
+          </div>
 
-          <div class="card-actions">
-            ${!isNeedsUpload ? `
-              <a href="${readUrl}" class="btn-read" title="${b.isArchiveRecord?'View archive metadata and file availability':external?'Book details and Athenaeum local reader':'Read online in high-speed reader'}">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                <span>${b.isArchiveRecord?'Archive details':external?'Details & reader':'Read'}</span>
-              </a>
+          <div class="card-actions" aria-label="Book actions">
+            ${b.isArchiveRecord ? `
+              <button type="button" class="btn-read" style="min-width:42px" onclick="openArchiveBook('${b.id}')" title="Open in Athenaeum reader (select matching EPUB or PDF if needed)" aria-label="Read ${escapeHtml(b.title)}">📖</button>
+              <a href="archive-book.html?id=${encodeURIComponent(b.id)}" class="btn-card-edit" title="Book details, contributor and original file information" aria-label="View details for ${escapeHtml(b.title)}">ⓘ</a>
+            ` : !isNeedsUpload ? `
+              <a href="${readUrl}" class="btn-read" title="${external ? 'Open free-book details and reader' : 'Read in Athenaeum'}" aria-label="Read ${escapeHtml(b.title)}">📖</a>
             ` : `
-              <button class="btn-read" style="background: #ea580c;" onclick="triggerDirectFileUpload('${b.id}')" title="Upload EPUB or PDF from PC to read">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <span>Upload</span>
-              </button>
+              <button class="btn-read" onclick="triggerDirectFileUpload('${b.id}')" title="Select local EPUB/PDF to read" aria-label="Select file for ${escapeHtml(b.title)}">📂</button>
             `}
-            <a href="book-notes.html?book=${encodeURIComponent(b.id)}" class="btn-card-edit" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;" title="Read and write book notes (local drafts until shared accounts launch)">📝</a>
-            ${b.isArchiveRecord ? `<a href="${readUrl}" class="btn-card-edit" title="View archived book details">ⓘ</a>` : external ? `<a href="${b.externalUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="Open official Project Gutenberg book page">↗</a>` :
-            `<a href="book-analysis.html?book=${encodeURIComponent(b.id || b.file)}" class="btn-card-edit" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; color: #9333ea;" title="AI Book Intelligence, Summary & Vocabulary">
-              🧠
-            </a>`}
-            <button class="btn-card-edit" onclick="openEditModal('${b.id}')" title="Edit book name, author, category or cover">
-              ✏️
-            </button>
-            <button class="btn-card-edit" onclick="openBookModal('${b.id}')" title="Book details">
-              &bull;&bull;&bull;
-            </button>
+            <a href="book-notes.html?book=${encodeURIComponent(b.id)}" class="btn-card-edit" title="Personal notes" aria-label="Notes for ${escapeHtml(b.title)}">📝</a>
+            ${external ? `<a href="${b.externalUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-edit" title="Open official Project Gutenberg edition" aria-label="External book source">↗</a>` : !b.isArchiveRecord ? `<a href="book-analysis.html?book=${encodeURIComponent(b.id || b.file)}" class="btn-card-edit" title="Summary and Book Intelligence" aria-label="Book analysis">🧠</a>` : ''}
+            <button class="btn-card-edit" onclick="openEditModal('${b.id}')" title="Edit book title, author or cover" aria-label="Edit book">✏️</button>
+            <button class="btn-card-edit" onclick="openBookModal('${b.id}')" title="More book information" aria-label="More book information">⋯</button>
           </div>
         </div>
       </article>
@@ -397,6 +389,52 @@ function renderBooks() {
 
   attachCardDragAndDrop();
 }
+
+/** Local reading of an A inventory title never publishes the source file to GitHub. */
+window.openArchiveBook = async function (id) {
+  const record = allBooks.find(b => b.id === id);
+  if (!record || !record.isArchiveRecord) return;
+  try {
+    const saved = await window.AthenaeumDB.getUserBookById(id);
+    if (saved && saved.fileData) {
+      location.href = 'reader.html?book=' + encodeURIComponent('idb://' + id);
+      return;
+    }
+  } catch (err) { console.warn('Local book lookup failed', err); }
+  if (record.format === 'MOBI') {
+    alert('This edition is MOBI. Convert a copy you are permitted to use to EPUB or PDF before opening it in Athenaeum.');
+    return;
+  }
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.pdf,.epub,application/pdf,application/epub+zip';
+  input.addEventListener('change', async () => {
+    const chosen = input.files?.[0];
+    if (!chosen) return;
+    const expected = (record.originArchiveEntry || '').split('/').pop().toLowerCase();
+    const actual = chosen.name.toLowerCase();
+    if (actual !== expected) {
+      alert('Please select the matching file "' + expected + '" from Abdurrehman’s ZIP. Other files must not be assigned to this record.');
+      return;
+    }
+    try {
+      const imported = await window.BookManager.processAndAddBook(chosen);
+      await window.AthenaeumDB.saveUserBook({
+        ...imported, id:record.id, file:'idb://' + record.id,
+        title:record.title, author:record.author, category:record.category,
+        originMark:'A', originAttribution:record.originAttribution,
+        originArchive:record.originArchive, originArchiveEntry:record.originArchiveEntry,
+        isArchiveRecord:false, isHosted:true, needsFix:false,
+        isUserAdded:true, summaryStatus:'awaiting_source_analysis'
+      });
+      await window.AthenaeumDB.deleteUserBook(imported.id);
+      location.href = 'reader.html?book=' + encodeURIComponent('idb://' + record.id);
+    } catch (err) {
+      alert('Unable to save book locally: ' + (err.message || err));
+    }
+  }, {once:true});
+  input.click();
+};
 
 /**
  * Direct File Upload Handler for Needs Upload Tab
@@ -806,9 +844,9 @@ function openBookModal(bookId) {
   }
 
   if (book.isArchiveRecord) {
-    readBtn.href = 'archive-book.html?id=' + encodeURIComponent(book.id);
-    readBtn.textContent = 'Archive details';
-    readBtn.onclick = null;
+    readBtn.href = '#';
+    readBtn.textContent = '📖 Open in reader';
+    readBtn.onclick = event => {event.preventDefault();modal.classList.remove('active');window.openArchiveBook(book.id);};
     readBtn.style.display = 'inline-flex';
   } else if (book.isExternal) {
     readBtn.href = 'external-book.html?id=' + encodeURIComponent(book.id);
