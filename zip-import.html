@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZIP Book Import | Athenaeum</title>
 <style>*{box-sizing:border-box}body{background:#101b2b;color:#ebf2f9;font:14px/1.5 system-ui;margin:0}header{background:#15253a;padding:20px max(16px,calc((100vw - 1100px)/2));border-bottom:1px solid #32475d}header a{color:#f0c98d;text-decoration:none}main{max-width:1100px;margin:0 auto;padding:34px 18px 80px}h1,h2{font-family:Georgia,serif}h1{font-size:38px;margin:0 0 8px}.warning{padding:16px;background:#45351f;border:1px solid #96713a;border-radius:13px;color:#ffe4b7;margin:20px 0;line-height:1.6}.panel{border:1px solid #33475d;border-radius:15px;background:#17283f;padding:21px;margin:22px 0}label{display:block;margin:14px 0;font-weight:600}input[type=file]{padding:14px;border:1px dashed #60718a;border-radius:8px;width:100%;color:#eee;background:#0d1b2e}button{background:#e8bb7c;color:#17263c;font-weight:750;border:0;border-radius:8px;padding:11px 16px;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.rows{max-height:510px;overflow:auto;border:1px solid #334b65;border-radius:12px}.item{padding:12px 15px;border-bottom:1px solid #304257;display:grid;grid-template-columns:30px minmax(0,1fr) 175px;gap:10px;align-items:start}.item:last-child{border:0}.item strong{overflow-wrap:anywhere;font-size:13px;display:block}.sub{color:#b7c3d2;font-size:11px;margin-top:5px;overflow-wrap:anywhere}.pill{border-radius:14px;padding:4px 8px;font-size:10px;background:#2b3f57;white-space:normal}.pill.exist{background:#1d4739;color:#acedd1}.pill.missing{background:#51402c;color:#ffd995}.pill.new{background:#273d57;color:#d9e8fa}.pill.review{background:#612e38;color:#ffd4d4}#status{white-space:pre-wrap;margin:15px 0;font-size:13px;color:#f2d6a4}#log{max-height:300px;overflow:auto;white-space:pre-wrap;font-size:12px;color:#b6d2e7}.flex{display:flex;gap:12px;align-items:center;flex-wrap:wrap}small{color:#b3c3d6}code{color:#ffe6b5}a{color:#f2ce93}@media(max-width:680px){.item{grid-template-columns:24px minmax(0,1fr)}.item .pill{grid-column:2;justify-self:start}}
-</style></head><body><header><a href="index.html">← Athenaeum Library</a> &nbsp; / &nbsp; <a href="my-hub.html">My Hub</a></header><main><h1>Import a book ZIP</h1><p>Review a folder archive and match PDFs/EPUBs to existing library entries, without creating duplicate titles.</p>
+</style></head><body><header><a href="index.html">← Athenaeum Library</a> &nbsp; / &nbsp; <a href="my-hub.html">My Hub</a></header><main><h1>Import books from ZIP</h1><p>Inspect a ZIP, connect matching catalog entries, then read the imported books on this device. This does not upload files to the shared cloud library.</p>
 <div class="warning"><strong>Local import only.</strong> These files are stored in this browser's IndexedDB, not uploaded to GitHub, Supabase or Cloudflare. Other people cannot read your imported books. Keep the original ZIP until private cloud storage and account syncing have been activated. Large archives may exceed browser memory or storage quota; import on desktop, one archive at a time.</div>
 <div class="panel"><label for="zip">Choose a ZIP archive</label><input type="file" id="zip" accept=".zip,application/zip">
 <label for="archive-origin">Who contributed the books in this ZIP?</label>
@@ -9,7 +9,7 @@
 <option value="R">R — My original collection</option>
 </select>
 <p><small>All newly imported entries from this ZIP receive the selected source marker and archive filename. Already hosted books retain their existing provenance.</small></p><p><small>Supports .pdf and .epub entries. Other file types will be listed as unsupported. Files are processed on your device.</small></p><div class="flex"><button type="button" id="inspect">Inspect ZIP and match books</button><button type="button" id="import" disabled>Import selected books to this device</button></div><p id="status" role="status"></p></div>
-<div class="panel"><h2>Detected books <span id="count"></span></h2><p><small>Matched and already hosted entries are skipped. Missing entries can be repaired locally; new titles can be added locally. Ambiguous matches require manual review.</small></p><div id="list" class="rows"></div></div>
+<div class="panel"><h2>Detected books <span id="count"></span></h2><p><small>Matched and already hosted entries are skipped. Matched archive entries can be connected with one click. A match is not an error: the file is connected only after importing. Already available files are skipped. Ambiguous matches require review.</small></p><div id="list" class="rows"></div></div>
 <div class="panel"><h2>Import log</h2><div id="log"></div></div>
 </main>
 <script src="js/vendor/jszip.min.js"></script><script src="js/vendor/pdf.min.js"></script><script>if(window.pdfjsLib)window.pdfjsLib.GlobalWorkerOptions.workerSrc="js/vendor/pdf.worker.min.js";</script><script src="js/db.js?v=3.8.0"></script><script src="js/book-manager.js?v=5.0.0"></script>
@@ -20,6 +20,7 @@ let archiveName='';
 const label=x=>{const e=document.createElement('span');e.className='pill '+x;return e};
 const lines=[];const log=t=>{lines.push(t);$('log').textContent=lines.join('\n');$('log').scrollTop=$('log').scrollHeight};
 const status=t=>$('status').textContent=t;
+const updateButton=()=>{ $('import').disabled=busy||!zip||!entries.some(x=>x.checked&&(x.kind==='missing'||x.kind==='new')); $('import').textContent='Connect '+entries.filter(x=>x.checked&&(x.kind==='missing'||x.kind==='new')).length+' selected files locally'; };
 const filename=path=>path.split('/').pop();
 function matches(name,path){
   const n=norm(name);
@@ -34,8 +35,8 @@ function matches(name,path){
 }
 function classify(name,path) {
  const options=matches(name,path);
- if(options.length>1) {const miss=options.filter(x=>x.needsFix||x.isArchiveRecord);const hosted=options.filter(x=>x.isHosted&&!x.needsFix);if(hosted.length)return{kind:'exist',title:'Already hosted',record:hosted[0]};if(miss.length===1)return{kind:'missing',title:'Repair missing locally',record:miss[0]};return{kind:'review',title:'Ambiguous match — review',record:null};}
- if(options.length===1){const b=options[0];return b.isHosted&&!b.needsFix?{kind:'exist',title:'Already hosted',record:b}:{kind:'missing',title:b.isArchiveRecord?'Connect to A book entry':'Repair missing locally',record:b};}
+ if(options.length>1) {const miss=options.filter(x=>x.needsFix||x.isArchiveRecord);const hosted=options.filter(x=>x.isHosted&&!x.needsFix);if(hosted.length)return{kind:'exist',title:'Already hosted',record:hosted[0]};if(miss.length===1)return{kind:'missing',title:'Ready to connect',record:miss[0]};return{kind:'review',title:'Ambiguous match — review',record:null};}
+ if(options.length===1){const b=options[0];return b.isHosted&&!b.needsFix?{kind:'exist',title:'Already hosted',record:b}:{kind:'missing',title:b.isArchiveRecord?'Ready to connect to A title':'Ready to connect',record:b};}
  return{kind:'new',title:'New local book',record:null};
 }
 async function inspect(){
@@ -59,12 +60,12 @@ async function inspect(){
   zip=await JSZip.loadAsync(file);entries=[];
   for(const [path,item] of Object.entries(zip.files)){if(item.dir)continue;const base=filename(path);if(!/\.(epub|pdf)$/i.test(base))continue;const match=classify(base,path);entries.push({path,base,item,...match,checked:match.kind==='missing'||match.kind==='new'});}
   entries.sort((a,b)=>({missing:0,new:1,exist:2,review:3}[a.kind]-{missing:0,new:1,exist:2,review:3}[b.kind])||a.base.localeCompare(b.base));
-  render();status('Inspection complete: '+entries.length+' EPUB/PDF files found. '+entries.filter(x=>x.kind==='missing').length+' missing-title matches, '+entries.filter(x=>x.kind==='new').length+' new candidates.');
- }catch(e){status('ZIP inspection failed: '+e.message);zip=null}finally{busy=false;$('inspect').disabled=false;$('import').disabled=!zip||!entries.some(x=>x.checked);}
+  render();status('Found '+entries.length+' EPUB/PDF files: '+entries.filter(x=>x.kind==='missing').length+' ready to connect, '+entries.filter(x=>x.kind==='new').length+' new titles, '+entries.filter(x=>x.kind==='exist').length+' already available. Select Import to save matching files locally.');
+ }catch(e){status('ZIP inspection failed: '+e.message);zip=null}finally{busy=false;$('inspect').disabled=false;updateButton();}
 }
 function render(){const list=$('list');list.replaceChildren();$('count').textContent='('+entries.length+')';if(!entries.length){list.textContent='No supported EPUB/PDF files were found.';return}
- entries.forEach((e,i)=>{const row=document.createElement('div');row.className='item';const chk=document.createElement('input');chk.type='checkbox';chk.checked=e.checked;chk.disabled=e.kind==='exist'||e.kind==='review';chk.setAttribute('aria-label','Import '+e.base);chk.onchange=()=>{e.checked=chk.checked;$('import').disabled=!entries.some(x=>x.checked)};
- const text=document.createElement('div'),name=document.createElement('strong');name.textContent=e.base;const sub=document.createElement('div');sub.className='sub';sub.textContent=e.path+(e.record?' → '+e.record.title:'');text.append(name,sub);const tag=label(e.kind);tag.textContent=e.title;row.append(chk,text,tag);list.append(row);});
+ entries.forEach((e,i)=>{const row=document.createElement('div');row.className='item';const chk=document.createElement('input');chk.type='checkbox';chk.checked=e.checked;chk.disabled=e.kind==='exist'||e.kind==='review';chk.setAttribute('aria-label','Import '+e.base);chk.onchange=()=>{e.checked=chk.checked;updateButton()};
+ const text=document.createElement('div'),name=document.createElement('strong');name.textContent=e.base;const sub=document.createElement('div');sub.className='sub';sub.textContent=e.path+(e.record?' → '+e.record.title:'');text.append(name,sub);const tag=label(e.kind);tag.textContent=e.title;tag.title=e.kind==='missing'?'This file matches a catalog record. Click Import to save a readable local copy.':e.kind==='exist'?'Already in the hosted or local library. It will be skipped.':e.title;row.append(chk,text,tag);list.append(row);});
 }
 async function importSelected(){
  if(busy||!zip)return;
@@ -88,10 +89,13 @@ async function importSelected(){
      const book=await window.BookManager.processAndAddBook(file,options);
      log((e.kind==='missing'?'CONNECTED':'ADDED')+' locally ['+source+']: '+book.title+' ('+book.id+')');
      done++;
-   } catch(err){errors++;log('FAILED: '+e.base+' — '+(err.message||err));}
+     e.checked=false;
+     e.kind='exist';e.title='✓ Connected on this device';e.record=book;
+     render();
+   } catch(err){errors++;e.title='Failed — retry';log('FAILED: '+e.base+' — '+(err.message||err));}
  }
  status('Completed: '+done+' locally imported; '+errors+' failed. Files stay in browser storage on this device. Original ZIP remains unchanged.');
- busy=false;$('import').disabled=false;$('inspect').disabled=false;
+ busy=false;$('inspect').disabled=false;updateButton();render();
 }
  $('inspect').onclick=inspect;$('import').onclick=importSelected;
 })();
