@@ -29,7 +29,7 @@
 <h2>Where are my books?</h2>
 <div class="row" style="gap:18px">
   <div><strong id="device-book-count">Checking…</strong><div class="small muted">Saved only in this browser</div></div>
-  <div><strong id="cloud-book-count">Not connected</strong><div class="small muted">Private shared cloud books</div></div>
+  <div><strong id="cloud-book-count">Not connected</strong><div class="small muted">Verified shared cloud inventory</div></div>
 </div>
 <p class="small muted">ZIP Import saves books locally, not to your friend's cloud library. Only books confirmed by the private cloud API count as shared uploads.</p>
 <a href="zip-import.html" class="button">View local ZIP importer</a>
@@ -62,6 +62,7 @@ const $=id=>document.getElementById(id);
 const cfg=window.ATHENAEUM_SHARED_CONFIG||{};
 const ready=/^https:\/\//i.test(cfg.workerUrl||'') && Boolean(window.JSZip);
 if(!ready){$('configuration').classList.remove('hidden');$('unlock').disabled=true;}
+else {$('configuration').classList.add('hidden');$('unlock').disabled=false;}
 let accessCode='',generated='',books=[],next=null,loading=false;
 async function updateLocalCount(){try{const b=await window.AthenaeumDB.getAllUserBooks();$('device-book-count').textContent=b.filter(x=>x.fileData&&x.fileData.byteLength>0).length+' local books';}catch(e){$('device-book-count').textContent='Local storage unavailable';}}
 updateLocalCount();
@@ -131,7 +132,12 @@ async function unlock(){
     $('who').textContent='🔒 Shared library unlocked';
     if($('remember-device').checked){try{await rememberCode(accessCode)}catch(e){console.warn('Remember device unavailable',e)}}
     else localStorage.removeItem(STORE);
-    await refresh();
+    // A temporary book-list outage is not an invalid access code.
+    try { await refresh(); }
+    catch(e){
+      $('cloud-book-count').textContent='Cloud list unavailable';
+      alert('Access code accepted, but the cloud book list could not load: '+e.message);
+    }
   }catch(e){
     accessCode='';
     $('signin').classList.remove('hidden');
@@ -168,11 +174,15 @@ function render(){
  $('more').classList.toggle('hidden',!next);
 }
 async function refresh(){
- books=[];next=null;let page=0;
+ // Do not replace the visible inventory until the complete server listing succeeds.
+ let loaded=[],cursor=null,page=0;
  do{
-   const r=await (await request('/books'+(next?'?cursor='+encodeURIComponent(next):''))).json();
-   books.push(...r.books);next=r.cursor;page++;
- }while(next&&page<200);
+   const r=await (await request('/books'+(cursor?'?cursor='+encodeURIComponent(cursor):''))).json();
+   if(!Array.isArray(r.books))throw Error('Invalid cloud inventory response');
+   loaded.push(...r.books);cursor=r.cursor||null;page++;
+ }while(cursor&&page<200);
+ if(cursor)throw Error('Cloud inventory has more pages than supported; displayed count was not updated.');
+ books=loaded;next=null;
  render();
 }
 $('refresh').onclick=()=>refresh().catch(e=>alert('Could not refresh: '+e.message));
