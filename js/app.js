@@ -76,12 +76,13 @@ async function loadCatalog() {
           const inventory = await response.json();
           const titleKey = value => String(value || '').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, '');
           const titles = new Set(baseBooks.map(b => titleKey(b.title)));
-          for (const item of (inventory.books || [])) {
+          const prioritize = {EPUB:0,PDF:1,MOBI:2};
+          for (const item of [...(inventory.books || [])].sort((a,b) => (prioritize[a.format] ?? 9) - (prioritize[b.format] ?? 9))) {
             const key = titleKey(item.title);
             if (key.length < 3 || titles.has(key)) continue;
             titles.add(key);
             baseBooks.push({
-              id:item.id, title:item.displayTitle || item.title, author:item.authorVerified ? item.author : 'Author not confirmed',
+              id:item.id, title:item.displayTitle || item.title, author:item.author || 'Author not confirmed',
               category:item.category, format:item.format, sizeMB:item.sizeMB,
               cover:'', file:'', isHosted:false, needsFix:false,
               isArchiveRecord:true, recordType:item.recordType || 'book-format archive entry', readingAvailable:false,
