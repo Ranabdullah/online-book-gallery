@@ -193,5 +193,27 @@
     everydayBtn.onclick=async()=>{everydayBtn.disabled=true;try{await runAI('everyday')}catch(e){explain(e.message)}finally{everydayBtn.disabled=false}};
     inDepthBtn.onclick=async()=>{inDepthBtn.disabled=true;try{await runAI('inDepth')}catch(e){explain(e.message)}finally{inDepthBtn.disabled=false}};
   }
-  document.addEventListener('DOMContentLoaded',init);
+  window.AthenaeumSourceEngine = {
+    keyName,
+    readCache,
+    async extractForBook(book) {
+      if(!book?.isHosted || book.needsFix || !book.file) throw new Error('Source book file is missing.');
+      let buffer;
+      if(book.file.startsWith('idb://')){
+        const saved=book.fileData ? book : await window.AthenaeumDB.getUserBookById(book.id);
+        if(!saved?.fileData) throw new Error('Local book bytes are unavailable on this device.');
+        buffer=saved.fileData instanceof Blob ? await saved.fileData.arrayBuffer() : saved.fileData;
+      }else{
+        const response=await fetch(book.file,{cache:'no-store'});
+        if(!response.ok) throw new Error('Source file HTTP '+response.status);
+        buffer=await response.arrayBuffer();
+      }
+      if(buffer.byteLength>350*1024*1024)throw new Error('File exceeds 350MB browser processing limit.');
+      const format=String(book.format||book.file.split('.').pop()).toLowerCase();
+      const parsed=format==='pdf' ? await extractPdf(buffer.slice(0)) : format==='epub' ? await extractEpub(buffer) : null;
+      if(!parsed)throw new Error('Only PDF and EPUB sources are supported.');
+      return parsed;
+    }
+  };
+  if(!location.pathname.endsWith('/bulk-summaries.html'))document.addEventListener('DOMContentLoaded',init);
 })();
