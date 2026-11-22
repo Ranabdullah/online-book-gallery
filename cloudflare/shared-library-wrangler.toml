@@ -1,0 +1,19 @@
+name = "athenaeum-private-library"
+main = "private-library-worker.js"
+compatibility_date = "2026-11-22"
+
+# Create this private bucket in Cloudflare R2 before deploying.
+[[r2_buckets]]
+binding = "BOOKS"
+bucket_name = "athenaeum-private-books"
+
+# Fill with the NEW dedicated Supabase Auth project's public endpoint/key.
+# The anon/publishable key is public; never paste a service-role secret here.
+[vars]
+SUPABASE_URL = "https://YOUR-PROJECT.supabase.co"
+SUPABASE_ANON_KEY = "YOUR-PUBLISHABLE-KEY"
+
+# Configure the two-person allowlist as a Worker secret:
+# npx wrangler secret put MEMBER_EMAILS --config cloudflare/shared-library-wrangler.toml
+# Enter: member1@example.com,member2@example.com
+# Never commit the member emails, API secrets, or R2 credentials.
