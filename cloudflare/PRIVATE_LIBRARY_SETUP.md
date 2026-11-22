@@ -1,24 +1,46 @@
-# Athenaeum private shared library — code-only setup
+# Athenaeum — finish the private shared library
 
-**Status: code staged in GitHub; cloud backend not deployed.** The connected Cloudflare account currently returns HTTP 403 for Workers and R2. Reconnect the correct Cloudflare account with **Workers R2 Storage Write** and **Workers Scripts Write/Edit** permissions to finish deployment.
+The website, ZIP importer, encrypted remembered session and Cloudflare R2 Worker are committed to GitHub. **The cloud backend is not active until the deployment workflow succeeds.**
 
-This feature provides private **book API and R2 files** protected by one shared code. Anyone possessing the code can read and upload. Do not publish the code or commit it to GitHub. Sharing the code with only one trusted friend is a practical convenience, but individual accounts, auditing, and revocation per person are not available.
+## One-time setup (no terminal required)
 
-## Minimal setup
+1. Open [Athenaeum GitHub repository settings](https://github.com/Ranabdullah/online-book-gallery/settings/secrets/actions).
+2. Add three **repository secrets** (Settings → Secrets and variables → Actions → New repository secret):
+   - `CLOUDFLARE_API_TOKEN` — a **new** Cloudflare API token with `Workers Scripts Write` and `Workers R2 Storage Write` permissions for Athenaeum's Cloudflare account. Generate this in Cloudflare → My Profile → API Tokens. Do not share it in chat.
+   - `CLOUDFLARE_ACCOUNT_ID` — the Cloudflare account identifier displayed in the Cloudflare dashboard.
+   - `ATHENAEUM_LIBRARY_CODE` — a **new random code of at least 24 characters**, generated using Athenaeum's "Generate secure code" control. **Don't reuse the one previously pasted in chat.** Share this replacement only with your friend, privately.
+3. Go to [Deploy Athenaeum Private Library](https://github.com/Ranabdullah/online-book-gallery/actions/workflows/deploy-private-library.yml) and choose **Run workflow** on `main`.
+4. After the workflow succeeds, open the deployment's run summary. It displays the **public Worker endpoint** (not a secret), such as `https://athenaeum-private-library.YOUR-SUBDOMAIN.workers.dev`. If the summary cannot determine it, find the endpoint in Cloudflare → Workers & Pages → `athenaeum-private-library`.
+5. Open [Athenaeum Shared Library](https://ranabdullah.github.io/online-book-gallery/shared-library.html). Paste the **Worker URL** into "Private library API URL" and select **Connect server**. Enter your new private code and select **Unlock**. "Remember this device" will preserve access on trusted browsers.
+6. Upload one **small ZIP containing an EPUB or PDF**, then verify its status in the upload receipt and the **cloud books count**. Give your friend the website URL, the Worker URL and the new code privately, and confirm they can read that same file.
+7. If this works, upload the remaining ZIPs individually. The ZIP is unpacked in the browser and supported files are uploaded to private R2. Very large ZIPs can exceed browser memory. Files over 350 MB each and MOBI are not supported without conversion.
 
-1. Reconnect Cloudflare with Workers and R2 write permissions.
-2. Create **private** R2 bucket `athenaeum-private-books`; leave the public r2.dev and public custom-domain access disabled.
-3. Run `npx wrangler deploy --config cloudflare/shared-library-wrangler.toml`.
-4. Open the website's `shared-library.html` page and click **Generate secure code**. Keep the code private. In Cloudflare, configure the **SHARED_ACCESS_CODE** Worker secret with that exact generated code. CLI: `npx wrangler secret put SHARED_ACCESS_CODE --config cloudflare/shared-library-wrangler.toml`. Do NOT put the code in chat, GitHub, a URL, or a plain config file.
-5. Set `workerUrl` in `js/shared-library-config.js` to the deployed Worker URL. This is a public URL, not a secret.
-6. Test with one small ZIP: unlock with the code, upload, then open the file from a second device using that code. Test wrong/no codes return HTTP 403.
-7. Upload the other ZIPs from each member's device through the website. Uploads run client-side; PDF and EPUB only. Long archives can exhaust browser memory. Retain original ZIPs for backup.
+## Clear separation of storage
 
-## Security and scope
+- `zip-import.html`: **local only** (files live in browser IndexedDB). It cannot transfer books to another device.
+- `shared-library.html`: **shared R2 cloud** (files live on the server, readable by holders of the code). It provides verified upload receipts and cloud counts.
+- `index.html`: existing GitHub Pages catalog. **Existing GitHub-hosted book files are public**, even if only you and your friend use the link. For a fully private library, their files must be moved to private storage and existing public copies deleted after rights review.
 
-- The access code is masked in the form and held in page memory, not in localStorage or the URL. The Worker validates it on every file operation.
-- The static GitHub Pages website and the historical `books/` files remain publicly accessible. Protecting *the entire gallery* requires moving all those files to authenticated hosting; this feature only protects newly uploaded shared-library books.
-- A shared code grants identical permission to anyone who has it. To revoke access, rotate the secret and send the replacement to your friend.
-- Uploads use SHA-256 keys and multipart storage; same-file duplicates are skipped.
-- The cloud backend is not activated until Cloudflare is configured. The website will show a clear setup notice, not a false upload success.
-- Copyright and other distribution rights may still apply to sharing book files even in a two-person collection.
+## Security
+
+The code is never committed or put into the Worker URL. The deployment workflow reads it from GitHub Actions Secrets and saves it as a Cloudflare Worker secret. The Worker checks the code on every upload, listing and download request. Anyone with the code has the same privileges; rotating the code revokes all existing users. "Remember this device" should only be enabled on your own browser profile.
+
+The GitHub Actions workflow and R2 setup may incur costs if you exceed free usage allowances. Copyright restrictions can apply even when sharing between two people.
+
+## Troubleshooting
+
+- **Workflow says missing secret**: check the spelling of all three GitHub repository secrets.
+- **403 during R2 bucket or Worker creation**: regenerate the Cloudflare API token with both write permissions for the correct Cloudflare account. Connecting ChatGPT alone will not update a token stored as a GitHub secret.
+- **Cloud setup required**: Worker URL was not entered on that device, or the backend was not deployed.
+- **Unlock returns 403**: check that you entered the same private code stored as `ATHENAEUM_LIBRARY_CODE`. The Worker is updated each time the deployment workflow runs.
+- **Books in ZIP Import but zero Shared Library books**: the imports were local only. Upload that ZIP from the Shared Library page after unlocking.
+- **Cloud upload failed**: inspect the per-book upload receipt and Worker logs; no file is labelled confirmed until the R2 object is verified.
+- **Blank or slow reader**: try a small book first; the reader downloads the private book to the current browser, and large PDF/EPUB files may take longer.
+
+## Internal structure
+
+- `cloudflare/private-library-worker.js`: authenticated R2 listing and chunked uploads/downloads
+- `cloudflare/shared-library-wrangler.toml`: Worker deployment configuration and private R2 binding
+- `.github/workflows/deploy-private-library.yml`: deploy Worker/bucket using repository secrets
+- `js/shared-library-config.js`: optional nonsecret worker URL (blank by default)
+- `shared-library.html`: private cloud library, upload receipts, source counts, browser session support
