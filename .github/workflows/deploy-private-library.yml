@@ -1,0 +1,70 @@
+name: Deploy Athenaeum Private Library
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check configuration
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          LIBRARY_CODE: ${{ secrets.ATHENAEUM_LIBRARY_CODE }}
+        run: |
+          test -n "$CF_API_TOKEN" || { echo "::error::Missing GitHub secret CLOUDFLARE_API_TOKEN"; exit 1; }
+          test -n "$CF_ACCOUNT_ID" || { echo "::error::Missing GitHub secret CLOUDFLARE_ACCOUNT_ID"; exit 1; }
+          test "${#LIBRARY_CODE}" -ge 24 || { echo "::error::ATHENAEUM_LIBRARY_CODE must be at least 24 characters"; exit 1; }
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: cloudflare
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Wrangler
+        run: npm install --no-save wrangler@4
+      - name: Ensure private R2 bucket exists
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler r2 bucket list > /tmp/athenaeum-r2-buckets.txt
+          if ! grep -q 'athenaeum-private-books' /tmp/athenaeum-r2-buckets.txt; then
+            npx wrangler r2 bucket create athenaeum-private-books
+          fi
+      - name: Deploy private authenticated Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy --config cloudflare/shared-library-wrangler.toml
+      - name: Store shared code securely as Worker secret
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          LIBRARY_CODE: ${{ secrets.ATHENAEUM_LIBRARY_CODE }}
+        run: |
+          printf '%s' "$LIBRARY_CODE" | npx wrangler secret put SHARED_ACCESS_CODE --config cloudflare/shared-library-wrangler.toml
+          echo "Access code saved to Worker secrets (value never printed)."
+      - name: Show backend URL
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          response="$(curl --fail --silent --show-error -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain")"
+          subdomain="$(printf '%s' "$response" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{try{const j=JSON.parse(s);if(j.success&&j.result?.subdomain)process.stdout.write(j.result.subdomain)}catch{}})")"
+          if [ -z "$subdomain" ]; then
+            echo "::warning::Worker deployed. Find its URL in Cloudflare Workers & Pages and set the site config manually."
+            exit 0
+          fi
+          url="https://athenaeum-private-library.$subdomain.workers.dev"
+          echo "### Private library backend deployed" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Public API endpoint (does NOT contain the access code): \`$url\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Set the value of \`workerUrl\` in \`js/shared-library-config.js\` to this endpoint." >> "$GITHUB_STEP_SUMMARY"
+          echo "Then verify unlock, upload a small ZIP and open from a second device." >> "$GITHUB_STEP_SUMMARY"
