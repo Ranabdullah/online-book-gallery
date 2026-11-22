@@ -15,13 +15,15 @@
 <input id="access-code" type="password" minlength="24" maxlength="256" placeholder="Enter your access code" autocomplete="off" style="width:min(100%,430px)">
 <button id="unlock" type="button" disabled title="Cloud storage must be configured before unlocking">Unlock library</button>
 </div>
+<label style="display:flex;align-items:center;gap:8px;font-weight:500"><input type="checkbox" id="remember-device" checked> Remember this device after a successful unlock</label>
+<p class="small muted">Only choose this on your own computer. Anyone using this browser profile could access the shared library.</p>
 <details><summary>Create a strong shared code</summary>
 <button type="button" id="generate-code">Generate secure code</button>
 <button type="button" id="copy-code" disabled>Copy generated code</button>
 <p id="generated-code" style="font:600 12px/1.6 ui-monospace,monospace;overflow-wrap:anywhere"></p>
 <p class="small muted">Generating a code does not activate it on the server. The same code must be saved privately as the Cloudflare Worker secret <code>SHARED_ACCESS_CODE</code>. Do not commit it to GitHub or post it in chat.</p>
 </details>
-<p class="small muted">The access code is kept in this tab's memory and cleared when you close it. Anyone with the code can upload and read.</p>
+<p class="small muted">If you choose Remember this device, Athenaeum saves an encrypted browser-local credential. Lock Library clears it. Do not use this option on shared or public computers.</p>
 </section>
 <section id="library" class="hidden">
 <div class="panel"><div class="row"><span id="who" style="font-weight:650"></span><span class="pill">Private cloud storage</span><button class="right" id="signout" type="button">Lock library</button></div></div>
@@ -48,6 +50,48 @@ const cfg=window.ATHENAEUM_SHARED_CONFIG||{};
 const ready=/^https:\/\//i.test(cfg.workerUrl||'') && Boolean(window.JSZip);
 if(!ready){$('configuration').classList.remove('hidden');$('unlock').disabled=true;}
 let accessCode='',generated='',books=[],next=null,loading=false;
+
+const STORE='athenaeum_shared_session_v1';
+const DB='athenaeum_private_session_keys';
+async function deviceKey(){
+  if(!('indexedDB' in window)||!crypto.subtle)throw Error('Browser secure storage unavailable');
+  return new Promise((resolve,reject)=>{
+    const open=indexedDB.open(DB,1);
+    open.onupgradeneeded=()=>open.result.createObjectStore('keys');
+    open.onerror=()=>reject(open.error);
+    open.onsuccess=()=>{
+      const db=open.result;
+      const read=db.transaction('keys','readonly').objectStore('keys').get('device');
+      read.onerror=()=>{db.close();reject(read.error)};
+      read.onsuccess=async()=>{
+        if(read.result){db.close();resolve(read.result);return}
+        try{
+          const key=await crypto.subtle.generateKey({name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+          const tx=db.transaction('keys','readwrite');
+          tx.objectStore('keys').put(key,'device');
+          tx.oncomplete=()=>{db.close();resolve(key)};
+          tx.onerror=()=>{db.close();reject(tx.error)};
+        }catch(e){db.close();reject(e)}
+      };
+    };
+  });
+}
+async function rememberCode(value){
+  const key=await deviceKey(),nonce=crypto.getRandomValues(new Uint8Array(12));
+  const bytes=new TextEncoder().encode(value);
+  const cipher=await crypto.subtle.encrypt({name:'AES-GCM',iv:nonce},key,bytes);
+  const hex=a=>Array.from(new Uint8Array(a),b=>b.toString(16).padStart(2,'0')).join('');
+  localStorage.setItem(STORE,JSON.stringify({nonce:hex(nonce),cipher:hex(cipher)}));
+}
+async function restoreCode(){
+  const text=localStorage.getItem(STORE);if(!text)return null;
+  try{
+    const saved=JSON.parse(text),toBytes=h=>new Uint8Array(h.match(/../g).map(x=>parseInt(x,16)));
+    const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:toBytes(saved.nonce)},await deviceKey(),toBytes(saved.cipher));
+    return new TextDecoder().decode(plain);
+  }catch(e){localStorage.removeItem(STORE);return null}
+}
+
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function status(t){$('status').textContent=t;}
 async function request(path,options={}){
@@ -70,6 +114,8 @@ async function unlock(){
     $('signin').classList.add('hidden');
     $('library').classList.remove('hidden');
     $('who').textContent='🔒 Shared library unlocked';
+    if($('remember-device').checked){try{await rememberCode(accessCode)}catch(e){console.warn('Remember device unavailable',e)}}
+    else localStorage.removeItem(STORE);
     await refresh();
   }catch(e){
     accessCode='';
@@ -81,7 +127,7 @@ async function unlock(){
 $('unlock').onclick=unlock;
 $('access-code').addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
 $('signout').onclick=()=>{
-  accessCode='';books=[];next=null;
+  accessCode='';books=[];next=null;localStorage.removeItem(STORE);
   $('library').classList.add('hidden');$('signin').classList.remove('hidden');
   $('access-code').value='';
 };
@@ -180,6 +226,14 @@ $('upload').onclick=async()=>{
  }catch(e){status('Could not process ZIP: '+e.message)}
  finally{loading=false;$('upload').disabled=false;}
 };
-// Unlock occurs only after the user types their private code.
+// Restore an unlocked session only after server-side verification.
+if(ready){
+  const stored=await restoreCode();
+  if(stored){
+    $('access-code').value=stored;
+    $('remember-device').checked=true;
+    await unlock();
+  }
+}
 })();
 </script></body></html>
