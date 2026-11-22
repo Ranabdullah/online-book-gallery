@@ -1,0 +1,73 @@
+name: Auto-generate Athenaeum Summaries
+on:
+  workflow_dispatch:
+    inputs:
+      max_books:
+        description: "Maximum books this run (1-150)"
+        required: false
+        default: "30"
+      model:
+        description: "Gemini model"
+        required: false
+        default: "gemini-3.8-flash"
+  schedule:
+    - cron: "17 2 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "data/books.json"
+      - "books/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: athenaeum-generate-summaries
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_MODEL: ${{ inputs.model || 'gemini-3.8-flash' }}
+      MAX_BOOKS: ${{ inputs.max_books || '20' }}
+    steps:
+      - name: Ensure private API key exists
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "::error::Set a new GEMINI_API_KEY under repository Settings → Secrets and variables → Actions. Do not put it in source or a chat."
+            exit 1
+          fi
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+          sparse-checkout: |
+            admin-scripts/generate_summaries.py
+            data
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check requests pypdf beautifulsoup4
+      - name: Produce evidence-grounded Everyday and In-Depth summaries
+        run: |
+          python admin-scripts/generate_summaries.py --limit "$MAX_BOOKS" --model "$GEMINI_MODEL"
+      - name: Commit successful results and status
+        if: success() || failure()
+        run: |
+          if ! test -f data/generated-summaries-status.json; then exit 0; fi
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add data/generated-summaries data/generated-summaries-status.json
+          if git diff --cached --quiet; then echo "No summary changes."; exit 0; fi
+          git commit -m "Publish verified excerpt-based book summaries [skip ci]"
+          git push origin HEAD:main
+      - name: Show published summary count
+        if: always()
+        run: |
+          if test -f data/generated-summaries-status.json; then
+            python -c 'import json; r=json.load(open("data/generated-summaries-status.json")); print("Summary records published:",r["publishedTotal"]); print("Newly generated:",len(r["successful"])); print("Errors:",len(r["failed"]))'
+          fi
