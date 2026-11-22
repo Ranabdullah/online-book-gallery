@@ -16,22 +16,24 @@
 <script>
 (()=>{const $=x=>document.getElementById(x);const norm=x=>String(x||'').normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g,'').replace(/\.(pdf|epub)$/,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 let zip=null,entries=[],catalog=[],busy=false;
+let archiveName='';
 const label=x=>{const e=document.createElement('span');e.className='pill '+x;return e};
 const lines=[];const log=t=>{lines.push(t);$('log').textContent=lines.join('\n');$('log').scrollTop=$('log').scrollHeight};
 const status=t=>$('status').textContent=t;
 const filename=path=>path.split('/').pop();
-function matches(name){
+function matches(name,path){
   const n=norm(name);
   return catalog.filter(b=>{
+    if (b.isArchiveRecord) return b.originArchive===archiveName && b.originArchiveEntry===path;
     const orig=norm(b.originalName);
     const t=norm(b.title),a=norm(b.author);
     return orig===n || t===n || (a && a!=='unknown' && n===norm(a+' '+b.title));
   });
 }
-function classify(name) {
- const options=matches(name);
- if(options.length>1) {const miss=options.filter(x=>x.needsFix);const hosted=options.filter(x=>x.isHosted&&!x.needsFix);if(hosted.length)return{kind:'exist',title:'Already hosted',record:hosted[0]};if(miss.length===1)return{kind:'missing',title:'Repair missing locally',record:miss[0]};return{kind:'review',title:'Ambiguous match — review',record:null};}
- if(options.length===1){const b=options[0];return b.isHosted&&!b.needsFix?{kind:'exist',title:'Already hosted',record:b}:{kind:'missing',title:'Repair missing locally',record:b};}
+function classify(name,path) {
+ const options=matches(name,path);
+ if(options.length>1) {const miss=options.filter(x=>x.needsFix||x.isArchiveRecord);const hosted=options.filter(x=>x.isHosted&&!x.needsFix);if(hosted.length)return{kind:'exist',title:'Already hosted',record:hosted[0]};if(miss.length===1)return{kind:'missing',title:'Repair missing locally',record:miss[0]};return{kind:'review',title:'Ambiguous match — review',record:null};}
+ if(options.length===1){const b=options[0];return b.isHosted&&!b.needsFix?{kind:'exist',title:'Already hosted',record:b}:{kind:'missing',title:b.isArchiveRecord?'Connect to A book entry':'Repair missing locally',record:b};}
  return{kind:'new',title:'New local book',record:null};
 }
 async function inspect(){
@@ -39,9 +41,14 @@ async function inspect(){
  busy=true;$('inspect').disabled=true;$('import').disabled=true;status('Opening archive and reading its directory…');
  try{
   const r=await fetch('data/books.json',{cache:'no-store'});if(!r.ok)throw new Error('Unable to load the library catalog.');
-  catalog=await r.json();const local=await window.AthenaeumDB.getAllUserBooks();for(const x of local)if(!catalog.some(b=>b.id===x.id))catalog.push(x);
+  catalog=await r.json();archiveName=file.name;
+  try {
+    const ar=await fetch('data/abdurrehman-archive.json',{cache:'no-store'});
+    if(ar.ok) for(const b of (await ar.json()).books || []) catalog.push({id:b.id,title:b.displayTitle||b.title,originalName:b.path.split('/').pop(),author:'Author not confirmed',category:b.category,originArchive:b.archive,originArchiveEntry:b.path,isArchiveRecord:true,isHosted:false,needsFix:false,originMark:'A'});
+  } catch(e){log('Archive inventory matching unavailable: '+e.message)}
+  const local=await window.AthenaeumDB.getAllUserBooks();for(const x of local)if(!catalog.some(b=>b.id===x.id))catalog.push(x);
   zip=await JSZip.loadAsync(file);entries=[];
-  for(const [path,item] of Object.entries(zip.files)){if(item.dir)continue;const base=filename(path);if(!/\.(epub|pdf)$/i.test(base))continue;const match=classify(base);entries.push({path,base,item,...match,checked:match.kind==='missing'||match.kind==='new'});}
+  for(const [path,item] of Object.entries(zip.files)){if(item.dir)continue;const base=filename(path);if(!/\.(epub|pdf)$/i.test(base))continue;const match=classify(base,path);entries.push({path,base,item,...match,checked:match.kind==='missing'||match.kind==='new'});}
   entries.sort((a,b)=>({missing:0,new:1,exist:2,review:3}[a.kind]-{missing:0,new:1,exist:2,review:3}[b.kind])||a.base.localeCompare(b.base));
   render();status('Inspection complete: '+entries.length+' EPUB/PDF files found. '+entries.filter(x=>x.kind==='missing').length+' missing-title matches, '+entries.filter(x=>x.kind==='new').length+' new candidates.');
  }catch(e){status('ZIP inspection failed: '+e.message);zip=null}finally{busy=false;$('inspect').disabled=false;$('import').disabled=!zip||!entries.some(x=>x.checked);}
@@ -54,7 +61,7 @@ async function importSelected(){if(busy||!zip)return;busy=true;$('import').disab
 const source=$('archive-origin').value==='A'?'A':'R';
 const sourceName=source==='A'?'Abdurrehman':'Original Athenaeum collection';
 const provenance={originMark:source,originAttribution:sourceName,originArchive:$('zip').files[0]?.name||'',originArchiveEntry:e.path,originKind:'user-identified-zip'};
-if(e.kind==='missing'&&e.record){const old=b.id;const author=String(e.record.author||'').match(/^(Archaeology and Anthropology|Arts|Unknown)$/i)&&b.author!=='Unknown Author'?b.author:e.record.author;const restored={...b,id:e.record.id,title:e.record.title,author:author||b.author,category:e.record.category==='Uncategorized'?b.category:e.record.category,file:'idb://'+e.record.id,isHosted:true,needsFix:false,isLocalRepair:true,...provenance};await window.AthenaeumDB.saveUserBook(restored);await window.AthenaeumDB.deleteUserBook(old);log('REPAIRED locally: '+e.record.title+' (catalog ID '+e.record.id+')');}else{await window.AthenaeumDB.saveUserBook({...b,...provenance});log('ADDED locally ['+source+']: '+b.title);}done++;}
+if(e.kind==='missing'&&e.record){const old=b.id;const author=String(e.record.author||'').match(/^(Archaeology and Anthropology|Arts|Unknown)$/i)&&b.author!=='Unknown Author'?b.author:e.record.author;const restored={...b,id:e.record.id,title:e.record.title,author:author||b.author,category:e.record.category==='Uncategorized'?b.category:e.record.category,file:'idb://'+e.record.id,isHosted:true,needsFix:false,isArchiveRecord:false,isLocalRepair:true,...provenance};await window.AthenaeumDB.saveUserBook(restored);await window.AthenaeumDB.deleteUserBook(old);log('REPAIRED locally: '+e.record.title+' (catalog ID '+e.record.id+')');}else{await window.AthenaeumDB.saveUserBook({...b,...provenance});log('ADDED locally ['+source+']: '+b.title);}done++;}
  catch(err){errors++;log('FAILED: '+e.base+' — '+err.message)}}
  status('Completed: '+done+' locally imported; '+errors+' failed. Original ZIP remains unchanged.');busy=false;$('import').disabled=false;$('inspect').disabled=false;}
  $('inspect').onclick=inspect;$('import').onclick=importSelected;
