@@ -7,7 +7,7 @@
 <body><header><a href="index.html">← Athenaeum main gallery</a> &nbsp; / &nbsp; Private shared library</header>
 <main><h1>Shared Library</h1><p>One shared private bookshelf. You and your friend enter the same access code to upload and read books from different devices.</p>
 <div class="note"><strong>Code protected:</strong> Storage and downloads require your shared code. The existing public GitHub Pages books are still public; this new cloud bookshelf does not make those existing files private.</div>
-<div id="configuration" class="panel hidden" role="alert"><strong>Cloud setup required.</strong> The private storage service is not configured. You can generate or enter a hidden code below, but unlocking and cloud uploads are disabled until storage is connected. See <a href="https://github.com/Ranabdullah/online-book-gallery/blob/main/cloudflare/PRIVATE_LIBRARY_SETUP.md">setup instructions</a>.</div>
+<div id="configuration" class="panel hidden" role="alert"><strong>Cloud backend offline.</strong> The access code is not being rejected. Athenaeum has no deployed private-storage API to verify it against. Local ZIP imports are not shared. Cloud uploading and unlocking are unavailable until R2 and the Worker are configured. See <a href="https://github.com/Ranabdullah/online-book-gallery/blob/main/cloudflare/PRIVATE_LIBRARY_SETUP.md">setup instructions</a>.</div>
 <section id="signin" class="panel">
 <h2>Enter your private library code</h2>
 <p>Only those with the code can access the shared book storage. The code is hidden as you type.</p>
@@ -25,6 +25,15 @@
 </details>
 <p class="small muted">If you choose Remember this device, Athenaeum saves an encrypted browser-local credential. Lock Library clears it. Do not use this option on shared or public computers.</p>
 </section>
+<div class="panel" id="storage-overview" aria-live="polite">
+<h2>Where are my books?</h2>
+<div class="row" style="gap:18px">
+  <div><strong id="device-book-count">Checking…</strong><div class="small muted">Saved only in this browser</div></div>
+  <div><strong id="cloud-book-count">Not connected</strong><div class="small muted">Private shared cloud books</div></div>
+</div>
+<p class="small muted">ZIP Import saves books locally, not to your friend's cloud library. Only books confirmed by the private cloud API count as shared uploads.</p>
+<a href="zip-import.html" class="button">View local ZIP importer</a>
+</div>
 <section id="library" class="hidden">
 <div class="panel"><div class="row"><span id="who" style="font-weight:650"></span><span class="pill">Private cloud storage</span><button class="right" id="signout" type="button">Lock library</button></div></div>
 <section class="panel"><h2>Upload ZIP files</h2><p>Select one ZIP at a time. Athenaeum extracts the supported PDFs and EPUBs on this device and sends individual books to private cloud storage. The ZIP itself is not shared publicly.</p>
@@ -32,6 +41,10 @@
 <label for="category">Category</label><select id="category"><option value="Uncategorized">Uncategorized</option><option>Philosophy</option><option>Psychology</option><option>Physics</option><option>Mathematics</option><option>Science</option><option>Management</option><option>Mechanical Engineering</option><option>Religion</option><option>Classics & Literature</option><option>Other</option></select>
 <div class="row" style="margin-top:16px"><button id="upload" type="button">Upload books from ZIP</button><span class="muted small">PDF / EPUB; duplicate file hashes are skipped</span></div>
 <progress id="progress" max="100" value="0"></progress><div id="status" role="status">Select a ZIP file to start.</div>
+<div id="upload-report" class="panel hidden" aria-live="polite">
+<h3>Verified cloud upload receipt</h3>
+<p id="upload-totals"></p><div id="upload-details" style="max-height:220px;overflow:auto;font-size:13px"></div>
+</div>
 <details><summary>Limits and privacy</summary><p class="small">ZIP archives are unpacked in your browser; large archives can exhaust browser memory. Files above 350 MB each are skipped. MOBI requires conversion to EPUB/PDF. Only authorized members can read books from this private bucket. Keep your original ZIP files as backups.</p></details>
 </section>
 <section class="panel"><div class="books-top"><h2>Cloud books <span class="pill" id="total">0</span></h2><button id="refresh" type="button">Refresh library</button></div><label for="search">Find a book</label><input id="search" type="search" placeholder="Search title, category, contributor, or ZIP..." style="width:100%;margin-bottom:12px"><div id="books"></div><div class="row" style="justify-content:center;margin-top:14px"><button id="more" type="button" class="hidden">Load more</button></div></section>
@@ -50,6 +63,8 @@ const cfg=window.ATHENAEUM_SHARED_CONFIG||{};
 const ready=/^https:\/\//i.test(cfg.workerUrl||'') && Boolean(window.JSZip);
 if(!ready){$('configuration').classList.remove('hidden');$('unlock').disabled=true;}
 let accessCode='',generated='',books=[],next=null,loading=false;
+async function updateLocalCount(){try{const b=await window.AthenaeumDB.getAllUserBooks();$('device-book-count').textContent=b.filter(x=>x.fileData&&x.fileData.byteLength>0).length+' local books';}catch(e){$('device-book-count').textContent='Local storage unavailable';}}
+updateLocalCount();
 
 const STORE='athenaeum_shared_session_v1';
 const DB='athenaeum_private_session_keys';
@@ -148,6 +163,7 @@ function render(){
  const q=$('search').value.toLowerCase().trim();
  const filtered=books.filter(b=>[b.title,b.category,b.contributedBy,b.archive].some(v=>String(v||'').toLowerCase().includes(q)));
  $('total').textContent=books.length;
+ $('cloud-book-count').textContent=books.length+' verified cloud books'+(next?' (more available)':'');
  $('books').innerHTML=filtered.map((b,i)=>'<article class="book"><strong>'+esc(b.title)+'</strong><div class="muted small">'+esc(b.category)+' · '+esc(b.format)+'</div><div class="muted small">By member: '+esc(b.contributedBy)+'</div><div class="muted small">From: '+esc(b.archive||'individual book')+'</div><button type="button" data-key="'+esc(b.key)+'" data-index="'+i+'" title="Download privately and open in Athenaeum">📖 Read book</button></article>').join('')||'<p class="muted">No matching cloud books yet.</p>';
  $('more').classList.toggle('hidden',!next);
 }
@@ -156,7 +172,7 @@ async function refresh(){
  do{
    const r=await (await request('/books'+(next?'?cursor='+encodeURIComponent(next):''))).json();
    books.push(...r.books);next=r.cursor;page++;
- }while(next&&page<4);
+ }while(next&&page<200);
  render();
 }
 $('refresh').onclick=()=>refresh().catch(e=>alert('Could not refresh: '+e.message));
@@ -190,7 +206,11 @@ async function uploadBook(entry,archive){
  const init=await (await request('/upload/init',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
    ext,size:data.byteLength,sha256:sha,title,category:$('category').value,archive,originalPath:path
  })})).json();
- if(init.exists)return 'Already uploaded';
+ if(init.exists){
+   const confirmation=await (await request('/book/status?key='+encodeURIComponent(init.key))).json();
+   if(!confirmation.stored||confirmation.size!==data.byteLength)throw Error('Existing cloud object could not be verified');
+   return {result:'Already uploaded',key:init.key,size:confirmation.size};
+ }
  const parts=[],step=init.partSize||8*1024*1024;
  for(let offset=0,n=1;offset<data.byteLength;offset+=step,n++){
    const chunk=data.subarray(offset,Math.min(data.byteLength,offset+step));
@@ -199,29 +219,41 @@ async function uploadBook(entry,archive){
    parts.push(p);
  }
  await request('/upload/complete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:init.key,uploadId:init.uploadId,parts})});
- return 'Uploaded';
+ const confirmation=await (await request('/book/status?key='+encodeURIComponent(init.key))).json();
+ if(!confirmation.stored||confirmation.size!==data.byteLength)throw Error('Cloud storage did not verify the uploaded book');
+ return {result:'Uploaded',key:init.key,size:confirmation.size};
+
 }
 $('upload').onclick=async()=>{
  const file=$('zip').files?.[0];
  if(!file){$('zip').focus();return}
  if(!/\.zip$/i.test(file.name)){status('Please select a ZIP archive.');return}
- if(loading)return;loading=true;$('upload').disabled=true;
+ if(loading)return;loading=true;$('upload').disabled=true;$('upload-report').classList.add('hidden');
  try{
    status('Inspecting ZIP file. Large archives may use considerable memory…');
    const zip=await JSZip.loadAsync(file);
    const files=Object.values(zip.files).filter(v=>!v.dir&&/\.(epub|pdf)$/i.test(v.name)&&!v.name.includes('__MACOSX/')).sort((a,b)=>a.name.localeCompare(b.name));
    if(!files.length)throw Error('No PDF/EPUB books found in this ZIP.');
-   let done=0,skipped=0,failed=0;
+   let done=0,skipped=0,failed=0;const outcomes=[];
    for(let i=0;i<files.length;i++){
      status('Processing '+(i+1)+' / '+files.length+': '+files[i].name);
      try{
        const result=await uploadBook(files[i],file.name);
-       if(result==='Uploaded')done++;else skipped++;
-     }catch(e){failed++;status('Failed: '+files[i].name+' — '+e.message);}
+       if(result.result==='Uploaded')done++;else skipped++;
+       outcomes.push({file:files[i].name,result:result.result,size:result.size});
+     }catch(e){failed++;outcomes.push({file:files[i].name,result:'Failed: '+e.message});status('Failed: '+files[i].name+' — '+e.message);}
      $('progress').value=Math.round((i+1)/files.length*100);
      await new Promise(resolve=>setTimeout(resolve,0));
    }
-   status('Upload finished. New: '+done+' · Duplicates: '+skipped+' · Failed: '+failed+'. Files are private to approved members.');
+   $('upload-report').classList.remove('hidden');
+   $('upload-totals').textContent='Cloud verified: '+done+' new · '+skipped+' existing · '+failed+' failed';
+   $('upload-details').replaceChildren();
+   for(const entry of outcomes){
+     const row=document.createElement('p');
+     row.textContent=(entry.result==='Uploaded'?'✓ ':entry.result==='Already uploaded'?'= ':'✕ ')+entry.file+' — '+entry.result;
+     $('upload-details').append(row);
+   }
+   status('Cloud upload complete: '+done+' verified new files, '+skipped+' confirmed duplicates, '+failed+' failures. Your friend can read the verified cloud files with the shared code.');
    await refresh();
  }catch(e){status('Could not process ZIP: '+e.message)}
  finally{loading=false;$('upload').disabled=false;}
